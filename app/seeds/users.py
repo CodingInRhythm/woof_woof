@@ -4,10 +4,19 @@ from app.models import db, User
 # Adds a demo user, you can add other users here if you want
 def seed_users():
 
-    demo = User(username='Demo', email='demo@aa.io',
-                password='password')
+    users = [
+        {'username':'Demo', 'email':'demo@aa.io', 'password':'password','firstname':'Demo','lastname':'Demo',},
+        {'username':'jesse_never_wong', 'email':'jesse@simpson.co', 'password':'password','firstname':'Jesse','lastname':'Wong',},
+        {'username':'brad_i_would_simp_for_son', 'email':'brad@simpson.com', 'password':'password','firstname':'Brad','lastname':'Simpson',},
+        {'username':'juliet_shafto_the_rescue', 'email':'juliet@shafto.com', 'password':'password','firstname':'Juliet','lastname':'Shafto',},
+        {'username':"mitchell_reiss's_pieces", 'email':'mitchel@reiss.com', 'password':'password','firstname':'Mitchell','lastname':'Reiss',},
+        {'username':'jeff_granof_the_grey', 'email':'jeff@granof.com', 'password':'password','firstname':'Jeff','lastname':'Granof',},
+        {'username':'zach_watts_up_dood', 'email':'zach@watts.com', 'password':'password','firstname':'Zach','lastname':'Watts',},
+    ]
 
-    db.session.add(demo)
+    for user in users:
+        load_user = User(username=user['username'], email=user['email'], password=user['password'], firstname=user['firstname'], lastname=user['lastname'])
+        db.session.load_user(load_user)
 
     db.session.commit()
 
