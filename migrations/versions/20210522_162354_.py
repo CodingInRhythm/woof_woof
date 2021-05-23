@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 5cddb99fa749
+Revision ID: 0ad91e69a4e9
 Revises: 
-Create Date: 2021-05-22 15:25:28.583319
+Create Date: 2021-05-22 16:23:54.380112
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '5cddb99fa749'
+revision = '0ad91e69a4e9'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -23,8 +23,8 @@ def upgrade():
     sa.Column('username', sa.String(length=40), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
-    sa.Column('firstname', sa.String(length=40), nullable=False),
-    sa.Column('lastname', sa.String(length=40), nullable=False),
+    sa.Column('firstname', sa.String(length=40), nullable=True),
+    sa.Column('lastname', sa.String(length=40), nullable=True),
     sa.Column('online_status', sa.Boolean(), nullable=False),
     sa.Column('profile_photo', sa.String(length=255), nullable=True),
     sa.PrimaryKeyConstraint('id'),
@@ -55,7 +55,7 @@ def upgrade():
     sa.Column('message', sa.Text(), nullable=False),
     sa.ForeignKeyConstraint(['channel_id'], ['channels.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
-    sa.PrimaryKeyConstraint('id', 'user_id', 'channel_id')
+    sa.PrimaryKeyConstraint('id')
     )
     op.create_table('channel_users',
     sa.Column('user_id', sa.Integer(), nullable=False),

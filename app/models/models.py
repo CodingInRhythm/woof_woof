@@ -20,24 +20,45 @@ channel_users = db.Table(
     )
 )
 
-# # CHANNEL MESSAGE JOIN TABLE #
-# class ChannelMessage(db.Model):
-#   __tablename__ = 'channel_messages'
+# CHANNEL MESSAGE JOIN TABLE #
+class ChannelMessage(db.Model):
+  __tablename__ = 'channel_messages'
 
-#   id = db.Column(db.Integer, primary_key = True)
-#   user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False, primary_key=True)
-#   channel_id = db.Column(db.Integer, db.ForeignKey("channels.id"), nullable=False, primary_key=True)
-#   message = db.Column(db.Text, nullable = False)
+  id = db.Column(db.Integer, primary_key = True)
+  user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+  channel_id = db.Column(db.Integer, db.ForeignKey("channels.id"), nullable=False)
+  message = db.Column(db.Text, nullable = False)
 
+  user = db.relationship(
+    "User",
+    back_populates="channel_messages"
+  )
 
-# # DIRECT MESSAGE JOIN TABLE #
-# class DirectMessage(db.Model):
-#   __tablename__ = 'direct_messages'
+  channel = db.relationship(
+    "Channel",
+    back_populates="user_messages"
+  )
 
-#   id = db.Column(db.Integer, primary_key = True)
-#   sender_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False, primary_key=True)
-#   recipient_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False, primary_key=True)
-#   message = db.Column(db.Text, nullable = False)
+# DIRECT MESSAGE JOIN TABLE #
+class DirectMessage(db.Model):
+  __tablename__ = 'direct_messages'
+
+  id = db.Column(db.Integer, primary_key = True)
+  sender_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+  recipient_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+  message = db.Column(db.Text, nullable = False)
+
+  sender = db.relationship(
+    "User",
+    back_populates="sender_messages",
+    foreign_keys='DirectMessage.sender_id'
+  )
+
+  recipient = db.relationship(
+    "User",
+    back_populates="recipient_messages",
+    foreign_keys='DirectMessage.recipient_id'
+  )
 
 
 # USER TABLE #
@@ -65,17 +86,22 @@ class User(db.Model, UserMixin):
     back_populates="users_in"
   )
 
-  # channel_messages = db.relationship(
-  #   "Channel",
-  #   secondary=ChannelMessage,
-  #   back_populates="user_messages"
-  # )
+  channel_messages = db.relationship(
+    "ChannelMessage",
+    back_populates="user"
+  )
 
-  # direct_messages = db.relationship(
-  #   "User",
-  #   secondary=DirectMessage,
-  #   back_populates="user_messages"
-  # )
+  sender_messages = db.relationship(
+    "DirectMessage",
+    back_populates="sender",
+    foreign_keys='DirectMessage.sender_id'
+  )
+
+  recipient_messages = db.relationship(
+    "DirectMessage",
+    back_populates="recipient",
+    foreign_keys='DirectMessage.recipient_id'
+  )
 
   @property
   def password(self):
@@ -116,11 +142,10 @@ class Channel(db.Model):
   users_in = db.relationship(
     "User",
     secondary=channel_users,
-    back_populates="channels"
+    back_populates="channels_in"
   )
 
-  # user_messages = db.relationship(
-  #   "User",
-  #   secondary=ChannelMessage,
-  #   back_populates="channel_messages"
-  # )
+  user_messages = db.relationship(
+    "ChannelMessage",
+    back_populates="channel"
+  )
