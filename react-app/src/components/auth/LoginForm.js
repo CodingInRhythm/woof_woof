@@ -38,7 +38,7 @@ const LoginForm = () => {
 				<div></div>
 				<div className="loginWrap">
 					<img src={logo} class="slack_logo"></img>
-						<h1 className="login-form-header">Sign in to Slack</h1>
+					<h1 className="login-form-header">Sign in to Slack</h1>
 					<form onSubmit={onLogin}>
 						{errors.length ? (
 							<div className="errorsContainer">
@@ -84,7 +84,7 @@ const LoginForm = () => {
 				</div>
 				<div class="signup-link">
 					<p className="switchLinkName">New to Slack?</p>
-					<NavLink to="/signup" className="switchLink">
+					<NavLink to="/sign-up" className="switchLink">
 						Create an account
 					</NavLink>
 				</div>
