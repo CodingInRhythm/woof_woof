@@ -2,7 +2,7 @@
 import random
 from faker import Faker
 
-from app.models import db, User, Channel
+from app.models import db, User, Channel, ChannelMessage
 
 
 #################### FUNCTIONS ####################
@@ -12,34 +12,35 @@ def seed_channel_messages():
 
     fake = Faker()
 
-    users = User.query.all()
-    channels = Channel.query.all()
+    channel_count = len(Channel.query.all())
 
-    print(users[0].channels_in)
+    messages = [
+        {'user_id': 1, 'channel_id': 1, "message":'Demo?'},
+        {'user_id': 2, 'channel_id': 1, "message":'Demo'},
+        {'user_id': 3, 'channel_id': 1, "message":'Yeah demo'},
+        {'user_id': 4, 'channel_id': 1, "message":'This is demost interesting conversation'},
+        {'user_id': 5, 'channel_id': 1, "message":'More like demoralizing'},
+        {'user_id': 6, 'channel_id': 1, "message":'Its just meant to demonstrate the general idea'},
+    ]
 
-    # messages = [
-    #     {'user_id': 1, 'channel_id': 1, "message":'Demo?'},
-    #     {'user_id': 2, 'channel_id': 1, "message":'Demo'},
-    #     {'user_id': 3, 'channel_id': 1, "message":'Yeah demo'},
-    #     {'user_id': 4, 'channel_id': 1, "message":'This is demost interesting conversation'},
-    #     {'user_id': 5, 'channel_id': 1, "message":'More like demoralizing'},
-    #     {'user_id': 6, 'channel_id': 1, "message":'Its just meant to demonstrate the general idea'},
-    # ]
+    for _ in range(200):
+        channel_id = random.randint(1,channel_count)
+        channel = Channel.query.get(channel_id)
 
-    # for _ in range(100):
-    #     channels.append(
-    #         {'name':name,
-    #         'user_id':random.randint(1,count),
-    #         'is_channel':is_channel}
-    #     )
+        user_id = random.sample(channel.users_in,1)[0].id
 
-    # for channel in channels:
-    #     load_channel = Channel(name=channel['name'], user_id=channel['user_id'], is_channel=channel['is_channel'])
-    #     db.session.add(load_channel)
+        messages.append(
+            {'user_id': user_id,
+            'channel_id': channel_id,
+            'message': fake.sentence(nb_words=random.randint(1,15))}
+        )
+
+    for message in messages:
+        load_channel_message = ChannelMessage(user_id=message['user_id'], channel_id=message['channel_id'], message=message['message'])
+        db.session.add(load_channel_message)
 
 
-
-    # db.session.commit()
+    db.session.commit()
 
 # Uses a raw SQL query to TRUNCATE the channel_messages table.
 # SQLAlchemy doesn't have a built in function to do this

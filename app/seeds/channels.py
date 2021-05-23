@@ -15,23 +15,23 @@ def seed_channels():
     users = User.query.all()
 
     channels = [
-        {'name':'DemoChannel', 'user_id': 1, 'is_channel':True, users_in=[users[0],users[1]]},
-        {'name':'JuiceFanz', 'user_id': 1, 'is_channel':True, users_in=[users[0], users[1], users[2], users[3], users[4], users[5], users[6], users[7]]}
+        {'name':'DemoChannel', 'user_id': 1, 'is_channel':True, 'users_in':[users[0],users[1]]},
+        {'name':'JuiceFanz', 'user_id': 1, 'is_channel':True, 'users_in':[users[0], users[1], users[2], users[3], users[4], users[5], users[6], users[7]]}
     ]
 
     for _ in range(100):
+        is_channel = True if random.randint(1,10)!=10 else False
         name = fake.slug() if is_channel else 'Group'
         user_id = random.randint(1,len(users))
-        is_channel = True if random.randint(1,10)!=10 else False
 
         temp_users = User.query.filter(User.id != user_id).all()
 
         users_in=[User.query.get(user_id)]
-        users_in+=random.sample(temp_users, random.randint(0,10))
+        users_in+=random.sample(temp_users, random.randint(0,3))
 
         channels.append(
             {'name':name,
-            'user_id':random.randint(1,len(users)),
+            'user_id':user_id,
             'is_channel':is_channel,
             'users_in':users_in}
         )

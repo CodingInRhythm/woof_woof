@@ -51,13 +51,13 @@ class DirectMessage(db.Model):
   sender = db.relationship(
     "User",
     back_populates="sender_messages",
-    foreign_keys='DirectMessage.sender_id'
+    foreign_keys=[sender_id]
   )
 
   recipient = db.relationship(
     "User",
     back_populates="recipient_messages",
-    foreign_keys='DirectMessage.recipient_id'
+    foreign_keys=[recipient_id]
   )
 
 
@@ -121,7 +121,16 @@ class User(db.Model, UserMixin):
     return {
       "id": self.id,
       "username": self.username,
-      "email": self.email
+      "email": self.email,
+      'firstname' : self.firstname,
+      'lastname' : self.lastname,
+      'online_status' : self.online_status,
+      'profile_photo' : self.profile_photo,
+      'channel_owned' : self.channel_owned,
+      'channels_in' : self.channels_in,
+      'channel_messages' : self.channel_messages,
+      'sender_messages' : self.sender_messages,
+      'recipient_messages' : self.recipient_messages,
     }
 
 
