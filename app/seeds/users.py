@@ -13,12 +13,12 @@ def seed_users():
 
     users = [
         {'username':'Demo', 'email':'demo@aa.io', 'password':'password','firstname':'Demo','lastname':'Demo',},
-        {'username':'jesse_never_wong', 'email':'jesse@simpson.co', 'password':'password','firstname':'Jesse','lastname':'Wong',},
+        {'username':'jesse_never_wong', 'email':'jesse@wong.com', 'password':'password','firstname':'Jesse','lastname':'Wong',},
         {'username':'brad_i_would_simp_for_son', 'email':'brad@simpson.com', 'password':'password','firstname':'Brad','lastname':'Simpson',},
         {'username':'juliet_shafto_the_rescue', 'email':'juliet@shafto.com', 'password':'password','firstname':'Juliet','lastname':'Shafto',},
         {'username':"mitchell_reiss's_pieces", 'email':'mitchel@reiss.com', 'password':'password','firstname':'Mitchell','lastname':'Reiss',},
         {'username':'jeff_granof_the_grey', 'email':'jeff@granof.com', 'password':'password','firstname':'Jeff','lastname':'Granof',},
-        {'username':'zach_watts_up_dood', 'email':'zach@watts.com', 'password':'password','firstname':'Zach','lastname':'Watts',},
+        {'username':'zach_watts_in_the_box', 'email':'zach@watts.com', 'password':'password','firstname':'Zach','lastname':'Watts',},
     ]
 
     for _ in range(50):
