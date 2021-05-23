@@ -1,5 +1,5 @@
 import React from 'react';
-import ava from '../../images/ava.png';
+import ava from '../../../images/ava.png';
 
 import './Navigation.css';
 

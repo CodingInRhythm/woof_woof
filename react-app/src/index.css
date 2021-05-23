@@ -53,6 +53,19 @@ button:hover {
 	cursor: pointer;
 }
 
-button:focus {
+button:focus,
+button:hover,
+button:active {
 	outline: none;
+}
+
+button {
+	border: none;
+	background: none;
+	padding: 0;
+	margin: 0;
+	font-size: inherit;
+	font-family: inherit;
+	text-align: left;
+	cursor: pointer;
 }

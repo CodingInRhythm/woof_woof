@@ -1,7 +1,7 @@
 import React from 'react';
-import Navigation from './Navigation';
-import SideBar from './SideBar';
-import Content from './Content';
+import Navigation from './NavBar/Navigation';
+import SideBar from './SideBar/SideBar';
+import Content from './Content/Content';
 import './MainInterface.css';
 
 const MainInterface = () => {

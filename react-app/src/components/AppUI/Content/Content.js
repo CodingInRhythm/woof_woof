@@ -1,6 +1,6 @@
 import React from 'react';
 import './Content.css';
-import ava from '../../images/ava.png';
+import ava from '../../../images/ava.png';
 import ReactQuill from 'react-quill'; // ES6
 
 const Content = () => {
