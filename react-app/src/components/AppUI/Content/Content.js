@@ -4,6 +4,28 @@ import ava from '../../../images/ava.png';
 import ReactQuill from 'react-quill'; // ES6
 
 const Content = () => {
+	let modules = {
+		toolbar: [
+			[{ header: [1, 2, false] }],
+			['bold', 'italic', 'underline', 'strike', 'blockquote'],
+			[{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+			['link', 'image'],
+			['clean'],
+		],
+	};
+	let formats = [
+		'header',
+		'bold',
+		'italic',
+		'underline',
+		'strike',
+		'blockquote',
+		'list',
+		'bullet',
+		'indent',
+		'link',
+		'image',
+	];
 	return (
 		<div class="main">
 			<header class="main__header">
@@ -104,7 +126,13 @@ const Content = () => {
 						</div>
 					</section>
 					<section class="main__chat-textarea">
-						<ReactQuill />
+						<ReactQuill
+							placeholder="Message #2021-01-group02-juice-and-the-thunks"
+							modules={modules}
+							formats={formats}
+						>
+							<div className="my-editing-area" />
+						</ReactQuill>
 						{/* RICH TEXT EDITOR
 						<input type="textarea" placeholder="Rich text editor should be here"></input> */}
 					</section>
