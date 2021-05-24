@@ -1,65 +1,96 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Redirect } from "react-router-dom";
-import { login } from "../../store/session";
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Redirect, NavLink } from 'react-router-dom';
+import { login } from '../../store/session';
+import './LoginForm.css';
+import logo from '../../images/slack_logo-ebd02d1.svg';
 
 const LoginForm = () => {
-  const [errors, setErrors] = useState([]);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const user = useSelector(state => state.session.user);
-  const dispatch = useDispatch();
+	const [errors, setErrors] = useState([]);
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
+	const user = useSelector(state => state.session.user);
+	const dispatch = useDispatch();
 
-  const onLogin = async (e) => {
-    e.preventDefault();
-    const data = await dispatch(login(email, password));
-    if (data.errors) {
-      setErrors(data.errors);
-    }
-  };
+	const onLogin = async e => {
+		e.preventDefault();
+		const data = await dispatch(login(email, password));
+		if (data.errors) {
+			setErrors(data.errors);
+		}
+	};
 
-  const updateEmail = (e) => {
-    setEmail(e.target.value);
-  };
+	const updateEmail = e => {
+		setEmail(e.target.value);
+	};
 
-  const updatePassword = (e) => {
-    setPassword(e.target.value);
-  };
+	const updatePassword = e => {
+		setPassword(e.target.value);
+	};
 
-  if (user) {
-    return <Redirect to="/" />;
-  }
+	if (user) {
+		return <Redirect to="/" />;
+	}
 
-  return (
-    <form onSubmit={onLogin}>
-      <div>
-        {errors.map((error) => (
-          <div>{error}</div>
-        ))}
-      </div>
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          name="email"
-          type="text"
-          placeholder="Email"
-          value={email}
-          onChange={updateEmail}
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={updatePassword}
-        />
-        <button type="submit">Login</button>
-      </div>
-    </form>
-  );
+	return (
+		<>
+			<div className="login-container">
+				<div></div>
+				<div className="loginWrap">
+					<img src={logo} class="slack_logo"></img>
+					<h1 className="login-form-header">Sign in to Slack</h1>
+					<form onSubmit={onLogin}>
+						{errors.length ? (
+							<div className="errorsContainer">
+								<span>The following errors occurred:</span>
+								<ul className="errorsList">
+									{errors.map((error, idx) => (
+										<li key={idx}>{error}</li>
+									))}
+								</ul>
+							</div>
+						) : (
+							<div></div>
+						)}
+
+						<label>
+							<input
+								id="email"
+								type="text"
+								required
+								onChange={updateEmail}
+								placeholder="name@email.com"
+								className="login-input"
+							/>
+						</label>
+						<label>
+							<input
+								id="password"
+								type="password"
+								value={password}
+								onChange={updatePassword}
+								required
+								placeholder="password"
+								className="login-input"
+							/>
+						</label>
+						<button type="submit" id="submitButton" className="login-btn">
+							Sign In With Email
+						</button>
+						<button id="demoButton" className="demo-btn">
+							Demo Login
+						</button>
+					</form>
+				</div>
+				<div class="signup-link">
+					<p className="switchLinkName">New to Slack?</p>
+					<NavLink to="/sign-up" className="switchLink">
+						Create an account
+					</NavLink>
+				</div>
+			</div>
+		</>
+	);
 };
 
 export default LoginForm;
