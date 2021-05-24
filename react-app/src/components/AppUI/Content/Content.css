@@ -1,0 +1,100 @@
+.main {
+	position: relative;
+	height: 100%;
+	flex: 1;
+	margin-left: 250px;
+}
+.main__header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	display: flex;
+	padding: 18px;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+	background: #fff;
+	justify-content: space-between;
+}
+
+.main__channel-members {
+	display: flex;
+	flex-direction: column;
+	width: 150px;
+	color: rgb(26, 26, 26);
+	margin-right: 12px;
+}
+
+.main__channel-members .fas {
+	margin-right: 10px;
+}
+
+.main__channel-members i,
+.main_channel-members-h3 {
+	font-size: 14px;
+}
+
+.main__h3 {
+	margin-bottom: 1rem;
+	font-size: 1rem;
+	font-weight: 900;
+	color: rgb(26, 26, 26);
+}
+.main__content {
+	position: relative;
+	top: 60px;
+	height: calc(100vh - 60px);
+	overflow-y: scroll;
+}
+.main__container {
+	padding: 10px 20px;
+	margin: 0 auto;
+	width: 100%;
+}
+
+.main__chat {
+	margin-top: 30px;
+}
+
+.main__chat-item {
+	display: flex;
+	margin-top: 10px;
+}
+
+.chat__avatar {
+	width: 44px;
+	border-radius: 5px;
+	margin-right: 10px;
+}
+
+.chat__username {
+	color: #000;
+	font-size: 16px;
+	font-weight: bold;
+}
+.chat__date {
+	color: rgb(99, 99, 99);
+	font-size: 13px;
+	margin-left: 20px;
+}
+.chat__text {
+	font-size: 16px;
+	margin: 0;
+}
+
+.chat__text--link {
+	color: rgb(57, 113, 187);
+	font-size: 16px;
+}
+
+.chat__username:hover,
+.chat__date:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.main__chat-textarea {
+	position: absolute;
+	bottom: 7%;
+	margin-top: 30px;
+	width: 95%;
+}

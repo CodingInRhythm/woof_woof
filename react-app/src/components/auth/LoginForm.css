@@ -1,0 +1,148 @@
+.login-form-header {
+	text-align: center;
+	font-weight: 600;
+	font-size: 2.6em;
+	margin-top: 10px;
+	color: #1b1b1b;
+	margin-bottom: 10px;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+.login-container {
+	height: 600px;
+	width: 100%;
+	margin: 0 auto;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+}
+
+.loginWrap {
+	position: relative;
+	margin: 90px auto;
+	width: 400px;
+	border-radius: 5px;
+	padding: 15px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.login-input,
+.photo-upload--input {
+	width: 90%;
+	margin-left: 5%;
+	margin-bottom: 10px;
+	height: 40px;
+	border-radius: 5px;
+	outline: 0;
+	border: 1px solid #cccccc;
+	padding: 0 0 0 10px;
+	font-size: 14px;
+}
+
+.login-btn,
+.demo-btn {
+	border-radius: 3px;
+	background-color: #4a154b;
+	color: #fff;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	line-height: 21px;
+	width: 90%;
+	margin-left: 5%;
+	margin-bottom: 10px;
+	height: 40px;
+	border-radius: 5px;
+	outline: 0;
+	border: none;
+	transition: all 1s;
+	text-align: center;
+}
+
+.login-btn:hover,
+.demo-btn:hover {
+	background-color: rgba(91, 27, 92, 0.9);
+}
+
+.login-input:focus .photo-upload--input:focus {
+	border: 1px solid #4a154b;
+}
+
+.switchLinkName {
+	font-size: 14px;
+	text-decoration: none;
+	margin-right: 25px;
+	margin-bottom: 0px;
+}
+.switchLink {
+	font-size: 14px;
+	color: #186dee;
+	margin-right: 25px;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.switchLink:hover {
+	text-decoration: underline;
+}
+
+.footer {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.errorsList {
+	list-style-position: none;
+	margin-left: 20px;
+}
+
+.errorsContainer {
+	width: 90%;
+	border: 1px solid #c44536;
+	padding: 10px;
+	background-color: #ffb1b4;
+	color: #c44536;
+	border-radius: 5px;
+	margin: 15px 5%;
+}
+
+.slack_logo {
+	height: 35px;
+	margin-bottom: 20px;
+}
+
+.signup-link {
+	margin-top: 90px;
+	text-align: end;
+}
+
+.photo-upload--form {
+	display: flex;
+	/* justify-content: space-between; */
+}
+
+.photo-upload--input {
+	width: 78%;
+	margin-right: 7px;
+}
+
+.photo-upload--input:focus {
+	border: 1px solid #4a154b;
+}
+
+.photo-upload--btn {
+	font-size: 24px;
+	color: #fff;
+	background-color: #4a154b;
+	padding: 0px 8px;
+	border-radius: 3px;
+	transition: all 0.5s;
+	margin-top: 0;
+	height: 40px;
+}
+
+.photo-upload--btn:hover {
+	background-color: rgba(91, 27, 92, 0.9);
+}

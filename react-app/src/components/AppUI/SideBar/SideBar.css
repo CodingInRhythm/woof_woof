@@ -1,0 +1,91 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900');
+html,
+body {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	font-size: 17px;
+	font-family: 'Lato', Helvetica, sans-serif;
+	color: #555459;
+}
+
+.workspace-menu {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	padding: 18px 18px 0;
+}
+.workspace-menu__name {
+	font-size: 18px;
+	font-weight: 900;
+	color: #fff;
+}
+.workspace-menu__status {
+	font-size: 15px;
+	line-height: 1.8;
+	color: #fff;
+}
+.workspace-menu__status:before {
+	content: '';
+	display: inline-block;
+	margin-right: 0.2rem;
+	width: 9px;
+	height: 9px;
+	background: #00ffba;
+	border-radius: 50%;
+}
+.workspace-menu__username {
+	opacity: 0.6;
+}
+.workspace-icon {
+	display: flex;
+	font-size: 25px;
+	color: #fff;
+}
+.workspace-menu:hover {
+	background: #350d36;
+}
+.sidebar {
+	position: fixed;
+	overflow-y: scroll;
+	top: 38px;
+	bottom: 0;
+	z-index: 1;
+	width: 250px;
+	background: #3f0e40;
+	color: #fff;
+}
+.threads {
+	margin: 0.6rem 0;
+	padding: 0 18px;
+	opacity: 0.7;
+	font-size: 16px;
+}
+
+.threads__items {
+	margin-top: 5px;
+}
+.threads__icon {
+	margin-right: 3px;
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #350d36;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #906791;
+	margin-right: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	/* background: #350d36; */
+}
