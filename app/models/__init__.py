@@ -1,2 +1,2 @@
-from .db import db
-from .user import User
+#################### IMPORTS ####################
+from .models import db, ChannelMessage, DirectMessage, User, Channel
