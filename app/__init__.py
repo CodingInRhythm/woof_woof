@@ -9,6 +9,7 @@ from flask_login import LoginManager
 from .models import db, User
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
+from .api.messages_routes import messages_routes
 
 from .seeds import seed_commands
 
@@ -67,6 +68,7 @@ def inject_csrf_token(response):
 #################### ROUTES ####################
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
+app.register_blueprint(messages_routes, url_prefix='/api/messages')
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
