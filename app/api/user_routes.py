@@ -1,10 +1,14 @@
+#################### IMPORTS ####################
 from flask import Blueprint, jsonify
 from flask_login import login_required
 from app.models import User
 
+
+#################### SETUP ####################
 user_routes = Blueprint('users', __name__)
 
 
+#################### ROUTES ####################
 @user_routes.route('/')
 @login_required
 def users():
