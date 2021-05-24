@@ -13,11 +13,6 @@ seed_commands = AppGroup('seed')
 
 
 #################### COMMANDS ####################
-# Creates the `flask seed ua` command meant to run all commands in one command
-@seed_commands.command('test')
-def test():
-    seed_direct_messages()
-
 # Creates the `flask seed all` command
 @seed_commands.command('all')
 def seed():
