@@ -48,6 +48,20 @@
     color: #561557
 }
 
+.splash_scrolling_nav{
+    background-color: white;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 50px;
+    height: 75px;
+    align-items: center;
+}
+
+.splash_scolling_nav_title{
+    margin-left: 35px;
+}
+
 .splash_page{
     display: flex;
     flex-direction: column;
@@ -55,7 +69,7 @@
     align-items: center;
     height: 750px;
     width: 1080px;
-    border: 2px solid white;
+    /* border: 2px solid white; */
 }
 
 .splash_main-1{

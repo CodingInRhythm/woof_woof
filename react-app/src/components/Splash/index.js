@@ -69,7 +69,14 @@ function Splash(){
         <h1 className="nav_title">slack</h1>
         <div className="splash_nav-right">
           <Link to="/login"><div className="splash_nav-link signin_btn">Sign In</div></Link>
-          <Link to="/sign-up" ><div className="splash_nav-link tryout_btn">Try for free</div></Link>
+          <Link to="/sign-up"><div className="splash_nav-link tryout_btn">Try for free</div></Link>
+        </div>
+      </nav>
+      <nav className="splash_scrolling_nav">
+        <h1 className="splash_scolling_nav_title">slack</h1>
+        <div className="splash_scrolling_nav-right">
+        <Link to="/login"><div className="splash_scrolling_signin">Sign In</div></Link>
+          <Link to="/sign-up"><div className="splash_scrolling_tryout">Try for free</div></Link>
         </div>
       </nav>
       <button className="scroll-btn" id="scroll-btn">Continue</button>
@@ -99,12 +106,12 @@ function Splash(){
                 <h2>This project was build with some fun technologies</h2>
               </div>
               <div className="splash_main-2-right">
-                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img id="js_logo" src={js} class="splash-logo" alt="js-logo"/></a>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img id="python_logo" src={python} class="splash-logo" alt="python-logo"/></a>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img id="docker_logo" src={docker} class="splash-logo" alt="docker-logo"/></a>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img id="react_logo" src={react} class="splash-logo" alt="react-logo"/></a>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img id="flask_logo" src={flask} class="splash-logo" alt="flask-logo"/></a>
-                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img id="postgres_logo" src={postgres} class="splash-logo" alt="postgres-logo"/></a>
+                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" id="js_logo"><img src={js} class="splash-logo" alt="js-logo"/></a>
+                <a href="https://docs.python.org/3/" id="python_logo"><img src={python} class="splash-logo" alt="python-logo"/></a>
+                <a href="https://docs.docker.com/" id="docker_logo"><img src={docker} class="splash-logo" alt="docker-logo"/></a>
+                <a href="https://reactjs.org/" id="react_logo"><img src={react} class="splash-logo" alt="react-logo"/></a>
+                <a href="https://flask.palletsprojects.com/en/2.0.x/" id="flask_logo"><img src={flask} class="splash-logo" alt="flask-logo"/></a>
+                <a href="https://www.postgresql.org/" id="postgres_logo"><img src={postgres} class="splash-logo" alt="postgres-logo"/></a>
               </div>
             </div>
           </Animator>

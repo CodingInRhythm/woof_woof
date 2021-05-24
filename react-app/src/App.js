@@ -32,9 +32,9 @@ function App() {
 		<BrowserRouter>
 			{/* <NavBar /> */}
 			<Switch>
-        <Route path="/" exact={true}>
-          <Splash />
-        </Route>
+				<Route path="/" exact={true}>
+					<Splash />
+				</Route>
 				<Route path="/login" exact={true}>
 					<LoginForm />
 				</Route>
