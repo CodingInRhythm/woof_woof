@@ -2,13 +2,13 @@
 import { io } from "socket.io-client";
 import React, {useState, useEffect} from 'react'
 import {useSelector} from 'react-redux'
-
+import MessageWindow from './MessageWindow'
 // outside of your component, initialize the socket variable
 let socket;
 
 const Chat = () => {
 
-    console.log('Component mounts?') //SUCCEED
+  
 
   //STATE VARIABLES
   const [messages, setMessages] = useState([]);
@@ -17,12 +17,38 @@ const Chat = () => {
   //REDUX
   const user = useSelector((state) => state.session.user);
 
-  console.log('test user store??', user)  //SUCCESS
+
 
   //FUNCTIONS
 
+    const joinChat1 = async (e) => {
+      e.preventDefault()
+      setMessages([{user: "Alex", msg: "Hello"}])
+      let res = await fetch('/change', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({channelid: 1})
+      })
+      console.log(res.json())
+    }
+       const joinChat2 = async (e) => {
+         e.preventDefault();
+          setMessages([{user: "Brent", msg: "Hello2"}]);
+         let res = await fetch("/change", {
+           method: "POST",
+           headers: {
+             "Content-Type": "application/json",
+           },
+           body: JSON.stringify({ channelid: 2 }),
+         });
+         console.log(res.json());
+       };
+
+
     const sendChat = (e) => {
-        console.log('event handler works?') //SUCCESS
+       
         e.preventDefault();
         // emit a message
         socket.emit("chat", { user: user.username, msg: chatInput });
@@ -37,19 +63,12 @@ const Chat = () => {
   //USEFFECTS
   
     useEffect(() => {
-    // create websocket/connect
-    socket = io("http://localhost:5000");
-        console.log(socket)
-    socket.on("chat", (chat) => {
-        console.log('making it?') //FAIL
-       // when we recieve a chat, add it into our messages array in state
-        setMessages((messages) => [...messages, chat]);
-     });
-    // when component unmounts, disconnect
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+  // create websocket/connect
+      socket = io("http://localhost:5000");
+      return () => {
+        socket.disconnect();
+      };
+    }, [])
 
 
   //RETURN STATEMENT
@@ -57,10 +76,14 @@ const Chat = () => {
 
   return (
       <>
+        <form onSubmit={joinChat1}>
+          <button>Chat 1</button>
+        </form>
+        <form onSubmit={joinChat2}>
+          <button>Chat 2</button>
+        </form>
         <div>
-            {messages.map((message, ind) => (
-                <div key={ind}>{`${message.user}: ${message.msg}`}</div>
-            ))}
+          <MessageWindow setMessages={setMessages} messages={messages}/>
         </div>
         <form onSubmit={sendChat}>
             <input value={chatInput} onChange={updateChatInput} />
