@@ -78,13 +78,10 @@ def inject_csrf_token(response):
 #################### ROUTES ####################
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
-<<<<<<< HEAD
 app.register_blueprint(channel_routes, url_prefix='/api/channels')
 app.register_blueprint(dm_routes, url_prefix='/api/dms')
 
-=======
 app.register_blueprint(messages_routes, url_prefix='/api/messages')
->>>>>>> main
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
