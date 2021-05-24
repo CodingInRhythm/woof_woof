@@ -52,28 +52,23 @@ const LoginForm = () => {
 						) : (
 							<div></div>
 						)}
-
-						<label>
-							<input
-								id="email"
-								type="text"
-								required
-								onChange={updateEmail}
-								placeholder="name@email.com"
-								className="login-input"
-							/>
-						</label>
-						<label>
-							<input
-								id="password"
-								type="password"
-								value={password}
-								onChange={updatePassword}
-								required
-								placeholder="password"
-								className="login-input"
-							/>
-						</label>
+						<input
+							id="email"
+							type="text"
+							required
+							onChange={updateEmail}
+							placeholder="name@email.com"
+							className="login-input"
+						/>
+						<input
+							id="password"
+							type="password"
+							value={password}
+							onChange={updatePassword}
+							required
+							placeholder="password"
+							className="login-input"
+						/>
 						<button type="submit" id="submitButton" className="login-btn">
 							Sign In With Email
 						</button>
