@@ -39,6 +39,33 @@ class ChannelMessage(db.Model):
     back_populates="user_messages"
   )
 
+
+  def to_dict(self):
+    return {
+      "id": self.id,
+      "user_id": self.user_id,
+      "channel_id": self.channel_id,
+      "message": self.message,
+    }
+
+  def to_dict_with_user(self):
+    return {
+      "id": self.id,
+      "user_id": self.user_id,
+      "channel_id": self.channel_id,
+      "message": self.message,
+      "user": self.user.to_dict_basic(),
+    }
+
+  def to_dict_with_channel(self):
+    return {
+      "id": self.id,
+      "user_id": self.user_id,
+      "channel_id": self.channel_id,
+      "message": self.message,
+      "channel": self.channel.to_dict_basic(),
+    }
+
 # DIRECT MESSAGE JOIN TABLE #
 class DirectMessage(db.Model):
   __tablename__ = 'direct_messages'
@@ -60,6 +87,34 @@ class DirectMessage(db.Model):
     foreign_keys=[recipient_id]
   )
 
+  def to_dict(self):
+    return {
+      "id": self.id,
+      "sender_id": self.sender_id,
+      "recipient_id": self.recipient_id,
+      "message": self.message,
+      "sender": self.sender.to_dict_basic(),
+      "recipient": self.recipient.to_dict_basic(),
+    }
+
+  def to_dict_with_sender(self):
+    return {
+      "id": self.id,
+      "sender_id": self.sender_id,
+      "recipient_id": self.recipient_id,
+      "message": self.message,
+      "sender": self.sender.to_dict_basic(),
+    }
+
+  def to_dict_with_recipient(self):
+    return {
+      "id": self.id,
+      "sender_id": self.sender_id,
+      "recipient_id": self.recipient_id,
+      "message": self.message,
+      "recipient": self.recipient.to_dict_basic(),
+    }
+
 
 # USER TABLE #
 class User(db.Model, UserMixin):
@@ -74,7 +129,7 @@ class User(db.Model, UserMixin):
   online_status = db.Column(db.Boolean, nullable = False, default=False)
   profile_photo = db.Column(db.String(255))
 
-  channel_owned = db.relationship(
+  channels_owned = db.relationship(
     "Channel",
     back_populates="owner",
     cascade='all, delete-orphan'
@@ -126,11 +181,19 @@ class User(db.Model, UserMixin):
       'lastname' : self.lastname,
       'online_status' : self.online_status,
       'profile_photo' : self.profile_photo,
-      'channel_owned' : self.channel_owned,
-      'channels_in' : self.channels_in,
-      'channel_messages' : self.channel_messages,
-      'sender_messages' : self.sender_messages,
-      'recipient_messages' : self.recipient_messages,
+      'channels_owned' : [channel.to_dict_basic() for channel in self.channels_owned],
+      'channels_in' : [channel.to_dict_basic() for channel in self.channels_in]
+    }
+
+  def to_dict_basic(self):
+    return {
+      "id": self.id,
+      "username": self.username,
+      "email": self.email,
+      'firstname' : self.firstname,
+      'lastname' : self.lastname,
+      'online_status' : self.online_status,
+      'profile_photo' : self.profile_photo
     }
 
 
@@ -145,7 +208,7 @@ class Channel(db.Model):
 
   owner = db.relationship(
     "User",
-    back_populates="channel_owned"
+    back_populates="channels_owned"
   )
 
   users_in = db.relationship(
@@ -158,3 +221,23 @@ class Channel(db.Model):
     "ChannelMessage",
     back_populates="channel"
   )
+
+
+  def to_dict(self):
+    return {
+      "id": self.id,
+      "user_id": self.user_id,
+      "name": self.name,
+      "is_channel": self.is_channel,
+      'owner' : self.owner.to_dict_basic(),
+      'users_in' : [user.to_dict_basic() for user in self.users_in],
+    }
+
+
+  def to_dict_basic(self):
+    return {
+      "id": self.id,
+      "user_id": self.user_id,
+      "name": self.name,
+      "is_channel": self.is_channel,
+    }
