@@ -40,6 +40,9 @@ function Splash(){
   }
 
   const onScroll = () => {
+    if(!document.getElementById("scroll-btn")){
+      return;
+    }
     if (window.scrollY >= 1950){
       document.getElementById("scroll-btn").onclick = scrollToPage3
     }
@@ -70,7 +73,7 @@ function Splash(){
     }
     console.log(window.scrollY)
   }
-
+  
   window.addEventListener('scroll', onScroll)
 
   useEffect(() => {
