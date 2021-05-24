@@ -2,6 +2,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
+from datetime import datetime
 
 #################### SETUP ####################
 db = SQLAlchemy()
@@ -28,6 +29,7 @@ class ChannelMessage(db.Model):
   user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
   channel_id = db.Column(db.Integer, db.ForeignKey("channels.id"), nullable=False)
   message = db.Column(db.Text, nullable = False)
+  created_at=db.Column(db.DateTime(timezone=True), default=datetime.now())
 
   user = db.relationship(
     "User",
@@ -46,6 +48,7 @@ class ChannelMessage(db.Model):
       "user_id": self.user_id,
       "channel_id": self.channel_id,
       "message": self.message,
+      "created_at": self.created_at,
       "user": self.user.to_dict_basic(),
       "channel": self.channel.to_dict_basic(),
     }
@@ -56,6 +59,7 @@ class ChannelMessage(db.Model):
       "user_id": self.user_id,
       "channel_id": self.channel_id,
       "message": self.message,
+      "created_at": self.created_at,
     }
 
 # DIRECT MESSAGE JOIN TABLE #
@@ -66,6 +70,7 @@ class DirectMessage(db.Model):
   sender_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
   recipient_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
   message = db.Column(db.Text, nullable = False)
+  created_at=db.Column(db.DateTime(timezone=True), default=datetime.now())
 
   sender = db.relationship(
     "User",
@@ -85,6 +90,7 @@ class DirectMessage(db.Model):
       "sender_id": self.sender_id,
       "recipient_id": self.recipient_id,
       "message": self.message,
+      "created_at": self.created_at,
       "sender": self.sender.to_dict_basic(),
       "recipient": self.recipient.to_dict_basic(),
     }
@@ -95,6 +101,7 @@ class DirectMessage(db.Model):
       "sender_id": self.sender_id,
       "recipient_id": self.recipient_id,
       "message": self.message,
+      "created_at": self.created_at,
     }
 
 
