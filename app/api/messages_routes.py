@@ -23,7 +23,7 @@ def dm_get(recipient_id):
     if not current_user.is_authenticated:
         return {'errors': ['Unauthorized']}
 
-    direct_messages = DirectMessage.query.filter_by(sender_id=current_user.id, recipient_id=recipient_id).all()
+    direct_messages = DirectMessage.query.filter(DirectMessage.sender_id.in_((current_user.id, recipient_id)),DirectMessage.recipient_id.in_((current_user.id, recipient_id))).all()
     return {'direct_messages':[message.to_dict_basic() for message in direct_messages]}
 
 # PUT (edit) specified direct message #
