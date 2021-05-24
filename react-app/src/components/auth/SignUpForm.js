@@ -59,7 +59,7 @@ const SignUpForm = () => {
 			<div className="login-container">
 				<div></div>
 				<div className="loginWrap">
-					<img src={logo} class="slack_logo"></img>
+					<img src={logo} class="slack_logo" alt="logo"></img>
 					<h1 className="login-form-header">Join Slack</h1>
 
 					<form onSubmit={onSignUp}>
@@ -111,9 +111,18 @@ const SignUpForm = () => {
 							/>
 						</div>
 						<div className="photo-upload--form">
-							<input
-								id="photo"
-								type="text"
+							<input type="file" id="actual-btn" hidden />
+
+							<label for="actual-btn" className="photo-upload--btn">
+								Choose File
+							</label>
+
+							<span id="file-chosen" className="photo-upload--filename">
+								No file chosen
+							</span>
+							{/* <input
+								id="photo-btn"
+								type="file"
 								onChange={updatePhoto}
 								placeholder="profile_photo.jpg"
 								className="photo-upload--input"
@@ -121,7 +130,7 @@ const SignUpForm = () => {
 							/>
 							<button className="photo-upload--btn">
 								<i class="fas fa-file-upload"></i>
-							</button>
+							</button> */}
 						</div>
 						<div>
 							<input

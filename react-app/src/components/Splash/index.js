@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Animator, ScrollContainer, ScrollPage, batch, Fade,Zoom, FadeIn, Move, MoveIn, MoveOut, Sticky, StickyIn, ZoomIn, ZoomOut } from "react-scroll-motion";
 import "./Splash.css"
-
+import LogoutButton from '../auth/LogoutButton'
 const FadeUp = batch(Fade(.1,1), Move(), Sticky(50))
 
-function Splash(){  
+function Splash(){
   return (
     <div classname="splash_container">
       <nav className="splash_nav">
@@ -22,6 +22,7 @@ function Splash(){
               <h3>Here is an amazing Slack clone!</h3><br/>
               <h4>Want to check it out?</h4>
               <Link to="/sign-up">Try Out</Link>
+			  <LogoutButton />
               <img className="splash_img" src="https://i.pcmag.com/imagery/reviews/07td46ju7p6lLVb0QGwc5VF-6.1569479844.fit_scale.size_1028x578.jpg" alt="slack" />
             </div>
           </Animator>

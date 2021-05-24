@@ -133,6 +133,36 @@
 }
 
 .photo-upload--btn {
+	font-size: 14px;
+	color: #fff;
+	background-color: #4a154b;
+	padding: 10px 8px;
+	border-radius: 3px;
+	transition: all 0.5s;
+	margin-top: 0;
+	margin-left: 5%;
+	height: 40px;
+	text-align: center;
+}
+
+.photo-upload--filename {
+	width: 65%;
+	margin-left: 5px;
+	margin-bottom: 10px;
+	height: 40px;
+	border-radius: 5px;
+	outline: 0;
+	border: 1px solid #cccccc;
+	padding: 0 0 0 10px;
+	font-size: 14px;
+	padding: 10px 12px;
+}
+
+.photo-upload--btn:hover {
+	background-color: rgba(91, 27, 92, 0.9);
+}
+
+/* input[type='file']::file-selector-button {
 	font-size: 24px;
 	color: #fff;
 	background-color: #4a154b;
@@ -143,6 +173,6 @@
 	height: 40px;
 }
 
-.photo-upload--btn:hover {
+input[type='file']::file-selector-button:hover {
 	background-color: rgba(91, 27, 92, 0.9);
-}
+} */
