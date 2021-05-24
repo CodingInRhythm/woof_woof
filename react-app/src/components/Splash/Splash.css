@@ -10,12 +10,23 @@
 }
 
 .splash_nav h1{
-    padding-left: 15px;
+    padding-left: 10px;
     color: white;
+    font-weight: 600
+}
+
+#slack_logo{
+    width:45px;
+    margin-left: 25px;
+}
+.splash_nav-left{
+    display: flex;
+    align-items: center;
 }
 
 .splash_nav-right{
     display: flex;
+    margin-right: 15px;
 }
 
 .splash_container{
@@ -43,9 +54,17 @@
     border: 1px solid white;
 }
 
+.signin_btn:hover{
+    border: 2px solid white;
+}
+
 .tryout_btn{
     background-color: white;
     color: #561557
+}
+
+.tryout_btn:hover{
+    border: 1px solid #471247
 }
 
 .splash_scrolling_nav{
@@ -56,10 +75,70 @@
     border-radius: 50px;
     height: 75px;
     align-items: center;
+    position: sticky;
+    top: 30px;
+    z-index: 1000;
+}
+
+.splash_scrolling_nav-left{
+    display: flex;
+}
+
+.splash_scrolling_nav-left:hover{
+    cursor: pointer;
 }
 
 .splash_scolling_nav_title{
-    margin-left: 35px;
+    margin-left: 10px;
+    color: black;
+    font-weight: 600
+}
+
+.splash_scrolling_nav-right{
+    display: flex;
+    margin-right: 15px;
+}
+
+.splash_scrolling_signin{
+    letter-spacing: .8px;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    width: 130px;
+    height: 40px;
+    margin-right: 15px;
+    font-size: 14px;
+    color: #561557;
+    border: 1px solid #561557;
+}
+
+.splash_scrolling_signin:hover{
+    border: 2px solid #561557;
+}
+
+.splash_scrolling_tryout{
+    letter-spacing: .8px;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    width: 130px;
+    height: 40px;
+    margin-right: 15px;
+    font-size: 14px;
+    background-color: #561557;
+    color: white
+}
+
+.splash_scrolling_tryout:hover{
+    background-color: #471247;
 }
 
 .splash_page{
@@ -110,6 +189,11 @@
     margin-bottom: 25px;
 }
 
+.splash_tryout_btn:hover{
+    padding: 19px 39px;
+    margin: 1px 1px 26px 1px
+}
+
 .splash_main-1 img{
     height: 500px
 }
@@ -121,7 +205,25 @@
 }
 
 .splash_main-2-left{
-    grid-area: mid-left
+    grid-area: mid-left;
+    margin-right: 25px;
+}
+
+.splash_main-2-left h2{
+    color: black;
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -1.3px;
+    font-size: 50px;
+    margin-top: -80px
+}
+
+.splash_main-2-left h4{
+    color: black;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: -.3px;
+    font-size: 24px;
 }
 
 .splash_main-2-right{
@@ -171,7 +273,6 @@
 
 .splash-logo{
     height: 200px;
-
 }
 
 .splash_main-3{
