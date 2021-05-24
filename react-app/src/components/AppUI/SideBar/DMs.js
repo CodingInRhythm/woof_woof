@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import './DMs.css';
 import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const DMs = () => {
 	const [users, setUsers] = useState([]);
+	const user = useSelector(state => state.session.user);
+	const userId = user.id;
 
 	useEffect(() => {
 		async function fetchData() {
-			const response = await fetch('/api/users/');
+			const response = await fetch(`/api/users/`);
 			const responseData = await response.json();
 			setUsers(responseData.users);
 		}
 		fetchData();
 	}, []);
-
+	console.log(users);
 	const userComponents = users.map(user => {
 		return (
 			<li key={user.id} className="dm__item">
-				<NavLink to={`/users/${user.id}`} className="dm__button">
-					{user.username}
+				<NavLink
+					to={`/users/${user.id}`}
+					className={`dm__button ${user.online_status ? 'dm__button--online' : ''}`}
+				>
+					<span>{user.firstname + ' ' + user.lastname}</span>
 				</NavLink>
 			</li>
 		);
@@ -28,7 +34,7 @@ const DMs = () => {
 		<div class="dm">
 			<h2 class="dm__heading">
 				<span>
-					Direct messages <span class="dm__number">(10)</span>
+					Direct messages <span class="dm__number">({users.length})</span>
 				</span>
 			</h2>
 			<ul class="dm__list">
@@ -46,71 +52,6 @@ const DMs = () => {
 				<li class="dm__item">
 					<button class="dm__button dm__button--online">
 						<span>Alex Clough</span>
-					</button>
-				</li>
-				<li class="dm__item">
-					<button class="dm__button dm__button--online">
-						<span>Brad Simpson</span>
-					</button>
-				</li>
-				<li class="dm__item">
-					<button class="dm__button">
-						<span>Juliet Shafto</span>
-					</button>
-				</li>
-				<li class="dm__item">
-					<button class="dm__button dm__button--online">
-						<span>Jeff Granof</span>
-					</button>
-				</li>
-				<li class="dm__item">
-					<button class="dm__button">
-						<span>Rebecca Potter</span>
-					</button>
-				</li>
-				<li class="dm__item">
-					<button class="dm__button dm__button--online">
-						<span>Sam Daniel</span>
-					</button>
-				</li>
-				<li class="dm__item">
-					<button class="dm__button">
-						<span>Daniel Munoz</span>
-					</button>
-				</li>
-				<li class="dm__item">
-					<button class="dm__button dm__button--online">
-						<span>Milton Ward</span>
-					</button>
-				</li>
-				<li class="dm__item">
-					<button class="dm__button">
-						<span>Luella Hunt</span>
-					</button>
-				</li>
-				<li class="dm__item">
-					<button class="dm__button dm__button--online">
-						<span>Calvin Coleman</span>
-					</button>
-				</li>
-				<li class="dm__item">
-					<button class="dm__button">
-						<span>Lou Hudson</span>
-					</button>
-				</li>
-				<li class="dm__item">
-					<button class="dm__button dm__button--online">
-						<span>Walter Lopez</span>
-					</button>
-				</li>
-				<li class="dm__item">
-					<button class="dm__button">
-						<span>Travis Castro</span>
-					</button>
-				</li>
-				<li class="dm__item">
-					<button class="dm__button dm__button--online">
-						<span>Max Dawson</span>
 					</button>
 				</li>
 				<li class="dm__item">

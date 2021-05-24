@@ -48,3 +48,12 @@
 .nav-logo:hover {
 	cursor: pointer;
 }
+
+.fa-home {
+	color: #fff;
+}
+
+.username {
+	color: #fff;
+	margin-right: 13px;
+}

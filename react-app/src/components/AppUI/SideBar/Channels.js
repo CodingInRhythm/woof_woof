@@ -16,8 +16,10 @@ const Channels = () => {
 
 	const channelComponents = channels.map(channel => {
 		return (
-			<li key={channel.id} className="channels__item">
-				<NavLink to={`/channels/${channel.id}`}>{channel.name}</NavLink>
+			<li key={channel.id} className="channels__button">
+				<NavLink to={`/channels/${channel.id}`}>
+					<span>{channel.name}</span>
+				</NavLink>
 			</li>
 		);
 	});
@@ -26,7 +28,7 @@ const Channels = () => {
 		<div className="channels">
 			<h2 className="channels__heading">
 				<span>
-					Channels <span className="channels__number">(9)</span>
+					Channels <span className="channels__number">({channels.length})</span>
 				</span>
 			</h2>
 			<ul className="channels__list">
