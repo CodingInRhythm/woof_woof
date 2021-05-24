@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect, NavLink } from 'react-router-dom';
+import { Redirect, NavLink, useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
 import './LoginForm.css';
 import logo from '../../images/slack_logo-ebd02d1.svg';
@@ -11,6 +11,7 @@ const LoginForm = () => {
 	const [password, setPassword] = useState('');
 	const user = useSelector(state => state.session.user);
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	const onLogin = async e => {
 		e.preventDefault();
@@ -28,6 +29,15 @@ const LoginForm = () => {
 		setPassword(e.target.value);
 	};
 
+	const logoClick = () => {
+		history.push('/')
+	}
+
+	const demoClick = async e => {
+		e.preventDefault();
+		await dispatch(login("demo@aa.io", "password"));
+	}
+
 	if (user) {
 		return <Redirect to="/" />;
 	}
@@ -37,7 +47,7 @@ const LoginForm = () => {
 			<div className="login-container">
 				<div></div>
 				<div className="loginWrap">
-					<img src={logo} class="slack_logo"></img>
+					<img src={logo} class="slack_logo" onClick={logoClick}></img>
 					<h1 className="login-form-header">Sign in to Slack</h1>
 					<form onSubmit={onLogin}>
 						{errors.length ? (
@@ -72,7 +82,7 @@ const LoginForm = () => {
 						<button type="submit" id="submitButton" className="login-btn">
 							Sign In With Email
 						</button>
-						<button id="demoButton" className="demo-btn">
+						<button id="demoButton" className="demo-btn" onClick={demoClick}>
 							Demo Login
 						</button>
 					</form>
