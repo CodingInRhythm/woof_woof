@@ -1,13 +1,36 @@
-from werkzeug.security import generate_password_hash
+#################### IMPORTS ####################
+from faker import Faker
+
 from app.models import db, User
 
-# Adds a demo user, you can add other users here if you want
+
+#################### FUNCTIONS ####################
+
+# Seeds User Data
 def seed_users():
 
-    demo = User(username='Demo', email='demo@aa.io',
-                password='password')
+    fake = Faker()
 
-    db.session.add(demo)
+    users = [
+        {'username':'Demo', 'email':'demo@aa.io', 'password':'password','firstname':'Demo','lastname':'Demo',},
+        {'username':'jesse_never_wong', 'email':'jesse@wong.com', 'password':'password','firstname':'Jesse','lastname':'Wong',},
+        {'username':'brad_i_would_simp_for_son', 'email':'brad@simpson.com', 'password':'password','firstname':'Brad','lastname':'Simpson',},
+        {'username':'juliet_shafto_the_rescue', 'email':'juliet@shafto.com', 'password':'password','firstname':'Juliet','lastname':'Shafto',},
+        {'username':"mitchell_reiss's_pieces", 'email':'mitchel@reiss.com', 'password':'password','firstname':'Mitchell','lastname':'Reiss',},
+        {'username':'jeff_granof_the_grey', 'email':'jeff@granof.com', 'password':'password','firstname':'Jeff','lastname':'Granof',},
+        {'username':'zach_watts_in_the_box', 'email':'zach@watts.com', 'password':'password','firstname':'Zach','lastname':'Watts',},
+    ]
+
+    for _ in range(50):
+        users.append({'username':fake.user_name(),
+        'email':fake.free_email(),
+        'password':fake.password(length=10),
+        'firstname':fake.first_name(),
+        'lastname':fake.last_name()})
+
+    for user in users:
+        load_user = User(username=user['username'], email=user['email'], password=user['password'], firstname=user['firstname'], lastname=user['lastname'])
+        db.session.add(load_user)
 
     db.session.commit()
 

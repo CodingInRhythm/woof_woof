@@ -1,12 +1,16 @@
+#################### IMPORTS ####################
 from flask import Blueprint, jsonify, session, request
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
 
+
+#################### SETUP ####################
 auth_routes = Blueprint('auth', __name__)
 
 
+#################### FUNCTIONS ####################
 def validation_errors_to_error_messages(validation_errors):
     """
     Simple function that turns the WTForms validation errors into a simple list
@@ -18,6 +22,7 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
+#################### ROUTES ####################
 @auth_routes.route('/')
 def authenticate():
     """
