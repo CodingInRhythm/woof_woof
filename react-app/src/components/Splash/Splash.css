@@ -3,67 +3,380 @@
     align-items: center;
     justify-content: space-between;
     background-color: lightgrey;
-    margin: 0
+    margin: 0;
+    height: 50px;
+    padding-top: 15px;
+    background-color: #561557;
 }
 
 .splash_nav h1{
-    padding-left: 15px;
+    padding-left: 10px;
+    color: white;
+    font-weight: 600
 }
 
-.splash_nav-link{
-    background-color: red;
+#slack_logo{
+    width:45px;
+    margin-left: 25px;
+}
+.splash_nav-left{
+    display: flex;
+    align-items: center;
+}
+
+.splash_nav-right{
+    display: flex;
     margin-right: 15px;
-    padding: 15px;
-    text-decoration: none;
-    color:black
-}
-
-.splash_main-1{
-    margin-top: -200px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 500px;
-    background-color: lightgoldenrodyellow;
-}
-
-.splash_main-1:hover #root{
-    background-color: red;
-}
-
-.splash_main-2{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 500px;
-    background-color: lightsalmon;
-}
-
-.splash_main-3{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 500px;
-    background-color: lightskyblue;
-}
-
-.splash_main-4{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    background-color: lightcoral;
-    /* width: 500px; */
-    margin: 0;
 }
 
 .splash_container{
-    height: 1080px;
-    width: 50px;
-    background-color: green;
+    background-color: #561557;
+    transition: all 1s ease;
 }
 
+.splash_nav-link{
+    letter-spacing: .8px;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    width: 130px;
+    height: 40px;
+    margin-right: 15px;
+    font-size: 14px;
+}
 
+.signin_btn{
+    color: white;
+    border: 1px solid white;
+}
+
+.signin_btn:hover{
+    border: 2px solid white;
+}
+
+.tryout_btn{
+    background-color: white;
+    color: #561557
+}
+
+.tryout_btn:hover{
+    border: 1px solid #471247
+}
+
+.splash_scrolling_nav{
+    background-color: white;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 50px;
+    height: 75px;
+    align-items: center;
+    position: sticky;
+    top: 30px;
+    z-index: 1000;
+}
+
+.splash_scrolling_nav-left{
+    display: flex;
+}
+
+.splash_scrolling_nav-left:hover{
+    cursor: pointer;
+}
+
+.splash_scolling_nav_title{
+    margin-left: 10px;
+    color: black;
+    font-weight: 600
+}
+
+.splash_scrolling_nav-right{
+    display: flex;
+    margin-right: 15px;
+}
+
+.splash_scrolling_signin{
+    letter-spacing: .8px;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    width: 130px;
+    height: 40px;
+    margin-right: 15px;
+    font-size: 14px;
+    color: #561557;
+    border: 1px solid #561557;
+}
+
+.splash_scrolling_signin:hover{
+    border: 2px solid #561557;
+}
+
+.splash_scrolling_tryout{
+    letter-spacing: .8px;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    width: 130px;
+    height: 40px;
+    margin-right: 15px;
+    font-size: 14px;
+    background-color: #561557;
+    color: white
+}
+
+.splash_scrolling_tryout:hover{
+    background-color: #471247;
+}
+
+.splash_page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 750px;
+    width: 1080px;
+    /* border: 2px solid white; */
+}
+
+.splash_main-1{
+    margin-top: 45px;
+}
+
+.splash_main-1-text,
+.splash_main-1-text-highlight{
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -1.5px;
+    font-size: 60px;
+    color: white;
+    text-align: center;
+}
+
+.splash_main-1-text-highlight{
+    color: #ecb22e
+}
+
+.splash_main-1-text{
+    margin-bottom: 25px;
+}
+
+.splash_tryout_btn{
+    letter-spacing: .8px;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    padding: 20px 40px;
+    font-size: 14px;
+    background-color: white;
+    color: #561557;
+    margin-bottom: 25px;
+}
+
+.splash_tryout_btn:hover{
+    padding: 19px 39px;
+    margin: 1px 1px 26px 1px
+}
+
+.splash_main-1 img{
+    height: 500px
+}
+
+.splash_main-2{
+    display: grid;
+    grid-template-columns: 3fr 3fr;
+    grid-template-areas: "mid-left mid-right";
+}
+
+.splash_main-2-left{
+    grid-area: mid-left;
+    margin-right: 25px;
+}
+
+.splash_main-2-left h2{
+    color: black;
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -1.3px;
+    font-size: 50px;
+    margin-top: -80px
+}
+
+.splash_main-2-left h4{
+    color: black;
+    font-weight: 400;
+    line-height: 1.3;
+    letter-spacing: -.3px;
+    font-size: 24px;
+}
+
+.splash_main-2-right{
+    height: 100%;
+    grid-area: mid-right;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 100px 100px 10px);
+    grid-template-areas: 
+    "js ."
+    "js python"
+    ". python"
+    "docker ."
+    "docker react"
+    ". react"
+    "flask ."
+    "flask postgres"
+    ". postgres"
+    ;
+}
+
+#js_logo{
+    grid-area: js;
+}
+
+#python_logo{
+    grid-area: python;
+}
+
+#docker_logo{
+    grid-area: docker;
+    margin-left: -20px;
+}
+
+#react_logo{
+    grid-area: react;
+    margin-left: -45px;
+}
+
+#flask_logo{
+    grid-area: flask;
+}
+
+#postgres_logo{
+    grid-area: postgres;
+}
+
+.splash-logo{
+    height: 200px;
+}
+
+.splash_main-3{
+    display: grid;
+    height: 500px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 100px 1fr;
+    grid-template-areas: 
+    "created created created created"
+    "nurs alex brent zane"
+}
+
+.splash_main-3 h2{
+    grid-area: created;
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -1.5px;
+    color: white;
+    font-size: 50px;
+    text-align: center
+}
+
+.splash_main-3-creator{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    /* border: 2px blue solid; */
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+
+.splash_main-3-creator h3{
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -1px;
+    font-size: 25px;
+    margin: 15px 0px;
+}
+
+.splash_main-3-creator img{
+    width: 175px;
+    border-radius: 50%;
+    margin-top: 15px;
+}
+
+.splash_main-3-creator a{
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.5px;
+}
+
+.splash_main-3-creator a:hover{
+    color: #ecb22e
+}
+
+#creator-nurs{
+    grid-area: nurs
+}
+
+#creator-alex{
+    grid-area: alex
+}
+
+#creator-brent{
+    grid-area: brent
+}
+
+#creator-zane{
+    grid-area: zane
+}
+
+.scroll-btn{
+    background-color: #ecb22e;
+    position: fixed;
+    bottom: 25px;
+    height: 50px;
+    width: 155px;
+    margin: 0 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-radius: 80px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    z-index: 1000;
+}
+
+.splash_footer{
+    background-color: white;
+    height: 50px;
+}
+
+.splash_container-middle{
+    background-color: #f6efe8;
+}
+
+.splash_container-last{
+    background-color: #0b2440;
+}
+
+.hidden{
+    display: none;
+}

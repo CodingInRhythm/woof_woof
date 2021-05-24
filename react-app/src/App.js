@@ -9,6 +9,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import MainInterface from './components/AppUI/MainInterface';
 import Splash from './components/Splash';
+import Chat from "./components/Chat"
 import { authenticate } from './store/session';
 
 function App() {
@@ -42,6 +43,9 @@ function App() {
 				</Route>
 				<Route path="/app_ui" exact={true}>
 					<MainInterface />
+				</Route>
+				<Route path="/chatroom">
+					<Chat />
 				</Route>
 				<ProtectedRoute path="/users" exact={true}>
 					<UsersList />
