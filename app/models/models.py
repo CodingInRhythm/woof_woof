@@ -46,24 +46,16 @@ class ChannelMessage(db.Model):
       "user_id": self.user_id,
       "channel_id": self.channel_id,
       "message": self.message,
-    }
-
-  def to_dict_with_user(self):
-    return {
-      "id": self.id,
-      "user_id": self.user_id,
-      "channel_id": self.channel_id,
-      "message": self.message,
       "user": self.user.to_dict_basic(),
+      "channel": self.channel.to_dict_basic(),
     }
 
-  def to_dict_with_channel(self):
+  def to_dict_basic(self):
     return {
       "id": self.id,
       "user_id": self.user_id,
       "channel_id": self.channel_id,
       "message": self.message,
-      "channel": self.channel.to_dict_basic(),
     }
 
 # DIRECT MESSAGE JOIN TABLE #
@@ -97,22 +89,12 @@ class DirectMessage(db.Model):
       "recipient": self.recipient.to_dict_basic(),
     }
 
-  def to_dict_with_sender(self):
+  def to_dict_basic(self):
     return {
       "id": self.id,
       "sender_id": self.sender_id,
       "recipient_id": self.recipient_id,
       "message": self.message,
-      "sender": self.sender.to_dict_basic(),
-    }
-
-  def to_dict_with_recipient(self):
-    return {
-      "id": self.id,
-      "sender_id": self.sender_id,
-      "recipient_id": self.recipient_id,
-      "message": self.message,
-      "recipient": self.recipient.to_dict_basic(),
     }
 
 
