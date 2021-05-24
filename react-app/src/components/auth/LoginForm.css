@@ -27,13 +27,17 @@
 	flex-direction: column;
 }
 
-.login-input {
+.login-input,
+.photo-upload--input {
 	width: 90%;
 	margin-left: 5%;
 	margin-bottom: 10px;
 	height: 40px;
 	border-radius: 5px;
 	outline: 0;
+	border: 1px solid #cccccc;
+	padding: 0 0 0 10px;
+	font-size: 14px;
 }
 
 .login-btn,
@@ -57,17 +61,11 @@
 
 .login-btn:hover,
 .demo-btn:hover {
-	background-color: rgba(74, 21, 75, 0.9);
+	background-color: rgba(91, 27, 92, 0.9);
 }
 
-.login-input {
-	border: 1px solid #cccccc;
-	padding: 0 0 0 10px;
-	font-size: 14px;
-}
-
-.login-input:focus {
-	border: 1px solid #aa0412;
+.login-input:focus .photo-upload--input:focus {
+	border: 1px solid #4a154b;
 }
 
 .switchLinkName {
@@ -118,4 +116,33 @@
 .signup-link {
 	margin-top: 90px;
 	text-align: end;
+}
+
+.photo-upload--form {
+	display: flex;
+	/* justify-content: space-between; */
+}
+
+.photo-upload--input {
+	width: 78%;
+	margin-right: 7px;
+}
+
+.photo-upload--input:focus {
+	border: 1px solid #4a154b;
+}
+
+.photo-upload--btn {
+	font-size: 24px;
+	color: #fff;
+	background-color: #4a154b;
+	padding: 0px 8px;
+	border-radius: 3px;
+	transition: all 0.5s;
+	margin-top: 0;
+	height: 40px;
+}
+
+.photo-upload--btn:hover {
+	background-color: rgba(91, 27, 92, 0.9);
 }
