@@ -17,7 +17,11 @@ else:
 socketio = SocketIO(cors_allowed_origins=origins)
 
 
+<<<<<<< HEAD
 # @socketio.join("join")
+=======
+# @socketio.on("join")
+>>>>>>> main
 # def join_room():
 #     channel = session['channel']
 #     join_room(channel)
