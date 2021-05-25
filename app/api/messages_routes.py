@@ -70,7 +70,7 @@ def channel_message_get(channel_id):
         return {'errors': ['Unauthorized']}
 
     channel_messages = ChannelMessage.query.filter_by(channel_id=channel_id).all()
-    return {'channel_messages':[message.to_dict_basic() for message in channel_messages]}
+    return {'channel_messages':[message.to_dict() for message in channel_messages]}
 
 
 # PUT (edit) specified direct message #
