@@ -46,6 +46,10 @@ const DMs = () => {
 			
 			//UseSelector grabs our conversations
 			const conversations = useSelector(state => state.dm_users);
+			let arr = []
+			for (let i in conversations){
+				arr.push(conversations[i])
+			}
 			
 			return (
 				<div class="dm">
@@ -56,7 +60,7 @@ const DMs = () => {
 			</h2>
 			<ul class="dm__list">
 
-				{conversations?.map(conversation => <DMPerson recipient={conversation}/>)}
+				{arr?.map(conversation => <DMPerson recipient={conversation}/>)}
 				{/* <li class="dm__item">
 					<button class="dm__button dm__button--online">
 					<span>Brent Arimoto</span>

@@ -9,7 +9,6 @@ const Nav = ({channel, setRoom}) =>{
 
 	let handleClick = ()=>{
 		if (!isClicked){
-
 			setIsClicked(true)
 		}
 		setRoom(`Channel: ${channel.id}`)
@@ -68,10 +67,8 @@ const Channels = ({ setRoom }) => {
 						<span>2021-01-group02-juice-and-the-thunks</span>
 					</button>
 				</li>
-				{arr?.map(channel=>
-					<Nav channel={channel} setRoom={setRoom}/>
-				)}
-				{/* {channelComponents} */}
+				{arr?.map(channel=> <Nav channel={channel} setRoom={setRoom}/>)}
+				{channelComponents}
 				<li className="channels__item">
 					<button className="channels__add">
 						<span className="dm__add--plussign">+</span>

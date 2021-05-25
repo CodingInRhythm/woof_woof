@@ -18,6 +18,10 @@ const MainInterface = () => {
 		dispatch(getDMUsers());
 	}, [dispatch]);
 
+	useEffect(() => {
+		console.log("hi im loading")
+	}, [])
+
 	const [room, setRoom] = useState('');
 
 	return (

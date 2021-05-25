@@ -5,6 +5,7 @@ import ReactQuill from 'react-quill'; // ES6
 import { useDispatch, useSelector } from 'react-redux';
 import { getChannelMessages } from '../../../store/channel_messages';
 import { useParams, useLocation } from 'react-router-dom';
+import { getDirectMessages } from '../../../store/direct_messages';
 
 const Content = ({ room, setRoom }) => {
 	let modules = {
@@ -47,6 +48,7 @@ const Content = ({ room, setRoom }) => {
 	console.log(location)
 	const dispatch = useDispatch();
 	const channel_messages = useSelector(state => state.channelMessages);
+	const direct_messages = useSelector(state => state.directMessages);
 	const userId = useSelector((state) => state.session.user.id)
 
 	let slice;
@@ -65,10 +67,14 @@ const Content = ({ room, setRoom }) => {
 		if (!channel_messages[id]) {
 			dispatch(getChannelMessages(id));
 		}
+		if (!direct_messages[id]){
+			dispatch(getDirectMessages(id))
+		}
 	}, [room, dispatch, id]);
 
-
-	const messages = useSelector((state) => state[slice][roomNum])
+	console.log("slice----", slice)
+	console.log('roomnum----', room)
+	const messages = useSelector((state) => state[slice])
 	
 	// console.log(messages[id]);
 	const messageItem = messages[id]?.map(msg => {
