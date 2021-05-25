@@ -70,7 +70,7 @@ const MessageWindow = ({recipientid, room}) => {
 
     return (()=>{
       socket.emit('leave', {room:room})
-      socket.disconnect()
+      // socket.disconnect()
     })
   },[room])
 

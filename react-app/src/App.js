@@ -57,6 +57,9 @@ function App() {
 				<Route path="/channels/:id" exact={true}>
 					<MainInterface />
 				</Route>
+				<Route path="/dm/:id" exact={true}>
+					<MainInterface />
+				</Route>
 				{/* <ProtectedRoute path="/" exact={true} >
 					<h1>My Home Page</h1>
 				</ProtectedRoute> */}

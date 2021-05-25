@@ -18,6 +18,10 @@ const MainInterface = () => {
 		dispatch(getDMUsers());
 	}, [dispatch]);
 
+	useEffect(() => {
+		console.log("hi im loading")
+	}, [])
+
 	const [room, setRoom] = useState('');
 
 	return (
@@ -25,7 +29,7 @@ const MainInterface = () => {
 			<Navigation />
 			<div className="main-container">
 				<SideBar setRoom={setRoom} />
-				<Content room={room} />
+				<Content room={room} setRoom={setRoom} />
 			</div>
 		</>
 	);
