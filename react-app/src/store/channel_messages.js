@@ -33,6 +33,13 @@ export const getChannelMessages = (channel_id) => async (dispatch) => {
 }
 
 
+//Write thunk to add message to store so that other users not currently in
+//room but with socket connection have message added to their store.  
+
+
+
+
+
 /*************************** REDUCER ***************************/
 
 const initialState = {};
