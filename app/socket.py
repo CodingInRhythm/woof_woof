@@ -3,7 +3,7 @@ from flask_socketio import SocketIO, emit, join_room
 import os
 from .models.models import db, DirectMessage
 
-#Setting origins variable to all when in dev, actual heroku app-url in production
+# Setting origins variable to all when in dev, actual heroku app-url in production
 
 if os.environ.get("FLASK_ENV") == "production":
     origins = [
@@ -17,15 +17,15 @@ else:
 socketio = SocketIO(cors_allowed_origins=origins)
 
 
-@socketio.join("join")
-def join_room():
-    channel = session['channel']
-    join_room(channel)
-    
+# @socketio.join("join")
+# def join_room():
+#     channel = session['channel']
+#     join_room(channel)
+
 @socketio.on("chat", namespace="")
 def handle_chat(data):
     '''
-    listening for 'chat' event.  Message received is data.  We emit message (data param) back to everyone on chat channel, 
+    listening for 'chat' event.  Message received is data.  We emit message (data param) back to everyone on chat channel,
     broadcast True means all connected users will receive message,
     will want to change this.
     '''

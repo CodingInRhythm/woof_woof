@@ -11,12 +11,14 @@ const DMs = () => {
 	useEffect(() => {
 		async function fetchData() {
 			const response = await fetch(`/api/users/`);
+			// const response = await fetch(`/api/dms/`);
 			const responseData = await response.json();
 			setUsers(responseData.users);
 		}
 		fetchData();
 	}, []);
 	console.log(users);
+
 	const userComponents = users.map(user => {
 		return (
 			<li key={user.id} className="dm__item">

@@ -8,7 +8,7 @@ let socket;
 
 const Chat = () => {
 
-  
+
 
   //STATE VARIABLES
   const [messages, setMessages] = useState([]);
@@ -48,7 +48,7 @@ const Chat = () => {
 
 
     const sendChat = (e) => {
-       
+
         e.preventDefault();
         // emit a message
         socket.emit("chat", { user: user.username, msg: chatInput });
@@ -59,9 +59,9 @@ const Chat = () => {
     const updateChatInput = (e) => {
       setChatInput(e.target.value);
     };
-  
+
   //USEFFECTS
-  
+
     useEffect(() => {
   // create websocket/connect
       socket = io("http://localhost:5000");

@@ -3,6 +3,7 @@ import Navigation from './NavBar/Navigation';
 import SideBar from './SideBar/SideBar';
 import Content from './Content/Content';
 import './MainInterface.css';
+import { Route } from 'react-router-dom';
 
 const MainInterface = () => {
 	return (

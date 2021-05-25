@@ -1,27 +1,21 @@
 from flask import Blueprint, jsonify
 # from flask_login import login_required
-from app.models import Channel, DirectMessage, User
-from flask_login import current_user, login_user, logout_user, login_required
+from app.models import DirectMessage, User
+from flask_login import current_user
 
 dm_routes = Blueprint('dms', __name__)
 
 
 @dm_routes.route('/')
-# @login_required
 def direct_messages():
-    # get channel for the current user
-    user = User.query.filter(User.id == current_user.id).first()
-    channels = {"channels": [channel.to_dict()
-                             for channel in user.channels_in]}
-    return channels
+    # users = User.query.filter(User.id == current_user.id).first()
+    # dms = DirectMessage.query.all()
+    print("***************************************")
+    print("***************************************")
+    direct_messages = DirectMessage.query.all()
+    return {'direct_messages': [message.to_dict_basic() for message in direct_messages]}
+    # filter(DirectMessage.sender_id == current_user.id)
+    # users = User.query.all()
+    # return {"users": [user.to_dict() for user in dm_users]}
 
-
-# @ channel_routes.route('/<int:id>')
-# # @login_required
-# def channel(id):
-#     messages = ChannelMessage.query.filter(
-#         ChannelMessage.channel_id == id).all()
-#     # print(")()()()()()()()()()()())))))()()())(")
-#     # print(messages)
-#     # print(")()()()()()()()()()()())))))()()())(")
-#     return {"messages": [message.to_dict() for message in messages]}
+# direct_messages.id, direct_messages.sender_id, direct_messages.recipient_id, users.id, users.firstname, users.lastname

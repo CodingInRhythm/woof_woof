@@ -9,8 +9,9 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import MainInterface from './components/AppUI/MainInterface';
 import Splash from './components/Splash';
-import Chat from "./components/Chat"
+import Chat from './components/Chat';
 import { authenticate } from './store/session';
+import Content from './components/AppUI/Content/Content';
 
 function App() {
 	const user = useSelector(state => state.session.user);

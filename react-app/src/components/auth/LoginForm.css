@@ -136,24 +136,27 @@
 	font-size: 14px;
 	color: #fff;
 	background-color: #4a154b;
-	padding: 10px 8px;
-	border-radius: 3px;
+	padding: 12px 8px;
+	border-radius: 5px;
 	transition: all 0.5s;
 	margin-top: 0;
-	margin-left: 5%;
+	margin-left: 5px;
 	height: 40px;
 	text-align: center;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 .photo-upload--filename {
 	width: 65%;
-	margin-left: 5px;
+	margin-left: 5%;
 	margin-bottom: 10px;
 	height: 40px;
 	border-radius: 5px;
 	outline: 0;
+	color: rgb(119, 118, 118);
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	border: 1px solid #cccccc;
-	padding: 0 0 0 10px;
+	padding: 0 0 0 12px;
 	font-size: 14px;
 	padding: 10px 12px;
 }

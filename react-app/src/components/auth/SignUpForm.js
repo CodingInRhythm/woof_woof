@@ -54,6 +54,7 @@ const SignUpForm = () => {
 	if (user) {
 		return <Redirect to="/" />;
 	}
+
 	return (
 		<>
 			<div className="login-container">
@@ -110,19 +111,20 @@ const SignUpForm = () => {
 								value={email}
 							/>
 						</div>
+
 						<div className="photo-upload--form">
+							<span id="file-chosen" className="photo-upload--filename">
+								No file chosen
+							</span>
 							<input type="file" id="actual-btn" hidden />
 
 							<label for="actual-btn" className="photo-upload--btn">
 								Choose File
 							</label>
 
-							<span id="file-chosen" className="photo-upload--filename">
-								No file chosen
-							</span>
 							{/* <input
 								id="photo-btn"
-								type="file"
+								type="input"
 								onChange={updatePhoto}
 								placeholder="profile_photo.jpg"
 								className="photo-upload--input"
