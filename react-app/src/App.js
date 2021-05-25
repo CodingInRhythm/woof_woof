@@ -13,7 +13,6 @@ import Chat from './components/Chat';
 import { authenticate } from './store/session';
 // import Content from './components/AppUI/Content/Content';
 
-
 function App() {
 	const user = useSelector(state => state.session.user);
 	const [loaded, setLoaded] = useState(false);
@@ -25,7 +24,6 @@ function App() {
 			setLoaded(true);
 		})();
 	}, [dispatch]);
-
 
 	if (!loaded) {
 		return null;
@@ -62,9 +60,9 @@ function App() {
 				{/* <ProtectedRoute path="/" exact={true} >
 					<h1>My Home Page</h1>
 				</ProtectedRoute> */}
-				{/* <Route>
+				<Route>
 					<h1>404 PAGE NOT FOUND</h1>
-				</Route> */}
+				</Route>
 			</Switch>
 		</BrowserRouter>
 	);

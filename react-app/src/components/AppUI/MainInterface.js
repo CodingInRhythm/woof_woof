@@ -6,11 +6,16 @@ import './MainInterface.css';
 import { Route, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getChannels } from '../../store/channels';
+import { getDMUsers } from '../../store/dm_people';
 
 const MainInterface = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		dispatch(getChannels());
+	}, [dispatch]);
+
+	useEffect(() => {
+		dispatch(getDMUsers());
 	}, [dispatch]);
 
 	const [room, setRoom] = useState('');

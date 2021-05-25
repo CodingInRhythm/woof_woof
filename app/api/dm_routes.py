@@ -10,11 +10,24 @@ dm_routes = Blueprint('dms', __name__)
 def direct_messages():
     # users = User.query.filter(User.id == current_user.id).first()
     # dms = DirectMessage.query.all()
-    print("***************************************")
-    print("***************************************")
     direct_messages = DirectMessage.query.filter(
         DirectMessage.sender_id == current_user.id).all()
-    return {'direct_messages': [message.to_dict() for message in direct_messages]}
+
+    users = []
+    for user in direct_messages:
+        if (user.recipient not in users and user.recipient_id != current_user.id):
+            users.append(user.recipient)
+        if (user.sender not in users and user.sender_id != current_user.id):
+            users.append(user.sender)
+
+    # print("******************************************")
+    # print(users)
+    # print(direct_messages)
+    # print("******************************************")
+
+    return {'dm_people': [user.to_dict() for user in users]}
+    # return {'direct_messages': [message.to_dict() for message in direct_messages]}
+
     #
     # users = User.query.all()
     # return {"users": [user.to_dict() for user in dm_users]}
