@@ -1,25 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navigation from './NavBar/Navigation';
 import SideBar from './SideBar/SideBar';
 import Content from './Content/Content';
 import './MainInterface.css';
 import { Route, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { getChannels } from '../../store/channels';
 
 const MainInterface = () => {
-	let { id } = useParams();
-	const channel = useSelector(state => state.channels[id]);
-	// console.log('id', useParams());
-	console.log('channel', channel);
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(getChannels());
+	}, [dispatch]);
+
+	const [room, setRoom] = useState('');
+
 	return (
 		<>
 			<Navigation />
-			<div class="main-container">
-				<SideBar />
-				{/* <Route path="/channels/:id" exact={true}> */}
-				<Content channel={channel} />
-				{/* </Route> */}
-				{/* <Content /> */}
+			<div className="main-container">
+				<SideBar setRoom={setRoom} />
+				<Content room={room} />
 			</div>
 		</>
 	);

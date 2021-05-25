@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+// import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './Channels.css';
 import { NavLink } from 'react-router-dom';
 
-const Channels = () => {
+const Channels = ({ setRoom }) => {
 	const channels = useSelector(state => state.channels);
 
 	let arr = [];
 	for (let i in channels) {
 		arr.push(channels[i]);
 	}
-
+	// const handleRoom = () => {
+	// 	setRoom(`Channel: ${channel.id}`)
+	// };
 	const channelComponents = arr.map(channel => {
 		return (
 			<li key={channel.id} className="channels__button">
-				<NavLink to={`/channels/${channel.id}`}>
+				<NavLink onClick={setRoom(`Channel: ${channel.id}`)} to={`/channels/${channel.id}`}>
 					<span>{channel.name}</span>
 				</NavLink>
 			</li>
@@ -40,23 +43,8 @@ const Channels = () => {
 					</button>
 				</li>
 				<li className="channels__item">
-					<button className="channels__button">
-						<span>2021-01-gp6-kangchenjunga</span>
-					</button>
-				</li>
-				<li className="channels__item">
 					<button className="channels__button channels__button--active">
 						<span>2021-01-group02-juice-and-the-thunks</span>
-					</button>
-				</li>
-				<li className="channels__item">
-					<button className="channels__button">
-						<span>2021-01-online-project-questions</span>
-					</button>
-				</li>
-				<li className="channels__item">
-					<button className="channels__button">
-						<span>2021-01-team-polis</span>
 					</button>
 				</li>
 				{channelComponents}

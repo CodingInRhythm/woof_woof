@@ -2,15 +2,19 @@ import React, { useEffect, useState } from 'react';
 import './Content.css';
 import ava from '../../../images/ava.png';
 import ReactQuill from 'react-quill'; // ES6
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getChannelMessages } from '../../../store/channel_messages';
+import { useParams } from 'react-router-dom';
 
-const Content = ({ messages }) => {
+const Content = ({ room }) => {
 	let modules = {
 		toolbar: [
 			[{ header: [1, 2, false] }],
-			['bold', 'italic', 'underline', 'strike', 'blockquote'],
-			[{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+			[{ font: [] }],
+			['bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block'],
+			[{ list: 'ordered' }, { list: 'bullet' }],
 			['link', 'image'],
+			[{ align: [] }],
 			['clean'],
 		],
 	};
@@ -27,27 +31,33 @@ const Content = ({ messages }) => {
 		'link',
 		'image',
 	];
+	const { id } = useParams();
+	const dispatch = useDispatch();
+	const channel_messages = useSelector(state => state.channelMessages);
 
-	// useEffect(() => {
-	// 	async function fetchData() {
-	// 		const response = await fetch(`/api/channel/2`);
-	// 		// const response = await fetch(`/api/dms/`);
-	// 		const responseData = await response.json();
-	// 		setMessages(responseData.message);
-	// 	}
-	// 	fetchData();
-	// }, []);
-	// console.log('******************************');
-	// console.log(messages);
-	// console.log('******************************');
+	useEffect(() => {
+		if (!channel_messages[id]) {
+			dispatch(getChannelMessages(id));
+		}
+	}, [room, dispatch, id]);
 
-	// const msg = messages.map(msg => {
-	// 	return (
-	// 		<li key={msg.id} className="channels__button">
-	// 			<span>{msg.id}</span>
-	// 		</li>
-	// 	);
-	// });
+	const messages = useSelector(state => state.channelMessages);
+	// console.log(messages[id]);
+	const messageItem = messages[id]?.map(msg => {
+		let date = new Date(msg?.created_at).toDateString() + ' ' + new Date(msg?.created_at).toLocaleTimeString();
+		return (
+			<div class="main__chat-item">
+				<div class="chat__image-container">
+					<img src={ava} alt="profile-photo" class="chat__avatar"></img>
+				</div>
+				<div class="chat__other-info">
+					<span class="chat__username">{msg.user.firstname + ' ' + msg.user.lastname}</span>
+					<span class="chat__date">{date}</span>
+					<p class="chat__text">{msg.message}</p>
+				</div>
+			</div>
+		);
+	});
 
 	return (
 		<div class="main">
@@ -66,98 +76,16 @@ const Content = ({ messages }) => {
 			</header>
 			<div class="main__content">
 				<div class="main__container">
-					<section class="main__chat">
-						<div class="main__chat-item">
-							<div class="chat__image-container">
-								<img src={ava} alt="profile-photo" class="chat__avatar"></img>
-							</div>
-							<div class="chat__other-info">
-								<span class="chat__username">Alex Clough</span>
-								<span class="chat__date">8:16 PM</span>
-								<p class="chat__text">
-									<span class="chat__text--link">@Nurs Asanov</span> would you mind sharing the link
-									to the tutorial that you used to write the code you shared w us earlier? Thanks!
-								</p>
-							</div>
-						</div>
-						<div class="main__chat-item">
-							<div class="chat__image-container">
-								<img src={ava} alt="profile-photo" class="chat__avatar"></img>
-							</div>
-							<div class="chat__other-info">
-								<span class="chat__username">Alex Clough</span>
-								<span class="chat__date">6:55 PM</span>
-								<p class="chat__text">
-									<span class="chat__text--link">
-										https://github.com/CodingInRhythm/slack_clone/wiki/User-Story
-									</span>
-								</p>
-							</div>
-						</div>
-						<div class="main__chat-item">
-							<div class="chat__image-container">
-								<img src={ava} alt="profile-photo" class="chat__avatar"></img>
-							</div>
-							<div class="chat__other-info">
-								<span class="chat__username">Alex Clough</span>
-								<span class="chat__date">6:55 PM</span>
-								<p class="chat__text">
-									<span class="chat__text--link">
-										https://github.com/CodingInRhythm/slack_clone/wiki/User-Story
-									</span>
-								</p>
-							</div>
-						</div>
-						<div class="main__chat-item">
-							<div class="chat__image-container">
-								<img src={ava} alt="profile-photo" class="chat__avatar"></img>
-							</div>
-							<div class="chat__other-info">
-								<span class="chat__username">Alex Clough</span>
-								<span class="chat__date">10:00 AM</span>
-								<p class="chat__text">
-									One implementation we can draw from for a react-redux front end with websockets:
-									<span class="chat__text--link">
-										https://www.pluralsight.com/guides/using-web-sockets-in-your-reactredux-app
-									</span>
-								</p>
-							</div>
-						</div>
-						<div class="main__chat-item">
-							<div class="chat__image-container">
-								<img src={ava} alt="profile-photo" class="chat__avatar"></img>
-							</div>
-							<div class="chat__other-info">
-								<span class="chat__username">Jeff Granof</span>
-								<span class="chat__date">11:31 AM</span>
-								<p class="chat__text">
-									<span class="chat__text--link">
-										https://github.com/appacademy-starters/express-project-planning-example/wiki/MVP-Feature-List
-									</span>
-								</p>
-							</div>
-						</div>
-						<div class="main__chat-item">
-							<div class="chat__image-container">
-								<img src={ava} alt="profile-photo" class="chat__avatar"></img>
-							</div>
-							<div class="chat__other-info">
-								<span class="chat__username">Nurs Asanov</span>
-								<span class="chat__date">12:31 AM</span>
-								<p class="chat__text">PUSHED :ok_hand::skin-tone-2:</p>
-							</div>
-						</div>
-					</section>
+					<section class="main__chat">{messageItem}</section>
 					<section class="main__chat-textarea">
 						<ReactQuill
-							placeholder="Message #2021-01-group02-juice-and-the-thunks"
+							placeholder={`Message #${messages[id]?.channel?.name}`}
 							modules={modules}
 							formats={formats}
+							inputClass="main__chat-textarea"
 						>
 							<div className="my-editing-area" />
 						</ReactQuill>
-						{/* RICH TEXT EDITOR
-						<input type="textarea" placeholder="Rich text editor should be here"></input> */}
 					</section>
 				</div>
 			</div>

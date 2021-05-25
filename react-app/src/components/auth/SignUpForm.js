@@ -53,8 +53,8 @@ const SignUpForm = () => {
 	};
 
 	const logoClick = () => {
-		history.push('/')
-	}
+		history.push('/');
+	};
 
 	if (user) {
 		return <Redirect to="/" />;
@@ -65,7 +65,7 @@ const SignUpForm = () => {
 			<div className="login-container">
 				<div></div>
 				<div className="loginWrap">
-					<img src={logo} class="slack_logo" onClick={logoClick}></img>
+					<img src={logo} class="slack_logo" onClick={logoClick} alt="logo"></img>
 					<h1 className="login-form-header">Join Slack</h1>
 
 					<form onSubmit={onSignUp}>

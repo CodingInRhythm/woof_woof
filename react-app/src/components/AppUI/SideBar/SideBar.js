@@ -3,7 +3,7 @@ import './SideBar.css';
 import DMs from './DMs';
 import Channels from './Channels';
 
-const SideBar = () => {
+const SideBar = ({ setRoom }) => {
 	return (
 		<div class="sidebar">
 			<button class="workspace-menu">
@@ -36,7 +36,7 @@ const SideBar = () => {
 					<span class="threads__icon"></span> Saved Items
 				</div>
 			</div>
-			<Channels />
+			<Channels setRoom={setRoom} />
 			<DMs />
 		</div>
 	);

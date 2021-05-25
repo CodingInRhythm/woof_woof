@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
-import NavBar from './components/NavBar';
+// import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import UsersList from './components/UsersList';
 import User from './components/User';
@@ -11,9 +11,8 @@ import MainInterface from './components/AppUI/MainInterface';
 import Splash from './components/Splash';
 import Chat from './components/Chat';
 import { authenticate } from './store/session';
-import Content from './components/AppUI/Content/Content';
+// import Content from './components/AppUI/Content/Content';
 
-import { getChannels } from './store/channels';
 
 function App() {
 	const user = useSelector(state => state.session.user);
@@ -25,11 +24,8 @@ function App() {
 			await dispatch(authenticate());
 			setLoaded(true);
 		})();
-	}, []);
-
-	useEffect(() => {
-		dispatch(getChannels());
 	}, [dispatch]);
+
 
 	if (!loaded) {
 		return null;

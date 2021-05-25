@@ -1,23 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+// import React from 'react';
 import './DMs.css';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const DMs = () => {
-	const [users, setUsers] = useState([]);
-	const user = useSelector(state => state.session.user);
-	const userId = user.id;
-
-	// useEffect(() => {
-	// 	async function fetchData() {
-	// 		const response = await fetch(`/api/messages/dm/userId`);
-	// 		// const response = await fetch(`/api/dms/`);
-	// 		const responseData = await response.json();
-	// 		setUsers(responseData.users);
-	// 		console.log(responseData);
-	// 	}
-	// 	fetchData();
-	// }, []);
+	// const user = useSelector(state => state.session.user);
+	// const userId = user.id;
 
 	// const userComponents = users.map(user => {
 	// 	return (
@@ -36,7 +25,7 @@ const DMs = () => {
 		<div class="dm">
 			<h2 class="dm__heading">
 				<span>
-					Direct messages <span class="dm__number">({users.length})</span>
+					Direct messages <span class="dm__number">()</span> {/*{users.length}*/}
 				</span>
 			</h2>
 			<ul class="dm__list">
