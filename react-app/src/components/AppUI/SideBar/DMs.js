@@ -27,6 +27,7 @@ const DMPerson = ({recipient}) => {
 }
 
 const DMs = () => {
+
 	// const user = useSelector(state => state.session.user);
 	// const userId = user.id;
 	
@@ -44,16 +45,17 @@ const DMs = () => {
 			// });
 			
 			//UseSelector grabs our conversations
-			const conversations = []
+			const conversations = useSelector(state => state.dm_users);
 			
 			return (
 				<div class="dm">
 			<h2 class="dm__heading">
 				<span>
-					Direct messages <span class="dm__number">()</span> {/*{users.length}*/}
+					Direct messages <span class="dm__number">({arr.length})</span>
 				</span>
 			</h2>
 			<ul class="dm__list">
+
 				{conversations?.map(conversation => <DMPerson recipient={conversation}/>)}
 				{/* <li class="dm__item">
 					<button class="dm__button dm__button--online">
@@ -77,6 +79,7 @@ const DMs = () => {
 					</button>
 				</li> */}
 				{/* {userComponents} */}
+
 				<li class="dm__item">
 					<button class="dm__add">
 						<span class="dm__add--plussign">+</span>

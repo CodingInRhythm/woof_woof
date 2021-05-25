@@ -3,15 +3,15 @@ import thunk from 'redux-thunk';
 import session from './session';
 import channelReducer from './channels';
 import channelMessageReducer from './channel_messages';
-
-import directMessageReducer from './direct_messages'
-
+import dmuserReducer from './dm_people';
+import directMessageReducer from './direct_messages';
 
 const rootReducer = combineReducers({
 	session,
 	channels: channelReducer,
 	channelMessages: channelMessageReducer,
-  directMessages: directMessageReducer,
+	directMessages: directMessageReducer,
+	dm_users: dmuserReducer,
 });
 
 let enhancer;
