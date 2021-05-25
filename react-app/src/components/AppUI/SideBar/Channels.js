@@ -17,7 +17,11 @@ const Channels = ({ setRoom }) => {
 	const channelComponents = arr.map(channel => {
 		return (
 			<li key={channel.id} className="channels__button">
-				<NavLink onClick={setRoom(`Channel: ${channel.id}`)} to={`/channels/${channel.id}`}>
+				<NavLink
+					activeClassName="active"
+					onClick={setRoom(`Channel: ${channel.id}`)}
+					to={`/channels/${channel.id}`}
+				>
 					<span>{channel.name}</span>
 				</NavLink>
 			</li>
@@ -43,7 +47,7 @@ const Channels = ({ setRoom }) => {
 					</button>
 				</li>
 				<li className="channels__item">
-					<button className="channels__button channels__button--active">
+					<button className="channels__button">
 						<span>2021-01-group02-juice-and-the-thunks</span>
 					</button>
 				</li>

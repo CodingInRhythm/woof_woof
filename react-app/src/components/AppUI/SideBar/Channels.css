@@ -63,3 +63,8 @@
 	content: '#';
 	opacity: 0.5;
 }
+
+.active {
+	background: #038edf;
+	color: #ffffff;
+}
