@@ -7,6 +7,7 @@ import MessageWindow from './MessageWindow'
 
 /*************************** OTHER FILE IMPORTS ***************************/
 import {getChannelMessages} from '../../store/channel_messages'
+import {getDirectMessages} from '../../store/direct_messages'
 
 // outside of your component, initialize the socket variable
 let socket;
@@ -20,17 +21,32 @@ const Chat = () => {
 
   //FUNCTIONS
 
+  const hashingRoom = (val1, val2) => {
+    if (!val2) {
+      return `Channel: ${val1}`
+    } 
+    else {
+      return `DM: ${val1 < val2 ? val1 : val2} and ${val1 > val2 ? val1 : val2}`;
+    }
+  }
+
   const joinChat1 = async (e) => {
     e.preventDefault()
-    dispatch(getChannelMessages(1))
-    setRoom('1')
+    dispatch(getChannelMessages(1)) //getChannelMessages fetches msgs from dB puts them in store 
+    setRoom(hashingRoom(1)) // room == num will function in child component, MessageWindow
   }
 
   const joinChat2 = async (e) => {
     e.preventDefault();
     dispatch(getChannelMessages(2))
-    setRoom('2')
+    setRoom(hashingRoom(2))
   };
+
+  const joinDm = async (e) => {
+    e.preventDefault()
+    dispatch(getDirectMessages(2))
+    setRoom(hashingRoom(70, 2))
+  }
 
   //USEFFECTS
 
@@ -50,20 +66,23 @@ const Chat = () => {
     //add conditional logic to check if user
 
   return (
-      <>
-        <form onSubmit={joinChat1}>
-          <button>Chat 1</button>
-        </form>
-        <form onSubmit={joinChat2}>
-          <button>Chat 2</button>
-        </form>
-        <div>
-          <Route path='/:id'>
-            <MessageWindow room={room}/>
-          </Route>
-        </div>
+    <>
+      <form onSubmit={joinChat1}>
+        <button>Chat 1</button>
+      </form>
+      <form onSubmit={joinChat2}>
+        <button>Chat 2</button>
+      </form>
+      <form onSubmit={joinDm}>
+        <button>DM</button>
+      </form>
+      <div>
+        <Route path="/:id">
+          <MessageWindow room={room} />
+        </Route>
+      </div>
     </>
-  )
+  );
 };
 
 export default Chat

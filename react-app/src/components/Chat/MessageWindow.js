@@ -16,7 +16,13 @@ const MessageWindow = ({room}) => {
 
   //REDUX
   const user = useSelector((state) => state.session.user);
-  const messages = useSelector((state) => state.channelMessages[room]);
+
+  let messages;
+  if (room.includes("Channel")) {
+  messages = useSelector((state) => state.channelMessages[room]); //grab msgs from store 
+  }
+  else { messages = useSelector((state) => state.directMessages[room])}
+
 
   const sendChat = (e) => {
 
@@ -34,6 +40,7 @@ const MessageWindow = ({room}) => {
   useEffect(()=>{
     socket = io()
     socket.on('connect', ()=>{
+      console.log('here?')
       socket.emit('join', {room:room})
     })
 

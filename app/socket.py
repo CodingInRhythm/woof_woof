@@ -21,6 +21,7 @@ socketio = SocketIO(cors_allowed_origins=origins)
 def on_join(data):
     room=data['room']
     join_room(room)
+    #what does 'connected' do?
     emit('Connected', room=room)
 
 
