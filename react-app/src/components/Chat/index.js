@@ -35,7 +35,6 @@ const Chat = () => {
     else {
       return `DM${val1 < recipientId ? val1 : recipientId}${val1 > recipientId ? val1 : recipientId}`;
     }
-
   }
 
   const joinChat1 = async (e) => {

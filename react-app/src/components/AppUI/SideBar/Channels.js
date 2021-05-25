@@ -1,8 +1,29 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 // import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './Channels.css';
 import { NavLink } from 'react-router-dom';
+
+const Nav = ({channel, setRoom}) =>{
+	const [isClicked, setIsClicked] = useState(false)
+
+	let handleClick = ()=>{
+		if (!isClicked){
+
+			setIsClicked(true)
+		}
+		setRoom(`Channel: ${channel.id}`)
+	}
+
+	return(
+		<li key={channel.id} className="channels__button">
+			<NavLink onClick={handleClick} to={`/channels/${channel.id}`}>
+				<span>{channel.name}</span>
+			</NavLink>
+		</li>
+	)
+}
+
 
 const Channels = ({ setRoom }) => {
 	const channels = useSelector(state => state.channels);
@@ -47,7 +68,10 @@ const Channels = ({ setRoom }) => {
 						<span>2021-01-group02-juice-and-the-thunks</span>
 					</button>
 				</li>
-				{channelComponents}
+				{arr?.map(channel=>
+					<Nav channel={channel} setRoom={setRoom}/>
+				)}
+				{/* {channelComponents} */}
 				<li className="channels__item">
 					<button className="channels__add">
 						<span className="dm__add--plussign">+</span>
