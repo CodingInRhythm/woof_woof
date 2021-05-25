@@ -14,7 +14,7 @@ const Nav = ({channel, setRoom}) =>{
 		setRoom(`Channel: ${channel.id}`)
 	}
 
-	return(
+	return (
 		<li key={channel.id} className="channels__button">
 			<NavLink onClick={handleClick} to={`/channels/${channel.id}`}>
 				<span>{channel.name}</span>
@@ -34,15 +34,15 @@ const Channels = ({ setRoom }) => {
 	// const handleRoom = () => {
 	// 	setRoom(`Channel: ${channel.id}`)
 	// };
-	const channelComponents = arr.map(channel => {
-		return (
-			<li key={channel.id} className="channels__button">
-				<NavLink onClick={setRoom(`Channel: ${channel.id}`)} to={`/channels/${channel.id}`}>
-					<span>{channel.name}</span>
-				</NavLink>
-			</li>
-		);
-	});
+	// const channelComponents = arr.map(channel => {
+	// 	return (
+	// 		<li key={channel.id} className="channels__button">
+	// 			<NavLink onClick={setRoom(`Channel: ${channel.id}`)} to={`/channels/${channel.id}`}>
+	// 				<span>{channel.name}</span>
+	// 			</NavLink>
+	// 		</li>
+	// 	);
+	// });
 
 	return (
 		<div className="channels">

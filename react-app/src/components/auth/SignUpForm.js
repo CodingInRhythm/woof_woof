@@ -9,7 +9,7 @@ const SignUpForm = () => {
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
 	const [email, setEmail] = useState('');
-	const [photo, setPhoto] = useState('');
+	const [photo, setPhoto] = useState(null);
 	const [password, setPassword] = useState('');
 	const [repeatPassword, setRepeatPassword] = useState('');
 	const user = useSelector(state => state.session.user);
@@ -19,8 +19,8 @@ const SignUpForm = () => {
 	const onSignUp = async e => {
 		e.preventDefault();
 		if (password === repeatPassword) {
-			await dispatch(signUp(username, email, password));
-			// await dispatch(signup(username, firstName, lastName, email, photo, password))
+			// await dispatch(signUp(username, email, password));
+			await dispatch(signUp(username, firstName, lastName, email, photo, password))
 		}
 	};
 
@@ -41,7 +41,7 @@ const SignUpForm = () => {
 	};
 
 	const updatePhoto = e => {
-		setPhoto(e.target.value);
+		setPhoto(e.target.files[0]);
 	};
 
 	const updatePassword = e => {
@@ -119,9 +119,9 @@ const SignUpForm = () => {
 
 						<div className="photo-upload--form">
 							<span id="file-chosen" className="photo-upload--filename">
-								No file chosen
+								{photo ? `${photo.name}` : 'No file chosen'}
 							</span>
-							<input type="file" id="actual-btn" hidden />
+							<input type="file" id="actual-btn" onChange={updatePhoto} hidden />
 
 							<label for="actual-btn" className="photo-upload--btn">
 								Choose File
