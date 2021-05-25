@@ -2,12 +2,15 @@ import {createStore, combineReducers, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import session from "./session"
 import channelMessageReducer from './channel_messages'
+
 import directMessageReducer from './direct_messages'
+
 
 const rootReducer = combineReducers({
     session,
     channelMessages: channelMessageReducer,
     directMessages: directMessageReducer,
+
 });
 
 

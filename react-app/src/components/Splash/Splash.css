@@ -67,6 +67,24 @@
     border: 1px solid #471247
 }
 
+#nav_logout{
+    color:#561557;
+    background: white;
+}
+
+#nav_logout:hover{
+    border: 1px solid #471247
+}
+
+#nav_scroll_logout{
+    color: white;
+    background: #561557
+}
+
+#nav_scroll_logout:hover{
+    background: #471247
+}
+
 .splash_scrolling_nav{
     background-color: white;
     width: 100%;

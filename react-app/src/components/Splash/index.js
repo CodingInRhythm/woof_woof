@@ -1,7 +1,14 @@
-import React, {useEffect} from 'react';
+//External Imports
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux'
 import { Animator, ScrollContainer, ScrollPage, batch, FadeOut, MoveIn, MoveOut, Sticky } from "react-scroll-motion";
+
+//Local Imports
 import "./Splash.css"
+import { logout } from '../../store/session'
+
+//Image Imports
 import github_alex from "../../images/creator_photos/github_alex.png"
 import github_brent from "../../images/creator_photos/github_brent.jpg"
 import slack_nurs from "../../images/creator_photos/slack_nurs.jpg"
@@ -16,15 +23,31 @@ import slack_screenshot from "../../images/slack_clone_screenshot.png"
 import slack_logo from "../../images/slack_logo.png"
 
 
-const SlideUp = batch(MoveIn(0,1000),MoveOut(0, -200), Sticky(), FadeOut(1, 0.8))
 
 function Splash(){  
+  //Subscribe to the store to grab user
+  const user = useSelector(state => state.session.user)
+  const dispatch = useDispatch();
+
+  //Function declarations
+
+  //Logout
+  const onLogout = async e => {
+    e.preventDefault();
+    await dispatch(logout())
+  }
+
+  //Animation
+  const SlideUp = batch(MoveIn(0,1000),MoveOut(0, -200), Sticky(), FadeOut(1, 0.8))
+
+  //Scroll Functions
   const scrollToPage2 = () => {
     window.scrollTo({
       top: 1950, 
       behavior: 'smooth' 
     })
   }
+
   const scrollToPage3 = () => {
     window.scrollTo({
       top: 3850, 
@@ -39,6 +62,7 @@ function Splash(){
     })
   }
 
+  //Alter page on scroll
   const onScroll = () => {
     if(!document.getElementById("scroll-btn")){
       return;
@@ -71,14 +95,33 @@ function Splash(){
     if(window.scrollY < 3600){
       document.getElementById("scroll-btn").classList.remove("hidden")
     }
-    console.log(window.scrollY)
   }
   
+  //Call onScroll function whenver page scrolls
   window.addEventListener('scroll', onScroll)
 
+  //UseEffect
   useEffect(() => {
-    document.getElementById("scroll-btn").onclick = scrollToPage2
-  }, [])
+    console.log(user);
+    if(!user){
+      console.log("inside user")
+      document.getElementById("nav_logout").classList.add("hidden")
+      document.getElementById("nav_scroll_logout").classList.add("hidden")
+      document.getElementById("nav_login").classList.remove("hidden")
+      document.getElementById("nav_signup").classList.remove("hidden")
+      document.getElementById("nav_scroll_login").classList.remove("hidden")
+      document.getElementById("nav_scroll_signup").classList.remove("hidden")
+    }
+    else{
+      console.log("me")
+      document.getElementById("nav_logout").classList.remove("hidden")
+      document.getElementById("nav_scroll_logout").classList.remove("hidden")
+      document.getElementById("nav_login").classList.add("hidden")
+      document.getElementById("nav_signup").classList.add("hidden")
+      document.getElementById("nav_scroll_login").classList.add("hidden")
+      document.getElementById("nav_scroll_signup").classList.add("hidden")
+    }
+  }, [user])
 
   return (
     <div className="splash_container" id="splash_container">
@@ -88,8 +131,9 @@ function Splash(){
           <h1 className="nav_title">slack</h1>
         </div>
         <div className="splash_nav-right">
-          <Link to="/login"><div className="splash_nav-link signin_btn">Sign In</div></Link>
-          <Link to="/sign-up"><div className="splash_nav-link tryout_btn">Try for free</div></Link>
+          <Link to="/login" id="nav_login"><div className="splash_nav-link signin_btn">Sign In</div></Link>
+          <Link to="/sign-up" id="nav_signup"><div className="splash_nav-link tryout_btn">Try for free</div></Link>
+          <button id="nav_logout" className="splash_nav-link" onClick={onLogout}>Log out</button>
         </div>
       </nav>
       <nav className="splash_scrolling_nav hidden" id="splash_scrolling_nav">
@@ -98,8 +142,9 @@ function Splash(){
           <h1 className="splash_scolling_nav_title">slack</h1>
         </div>
         <div className="splash_scrolling_nav-right">
-        <Link to="/login"><div className="splash_scrolling_signin">Sign In</div></Link>
-        <Link to="/sign-up"><div className="splash_scrolling_tryout">Try for free</div></Link>
+          <Link to="/login" id="nav_scroll_login"><div className="splash_scrolling_signin">Sign In</div></Link>
+          <Link to="/sign-up" id="nav_scroll_signup"><div className="splash_scrolling_tryout">Try for free</div></Link>
+          <button id="nav_scroll_logout" className="splash_nav-link" onClick={onLogout}>Log out</button>
         </div>
       </nav>
       <button className="scroll-btn" id="scroll-btn">Continue</button>
