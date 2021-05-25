@@ -20,7 +20,7 @@ const MainInterface = () => {
 			<Navigation />
 			<div className="main-container">
 				<SideBar setRoom={setRoom} />
-				<Content room={room} />
+				<Content room={room} setRoom={setRoom} />
 			</div>
 		</>
 	);
