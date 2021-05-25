@@ -1,74 +1,49 @@
-// import the socket
-import { io } from "socket.io-client";
+/*************************** REACT IMPORTS ***************************/
 import React, {useState, useEffect} from 'react'
-import {useSelector} from 'react-redux'
+import {Route} from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
 import MessageWindow from './MessageWindow'
+
+
+/*************************** OTHER FILE IMPORTS ***************************/
+import {getChannelMessages} from '../../store/channel_messages'
+
 // outside of your component, initialize the socket variable
 let socket;
 
+/*************************** COMPONENTS ***************************/
 const Chat = () => {
 
-  
+  const dispatch= useDispatch()
 
-  //STATE VARIABLES
-  const [messages, setMessages] = useState([]);
-  const [chatInput, setChatInput] = useState("");
-
-  //REDUX
-  const user = useSelector((state) => state.session.user);
-
-
+  const [room, setRoom] = useState('1')
 
   //FUNCTIONS
 
-    const joinChat1 = async (e) => {
-      e.preventDefault()
-      setMessages([{user: "Alex", msg: "Hello"}])
-      let res = await fetch('/change', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({channelid: 1})
-      })
-      console.log(res.json())
-    }
-       const joinChat2 = async (e) => {
-         e.preventDefault();
-          setMessages([{user: "Brent", msg: "Hello2"}]);
-         let res = await fetch("/change", {
-           method: "POST",
-           headers: {
-             "Content-Type": "application/json",
-           },
-           body: JSON.stringify({ channelid: 2 }),
-         });
-         console.log(res.json());
-       };
+  const joinChat1 = async (e) => {
+    e.preventDefault()
+    dispatch(getChannelMessages(1))
+    setRoom('1')
+  }
 
-
-    const sendChat = (e) => {
-       
-        e.preventDefault();
-        // emit a message
-        socket.emit("chat", { user: user.username, msg: chatInput });
-        // clear the input field after the message is sent
-        setChatInput("");
+  const joinChat2 = async (e) => {
+    e.preventDefault();
+    dispatch(getChannelMessages(2))
+    setRoom('2')
   };
 
-    const updateChatInput = (e) => {
-      setChatInput(e.target.value);
-    };
-  
   //USEFFECTS
-  
-    useEffect(() => {
-  // create websocket/connect
-      socket = io("http://localhost:5000");
-      return () => {
-        socket.disconnect();
-      };
-    }, [])
+
+  useEffect(async ()=>{
+    let res = await fetch('/change', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({channelid: 1})
+    })
+
+  },[])
 
 
   //RETURN STATEMENT
@@ -83,12 +58,10 @@ const Chat = () => {
           <button>Chat 2</button>
         </form>
         <div>
-          <MessageWindow setMessages={setMessages} messages={messages}/>
+          <Route path='/:id'>
+            <MessageWindow room={room}/>
+          </Route>
         </div>
-        <form onSubmit={sendChat}>
-            <input value={chatInput} onChange={updateChatInput} />
-            <button type="submit">Send</button>
-        </form>
     </>
   )
 };

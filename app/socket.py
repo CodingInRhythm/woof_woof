@@ -31,7 +31,6 @@ def handle_chat(data):
     '''
     join_room(session['channel'])
     # message = DirectMessage(sender_id = 1, recipient_id = 2, message=data['msg'])
-    # print(message)
     # db.session.add(message)
     # db.session.commit()
     emit("chat", data, to=session['channel'])
