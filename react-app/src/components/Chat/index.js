@@ -19,14 +19,17 @@ const Chat = () => {
 
   const [room, setRoom] = useState('1')
 
+  const userId = useSelector((state) => state.session.user.id)
+
   //FUNCTIONS
 
-  const hashingRoom = (val1, val2) => {
-    if (!val2) {
+  //val 1 will either be channelId or userId
+  const hashingRoom = (val1, recipientId) => {
+    if (!recipientId) {
       return `Channel: ${val1}`
     } 
     else {
-      return `DM: ${val1 < val2 ? val1 : val2} and ${val1 > val2 ? val1 : val2}`;
+      return `DM${val1 < recipientId ? val1 : recipientId}${val1 > recipientId ? val1 : recipientId}`;
     }
   }
 
@@ -41,11 +44,13 @@ const Chat = () => {
     dispatch(getChannelMessages(2))
     setRoom(hashingRoom(2))
   };
-
+  let recipientId;
   const joinDm = async (e) => {
     e.preventDefault()
-    dispatch(getDirectMessages(2))
-    setRoom(hashingRoom(70, 2))
+    let recipientId = Number(e.target.id)
+    console.log(e.target)
+    dispatch(getDirectMessages(recipientId))
+    setRoom(hashingRoom(userId, recipientId))
   }
 
   //USEFFECTS
@@ -73,12 +78,15 @@ const Chat = () => {
       <form onSubmit={joinChat2}>
         <button>Chat 2</button>
       </form>
-      <form onSubmit={joinDm}>
-        <button>DM</button>
+      <form id="1" onSubmit={joinDm}>
+        <button>User1</button>
+      </form>
+      <form id="2" onSubmit={joinDm}>
+        <button>User2</button>
       </form>
       <div>
         <Route path="/:id">
-          <MessageWindow room={room} />
+          <MessageWindow recipientid={recipientId} room={room} />
         </Route>
       </div>
     </>
