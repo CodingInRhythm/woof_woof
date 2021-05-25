@@ -113,6 +113,10 @@
 	margin-bottom: 20px;
 }
 
+.slack_logo:hover{
+	cursor: pointer;
+}
+
 .signup-link {
 	margin-top: 90px;
 	text-align: end;

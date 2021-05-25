@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Redirect, NavLink } from 'react-router-dom';
+import { Redirect, NavLink, useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
 import logo from '../../images/slack_logo-ebd02d1.svg';
 
@@ -14,6 +14,7 @@ const SignUpForm = () => {
 	const [repeatPassword, setRepeatPassword] = useState('');
 	const user = useSelector(state => state.session.user);
 	const dispatch = useDispatch();
+	const history = useHistory();
 
 	const onSignUp = async e => {
 		e.preventDefault();
@@ -51,6 +52,10 @@ const SignUpForm = () => {
 		setRepeatPassword(e.target.value);
 	};
 
+	const logoClick = () => {
+		history.push('/')
+	}
+
 	if (user) {
 		return <Redirect to="/" />;
 	}
@@ -59,7 +64,7 @@ const SignUpForm = () => {
 			<div className="login-container">
 				<div></div>
 				<div className="loginWrap">
-					<img src={logo} class="slack_logo"></img>
+					<img src={logo} class="slack_logo" onClick={logoClick}></img>
 					<h1 className="login-form-header">Join Slack</h1>
 
 					<form onSubmit={onSignUp}>
