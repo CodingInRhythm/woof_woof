@@ -17,8 +17,8 @@ def direct_messages():
     for user in direct_messages:
         if (user.recipient not in users and user.recipient_id != current_user.id):
             users.append(user.recipient)
-        if (user.sender not in users and user.sender_id != current_user.id):
-            users.append(user.sender)
+        if (user.user not in users and user.sender_id != current_user.id):
+            users.append(user.user)
 
     print("******************************************")
     print(users)
