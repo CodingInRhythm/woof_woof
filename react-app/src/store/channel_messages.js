@@ -23,7 +23,6 @@ export const getChannelMessages = channel_id => async dispatch => {
 	const response = await fetch(`/api/messages/channel/${channel_id}`);
 
 	const data = await response.json();
-	console.log(data);
 	if (data.errors) {
 		return;
 	}

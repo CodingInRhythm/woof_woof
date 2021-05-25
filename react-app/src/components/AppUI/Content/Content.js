@@ -18,7 +18,7 @@ const Content = ({ room, setRoom }) => {
 			[{ align: [] }],
 			['clean'],
 		],
-	};
+	}; 
 	let formats = [
 		'header',
 		'bold',
@@ -45,7 +45,6 @@ const Content = ({ room, setRoom }) => {
 
 	const { id } = useParams();
 	const location = useLocation();
-	console.log(location)
 	const dispatch = useDispatch();
 	const channel_messages = useSelector(state => state.channelMessages);
 	const direct_messages = useSelector(state => state.directMessages);
@@ -70,48 +69,47 @@ const Content = ({ room, setRoom }) => {
 		if (!direct_messages[id]){
 			dispatch(getDirectMessages(id))
 		}
+		console.log(room)
 	}, [room, dispatch, id]);
 
-	console.log("slice----", slice)
-	console.log('roomnum----', room)
+	
 	const messages = useSelector((state) => state[slice])
 	
-	// console.log(messages[id]);
 	const messageItem = messages[id]?.map(msg => {
 		let date = new Date(msg?.created_at).toDateString() + ' ' + new Date(msg?.created_at).toLocaleTimeString();
 		return (
-			<div class="main__chat-item">
-				<div class="chat__image-container">
-					<img src={ava} alt="profile-photo" class="chat__avatar"></img>
+			<div className="main__chat-item">
+				<div className="chat__image-container">
+					<img src={ava} alt="profile-photo" className="chat__avatar"></img>
 				</div>
-				<div class="chat__other-info">
-					<span class="chat__username">{msg.user.firstname + ' ' + msg.user.lastname}</span>
-					<span class="chat__date">{date}</span>
-					<p class="chat__text">{msg.message}</p>
+				<div className="chat__other-info">
+					<span className="chat__username">{msg.user.firstname + ' ' + msg.user.lastname}</span>
+					<span className="chat__date">{date}</span>
+					<p className="chat__text">{msg.message}</p>
 				</div>
 			</div>
 		);
 	});
 
 	return (
-		<div class="main">
-			<header class="main__header">
-				<div class="main__channel-info">
-					<h1 class="main__h3">#2021-01-group02-juice-and-the-thunks</h1>
+		<div className="main">
+			<header className="main__header">
+				<div className="main__channel-info">
+					<h1 className="main__h3">#2021-01-group02-juice-and-the-thunks</h1>
 				</div>
-				<div class="main__channel-members">
+				<div className="main__channel-members">
 					<div>
-						<i class="fas fa-user-friends"></i> <span class="main_channel-members-h3">View Members</span>
+						<i className="fas fa-user-friends"></i> <span className="main_channel-members-h3">View Members</span>
 					</div>
 					<div>
-						<i class="fas fa-user-plus"></i> <span class="main_channel-members-h3">Add Members</span>
+						<i className="fas fa-user-plus"></i> <span className="main_channel-members-h3">Add Members</span>
 					</div>
 				</div>
 			</header>
-			<div class="main__content">
-				<div class="main__container">
-					<section class="main__chat">{messageItem}</section>
-					<section class="main__chat-textarea">
+			<div className="main__content">
+				<div className="main__container">
+					<section className="main__chat">{messageItem}</section>
+					<section className="main__chat-textarea">
 						<ReactQuill
 							placeholder={`Message #${messages[id]?.channel?.name}`}
 							modules={modules}

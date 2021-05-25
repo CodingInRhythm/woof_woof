@@ -67,7 +67,6 @@ const Chat = () => {
   const joinDm = async (e) => {
     e.preventDefault()
     let recipientId = Number(e.target.id)
-    console.log(e.target)
     dispatch(getDirectMessages(recipientId))
     setRoom(hashingRoom(userId, recipientId))
   }
