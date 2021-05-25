@@ -48,7 +48,7 @@ class ChannelMessage(db.Model):
       "user_id": self.user_id,
       "channel_id": self.channel_id,
       "message": self.message,
-      "created_at": self.created_at,
+      "created_at": str(self.created_at),
       "user": self.user.to_dict_basic(),
       "channel": self.channel.to_dict_basic(),
     }
@@ -72,7 +72,7 @@ class DirectMessage(db.Model):
   message = db.Column(db.Text, nullable = False)
   created_at=db.Column(db.DateTime(timezone=True), default=datetime.now())
 
-  sender = db.relationship(
+  user = db.relationship(
     "User",
     back_populates="sender_messages",
     foreign_keys=[sender_id]
@@ -90,8 +90,8 @@ class DirectMessage(db.Model):
       "sender_id": self.sender_id,
       "recipient_id": self.recipient_id,
       "message": self.message,
-      "created_at": self.created_at,
-      "sender": self.sender.to_dict_basic(),
+      "created_at": str(self.created_at),
+      "user": self.user.to_dict_basic(),
       "recipient": self.recipient.to_dict_basic(),
     }
 
@@ -101,7 +101,7 @@ class DirectMessage(db.Model):
       "sender_id": self.sender_id,
       "recipient_id": self.recipient_id,
       "message": self.message,
-      "created_at": self.created_at,
+      "created_at": str(self.created_at),
     }
 
 
@@ -137,7 +137,7 @@ class User(db.Model, UserMixin):
 
   sender_messages = db.relationship(
     "DirectMessage",
-    back_populates="sender",
+    back_populates="user",
     foreign_keys='DirectMessage.sender_id'
   )
 
