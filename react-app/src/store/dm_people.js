@@ -13,15 +13,15 @@ const setDMUser = dm_users => ({
 export const getDMUsers = () => async dispatch => {
 	const response = await fetch(`/api/dms/`);
 	const data = await response.json();
-	console.log('****************************');
-	console.log(data);
-	console.log('****************************');
+	// console.log('****************************');
+	// console.log(data);
+	// console.log('****************************');
 	if (data.errors) {
 		return;
 	}
 
 	let currentUserDMs = {};
-	data.dm_users.forEach(dmuser => {
+	data.dm_people.forEach(dmuser => {
 		currentUserDMs[dmuser.id] = dmuser;
 	});
 	dispatch(setDMUser(currentUserDMs));
