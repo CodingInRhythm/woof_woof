@@ -5,7 +5,7 @@ import { addMessage } from "../../store/channel_messages";
 
 let socket;
 
-const MessageWindow = ({room}) => {
+const MessageWindow = ({recipientid, room}) => {
   //STATE VARIABLES
 
   const dispatch = useDispatch()
@@ -18,8 +18,20 @@ const MessageWindow = ({room}) => {
   const newMessages = []
 
   //REDUX
+
+  let slice;
+  let roomNum;
+  if (room.includes("Channel")) {
+    roomNum = room.split(" ")[1];
+    slice = 'channelMessages'
+  } else {
+    roomNum = recipientid
+    slice = "directMessages"
+  }
+
   const user = useSelector((state) => state.session.user);
-  const messages = useSelector((state) => state.channelMessages[room]);
+  const messages = useSelector((state) => state[slice][roomNum]) //grab msgs from store
+
 
   const sendChat = (e) => {
 
@@ -48,6 +60,7 @@ const MessageWindow = ({room}) => {
       })
       setOtherLoad(true)
     }
+
 
     socket.on("chat", (chat) => {
         // when we recieve a chat, add it into our messages array in state

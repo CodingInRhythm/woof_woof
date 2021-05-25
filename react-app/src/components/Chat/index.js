@@ -8,6 +8,7 @@ import "./chat.css"
 
 /*************************** OTHER FILE IMPORTS ***************************/
 import {getChannelMessages} from '../../store/channel_messages'
+import {getDirectMessages} from '../../store/direct_messages'
 
 // outside of your component, initialize the socket variable
 let socket;
@@ -21,8 +22,19 @@ const Chat = () => {
   const [room, setRoom] = useState('1')
 
   const [onLoad, setOnLoad] = useState(false)
+  const userId = useSelector((state) => state.session.user.id)
 
   //FUNCTIONS
+
+  //val 1 will either be channelId or userId
+  const hashingRoom = (val1, recipientId) => {
+    if (!recipientId) {
+      return `Channel: ${val1}`
+    } 
+    else {
+      return `DM${val1 < recipientId ? val1 : recipientId}${val1 > recipientId ? val1 : recipientId}`;
+    }
+  }
 
   const joinChat1 = async (e) => {
     e.preventDefault()
@@ -33,6 +45,8 @@ const Chat = () => {
     document.getElementById("chat1").classList.add("red-chat")
     document.getElementById("chat2").classList.remove("red-chat")
     document.getElementById("chat1_notice").classList.add("hidden")
+    dispatch(getChannelMessages(1)) //getChannelMessages fetches msgs from dB puts them in store 
+    setRoom(hashingRoom(1)) // room == num will function in child component, MessageWindow
   }
 
   const joinChat2 = async (e) => {
@@ -44,7 +58,17 @@ const Chat = () => {
     document.getElementById("chat2").classList.add("red-chat")
     document.getElementById("chat1").classList.remove("red-chat")
     document.getElementById("chat2_notice").classList.add("hidden")
+    dispatch(getChannelMessages(2))
+    setRoom(hashingRoom(2))
   };
+  let recipientId;
+  const joinDm = async (e) => {
+    e.preventDefault()
+    let recipientId = Number(e.target.id)
+    console.log(e.target)
+    dispatch(getDirectMessages(recipientId))
+    setRoom(hashingRoom(userId, recipientId))
+  }
 
   //USEFFECTS
 
@@ -86,13 +110,19 @@ const Chat = () => {
           <button id="chat2">Chat 2</button>
           <h2 id="chat2_notice" className="hidden notice">New Message!</h2>
         </form>
+        <form id="1" onSubmit={joinDm}>
+          <button>User1</button>
+        </form>
+        <form id="2" onSubmit={joinDm}>
+          <button>User2</button>
+        </form>
         <div>
           <Route path='/:id'>
             <MessageWindow room={room}/>
           </Route>
         </div>
     </>
-  )
+  );
 };
 
 export default Chat
