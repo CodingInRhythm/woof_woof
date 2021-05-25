@@ -30,6 +30,7 @@ def on_join(data):
 @socketio.on('leave')
 def on_leave(data):
     room=data['room']
+    print("I have left ", room)
     emit('Disconnected', room=room)
 
 @socketio.on("chat")
@@ -39,8 +40,8 @@ def handle_chat(data):
     broadcast True means all connected users will receive message,
     will want to change this.
     '''
-    # print('TEST', data)
-    # message = ChannelMessage(user_id = data['id'], channel_id = data['room'], message=data['message'])
-    # db.session.add(message)
-    # db.session.commit()
-    emit("chat", data, room=data['room'])
+    message = ChannelMessage(user_id = data['id'], channel_id = data['room'], message=data['message'])
+    db.session.add(message)
+    db.session.commit()
+    print(message.to_dict_basic())
+    emit("chat", message.to_dict_basic(), room=data['room'])
