@@ -4,9 +4,9 @@ import ava from '../../../images/ava.png';
 import ReactQuill from 'react-quill'; // ES6
 import { useDispatch, useSelector } from 'react-redux';
 import { getChannelMessages } from '../../../store/channel_messages';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 
-const Content = ({ room }) => {
+const Content = ({ room, setRoom }) => {
 	let modules = {
 		toolbar: [
 			[{ header: [1, 2, false] }],
@@ -31,9 +31,35 @@ const Content = ({ room }) => {
 		'link',
 		'image',
 	];
+
+	//val 1 will either be channelId or userId
+	const hashingRoom = (val1, recipientId) => {
+		if (!recipientId) {
+		  return `Channel: ${val1}`
+		} 
+		else {
+		  return `DM${val1 < recipientId ? val1 : recipientId}${val1 > recipientId ? val1 : recipientId}`;
+		}
+	  }
+
 	const { id } = useParams();
+	const location = useLocation();
+	console.log(location)
 	const dispatch = useDispatch();
 	const channel_messages = useSelector(state => state.channelMessages);
+	const userId = useSelector((state) => state.session.user.id)
+
+	let slice;
+	let roomNum;
+	if (location.pathname.includes("channel")) {
+		roomNum = room.split(" ")[1];
+		slice = 'channelMessages'
+		setRoom(hashingRoom(id))
+	} else {
+		roomNum = id
+		setRoom(hashingRoom(userId, id))
+		slice = "directMessages"
+	}
 
 	useEffect(() => {
 		if (!channel_messages[id]) {
@@ -41,7 +67,9 @@ const Content = ({ room }) => {
 		}
 	}, [room, dispatch, id]);
 
-	const messages = useSelector(state => state.channelMessages);
+
+	const messages = useSelector((state) => state[slice][roomNum])
+	
 	// console.log(messages[id]);
 	const messageItem = messages[id]?.map(msg => {
 		let date = new Date(msg?.created_at).toDateString() + ' ' + new Date(msg?.created_at).toLocaleTimeString();
