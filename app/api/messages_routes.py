@@ -24,7 +24,7 @@ def dm_get(recipient_id):
         return {'errors': ['Unauthorized']}
 
     direct_messages = DirectMessage.query.filter(DirectMessage.sender_id.in_((current_user.id, recipient_id)),DirectMessage.recipient_id.in_((current_user.id, recipient_id))).all()
-    return {'direct_messages':[message.to_dict_basic() for message in direct_messages]}
+    return {'direct_messages':[message.to_dict() for message in direct_messages]}
 
 # PUT (edit) specified direct message #
 @messages_routes.route('/dm/<int:direct_message_id>', methods=['PUT'])
