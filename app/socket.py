@@ -43,5 +43,4 @@ def handle_chat(data):
     message = ChannelMessage(user_id = data['id'], channel_id = data['room'], message=data['message'])
     db.session.add(message)
     db.session.commit()
-    print(message.to_dict_basic())
-    emit("chat", message.to_dict_basic(), room=data['room'])
+    emit("chat", message.to_dict(), room=data['room'])

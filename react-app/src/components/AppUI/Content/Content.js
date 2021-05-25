@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { io } from "socket.io-client";
 import './Content.css';
 import ava from '../../../images/ava.png';
 import ReactQuill from 'react-quill'; // ES6
 import { useDispatch, useSelector } from 'react-redux';
-import { getChannelMessages } from '../../../store/channel_messages';
+import { getChannelMessages, addMessage as addChannelMessage } from '../../../store/channel_messages';
 import { useParams, useLocation } from 'react-router-dom';
 import { getDirectMessages } from '../../../store/direct_messages';
+
 
 const Content = ({ room, setRoom }) => {
 	let modules = {
@@ -36,13 +38,14 @@ const Content = ({ room, setRoom }) => {
 	//val 1 will either be channelId or userId
 	const hashingRoom = (val1, recipientId) => {
 		if (!recipientId) {
-		  return `Channel: ${val1}`
+			return `Channel: ${val1}`
 		} 
 		else {
-		  return `DM${val1 < recipientId ? val1 : recipientId}${val1 > recipientId ? val1 : recipientId}`;
+			return `DM${val1 < recipientId ? val1 : recipientId}${val1 > recipientId ? val1 : recipientId}`;
 		}
-	  }
-
+	}
+	
+	// let socket = io()
 	const { id } = useParams();
 	const location = useLocation();
 	const dispatch = useDispatch();
@@ -50,6 +53,7 @@ const Content = ({ room, setRoom }) => {
 	const direct_messages = useSelector(state => state.directMessages);
 	const userId = useSelector((state) => state.session.user.id)
 
+	//Establish if DM or Channel and set room
 	let slice;
 	let roomNum;
 	if (location.pathname.includes("channel")) {
@@ -62,6 +66,7 @@ const Content = ({ room, setRoom }) => {
 		slice = "directMessages"
 	}
 
+	//Populate Store if nothing there
 	useEffect(() => {
 		if (!channel_messages[id]) {
 			dispatch(getChannelMessages(id));
@@ -69,8 +74,33 @@ const Content = ({ room, setRoom }) => {
 		if (!direct_messages[id]){
 			dispatch(getDirectMessages(id))
 		}
-		console.log(room)
 	}, [room, dispatch, id]);
+
+	//Establish Websockets
+	// useEffect(() => {
+	// 	socket.on('connect', () => {
+	// 		socket.emit('join', {room:room})
+	// 		console.log("I have joined room:  ", room)
+	// 	})
+
+	// 	socket.on("chat", (chat) => {
+	// 		// when we recieve a chat, add it into our messages array in state
+	// 		console.log(chat)
+	// 		dispatch(addChannelMessage(chat.channel_id, chat))
+	// 	})
+
+	// 	return (()=>{
+	// 		socket.emit('leave', {room:room})
+	// 		console.log("I have left room:  ", room)
+	// 		socket.disconnect()
+	// 	  })
+	// }, [room])
+
+	// //Handle send chat
+	// const sendChat = (e) => {
+	// 	e.preventDefault();
+	// 	socket.emit("chat", {})
+	// }
 
 	
 	const messages = useSelector((state) => state[slice])
