@@ -88,7 +88,7 @@ def channel_message_put(channel_message_id):
     channel_message.message = message
     db.session.commit()
 
-    return {'channel_message':channel_message.to_dict_basic()}
+    return {'channel_message':channel_message.to_dict()}
 
 # DELETE specified channel message #
 @messages_routes.route('/channel/<int:channel_message_id>', methods=['DELETE'])
@@ -103,4 +103,4 @@ def channel_message_delete(channel_message_id):
     db.session.delete(channel_message)
     db.session.commit()
 
-    return {'message':'success'}
+    return {'channel_id':channel_message.channel_id}

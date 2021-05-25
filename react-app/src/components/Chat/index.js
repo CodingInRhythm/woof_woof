@@ -20,6 +20,10 @@ const Chat = () => {
 
   //FUNCTIONS
 
+  const roomHasher =() =>{
+
+  }
+
   const joinChat1 = async (e) => {
     e.preventDefault()
     dispatch(getChannelMessages(1))

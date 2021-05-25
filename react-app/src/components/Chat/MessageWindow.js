@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {useDispatch, useSelector} from 'react-redux'
 import { io } from "socket.io-client";
-import { addMessage } from "../../store/channel_messages";
+import { addChannelMessage } from "../../store/channel_messages";
 
 let socket;
 
@@ -39,15 +39,14 @@ const MessageWindow = ({room}) => {
 
     socket.on("chat", (chat) => {
         // when we recieve a chat, add it into our messages array in state
-        console.log(chat)
-        dispatch(addMessage(chat.channel_id, chat))
+        dispatch(addChannelMessage(chat.channel_id, chat))
         // setNewMessages(messages=>[...messages, chat])
     })
 
-    // return (()=>{
-    //   socket.emit('leave', {room:room})
-    //   socket.disconnect()
-    // })
+    return (()=>{
+      socket.emit('leave', {room:room})
+      socket.disconnect()
+    })
   },[room])
 
   return (
