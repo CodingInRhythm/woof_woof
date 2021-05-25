@@ -57,20 +57,16 @@ const MessageWindow = ({room}) => {
 
     return (()=>{
       socket.emit('leave', {room:room})
-      // socket.disconnect()
+      socket.disconnect()
     })
   },[room])
-
-  useEffect(()=> {
-    console.log("Oh no I've changed!")
-  }, [])
 
   return (
       <div>
         {messages?.map((message, ind) => (
           <div key={message.id}>{`${message.message}`}</div>
         ))}
-        ____________________________________________________
+        _______________________________________________
         {newMessages.map((message, ind) => (
           <div key={message.id}>{`${message.message}`}</div>
         ))}

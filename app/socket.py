@@ -27,6 +27,7 @@ def on_join(data):
 @socketio.on('leave')
 def on_leave(data):
     room=data['room']
+    print("I have left ", room)
     emit('Disconnected', room=room)
 
 @socketio.on("chat")
