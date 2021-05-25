@@ -68,7 +68,7 @@ const Channels = ({ setRoom }) => {
 					</button>
 				</li>
 				{arr?.map(channel=> <Nav channel={channel} setRoom={setRoom}/>)}
-				{channelComponents}
+				{/* {channelComponents} */}
 				<li className="channels__item">
 					<button className="channels__add">
 						<span className="dm__add--plussign">+</span>
