@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState, useEffect} from 'react';
+// import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './Channels.css';
 import { NavLink } from 'react-router-dom';
@@ -8,7 +9,6 @@ const Nav = ({channel, setRoom}) =>{
 
 	let handleClick = ()=>{
 		if (!isClicked){
-			// dispatch
 			setIsClicked(true)
 		}
 		setRoom(`Channel: ${channel.id}`)
