@@ -1,0 +1,13 @@
+.red-chat{
+    color: red;
+    font-size: 15px;
+}
+
+.hidden{
+    display: none;
+}
+
+.notice{
+    color: green;
+    font-weight: 700;
+}

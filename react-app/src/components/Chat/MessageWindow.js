@@ -12,7 +12,10 @@ const MessageWindow = ({room}) => {
 
   const [chatInput, setChatInput] = useState("");
 
-  const [newMessages, setNewMessages] = useState([]);
+  const [firstLoad, setFirstLoad] = useState(false);
+  const [otherLoad, setOtherLoad] = useState(false);
+  
+  const newMessages = []
 
   //REDUX
   const user = useSelector((state) => state.session.user);
@@ -22,7 +25,7 @@ const MessageWindow = ({room}) => {
 
       e.preventDefault();
       // emit a message
-      socket.emit("chat", { id: user.id, recipient_id: user.id===1 ? 2 : 1, message: chatInput, room:room });
+      socket.emit("chat", {id: user.id, recipient_id: user.id===1 ? 2 : 1, message: chatInput, room:room });
       // clear the input field after the message is sent
       setChatInput("");
   };
@@ -33,29 +36,41 @@ const MessageWindow = ({room}) => {
 
   useEffect(()=>{
     socket = io()
-    socket.on('connect', ()=>{
-      socket.emit('join', {room:room})
-    })
+    if (room === "1" && firstLoad === false){
+      socket.on('connect', ()=>{
+        socket.emit('join', {room:room})
+      })
+      setFirstLoad(true)
+    } 
+    if (room === "2" && otherLoad === false){
+      socket.on('connect', ()=>{
+        socket.emit('join', {room:room})
+      })
+      setOtherLoad(true)
+    }
 
     socket.on("chat", (chat) => {
         // when we recieve a chat, add it into our messages array in state
         console.log(chat)
-        // dispatch(addMessage(chat.channel_id, chat))
-        setNewMessages(messages=>[...messages, chat])
+        dispatch(addMessage(chat.channel_id, chat))
     })
 
-    // return (()=>{
-    //   socket.emit('leave', {room:room})
-    //   socket.disconnect()
-    // })
+    return (()=>{
+      socket.emit('leave', {room:room})
+      // socket.disconnect()
+    })
   },[room])
+
+  useEffect(()=> {
+    console.log("Oh no I've changed!")
+  }, [])
 
   return (
       <div>
         {messages?.map((message, ind) => (
           <div key={message.id}>{`${message.message}`}</div>
         ))}
-        DUMMY TEXT
+        ____________________________________________________
         {newMessages.map((message, ind) => (
           <div key={message.id}>{`${message.message}`}</div>
         ))}
