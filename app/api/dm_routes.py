@@ -12,9 +12,10 @@ def direct_messages():
     # dms = DirectMessage.query.all()
     print("***************************************")
     print("***************************************")
-    direct_messages = DirectMessage.query.all()
-    return {'direct_messages': [message.to_dict_basic() for message in direct_messages]}
-    # filter(DirectMessage.sender_id == current_user.id)
+    direct_messages = DirectMessage.query.filter(
+        DirectMessage.sender_id == current_user.id).all()
+    return {'direct_messages': [message.to_dict() for message in direct_messages]}
+    #
     # users = User.query.all()
     # return {"users": [user.to_dict() for user in dm_users]}
 

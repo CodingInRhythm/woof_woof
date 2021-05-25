@@ -13,6 +13,8 @@ import Chat from './components/Chat';
 import { authenticate } from './store/session';
 import Content from './components/AppUI/Content/Content';
 
+import { getChannels } from './store/channels';
+
 function App() {
 	const user = useSelector(state => state.session.user);
 	const [loaded, setLoaded] = useState(false);
@@ -24,6 +26,10 @@ function App() {
 			setLoaded(true);
 		})();
 	}, []);
+
+	useEffect(() => {
+		dispatch(getChannels());
+	}, [dispatch]);
 
 	if (!loaded) {
 		return null;
@@ -54,9 +60,15 @@ function App() {
 				<ProtectedRoute path="/users/:userId" exact={true}>
 					<User />
 				</ProtectedRoute>
+				<Route path="/channels/:id" exact={true}>
+					<MainInterface />
+				</Route>
 				{/* <ProtectedRoute path="/" exact={true} >
 					<h1>My Home Page</h1>
 				</ProtectedRoute> */}
+				{/* <Route>
+					<h1>404 PAGE NOT FOUND</h1>
+				</Route> */}
 			</Switch>
 		</BrowserRouter>
 	);

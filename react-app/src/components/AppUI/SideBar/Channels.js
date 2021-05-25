@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import './Channels.css';
 import { NavLink } from 'react-router-dom';
 
 const Channels = () => {
-	const [channels, setChannels] = useState([]);
+	const channels = useSelector(state => state.channels);
 
-	useEffect(() => {
-		async function fetchData() {
-			const response = await fetch('/api/channels/');
-			const responseData = await response.json();
-			setChannels(responseData.channels);
-		}
-		fetchData();
-	}, []);
+	let arr = [];
+	for (let i in channels) {
+		arr.push(channels[i]);
+	}
 
-	const channelComponents = channels.map(channel => {
+	const channelComponents = arr.map(channel => {
 		return (
 			<li key={channel.id} className="channels__button">
 				<NavLink to={`/channels/${channel.id}`}>
@@ -28,7 +25,7 @@ const Channels = () => {
 		<div className="channels">
 			<h2 className="channels__heading">
 				<span>
-					Channels <span className="channels__number">({channels.length})</span>
+					Channels <span className="channels__number">({arr.length})</span>
 				</span>
 			</h2>
 			<ul className="channels__list">
@@ -62,7 +59,7 @@ const Channels = () => {
 						<span>2021-01-team-polis</span>
 					</button>
 				</li>
-				<ul>{channelComponents}</ul>
+				{channelComponents}
 				<li className="channels__item">
 					<button className="channels__add">
 						<span className="dm__add--plussign">+</span>

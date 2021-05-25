@@ -22,7 +22,6 @@ import docker from "../../images/technologies/docker_logo.png"
 import slack_screenshot from "../../images/slack_clone_screenshot.png"
 import slack_logo from "../../images/slack_logo.png"
 
-const SlideUp = batch(MoveIn(0, 1000), MoveOut(0, -200), Sticky(), FadeOut(1, 0.8));
 
 
 function Splash(){
@@ -56,39 +55,12 @@ function Splash(){
     })
   }
 
-	const onScroll = () => {
-		if (!document.getElementById('scroll-btn')) {
-			return;
-		}
-		if (window.scrollY >= 1950) {
-			document.getElementById('scroll-btn').onclick = scrollToPage3;
-		}
-		if (window.scrollY < 1950) {
-			document.getElementById('scroll-btn').onclick = scrollToPage2;
-		}
-		if (window.scrollY > 1000 && window.scrollY < 2900) {
-			document.getElementById('splash_container').classList.add('splash_container-middle');
-			document.getElementById('splash_container').classList.remove('splash_container-last');
-		}
-		if (window.scrollY > 1000) {
-			document.getElementById('splash_scrolling_nav').classList.remove('hidden');
-		}
-		if (window.scrollY <= 1000) {
-			document.getElementById('splash_container').classList.remove('splash_container-middle');
-			document.getElementById('splash_scrolling_nav').classList.add('hidden');
-		}
-		if (window.scrollY > 2900) {
-			document.getElementById('splash_container').classList.add('splash_container-last');
-			document.getElementById('splash_container').classList.remove('splash_container-middle');
-		}
-		if (window.scrollY > 3600) {
-			document.getElementById('scroll-btn').classList.add('hidden');
-		}
-		if (window.scrollY < 3600) {
-			document.getElementById('scroll-btn').classList.remove('hidden');
-		}
-		console.log(window.scrollY);
-	};
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
 
   //Alter page on scroll
   const onScroll = () => {
@@ -256,4 +228,4 @@ function Splash(){
   )
 }
 
-export default Splash;
+export default Splash

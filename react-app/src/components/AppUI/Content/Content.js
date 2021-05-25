@@ -4,7 +4,7 @@ import ava from '../../../images/ava.png';
 import ReactQuill from 'react-quill'; // ES6
 import { useSelector } from 'react-redux';
 
-const Content = () => {
+const Content = ({ messages }) => {
 	let modules = {
 		toolbar: [
 			[{ header: [1, 2, false] }],
@@ -28,33 +28,30 @@ const Content = () => {
 		'image',
 	];
 
-	const [messages, setMessages] = useState([]);
+	// useEffect(() => {
+	// 	async function fetchData() {
+	// 		const response = await fetch(`/api/channel/2`);
+	// 		// const response = await fetch(`/api/dms/`);
+	// 		const responseData = await response.json();
+	// 		setMessages(responseData.message);
+	// 	}
+	// 	fetchData();
+	// }, []);
+	// console.log('******************************');
+	// console.log(messages);
+	// console.log('******************************');
 
-	useEffect(() => {
-		async function fetchData() {
-			const response = await fetch(`/api/channel/2`);
-			// const response = await fetch(`/api/dms/`);
-			const responseData = await response.json();
-			setMessages(responseData.message);
-		}
-		fetchData();
-	}, []);
-	console.log('******************************');
-	console.log(messages);
-	console.log('******************************');
-
-	const msg = messages.map(msg => {
-		return (
-			<li key={msg.id} className="channels__button">
-				<span>{msg.id}</span>
-			</li>
-		);
-	});
+	// const msg = messages.map(msg => {
+	// 	return (
+	// 		<li key={msg.id} className="channels__button">
+	// 			<span>{msg.id}</span>
+	// 		</li>
+	// 	);
+	// });
 
 	return (
 		<div class="main">
 			<header class="main__header">
-				{msg}
 				<div class="main__channel-info">
 					<h1 class="main__h3">#2021-01-group02-juice-and-the-thunks</h1>
 				</div>
