@@ -92,9 +92,12 @@
 	cursor: pointer;
 }
 
+.my-editing-area {
+	height: 90px;
+}
+
 .main__chat-textarea {
-	position: absolute;
-	bottom: 7%;
-	margin-top: 30px;
-	width: 95%;
+	position: fixed;
+	bottom: 10px;
+	width: 70%;
 }

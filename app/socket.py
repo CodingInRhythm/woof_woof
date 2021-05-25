@@ -3,7 +3,7 @@ from flask_socketio import SocketIO, emit, join_room
 import os
 from .models.models import db, ChannelMessage
 
-#Setting origins variable to all when in dev, actual heroku app-url in production
+# Setting origins variable to all when in dev, actual heroku app-url in production
 
 if os.environ.get("FLASK_ENV") == "production":
     origins = [

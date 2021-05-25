@@ -15,6 +15,7 @@ let socket;
 /*************************** COMPONENTS ***************************/
 const Chat = () => {
 
+
   const dispatch= useDispatch()
 
   const [room, setRoom] = useState('1')
@@ -31,6 +32,7 @@ const Chat = () => {
     else {
       return `DM${val1 < recipientId ? val1 : recipientId}${val1 > recipientId ? val1 : recipientId}`;
     }
+
   }
 
   const joinChat1 = async (e) => {
@@ -43,6 +45,7 @@ const Chat = () => {
     e.preventDefault();
     dispatch(getChannelMessages(2))
     setRoom(hashingRoom(2))
+
   };
   let recipientId;
   const joinDm = async (e) => {
@@ -52,6 +55,7 @@ const Chat = () => {
     dispatch(getDirectMessages(recipientId))
     setRoom(hashingRoom(userId, recipientId))
   }
+
 
   //USEFFECTS
 

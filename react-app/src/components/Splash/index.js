@@ -24,7 +24,7 @@ import slack_logo from "../../images/slack_logo.png"
 
 
 
-function Splash(){  
+function Splash(){
   //Subscribe to the store to grab user
   const user = useSelector(state => state.session.user)
   const dispatch = useDispatch();
@@ -43,15 +43,15 @@ function Splash(){
   //Scroll Functions
   const scrollToPage2 = () => {
     window.scrollTo({
-      top: 1950, 
-      behavior: 'smooth' 
+      top: 1950,
+      behavior: 'smooth'
     })
   }
 
   const scrollToPage3 = () => {
     window.scrollTo({
-      top: 3850, 
-      behavior: 'smooth' 
+      top: 3850,
+      behavior: 'smooth'
     })
   }
 
@@ -83,7 +83,7 @@ function Splash(){
     if(window.scrollY <= 1000){
       document.getElementById("splash_container").classList.remove("splash_container-middle")
       document.getElementById("splash_scrolling_nav").classList.add("hidden")
-      
+
     }
     if(window.scrollY > 2900){
       document.getElementById("splash_container").classList.add("splash_container-last")
@@ -96,7 +96,7 @@ function Splash(){
       document.getElementById("scroll-btn").classList.remove("hidden")
     }
   }
-  
+
   //Call onScroll function whenver page scrolls
   window.addEventListener('scroll', onScroll)
 
@@ -152,7 +152,7 @@ function Splash(){
         <ScrollPage page={0}>
           <Animator animation={SlideUp}>
             <div className="splash_main-1 splash_page">
-              <h1 className="splash_main-1-text">Here is an amazing 
+              <h1 className="splash_main-1-text">Here is an amazing
                 <span className="splash_main-1-text-highlight"> Slack clone</span>
                 ! Want to check it out?</h1>
               <Link to="/sign-up"><div className="splash_tryout_btn">Try for free</div></Link>
