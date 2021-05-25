@@ -31,6 +31,13 @@ export const getChannelMessages = channel_id => async dispatch => {
 	dispatch(setMessages(channel_id, data['channel_messages']));
 };
 
+//Write thunk to add message to store so that other users not currently in
+//room but with socket connection have message added to their store.  
+
+
+
+
+
 /*************************** REDUCER ***************************/
 
 const initialState = {};
