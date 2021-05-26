@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {useDispatch, useSelector} from 'react-redux'
-
-import { addMessage } from "../../store/channel_messages";
+import { io } from "socket.io-client";
+import { addChannelMessage } from "../../store/channel_messages";
 
 let socket;
 
@@ -14,7 +14,7 @@ const MessageWindow = ({recipientid, room}) => {
 
   const [firstLoad, setFirstLoad] = useState(false);
   const [otherLoad, setOtherLoad] = useState(false);
-  
+
   const newMessages = []
 
   //REDUX
@@ -73,6 +73,7 @@ const MessageWindow = ({recipientid, room}) => {
   //     // socket.disconnect()
   //   })
   // },[room])
+
 
   return (
       <div>

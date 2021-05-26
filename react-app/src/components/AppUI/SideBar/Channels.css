@@ -64,6 +64,7 @@
 	opacity: 0.5;
 }
 
-li a .select-me{
-	background-color: red;
-}
+/* .active {
+	background: #038edf;
+	color: #ffffff;
+} */

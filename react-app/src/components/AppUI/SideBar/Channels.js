@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+
 import './Channels.css';
 import { NavLink } from 'react-router-dom';
 import { getChannelMessages } from '../../../store/channel_messages';
@@ -28,7 +29,6 @@ const Nav = ({channel, setRoom}) =>{
 	)
 }
 
-
 const Channels = ({ setRoom }) => {
 	const channels = useSelector(state => state.channels);
 
@@ -42,7 +42,11 @@ const Channels = ({ setRoom }) => {
 	// const channelComponents = arr.map(channel => {
 	// 	return (
 	// 		<li key={channel.id} className="channels__button">
-	// 			<NavLink onClick={setRoom(`Channel: ${channel.id}`)} to={`/channels/${channel.id}`}>
+	// 			<NavLink
+	// 				activeClassName="active"
+	// 				onClick={setRoom(`Channel: ${channel.id}`)}
+	// 				to={`/channels/${channel.id}`}
+	// 			>
 	// 				<span>{channel.name}</span>
 	// 			</NavLink>
 	// 		</li>
@@ -68,11 +72,13 @@ const Channels = ({ setRoom }) => {
 					</button>
 				</li>
 				<li className="channels__item">
-					<button className="channels__button channels__button--active">
+					<button className="channels__button">
 						<span>2021-01-group02-juice-and-the-thunks</span>
 					</button>
 				</li>
+        
 				{arr?.map(channel=> <Nav channel={channel} setRoom={setRoom} key={channel.id}/>)}
+
 				{/* {channelComponents} */}
 				<li className="channels__item">
 					<button className="channels__add">

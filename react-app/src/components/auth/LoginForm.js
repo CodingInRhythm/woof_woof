@@ -30,16 +30,16 @@ const LoginForm = () => {
 	};
 
 	const logoClick = () => {
-		history.push('/')
-	}
+		history.push('/');
+	};
 
 	const demoClick = async e => {
 		e.preventDefault();
-		await dispatch(login("demo@aa.io", "password"));
-	}
+		await dispatch(login('demo@aa.io', 'password'));
+	};
 
 	if (user) {
-		return <Redirect to="/" />;
+		return <Redirect to="app_ui" />;
 	}
 
 	return (

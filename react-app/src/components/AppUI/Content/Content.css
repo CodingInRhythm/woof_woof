@@ -58,6 +58,15 @@
 .main__chat-item {
 	display: flex;
 	margin-top: 10px;
+	position: relative;
+}
+
+.main__chat-item:hover {
+	background-color: whitesmoke;
+}
+
+.main__chat-item:hover .chat__extra-options{
+	display: flex;
 }
 
 .chat__avatar {
@@ -86,6 +95,27 @@
 	font-size: 16px;
 }
 
+.chat__extra-options{
+	position: absolute;
+	top: -10px;
+	right: 0;
+	display: none;
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	background-color: white;
+}
+
+.chat__edit,
+.chat__delete{
+	font-size: 17px;
+	margin: 5px;
+}
+
+.chat__edit:hover,
+.chat__delete:hover{
+	color: grey;
+}
+
 .chat__username:hover,
 .chat__date:hover {
 	text-decoration: underline;
@@ -100,4 +130,24 @@
 	position: fixed;
 	bottom: 10px;
 	width: 70%;
+}
+
+.main__chat-send {
+	background-color: #4a154b;
+	color: #fff;
+	width: 35px;
+	height: 35px;
+	bottom: 10px;
+	right: 10px;
+	border-radius: 50%;
+	transition: all 1s;
+	position: absolute;
+}
+
+.main__chat-send i {
+	margin-left: 25%;
+}
+
+.main__chat-send:hover {
+	background-color: #681e69;
 }
