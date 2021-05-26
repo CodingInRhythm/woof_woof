@@ -2,6 +2,7 @@
 import React, {useState, useEffect} from 'react'
 import {Route} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
+import { io } from "socket.io-client";
 import MessageWindow from './MessageWindow'
 import "./chat.css"
 
@@ -42,11 +43,10 @@ const Chat = () => {
     if (!channels[1]){
       dispatch(getChannelMessages(1))
     }
-    setRoom('1')
     document.getElementById("chat1").classList.add("red-chat")
     document.getElementById("chat2").classList.remove("red-chat")
     document.getElementById("chat1_notice").classList.add("hidden")
-    dispatch(getChannelMessages(1)) //getChannelMessages fetches msgs from dB puts them in store 
+    // dispatch(getChannelMessages(1)) //getChannelMessages fetches msgs from dB puts them in store 
     setRoom(hashingRoom(1)) // room == num will function in child component, MessageWindow
   }
 
@@ -55,11 +55,10 @@ const Chat = () => {
     if (!channels[2]){
       dispatch(getChannelMessages(2))
     }
-    setRoom('2')
     document.getElementById("chat2").classList.add("red-chat")
     document.getElementById("chat1").classList.remove("red-chat")
     document.getElementById("chat2_notice").classList.add("hidden")
-    dispatch(getChannelMessages(2))
+    // dispatch(getChannelMessages(2))
     setRoom(hashingRoom(2))
 
   };
@@ -71,7 +70,10 @@ const Chat = () => {
     setRoom(hashingRoom(userId, recipientId))
   }
 
-
+  useEffect(() => {
+    dispatch(getChannelMessages(1))
+    dispatch(getChannelMessages(2))
+  }, [])
   //USEFFECTS
 
   useEffect(async ()=>{

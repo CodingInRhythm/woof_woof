@@ -8,12 +8,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getChannels } from '../../store/channels';
 import { getDMUsers } from '../../store/dm_people';
 import { addMessage as addChannelMessage } from "../../store/channel_messages"
+let socket;
+
 const MainInterface = () => {
 	const dispatch = useDispatch();
 	const dmUsers = useSelector(state => state.dmUsers)
 	const channels = useSelector(state => state.channels)
-	const socket = io();
-
+	const userId = useSelector(state => state.session.user.id)
+	// const directMessages = useSelector(state => state.directMessages)
+	
 	const hashingRoom = (val1, recipientId) => {
 		if (!recipientId) {
 			return `Channel: ${val1}`
@@ -22,22 +25,29 @@ const MainInterface = () => {
 			return `DM${val1 < recipientId ? val1 : recipientId}${val1 > recipientId ? val1 : recipientId}`;
 		}
 	}
-
+	
 	useEffect(() => {
 		dispatch(getChannels());
 	}, [dispatch]);
-
+	
 	useEffect(() => {
 		dispatch(getDMUsers());
 	}, [dispatch]);
-
+	
 	useEffect(() => {
+		socket = io();
 		for (let channel in channels) {
 			socket.on('connect', () => {
 					socket.emit('join', {room:hashingRoom(channel)})
 					console.log("I have joined room:  ", hashingRoom(channel))
 				})
 			}
+		for (let dm in dmUsers){
+			socket.on('connect', () => {
+				socket.emit('join', {room:hashingRoom(userId, dm)})
+				console.log("I have joined dm:  ", hashingRoom(userId, dm))
+			})
+		}
 		socket.on("chat", (chat) => {
 				// when we recieve a chat, add it into our channelMessages object in redux
 				console.log("I'm a new chat-------", chat)
@@ -48,6 +58,11 @@ const MainInterface = () => {
 			for (let channel in channels) {
 				socket.emit('leave', {room:hashingRoom(channel)})
 				console.log("I have left room:  ", hashingRoom(channel))
+				socket.disconnect()
+			}
+			for (let dm in dmUsers) {
+				socket.emit('leave', {room:hashingRoom(userId, dm)})
+				console.log("I have left dm:  ", hashingRoom(userId, dm))
 				socket.disconnect()
 			}
 		  })
