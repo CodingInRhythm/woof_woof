@@ -57,12 +57,11 @@ function App() {
 				<ProtectedRoute path="/channels/:id" exact={true}>
 					<MainInterface />
 
-				</Route>
-				<Route path="/dms/all" exact={true}>
+				</ProtectedRoute>
+				<ProtectedRoute path="/dms/all" exact={true}>
 					<MainInterface />
-				</Route>
-				<Route path="/dm/:id" exact={true}>
-
+				</ProtectedRoute>
+				<ProtectedRoute path="/dm/:id" exact={true}>
 					<MainInterface />
 				</ProtectedRoute>
 				{/* <ProtectedRoute path="/" exact={true} >

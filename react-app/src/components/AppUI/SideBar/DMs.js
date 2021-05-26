@@ -33,7 +33,7 @@ const DMPerson = ({ recipient }) => {
 const DMs = () => {
 
 	const conversations = useSelector(state => state.dm_users);
-	
+	const history = useHistory();
 	let arr = []
 	for (let i in conversations){
 		arr.push(conversations[i])

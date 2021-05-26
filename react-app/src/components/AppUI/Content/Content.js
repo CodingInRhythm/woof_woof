@@ -1,17 +1,12 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import {Link} from 'react-router-dom'
-
-
-
 import './Content.css';
 import ava from '../../../images/ava.png';
 import ReactQuill from 'react-quill'; // ES6
 import Message from './Message'
 import { useDispatch, useSelector } from 'react-redux';
-
 import { getChannelMessages, addMessage as addChannelMessage } from '../../../store/channel_messages';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { getDirectMessages } from '../../../store/direct_messages';
 
 
@@ -89,7 +84,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 		roomNum = id
 		setRoom(hashingRoom(userId, id))
 		slice = "directMessages"
-    
+	}
     let messages = useSelector(state => state[slice])
 
   let textField;
@@ -153,7 +148,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 
 
 
-	if (addDM) {
+	if (isAddDM) {
 		messageItem = Object.keys(messages).map(msg => {
 			return (
         <Link to={`/dm/${messages[msg].id}`}>
@@ -275,5 +270,6 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
     </div>
   );
 };
+
 
 export default Content;
