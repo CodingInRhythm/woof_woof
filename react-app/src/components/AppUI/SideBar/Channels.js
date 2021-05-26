@@ -3,6 +3,8 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import './Channels.css';
 import { NavLink, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addNewChannel } from '../../../store/channels';
 
 const Nav = ({ channel, setRoom }) => {
 	const [isClicked, setIsClicked] = useState(false);
@@ -56,7 +58,22 @@ const Channels = ({ setRoom }) => {
 	// 	);
 	// });
 
-	const addChannel = () => {};
+	const dispatch = useDispatch();
+	const [isHidden, setHidden] = useState('true');
+	const [newChannelName, setChannelName] = useState('');
+	const user = useSelector(state => state.session.user);
+	const toggleAddChannel = () => {
+		setHidden(!isHidden);
+	};
+
+	const addChannel = () => {
+		const payload = {
+			user_id: user.id,
+			name: newChannelName,
+			is_channel: true,
+		};
+		dispatch(addNewChannel(payload));
+	};
 
 	return (
 		<div className="channels">
@@ -70,7 +87,19 @@ const Channels = ({ setRoom }) => {
 					<Nav channel={channel} setRoom={setRoom} key={id} />
 				))}
 				<li className="channels__item">
-					<button className="channels__add" onclick={addChannel}>
+					<div className={`channel__add--form ${isHidden ? 'hidden' : null}`}>
+						<input
+							type="text"
+							placeholder="Channel name"
+							className="channels__add-input"
+							onChange={e => setChannelName(e.target.value)}
+						></input>
+						<button className="channels__add--btn" onClick={addChannel}>
+						<span className="channels__add-plussign">+</span>
+						</button>
+					</div>
+
+					<button className="channels__add" onClick={toggleAddChannel}>
 						<span className="dm__add--plussign">+</span>
 						<span className="dm__add">Add channels</span>
 					</button>

@@ -21,11 +21,11 @@ def direct_messages():
         if (user.user not in users and user.sender_id != current_user.id):
             users.append(user.user)
 
-    print("******************************************")
-    print(users)
-    print(sent_messages)
-    print(received_messages)
-    print("******************************************")
+    # print("******************************************")
+    # print(users)
+    # print(sent_messages)
+    # print(received_messages)
+    # print("******************************************")
 
     return {'dm_people': [user.to_dict() for user in users]}
     # return {'direct_messages': [message.to_dict() for message in direct_messages]}
