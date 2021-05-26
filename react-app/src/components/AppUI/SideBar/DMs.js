@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import React from 'react';
 import './DMs.css';
-import { useHistory } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getDirectMessages } from '../../../store/direct_messages';
@@ -16,16 +16,21 @@ const DMPerson = ({ recipient }) => {
 			dispatch(getDirectMessages(recipient.id));
 			setIsClicked(true);
 		}
+	let location = useLocation();
+	const getNavLinkClass = path => {
+		return location.pathname === path ? 'dm__button--active' : '';
+	};
 
-		history.push(`/dm/${recipient.id}`)
-	}
-
-	return(
-	<li className="dm__item">
-		<button className="dm__button" id={`dm_${recipient.id}`} onClick={handleClick}>
-			<span>{`${recipient.firstname} ${recipient.lastname}`}</span>
-		</button>
-	</li>
+	return (
+		<li key={recipient.id}>
+			<button
+				id={`dm_${recipient.id}`}
+				onClick={handleClick}
+				className={`dm__button` + ' ' + getNavLinkClass(`/dm/${recipient.id}`)}
+			>
+				<span>{`${recipient.firstname} ${recipient.lastname}`}</span>
+			</button>
+		</li>
 
 	);
 };
@@ -39,13 +44,14 @@ const DMs = () => {
 		arr.push(conversations[i])
 	}
 
-			//FUNCTIONS
+	//FUNCTIONS
 		
 	const newMessage = () => {
 		
 		history.push('/dms/all')
 	}
 	//Component is mapping thru conversations
+
 
 	return (
 		<div className="dm">
@@ -54,6 +60,7 @@ const DMs = () => {
 					Direct messages <span className="dm__number">({arr.length})</span>
 				</span>
 			</h2>
+
 			<ul className="dm__list">
 				{arr?.map((conversation, i) => <DMPerson recipient={conversation} key={i}/>)}
 				<li className="dm__item">

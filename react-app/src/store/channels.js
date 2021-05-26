@@ -10,10 +10,10 @@ const setChannels = channels => ({
 	channels,
 });
 
-// export const addChannels = (channels) => ({
-// 	type: ADD_CHANNEL_MESSAGE,
-// 	channels
-// });
+export const addChannel = channel => ({
+	type: ADD_CHANNEL,
+	channel,
+});
 
 /*************************** THUNKS ***************************/
 export const getChannels = () => async dispatch => {
@@ -30,6 +30,20 @@ export const getChannels = () => async dispatch => {
 	dispatch(setChannels(currentUserChannels));
 };
 
+export const addNewChannel = channel_obj => async dispatch => {
+	const response = await fetch(`/api/channels/`, {
+		method: 'POST',
+		body: JSON.stringify(channel_obj),
+		headers: { 'Content-Type': 'application/json' },
+	});
+	if (response.ok) {
+		const channel = await response.json();
+		dispatch(addChannel(channel.channel));
+		return channel;
+	} else {
+		throw response;
+	}
+};
 /*************************** REDUCER ***************************/
 
 const initialState = {};
@@ -40,8 +54,10 @@ export default function channelReducer(state = initialState, action) {
 		case SET_CHANNEL:
 			newState = { ...state, ...action.channels };
 			return newState;
-		// case ADD_CHANNEL:
-		// 	return newState;
+		case ADD_CHANNEL:
+			newState = { ...state };
+			newState[action.channel.id] = action.channel;
+			return newState;
 		default:
 			return state;
 	}
