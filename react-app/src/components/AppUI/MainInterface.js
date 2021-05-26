@@ -7,7 +7,7 @@ import './MainInterface.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getChannels } from '../../store/channels';
 import { getDMUsers } from '../../store/dm_people';
-import { addMessage as addChannelMessage } from "../../store/channel_messages"
+import { addChannelMessage } from "../../store/channel_messages"
 import { addMessage as addDirectMessage } from "../../store/direct_messages"
 let socket;
 
@@ -56,8 +56,13 @@ const MainInterface = () => {
 			})
 		socket.on("dm", (dm) => {
 			// when we recieve a dm, add it into our directMessages object in redux
-			console.log("I'm a new dm-------", dm)
-			dispatch(addDirectMessage(dm.recipient_id, dm))
+			if (dm.recipient_id === userId){
+				console.log("I have recieved a dm---------", dm)
+				dispatch(addDirectMessage(dm.sender_id, dm))
+			} else{
+				console.log("I have send a dm---------", dm)
+				dispatch(addDirectMessage(dm.recipient_id, dm))
+			}
 		})
 			
 		return (()=>{
