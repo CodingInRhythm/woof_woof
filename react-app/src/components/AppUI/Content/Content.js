@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import './Content.css';
 import ava from '../../../images/ava.png';
 import ReactQuill from 'react-quill'; // ES6
+
+import Message from './Message'
 import { useDispatch, useSelector } from 'react-redux';
 import { getChannelMessages } from '../../../store/channel_messages';
 import { useParams, useLocation } from 'react-router-dom';
@@ -63,6 +65,8 @@ const Content = ({ room, setRoom }) => {
 		slice = 'directMessages';
 	}
 
+	const messages = useSelector((state) => state[slice])
+
 	useEffect(() => {
 		if (!channel_messages[id]) {
 			dispatch(getChannelMessages(id));
@@ -83,12 +87,20 @@ const Content = ({ room, setRoom }) => {
 		return (
 			<div class="main__chat-item">
 				<div class="chat__image-container">
-					<img src={ava} alt="profile-photo" class="chat__avatar"></img>
+					<img src={msg.user?.profile_photo ? msg.user.profile_photo : ava} alt="profile-photo" class="chat__avatar"></img>
 				</div>
 				<div class="chat__other-info">
 					<span class="chat__username">{msg.user.firstname + ' ' + msg.user.lastname}</span>
 					<span class="chat__date">{date}</span>
 					<p class="chat__text">{msg.message}</p>
+				</div>
+				<div class="chat__extra-options">
+					<div class="chat__edit">
+						<button>Edit</button>
+					</div>
+					<div class="chat__delete">
+						<button>Delete</button>
+					</div>
 				</div>
 			</div>
 		);
@@ -111,7 +123,11 @@ const Content = ({ room, setRoom }) => {
 			</header>
 			<div class="main__content">
 				<div class="main__container">
-					<section class="main__chat">{messageItem}</section>
+					<section class="main__chat">
+						{messages[id]?.map(msg => (
+							<Message key={msg.id} msg={msg} modules={modules} formats={formats}/>
+						))}
+					</section>
 					<section class="main__chat-textarea">
 						<ReactQuill
 							placeholder={`Message #${messages[id]?.channel?.name}`}
