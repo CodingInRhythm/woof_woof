@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { io } from "socket.io-client";
 import './Content.css';
 import ava from '../../../images/ava.png';
 import ReactQuill from 'react-quill'; // ES6
-
 import Message from './Message'
 import { useDispatch, useSelector } from 'react-redux';
-import { getChannelMessages } from '../../../store/channel_messages';
+import { getChannelMessages, addMessage as addChannelMessage } from '../../../store/channel_messages';
 import { useParams, useLocation } from 'react-router-dom';
 import { getDirectMessages } from '../../../store/direct_messages';
 
-const Content = ({ room, setRoom }) => {
+
+const Content = ({ room, setRoom, socket }) => {
 	let modules = {
 		toolbar: [
 			[{ header: [1, 2, false] }],
@@ -19,7 +20,7 @@ const Content = ({ room, setRoom }) => {
 			['link', 'image'],
 			['clean'],
 		],
-	};
+	}; 
 	let formats = [
 		'header',
 		'bold',
@@ -35,25 +36,29 @@ const Content = ({ room, setRoom }) => {
 		'link',
 		'image',
 	];
-
+	
+	
+	
 	//val 1 will either be channelId or userId
 	const hashingRoom = (val1, recipientId) => {
 		if (!recipientId) {
-			return `Channel: ${val1}`;
-		} else {
+      return `Channel: ${val1}`
+		} 
+		else {
 			return `DM${val1 < recipientId ? val1 : recipientId}${val1 > recipientId ? val1 : recipientId}`;
 		}
-	};
-
-	const { id } = useParams();
+	}
+  
+  const { id } = useParams();
 	const location = useLocation();
-	console.log(location);
 	const dispatch = useDispatch();
 	const channel_messages = useSelector(state => state.channelMessages);
 	const direct_messages = useSelector(state => state.directMessages);
-	const userId = useSelector(state => state.session.user.id);
-
-	let slice;
+	const userId = useSelector((state) => state.session.user.id)
+  
+  const textInput = useRef(null)
+  
+  let slice;
 	let roomNum;
 	if (location.pathname.includes('channel')) {
 		roomNum = room.split(' ')[1];
@@ -66,8 +71,37 @@ const Content = ({ room, setRoom }) => {
 	}
 
 	const messages = useSelector((state) => state[slice])
+  
+  let textField;
+  
+  //Handle Send Message
+	const sendMessage = (e) => {
+		e.preventDefault();
+		textField = textInput.current.state.value
 
+		if(textField && textField !== "<br>"){
+			let editor = textInput.current.getEditor()
+			let text= editor.getText()
+			editor.deleteText(0, text.length)
+
+			if (location.pathname.includes("dm")){
+				console.log("before dm")
+				socket.emit("dm", {sender_id:userId, recipient_id: id, message:text, room:hashingRoom(userId, id)})
+			} else{
+				socket.emit("chat", {room:id, id:userId, message:text})
+			}
+			console.log(text)
+		}
+	}
+ 
 	useEffect(() => {
+		if (location.pathname.includes("channel")) {
+			slice = 'channelMessages'
+			setRoom(hashingRoom(id))
+		} else {
+			setRoom(hashingRoom(userId, id))
+			slice = "directMessages"
+		}
 		if (!channel_messages[id]) {
 			dispatch(getChannelMessages(id));
 		}
@@ -89,10 +123,10 @@ const Content = ({ room, setRoom }) => {
 				<div class="chat__image-container">
 					<img src={msg.user?.profile_photo ? msg.user.profile_photo : ava} alt="profile-photo" class="chat__avatar"></img>
 				</div>
-				<div class="chat__other-info">
-					<span class="chat__username">{msg.user.firstname + ' ' + msg.user.lastname}</span>
-					<span class="chat__date">{date}</span>
-					<p class="chat__text">{msg.message}</p>
+				<div className="chat__other-info">
+					<span className="chat__username">{msg.user.firstname + ' ' + msg.user.lastname}</span>
+					<span className="chat__date">{date}</span>
+					<p className="chat__text">{msg.message}</p>
 				</div>
 				<div class="chat__extra-options">
 					<div class="chat__edit">
@@ -105,19 +139,20 @@ const Content = ({ room, setRoom }) => {
 			</div>
 		);
 	});
-
-	return (
-		<div class="main">
-			<header class="main__header">
-				<div class="main__channel-info">
-					<h1 class="main__h3">#2021-01-group02-juice-and-the-thunks</h1>
+	}
+			
+		return (
+			<div className="main">
+			<header className="main__header">
+				<div className="main__channel-info">
+					<h1 className="main__h3">#2021-01-group02-juice-and-the-thunks</h1>
 				</div>
-				<div class="main__channel-members">
+				<div className="main__channel-members">
 					<div>
-						<i class="fas fa-user-friends"></i> <span class="main_channel-members-h3">View Members</span>
+						<i className="fas fa-user-friends"></i> <span className="main_channel-members-h3">View Members</span>
 					</div>
 					<div>
-						<i class="fas fa-user-plus"></i> <span class="main_channel-members-h3">Add Members</span>
+						<i className="fas fa-user-plus"></i> <span className="main_channel-members-h3">Add Members</span>
 					</div>
 				</div>
 			</header>
@@ -129,22 +164,25 @@ const Content = ({ room, setRoom }) => {
 						))}
 					</section>
 					<section class="main__chat-textarea">
-						<ReactQuill
-							placeholder={`Message #${messages[id]?.channel?.name}`}
-							modules={modules}
-							formats={formats}
-							inputClass="main__chat-textarea"
-							actionText="Send"
-							// onChange={handleChange}
-						>
-							<div className="my-editing-area"></div>
-						</ReactQuill>
-						<button
-							className="main__chat-send"
-							// onClick={}
-						>
-							<i class="fas fa-paper-plane"></i>
-						</button>
+            <form onSubmit={sendMessage}>
+              <ReactQuill
+                placeholder={`Message #${messages[id]?.channel?.name}`}
+                modules={modules}
+                formats={formats}
+                inputClass="main__chat-textarea"
+                id="input_field
+                ref={textInput}
+                // onChange={handleChange}
+              >
+                <div className="my-editing-area"></div>
+              </ReactQuill>
+              <button
+                className="main__chat-send"
+                type="submit"
+              >
+                <i class="fas fa-paper-plane"></i>
+              </button>
+            </form>
 					</section>
 				</div>
 			</div>
