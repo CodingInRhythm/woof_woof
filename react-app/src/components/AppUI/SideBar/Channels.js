@@ -40,15 +40,15 @@ const Nav = ({ channel, setRoom }) => {
 	},[channelMessageChannel])
 
 	return (
-		<li
-			key={channel.id}
-			// className="channels__button"
-			className={`channels__button` + ' ' + getNavLinkClass(`/channels/${channel.id}`)}
-		>
-			<NavLink onClick={handleClick} to={`/channels/${channel.id}`}>
+		<NavLink onClick={handleClick} to={`/channels/${channel.id}`}>
+			<li
+				key={channel.id}
+				// className="channels__button"
+				className={`channels__button` + ' ' + getNavLinkClass(`/channels/${channel.id}`)}
+			>
 				<span className={newMessage ? "new_message" : ""}>{channel.name}</span>
-			</NavLink>
-		</li>
+			</li>
+		</NavLink>
 	);
 };
 
