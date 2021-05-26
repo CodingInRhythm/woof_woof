@@ -43,16 +43,22 @@ const DMs = () => {
 			// 		</li>
 			// 	);
 			// });
+
 			
 			//UseSelector grabs our conversations
-			const conversations = useSelector(state => state.dm_users);
-			let arr = []
-			for (let i in conversations){
-				arr.push(conversations[i])
-			}
-			
-			return (
-				<div class="dm">
+	const conversations = useSelector(state => state.dm_users);
+	let arr = []
+	for (let i in conversations){
+		arr.push(conversations[i])
+	}
+			//FUNCTIONS
+		
+	const newMessage = () => {
+		console.log('working?')
+	}
+		
+	return (
+		<div class="dm">
 			<h2 class="dm__heading">
 				<span>
 					Direct messages <span class="dm__number">({arr.length})</span>
@@ -85,7 +91,7 @@ const DMs = () => {
 				{/* {userComponents} */}
 
 				<li class="dm__item">
-					<button class="dm__add">
+					<button onClick={newMessage} class="dm__add">
 						<span class="dm__add--plussign">+</span>
 						<span class="dm__add">Add teammates</span>
 					</button>
