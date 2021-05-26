@@ -11,12 +11,14 @@ const DMPerson = ({ recipient }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [isClicked, setIsClicked] = useState(false);
+	let location = useLocation();
 	const handleClick = () => {
 		if (!isClicked) {
 			dispatch(getDirectMessages(recipient.id));
 			setIsClicked(true);
 		}
-	let location = useLocation();
+		history.push(`/dm/${recipient.id}`)
+	}
 	const getNavLinkClass = path => {
 		return location.pathname === path ? 'dm__button--active' : '';
 	};

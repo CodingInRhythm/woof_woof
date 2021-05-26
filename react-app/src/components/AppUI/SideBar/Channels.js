@@ -1,9 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
 import './Channels.css';
 import { NavLink, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { addNewChannel } from '../../../store/channels';
 import { getChannelMessages } from '../../../store/channel_messages';
 
@@ -17,9 +15,9 @@ const Nav = ({channel, setRoom}) =>{
 			setIsClicked(true)
 			dispatch(getChannelMessages(channel.id))
 		}
-		let element = document.querySelector(".channels__button--active")
-		element.classList.remove("channels__button--active")
-		e.target.classList.add("channels__button--active")
+		// let element = document.querySelector(".channels__button--active")
+		// element.classList.remove("channels__button--active")
+		// e.target.classList.add("channels__button--active")
 		setRoom(`Channel: ${channel.id}`)
 	}
 
