@@ -63,13 +63,19 @@ const Content = ({ room, setRoom, socket }) => {
 	const sendMessage = (e) => {
 		e.preventDefault();
 		textField = textInput.current.state.value
+
 		if(textField && textField !== "<br>"){
 			let editor = textInput.current.getEditor()
 			let text= editor.getText()
 			editor.deleteText(0, text.length)
-			socket.emit("chat", {room:id, id:userId, message:text})
+
+			if (location.pathname.includes("dm")){
+				console.log("before dm")
+				socket.emit("dm", {sender_id:userId, recipient_id: id, message:text, room:hashingRoom(userId, id)})
+			} else{
+				socket.emit("chat", {room:id, id:userId, message:text})
+			}
 			console.log(text)
-			// textInput.current.state.value = "<p><br></p>"
 		}
 	}
 	
@@ -93,32 +99,6 @@ const Content = ({ room, setRoom, socket }) => {
 		}
 		console.log(slice)
 	}, [slice, id]);
-	
-	//Establish Websockets
-	// useEffect(() => {
-	// 	socket.on('connect', () => {
-	// 			socket.emit('join', {room:room})
-	// 			console.log("I have joined room:  ", room)
-	// 		})
-		
-	// 	socket.on("chat", (chat) => {
-	// 			// when we recieve a chat, add it into our messages array in state
-	// 			console.log("I'm a new chat-------", chat)
-	// 			dispatch(addChannelMessage(chat.channel_id, chat))
-	// 		})
-			
-	// 	// return (()=>{
-	// 	// 	socket.emit('leave', {room:room})
-	// 	// 	console.log("I have left room:  ", room)
-	// 	// 	socket.disconnect()
-	// 	//   })
-	// }, [room])
-
-	//Handle send chat
-	// const sendChat = (e) => {
-	// 	e.preventDefault();
-		
-	// }
 						
 						
 	const messages = useSelector((state) => state[slice])

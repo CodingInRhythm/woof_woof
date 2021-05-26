@@ -42,8 +42,9 @@ def handle_chat(data):
 
 @socketio.on("dm")
 def handle_dm(data):
+    print("Hello World!!!!!!!")
     message = DirectMessage(sender_id=data['sender_id'], recipient_id=data['recipient_id'], message=data["message"])
     db.session.add(message)
     db.session.commit()
-    
+    print(message.to_dict_basic())
     emit("dm", message.to_dict(), room=data["room"])

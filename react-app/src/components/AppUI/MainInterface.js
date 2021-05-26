@@ -8,11 +8,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getChannels } from '../../store/channels';
 import { getDMUsers } from '../../store/dm_people';
 import { addMessage as addChannelMessage } from "../../store/channel_messages"
+import { addMessage as addDirectMessage } from "../../store/direct_messages"
 let socket;
 
 const MainInterface = () => {
 	const dispatch = useDispatch();
-	const dmUsers = useSelector(state => state.dmUsers)
+	const dmUsers = useSelector(state => state.dm_users)
 	const channels = useSelector(state => state.channels)
 	const userId = useSelector(state => state.session.user.id)
 	// const directMessages = useSelector(state => state.directMessages)
@@ -53,6 +54,11 @@ const MainInterface = () => {
 				console.log("I'm a new chat-------", chat)
 				dispatch(addChannelMessage(chat.channel_id, chat))
 			})
+		socket.on("dm", (dm) => {
+			// when we recieve a dm, add it into our directMessages object in redux
+			console.log("I'm a new dm-------", dm)
+			dispatch(addDirectMessage(dm.recipient_id, dm))
+		})
 			
 		return (()=>{
 			for (let channel in channels) {
