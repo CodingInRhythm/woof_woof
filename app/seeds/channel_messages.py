@@ -17,10 +17,11 @@ def seed_channel_messages():
     messages = [
         {'user_id': 1, 'channel_id': 1, "message":'Demo?'},
         {'user_id': 2, 'channel_id': 1, "message":'Demo'},
-        {'user_id': 3, 'channel_id': 1, "message":'Yeah demo'},
-        {'user_id': 4, 'channel_id': 1, "message":'This is demost interesting conversation'},
-        {'user_id': 5, 'channel_id': 1, "message":'More like demoralizing'},
-        {'user_id': 6, 'channel_id': 1, "message":'Its just meant to demonstrate the general idea'},
+        {'user_id': 3, 'channel_id': 1, "message":'Demo?'},
+        {'user_id': 4, 'channel_id': 1, "message":'Juice'},
+        {'user_id': 5, 'channel_id': 1, "message":'Demo?'},
+        {'user_id': 7, 'channel_id': 1, "message":'Demo'},
+        {'user_id': 6, 'channel_id': 1, "message":'Bucks'},
     ]
 
     for _ in range(200):

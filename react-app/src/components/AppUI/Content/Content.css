@@ -59,6 +59,15 @@
 	display: flex;
 	margin-top: 10px;
 	position: relative;
+	padding: 5px;
+}
+
+.main__chat-item-edit-delete {
+	display: flex;
+	margin-top: 10px;
+	position: relative;
+	padding: 5px;
+	background-color: wheat;
 }
 
 .main__chat-item:hover {
@@ -105,8 +114,8 @@
 	background-color: white;
 }
 
-.chat__edit button,
-.chat__delete button{
+.chat_edit-btn,
+.chat__delete-btn{
 	font-size: 17px;
 	margin: 5px;
 	color: grey;
@@ -131,6 +140,7 @@
 	position: fixed;
 	bottom: 10px;
 	width: 70%;
+	background-color: white;
 }
 
 .main__chat-send {
@@ -151,4 +161,49 @@
 
 .main__chat-send:hover {
 	background-color: #681e69;
+}
+
+.chat__quill{
+	background-color: white;
+}
+
+.chat__other-info-delete-alert{
+	font-weight: bold;
+	font-size: 15px;
+	color: grey;
+}
+
+.chat__other-info-delete-message{
+	font-weight: bold;
+	color: #4a154b;
+}
+
+.chat__other-info-cancel{
+	border-radius: 3px;
+	background-color: white;
+	color: black;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	margin: 5px;
+	padding: 5px;
+	border-radius: 5px;
+	outline: 0;
+	border: none;
+	transition: all 1s;
+	text-align: center;
+}
+
+.chat__other-info-confirm{
+	border-radius: 3px;
+	background-color: green;
+	color: #fff;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-weight: bold;
+	margin: 5px;
+	padding: 5px;
+	border-radius: 5px;
+	outline: 0;
+	border: none;
+	transition: all 1s;
+	text-align: center;
 }
