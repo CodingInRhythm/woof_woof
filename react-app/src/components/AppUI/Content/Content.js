@@ -15,7 +15,6 @@ const Content = ({ room, setRoom }) => {
 			['bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block'],
 			[{ list: 'ordered' }, { list: 'bullet' }],
 			['link', 'image'],
-			[{ align: [] }],
 			['clean'],
 		],
 	};
@@ -23,9 +22,11 @@ const Content = ({ room, setRoom }) => {
 		'header',
 		'bold',
 		'italic',
+		'font',
 		'underline',
 		'strike',
 		'blockquote',
+		'code-block',
 		'list',
 		'bullet',
 		'indent',
@@ -36,47 +37,47 @@ const Content = ({ room, setRoom }) => {
 	//val 1 will either be channelId or userId
 	const hashingRoom = (val1, recipientId) => {
 		if (!recipientId) {
-		  return `Channel: ${val1}`
-		} 
-		else {
-		  return `DM${val1 < recipientId ? val1 : recipientId}${val1 > recipientId ? val1 : recipientId}`;
+			return `Channel: ${val1}`;
+		} else {
+			return `DM${val1 < recipientId ? val1 : recipientId}${val1 > recipientId ? val1 : recipientId}`;
 		}
-	  }
+	};
 
 	const { id } = useParams();
 	const location = useLocation();
-	console.log(location)
+	console.log(location);
 	const dispatch = useDispatch();
 	const channel_messages = useSelector(state => state.channelMessages);
 	const direct_messages = useSelector(state => state.directMessages);
-	const userId = useSelector((state) => state.session.user.id)
+	const userId = useSelector(state => state.session.user.id);
 
 	let slice;
 	let roomNum;
-	if (location.pathname.includes("channel")) {
-		roomNum = room.split(" ")[1];
-		slice = 'channelMessages'
-		setRoom(hashingRoom(id))
+	if (location.pathname.includes('channel')) {
+		roomNum = room.split(' ')[1];
+		slice = 'channelMessages';
+		setRoom(hashingRoom(id));
 	} else {
-		roomNum = id
-		setRoom(hashingRoom(userId, id))
-		slice = "directMessages"
+		roomNum = id;
+		setRoom(hashingRoom(userId, id));
+		slice = 'directMessages';
 	}
 
 	useEffect(() => {
 		if (!channel_messages[id]) {
 			dispatch(getChannelMessages(id));
 		}
-		if (!direct_messages[id]){
-			dispatch(getDirectMessages(id))
+		if (!direct_messages[id]) {
+			dispatch(getDirectMessages(id));
 		}
 	}, [room, dispatch, id]);
 
-	console.log("slice----", slice)
-	console.log('roomnum----', room)
-	const messages = useSelector((state) => state[slice])
-	
-	// console.log(messages[id]);
+	console.log('slice----', slice);
+	console.log('roomnum----', room);
+	const messages = useSelector(state => state[slice]);
+
+	// console.log('messages id ----------------', messages[id]);
+
 	const messageItem = messages[id]?.map(msg => {
 		let date = new Date(msg?.created_at).toDateString() + ' ' + new Date(msg?.created_at).toLocaleTimeString();
 		return (
@@ -117,9 +118,17 @@ const Content = ({ room, setRoom }) => {
 							modules={modules}
 							formats={formats}
 							inputClass="main__chat-textarea"
+							actionText="Send"
+							// onChange={handleChange}
 						>
-							<div className="my-editing-area" />
+							<div className="my-editing-area"></div>
 						</ReactQuill>
+						<button
+							className="main__chat-send"
+							// onClick={}
+						>
+							<i class="fas fa-paper-plane"></i>
+						</button>
 					</section>
 				</div>
 			</div>

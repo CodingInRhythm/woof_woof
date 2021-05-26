@@ -70,7 +70,9 @@ const Channels = ({ setRoom }) => {
 						<span>2021-01-group02-juice-and-the-thunks</span>
 					</button>
 				</li>
-				{arr?.map(channel=> <Nav channel={channel} setRoom={setRoom}/>)}
+				{arr?.map((channel, id) => (
+					<Nav channel={channel} setRoom={setRoom} key={id} />
+				))}
 				{/* {channelComponents} */}
 				<li className="channels__item">
 					<button className="channels__add">
