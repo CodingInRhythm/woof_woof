@@ -72,7 +72,7 @@ const Channels = ({ setRoom }) => {
 					</button>
 				</li>
 				<li className="channels__item">
-					<button className="channels__button">
+					<button className="channels__button channels__button--active">
 						<span>2021-01-group02-juice-and-the-thunks</span>
 					</button>
 				</li>

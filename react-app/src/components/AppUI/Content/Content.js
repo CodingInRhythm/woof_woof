@@ -70,8 +70,6 @@ const Content = ({ room, setRoom, socket }) => {
 		slice = 'directMessages';
 	}
 
-	const messages = useSelector((state) => state[slice])
-
   let textField;
 
   //Handle Send Message
@@ -113,52 +111,74 @@ const Content = ({ room, setRoom, socket }) => {
 
 	// console.log('messages id ----------------', messages[id]);
 
+	// const messageItem = messages[id]?.map(msg => {
+	// 	let date = new Date(msg?.created_at).toDateString() + ' ' + new Date(msg?.created_at).toLocaleTimeString();
+	// 	return (
+	// 		<div class="main__chat-item">
+	// 			<div class="chat__image-container">
+	// 				<img src={msg.user?.profile_photo ? msg.user.profile_photo : ava} alt="profile-photo" class="chat__avatar"></img>
+	// 			</div>
+	// 			<div className="chat__other-info">
+	// 				<span className="chat__username">{msg.user.firstname + ' ' + msg.user.lastname}</span>
+	// 				<span className="chat__date">{date}</span>
+	// 				<p className="chat__text">{msg.message}</p>
+	// 			</div>
+	// 			<div class="chat__extra-options">
+	// 				<div class="chat__edit">
+	// 					<button>Edit</button>
+	// 				</div>
+	// 				<div class="chat__delete">
+	// 					<button>Delete</button>
+	// 				</div>
+	// 			</div>
+	// 		</div>
+	// 	);
+	// });
+	// }
+
 	return (
 		<div className="main">
-			<header className="main__header">
-				<div className="main__channel-info">
-					<h1 className="main__h3">#2021-01-group02-juice-and-the-thunks</h1>
+		<header className="main__header">
+			<div className="main__channel-info">
+				<h1 className="main__h3">#2021-01-group02-juice-and-the-thunks</h1>
+			</div>
+			<div className="main__channel-members">
+				<div>
+					<i className="fas fa-user-friends"></i> <span className="main_channel-members-h3">View Members</span>
 				</div>
-				<div className="main__channel-members">
-					<div>
-						<i className="fas fa-user-friends"></i> <span className="main_channel-members-h3">View Members</span>
-					</div>
-					<div>
-						<i className="fas fa-user-plus"></i> <span className="main_channel-members-h3">Add Members</span>
-					</div>
-				</div>
-			</header>
-			<div class="main__content">
-				<div class="main__container">
-					<section class="main__chat">
-						{messages[id] && Object.entries(messages[id]).map(([id, msg])=> (
-							<Message key={msg.id} msg={msg} modules={modules} formats={formats}/>
-						))}
-					</section>
-					<section class="main__chat-textarea">
-            <form onSubmit={sendMessage}>
-              <ReactQuill
-                placeholder={`Message #${messages[id]?.channel?.name}`}
-                modules={modules}
-                formats={formats}
-                inputClass="main__chat-textarea"
-                id="input_field"
-                ref={textInput}
-                // onChange={handleChange}
-              >
-                <div className="my-editing-area"></div>
-              </ReactQuill>
-              <button
-                className="main__chat-send"
-                type="submit"
-              >
-                <i class="fas fa-paper-plane"></i>
-              </button>
-            </form>
-					</section>
+				<div>
+					<i className="fas fa-user-plus"></i> <span className="main_channel-members-h3">Add Members</span>
 				</div>
 			</div>
+		</header>
+		<div class="main__content">
+			<div class="main__container">
+				<section class="main__chat">
+					{messages[id]?.map(msg => (
+						<Message key={msg.id} msg={msg} modules={modules} formats={formats}/>
+					))}
+				</section>
+				<section class="main__chat-textarea">
+		<form onSubmit={sendMessage}>
+			<ReactQuill
+			placeholder={`Message #${messages[id]?.channel?.name}`}
+			modules={modules}
+			formats={formats}
+			inputClass="main__chat-textarea"
+			id="input_field"
+			ref={textInput}
+			// onChange={handleChange}
+			>
+			<div className="my-editing-area"></div>
+			</ReactQuill>
+			<button className="main__chat-send" type="submit">
+			<i class="fas fa-paper-plane"></i>
+			</button>
+		</form>
+				</section>
+			</div>
 		</div>
+	</div>
 	);
 };
 
