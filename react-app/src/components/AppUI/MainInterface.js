@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getChannels } from '../../store/channels';
 import { getDMUsers } from '../../store/dm_people';
 import { addChannelMessage } from "../../store/channel_messages"
-import { addMessage as addDirectMessage } from "../../store/direct_messages"
+import { addDirectMessage } from "../../store/direct_messages"
 let socket;
 
 const MainInterface = () => {

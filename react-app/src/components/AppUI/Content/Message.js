@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ReactQuill from 'react-quill'; // ES6
 
 import {editChannelMessage, deleteChannelMessage} from '../../../store/channel_messages'
+import {editDirectMessage, deleteDirectMessage} from '../../../store/direct_messages'
 import ava from '../../../images/ava.png';
 
 /*************************** HELPER COMPONENT ***************************/
@@ -20,7 +21,7 @@ const EditDelete = ({editOn, setEditOn, deleteOn, setDeleteOn, msg, date, module
             let editor = textInput.current.getEditor()
             let text= editor.getText()
             if (msg.recipient_id){
-
+                dispatch(editDirectMessage(msg.id, text))
             } else if (msg.channel_id && text!==currentMessage){
                 dispatch(editChannelMessage(msg.id, text))
             }
@@ -30,7 +31,7 @@ const EditDelete = ({editOn, setEditOn, deleteOn, setDeleteOn, msg, date, module
 
     const handleDelete = ()=>{
         if (msg.recipient_id){
-
+            dispatch(deleteDirectMessage(msg.id))
         } else{
             dispatch(deleteChannelMessage(msg.id))
         }

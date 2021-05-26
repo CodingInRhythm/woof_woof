@@ -70,6 +70,8 @@ const Content = ({ room, setRoom, socket }) => {
 		slice = 'directMessages';
 	}
 
+	let messages = useSelector(state => state[slice])
+
   let textField;
 
   //Handle Send Message
@@ -154,8 +156,8 @@ const Content = ({ room, setRoom, socket }) => {
 		<div class="main__content">
 			<div class="main__container">
 				<section class="main__chat">
-					{messages[id]?.map(msg => (
-						<Message key={msg.id} msg={msg} modules={modules} formats={formats}/>
+					{messages[id] && Object.entries(messages[id])?.map(([id,msg]) => (
+						<Message key={id} msg={msg} modules={modules} formats={formats}/>
 					))}
 				</section>
 				<section class="main__chat-textarea">

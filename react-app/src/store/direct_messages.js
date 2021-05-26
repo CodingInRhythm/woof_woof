@@ -5,7 +5,7 @@ const SET_DIRECT_MESSAGES = "set/DIRECT_MESSAGES";
 
 const ADD_DIRECT_MESSAGE = "add/DIRECT_MESSAGE";
 
-const DELETE_DIRECT_MESSAGE = "delete/direct_message";
+const DELETE_DIRECT_MESSAGE = "delete/DIRECT_MESSAGE";
 
 /*************************** ACTIONS ***************************/
 
@@ -55,7 +55,7 @@ export const getDirectMessages = (recipient_id) => async (dispatch) => {
 //room but with socket connection have message added to their store.
 
 export const editDirectMessage = (recipient_id, message) => async (dispatch) => {
-  const response = await fetch(`/api/messages/channel/${recipient_id}`,{
+  const response = await fetch(`/api/messages/dm/${recipient_id}`,{
       method: 'PUT',
       headers : {
           'Content-Type' : 'application/json'
@@ -69,12 +69,14 @@ export const editDirectMessage = (recipient_id, message) => async (dispatch) => 
       return;
   }
 
-  dispatch(removeDirectMessage(data.direct_message.channel_id, data.direct_message.id))
-  dispatch(addDirectMessage(data.direct_message.channel_id, data.direct_message))
+  console.log(data)
+
+  dispatch(removeDirectMessage(data.direct_message.recipient_id, data.direct_message.id))
+  dispatch(addDirectMessage(data.direct_message.recipient_id, data.direct_message))
 }
 
 export const deleteDirectMessage = (recipient_id) => async (dispatch) => {
-  const response = await fetch(`/api/messages/channel/${recipient_id}`,{
+  const response = await fetch(`/api/messages/dm/${recipient_id}`,{
       method: 'DELETE'
   });
 
@@ -84,7 +86,7 @@ export const deleteDirectMessage = (recipient_id) => async (dispatch) => {
       return;
   }
 
-  dispatch(removeDirectMessage(data.direct_message.channel_id, recipient_id))
+  dispatch(removeDirectMessage(data.direct_message.recipient_id, recipient_id))
 }
 
 /*************************** REDUCER ***************************/
@@ -103,6 +105,10 @@ export default function directMessageReducer(state = initialState, action) {
       newState[action.recipient_id]={...newState[action.recipient_id]}
       newState[action.recipient_id][action.message.id]=action.message
       return newState;
+    case DELETE_DIRECT_MESSAGE:
+      newState = {...state}
+      delete newState[action.recipient_id][action.direct_message_id]
+      return newState
     default:
       return state;
   }
