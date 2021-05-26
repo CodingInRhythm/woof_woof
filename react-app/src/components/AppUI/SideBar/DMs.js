@@ -87,7 +87,7 @@ const DMs = () => {
 				{/* {userComponents} */}
 
 				<li class="dm__item">
-					<button onClick={newMessage} class="dm__add">
+					<button class="dm__add">
 						<span class="dm__add--plussign">+</span>
 						<span class="dm__add">Add teammates</span>
 					</button>

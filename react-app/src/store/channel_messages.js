@@ -5,7 +5,7 @@ const SET_CHANNEL_MESSAGES = 'set/CHANNEL_MESSAGES';
 
 const ADD_CHANNEL_MESSAGE = 'add/CHANNEL_MESSAGES'
 
-const EDIT_CHANNEL_MESSAGE = "edit/CHANNEL_MESSAGE";
+// const EDIT_CHANNEL_MESSAGE = "edit/CHANNEL_MESSAGE";
 
 const DELETE_CHANNEL_MESSAGE = "delete/CHANNEL_MESSAGE";
 
@@ -23,11 +23,11 @@ export const addChannelMessage = (channel_id, message)=> ({
     message
 });
 
-const changeChannelMessage = (channel_id, message)=> ({
-    type: EDIT_CHANNEL_MESSAGE,
-    channel_id,
-    message
-});
+// const changeChannelMessage = (channel_id, message)=> ({
+//     type: EDIT_CHANNEL_MESSAGE,
+//     channel_id,
+//     message
+// });
 
 const removeChannelMessage = (channel_id, channel_message_id)=> ({
     type: DELETE_CHANNEL_MESSAGE,
@@ -44,7 +44,13 @@ export const getChannelMessages = channel_id => async dispatch => {
 		return;
 	}
 
-	dispatch(setChannelMessages(channel_id, data['channel_messages']))
+    const obj = {}
+
+    data.channel_messages.forEach(message=>{
+        obj[message.id]=message
+    })
+
+	dispatch(setChannelMessages(channel_id, obj))
 };
 
 //Write thunk to add message to store so that other users not currently in
@@ -65,7 +71,8 @@ export const editChannelMessage = (channel_message_id, message) => async (dispat
         return;
     }
 
-    dispatch(changeChannelMessage(data.channel_message.channel_id, data.channel_message))
+    dispatch(removeChannelMessage(data.channel_message.channel_id, data.channel_message.id))
+    dispatch(addChannelMessage(data.channel_message.channel_id, data.channel_message))
 }
 
 export const deleteChannelMessage = (channel_message_id) => async (dispatch) => {
@@ -96,25 +103,18 @@ export default function channelMessageReducer(state=initialState, action) {
             return newState
         case ADD_CHANNEL_MESSAGE:
             newState = {...state}
-            newState[action.channel_id]=[...newState[action.channel_id], action.message]
+            newState[action.channel_id]={...newState[action.channel_id]}
+            newState[action.channel_id][action.message.id]=action.message
             return newState
-        case EDIT_CHANNEL_MESSAGE:
-            newState = {...state}
-            newState[action.channel_id]=newState[action.channel_id].map((message)=>{
-                if(message.id===action.message.id){
-                    return action.message
-                } else {
-                    return {...message}
-                }
-            })
-            return newState
+        // case EDIT_CHANNEL_MESSAGE:
+        //     newState = {...state}
+        //     newState[action.channel_id]={...newState[action.channel_id]}
+        //     console.log(newState[action.channel_id][action.message.id] === action.message)
+        //     newState[action.channel_id][action.message.id]=action.message
+        //     return newState
         case DELETE_CHANNEL_MESSAGE:
             newState = {...state}
-            newState[action.channel_id]=newState[action.channel_id].filter((message)=>{
-                if(message.id!==action.channel_message_id){
-                    return message
-                }
-            })
+            delete newState[action.channel_id][action.channel_message_id]
             return newState
         default:
             return state;

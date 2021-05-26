@@ -65,7 +65,7 @@ const Content = ({ room, setRoom }) => {
 		slice = 'directMessages';
 	}
 
-	const messages = useSelector((state) => state[slice])
+	const messages = useSelector((state) => state['channelMessages'])
 
 	useEffect(() => {
 		if (!channel_messages[id]) {
@@ -76,35 +76,7 @@ const Content = ({ room, setRoom }) => {
 		}
 	}, [room, dispatch, id]);
 
-	console.log('slice----', slice);
-	console.log('roomnum----', room);
-	const messages = useSelector(state => state[slice]);
-
-	// console.log('messages id ----------------', messages[id]);
-
-	const messageItem = messages[id]?.map(msg => {
-		let date = new Date(msg?.created_at).toDateString() + ' ' + new Date(msg?.created_at).toLocaleTimeString();
-		return (
-			<div class="main__chat-item">
-				<div class="chat__image-container">
-					<img src={msg.user?.profile_photo ? msg.user.profile_photo : ava} alt="profile-photo" class="chat__avatar"></img>
-				</div>
-				<div class="chat__other-info">
-					<span class="chat__username">{msg.user.firstname + ' ' + msg.user.lastname}</span>
-					<span class="chat__date">{date}</span>
-					<p class="chat__text">{msg.message}</p>
-				</div>
-				<div class="chat__extra-options">
-					<div class="chat__edit">
-						<button>Edit</button>
-					</div>
-					<div class="chat__delete">
-						<button>Delete</button>
-					</div>
-				</div>
-			</div>
-		);
-	});
+	console.log(Object.entries(messages[id] ? messages[id] : {}))
 
 	return (
 		<div class="main">
@@ -124,7 +96,7 @@ const Content = ({ room, setRoom }) => {
 			<div class="main__content">
 				<div class="main__container">
 					<section class="main__chat">
-						{messages[id]?.map(msg => (
+						{messages[id] && Object.entries(messages[id]).map(([id, msg])=> (
 							<Message key={msg.id} msg={msg} modules={modules} formats={formats}/>
 						))}
 					</section>
