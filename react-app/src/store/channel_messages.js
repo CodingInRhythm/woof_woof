@@ -26,7 +26,6 @@ export const getChannelMessages = channel_id => async dispatch => {
 	if (data.errors) {
 		return;
 	}
-
 	dispatch(setMessages(channel_id, data['channel_messages']));
 };
 

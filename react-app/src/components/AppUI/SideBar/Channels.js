@@ -8,20 +8,23 @@ const Nav = ({channel, setRoom}) =>{
 	const [isClicked, setIsClicked] = useState(false)
 	const dispatch = useDispatch()
 
-	let handleClick = ()=>{
+	let handleClick = (e)=>{
 		if (!isClicked){
 			setIsClicked(true)
 			dispatch(getChannelMessages(channel.id))
 		}
+		let element = document.querySelector(".channels__button--active")
+		element.classList.remove("channels__button--active")
+		e.target.classList.add("channels__button--active")
 		setRoom(`Channel: ${channel.id}`)
 	}
 
 	return (
-		<li className="channels__button">
-			<NavLink onClick={handleClick} to={`/channels/${channel.id}`}>
-				<span>{channel.name}</span>
-			</NavLink>
-		</li>
+		<NavLink onClick={handleClick} to={`/channels/${channel.id}`}>
+			<li className="channels__button">
+					{channel.name}
+			</li>
+		</NavLink>
 	)
 }
 

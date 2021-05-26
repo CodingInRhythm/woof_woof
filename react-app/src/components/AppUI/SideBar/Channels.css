@@ -42,7 +42,7 @@
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
 }
-.channels__button span {
+.channels__button {
 	opacity: 0.7;
 }
 .channels__button:before {
@@ -62,4 +62,8 @@
 .channels__button:before {
 	content: '#';
 	opacity: 0.5;
+}
+
+li a .select-me{
+	background-color: red;
 }

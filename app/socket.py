@@ -23,15 +23,11 @@ def on_join(data):
     print("room name", room)
     join_room(room)
 
-    #what does 'connected' do?
-    emit('Connected', room=room)
-
 
 @socketio.on('leave')
 def on_leave(data):
     room=data['room']
     print("I have left ", room)
-    emit('Disconnected', room=room)
 
 @socketio.on("chat")
 def handle_chat(data):
@@ -43,4 +39,5 @@ def handle_chat(data):
     message = ChannelMessage(user_id = data['id'], channel_id = data['room'], message=data['message'])
     db.session.add(message)
     db.session.commit()
-    emit("chat", message.to_dict(), room=data['room'])
+    print(message.to_dict_basic())
+    emit("chat", message.to_dict(), room="Channel: " + data['room'])

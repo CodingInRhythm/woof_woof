@@ -31,7 +31,7 @@ export const getDirectMessages = (recipient_id) => async (dispatch) => {
   if (data.errors) {
     return;
   }
-
+  console.log(data)
   dispatch(setMessages(recipient_id, data["direct_messages"]));
 };
 
