@@ -110,39 +110,11 @@ const Content = ({ room, setRoom, socket }) => {
 		}
 	}, [room, dispatch, id]);
 
-	console.log('slice----', slice);
-	console.log('roomnum----', room);
-	const messages = useSelector(state => state[slice]);
 
 	// console.log('messages id ----------------', messages[id]);
 
-	const messageItem = messages[id]?.map(msg => {
-		let date = new Date(msg?.created_at).toDateString() + ' ' + new Date(msg?.created_at).toLocaleTimeString();
-		return (
-			<div class="main__chat-item">
-				<div class="chat__image-container">
-					<img src={msg.user?.profile_photo ? msg.user.profile_photo : ava} alt="profile-photo" class="chat__avatar"></img>
-				</div>
-				<div className="chat__other-info">
-					<span className="chat__username">{msg.user.firstname + ' ' + msg.user.lastname}</span>
-					<span className="chat__date">{date}</span>
-					<p className="chat__text">{msg.message}</p>
-				</div>
-				<div class="chat__extra-options">
-					<div class="chat__edit">
-						<button>Edit</button>
-					</div>
-					<div class="chat__delete">
-						<button>Delete</button>
-					</div>
-				</div>
-			</div>
-		);
-	});
-	}
-
-		return (
-			<div className="main">
+	return (
+		<div className="main">
 			<header className="main__header">
 				<div className="main__channel-info">
 					<h1 className="main__h3">#2021-01-group02-juice-and-the-thunks</h1>
@@ -170,7 +142,7 @@ const Content = ({ room, setRoom, socket }) => {
                 modules={modules}
                 formats={formats}
                 inputClass="main__chat-textarea"
-                id="input_field
+                id="input_field"
                 ref={textInput}
                 // onChange={handleChange}
               >

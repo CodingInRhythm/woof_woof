@@ -7,8 +7,8 @@ import './MainInterface.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getChannels } from '../../store/channels';
 import { getDMUsers } from '../../store/dm_people';
-import { addMessage as addChannelMessage } from "../../store/channel_messages"
-import { addMessage as addDirectMessage } from "../../store/direct_messages"
+import { addChannelMessage } from "../../store/channel_messages"
+import { addDirectMessage } from "../../store/direct_messages"
 let socket;
 
 const MainInterface = () => {
@@ -17,24 +17,24 @@ const MainInterface = () => {
 	const channels = useSelector(state => state.channels)
 	const userId = useSelector(state => state.session.user.id)
 	// const directMessages = useSelector(state => state.directMessages)
-	
+
 	const hashingRoom = (val1, recipientId) => {
 		if (!recipientId) {
 			return `Channel: ${val1}`
-		} 
+		}
 		else {
 			return `DM${val1 < recipientId ? val1 : recipientId}${val1 > recipientId ? val1 : recipientId}`;
 		}
 	}
-	
+
 	useEffect(() => {
 		dispatch(getChannels());
 	}, [dispatch]);
-	
+
 	useEffect(() => {
 		dispatch(getDMUsers());
 	}, [dispatch]);
-	
+
 	useEffect(() => {
 		socket = io();
 		for (let channel in channels) {
@@ -59,7 +59,7 @@ const MainInterface = () => {
 			console.log("I'm a new dm-------", dm)
 			dispatch(addDirectMessage(dm.recipient_id, dm))
 		})
-			
+
 		return (()=>{
 			for (let channel in channels) {
 				socket.emit('leave', {room:hashingRoom(channel)})
