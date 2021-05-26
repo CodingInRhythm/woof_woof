@@ -101,3 +101,23 @@
 	bottom: 10px;
 	width: 70%;
 }
+
+.main__chat-send {
+	background-color: #4a154b;
+	color: #fff;
+	width: 35px;
+	height: 35px;
+	bottom: 10px;
+	right: 10px;
+	border-radius: 50%;
+	transition: all 1s;
+	position: absolute;
+}
+
+.main__chat-send i {
+	margin-left: 25%;
+}
+
+.main__chat-send:hover {
+	background-color: #681e69;
+}

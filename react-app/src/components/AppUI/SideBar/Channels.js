@@ -1,18 +1,18 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 // import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './Channels.css';
 import { NavLink } from 'react-router-dom';
 
-const Nav = ({channel, setRoom}) =>{
-	const [isClicked, setIsClicked] = useState(false)
+const Nav = ({ channel, setRoom }) => {
+	const [isClicked, setIsClicked] = useState(false);
 
-	let handleClick = ()=>{
-		if (!isClicked){
-			setIsClicked(true)
+	let handleClick = () => {
+		if (!isClicked) {
+			setIsClicked(true);
 		}
-		setRoom(`Channel: ${channel.id}`)
-	}
+		setRoom(`Channel: ${channel.id}`);
+	};
 
 	return (
 		<li key={channel.id} className="channels__button">
@@ -20,9 +20,8 @@ const Nav = ({channel, setRoom}) =>{
 				<span>{channel.name}</span>
 			</NavLink>
 		</li>
-	)
-}
-
+	);
+};
 
 const Channels = ({ setRoom }) => {
 	const channels = useSelector(state => state.channels);
@@ -37,7 +36,11 @@ const Channels = ({ setRoom }) => {
 	// const channelComponents = arr.map(channel => {
 	// 	return (
 	// 		<li key={channel.id} className="channels__button">
-	// 			<NavLink onClick={setRoom(`Channel: ${channel.id}`)} to={`/channels/${channel.id}`}>
+	// 			<NavLink
+	// 				activeClassName="active"
+	// 				onClick={setRoom(`Channel: ${channel.id}`)}
+	// 				to={`/channels/${channel.id}`}
+	// 			>
 	// 				<span>{channel.name}</span>
 	// 			</NavLink>
 	// 		</li>
@@ -63,11 +66,13 @@ const Channels = ({ setRoom }) => {
 					</button>
 				</li>
 				<li className="channels__item">
-					<button className="channels__button channels__button--active">
+					<button className="channels__button">
 						<span>2021-01-group02-juice-and-the-thunks</span>
 					</button>
 				</li>
-				{arr?.map(channel=> <Nav channel={channel} setRoom={setRoom}/>)}
+				{arr?.map((channel, id) => (
+					<Nav channel={channel} setRoom={setRoom} key={id} />
+				))}
 				{/* {channelComponents} */}
 				<li className="channels__item">
 					<button className="channels__add">
