@@ -4,7 +4,10 @@ import Navigation from './NavBar/Navigation';
 import SideBar from './SideBar/SideBar';
 import Content from './Content/Content';
 import './MainInterface.css';
+
+import { Route, useParams, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+
 import { getChannels } from '../../store/channels';
 import { getDMUsers } from '../../store/dm_people';
 import { addChannelMessage } from "../../store/channel_messages"
@@ -13,6 +16,13 @@ let socket;
 
 const MainInterface = () => {
 	const dispatch = useDispatch();
+
+  
+  const location = useLocation()
+		
+	const [room, setRoom] = useState('');
+	const [isAddDM, setIsAddDM] = useState(false)
+  
 	const dmUsers = useSelector(state => state.dm_users)
 	const channels = useSelector(state => state.channels)
 	const userId = useSelector(state => state.session.user.id)
@@ -27,6 +37,7 @@ const MainInterface = () => {
 		}
 	}
 
+
 	useEffect(() => {
 		dispatch(getChannels());
 	}, [dispatch]);
@@ -36,6 +47,8 @@ const MainInterface = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
+
+
 		socket = io();
 		for (let channel in channels) {
 			socket.on('connect', () => {
@@ -79,14 +92,30 @@ const MainInterface = () => {
 		  })
 	},[dmUsers, channels])
 
-	const [room, setRoom] = useState('');
 
+	useEffect(() => {
+		if (location.pathname.includes("dms")) {
+			console.log("here")
+			setIsAddDM(true);
+		}
+		else {
+			setIsAddDM(false)
+		}
+	}, [location.pathname]);
+	console.log(isAddDM)
+	/*Need to add: 
+	Search bar
+	components of rendered users
+	GET RID OF P TAG :)
+	*/
 	return (
 		<>
 			<Navigation />
 			<div className="main-container">
 				<SideBar setRoom={setRoom} />
-				<Content room={room} setRoom={setRoom} socket={socket}/>
+
+				<Content isAddDM={isAddDM} room={room} setRoom={setRoom} socket={socket}/>
+
 			</div>
 		</>
 	);

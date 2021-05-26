@@ -3,7 +3,9 @@ import React, { useState } from 'react';
 import './DMs.css';
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+
 import { getDirectMessages } from '../../../store/direct_messages';
+
 
 const DMPerson = ({ recipient }) => {
 	const dispatch = useDispatch();
@@ -29,11 +31,22 @@ const DMPerson = ({ recipient }) => {
 };
 
 const DMs = () => {
+
 	const conversations = useSelector(state => state.dm_users);
+	
 	let arr = []
 	for (let i in conversations){
 		arr.push(conversations[i])
 	}
+
+			//FUNCTIONS
+		
+	const newMessage = () => {
+		
+		history.push('/dms/all')
+	}
+	//Component is mapping thru conversations
+
 	return (
 		<div className="dm">
 			<h2 className="dm__heading">

@@ -1,16 +1,22 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { io } from "socket.io-client";
+
+import React, { useEffect, useState, useRef } from 'react';
+import {Link} from 'react-router-dom'
+
+
+
 import './Content.css';
 import ava from '../../../images/ava.png';
 import ReactQuill from 'react-quill'; // ES6
 import Message from './Message'
 import { useDispatch, useSelector } from 'react-redux';
+
 import { getChannelMessages, addMessage as addChannelMessage } from '../../../store/channel_messages';
 import { useParams, useLocation } from 'react-router-dom';
 import { getDirectMessages } from '../../../store/direct_messages';
 
 
-const Content = ({ room, setRoom, socket }) => {
+const Content = ({ isAddDM, room, setRoom, socket }) => {
+
 	let modules = {
 		toolbar: [
 			[{ header: [1, 2, false] }],
@@ -54,23 +60,37 @@ const Content = ({ room, setRoom, socket }) => {
 	const dispatch = useDispatch();
 	const channel_messages = useSelector(state => state.channelMessages);
 	const direct_messages = useSelector(state => state.directMessages);
+	const dms = useSelector((state) => state.dm_users)
 	const userId = useSelector((state) => state.session.user.id)
 
-  const textInput = useRef(null)
 
-  let slice;
+	const history = useHistory();
+	 	 
+
+	const [searchParam, setSearchParam] = useState('')
+	const [matchingUsers, setMatchingUsers] = useState([])
+	
+	const textInput = useRef(null)
+  
+	let slice;
 	let roomNum;
-	if (location.pathname.includes('channel')) {
-		roomNum = room.split(' ')[1];
-		slice = 'channelMessages';
-		setRoom(hashingRoom(id));
-	} else {
-		roomNum = id;
-		setRoom(hashingRoom(userId, id));
-		slice = 'directMessages';
-	}
 
-	let messages = useSelector(state => state[slice])
+	//Check if path is for channel, dm or dm/all which will list dms and have
+	//search functionality
+	if (location.pathname.includes("channel")) {
+		roomNum = room.split(" ")[1];
+		slice = "channelMessages";
+		setRoom(hashingRoom(id));
+	}
+	else if (location.pathname === "/dms/all") {
+		slice = "dm_users"
+	}
+	else if (location.pathname.includes("dm")) {
+		roomNum = id
+		setRoom(hashingRoom(userId, id))
+		slice = "directMessages"
+    
+    let messages = useSelector(state => state[slice])
 
   let textField;
 
@@ -92,7 +112,10 @@ const Content = ({ room, setRoom, socket }) => {
 			}
 			console.log(text)
 		}
+
 	}
+
+	//  USEEFFECTS
 
 	useEffect(() => {
 		if (location.pathname.includes("channel")) {
@@ -111,52 +134,119 @@ const Content = ({ room, setRoom, socket }) => {
 	}, [room, dispatch, id]);
 
 
-	// console.log('messages id ----------------', messages[id]);
+	useEffect(() => {
+		const fetchUsers = async () => {
+			const res = await fetch('/api/users/')
+			const data = await res.json()
+		
+			setMatchingUsers(data.users.filter((user) => {
+				return user.firstname?.toLowerCase().indexOf(searchParam) === 0
+			}))
+		
+		}
+		if (searchParam) fetchUsers()
+	}, [searchParam])
 
-	// const messageItem = messages[id]?.map(msg => {
-	// 	let date = new Date(msg?.created_at).toDateString() + ' ' + new Date(msg?.created_at).toLocaleTimeString();
-	// 	return (
-	// 		<div class="main__chat-item">
-	// 			<div class="chat__image-container">
-	// 				<img src={msg.user?.profile_photo ? msg.user.profile_photo : ava} alt="profile-photo" class="chat__avatar"></img>
-	// 			</div>
-	// 			<div className="chat__other-info">
-	// 				<span className="chat__username">{msg.user.firstname + ' ' + msg.user.lastname}</span>
-	// 				<span className="chat__date">{date}</span>
-	// 				<p className="chat__text">{msg.message}</p>
-	// 			</div>
-	// 			<div class="chat__extra-options">
-	// 				<div class="chat__edit">
-	// 					<button>Edit</button>
-	// 				</div>
-	// 				<div class="chat__delete">
-	// 					<button>Delete</button>
-	// 				</div>
-	// 			</div>
-	// 		</div>
-	// 	);
-	// });
-	// }
+
+
+	let messageItem;
+
+
+
+	if (addDM) {
+		messageItem = Object.keys(messages).map(msg => {
+			return (
+        <Link to={`/dm/${messages[msg].id}`}>
+          <div class="main__chat-item">
+            <div class="chat__image-container">
+              <img
+                src={messages[msg].profile_photo}
+                alt="profile-photo"
+                class="chat__avatar"
+              ></img>
+            </div>
+            <div class="chat__other-info">
+              {messages[msg].firstname + " " + messages[msg].lastname}
+            </div>
+          </div>
+        </Link>
+      );	
+		})
+	}
+	
+
+	//FUNCTIONS//
+
+	const handleSubmit = (e) => {
+		e.preventDefault()
+		
+		console.log(e.target.id)
+		/*need logic to check if user exits in dm store.
+		If it does, we need to link to that users DMs.  
+		*/
+	
+		
+		history.push(`/dm/${e.target.id}`)
+	
+ 
+	}
+	console.log(matchingUsers)
 
 	return (
-		<div className="main">
-		<header className="main__header">
-			<div className="main__channel-info">
-				<h1 className="main__h3">#2021-01-group02-juice-and-the-thunks</h1>
-			</div>
-			<div className="main__channel-members">
-				<div>
-					<i className="fas fa-user-friends"></i> <span className="main_channel-members-h3">View Members</span>
-				</div>
-				<div>
-					<i className="fas fa-user-plus"></i> <span className="main_channel-members-h3">Add Members</span>
-				</div>
-			</div>
-		</header>
-		<div class="main__content">
-			<div class="main__container">
-				<section class="main__chat">
-					{messages[id] && Object.entries(messages[id])?.map(([id,msg]) => (
+    <div class="main">
+      <header class="main__header">
+        <div class="main__channel-info">
+          {isAddDM ? (
+            <div>
+              <h1 class="main__h3">All Direct Messages</h1>
+            </div>
+          ) : (
+            <h1 class="main__h3">#2021-01-group02-juice-and-the-thunks</h1>
+          )}
+        </div>
+        <div class="main__channel-members">
+          <div>
+            <i class="fas fa-user-friends"></i>{" "}
+            <span class="main_channel-members-h3">View Members</span>
+          </div>
+          <div>
+            <i class="fas fa-user-plus"></i>{" "}
+            <span class="main_channel-members-h3">Add Members</span>
+          </div>
+        </div>
+      </header>
+      <div class="main__content">
+        <div>
+          {isAddDM ? (
+            <>
+              <form>
+                <input
+                  type="text"
+                  name="searchParam"
+                  value={searchParam}
+                  onChange={(e) => setSearchParam(e.target.value)}
+                  placeholder="@somebody"
+                />
+              </form>
+              {matchingUsers.length && (
+                <ul>
+                  {matchingUsers.map((user, index) => {
+                    return (
+                      <li>
+                        <form id={user.id} onSubmit={handleSubmit}>
+                          <button type="submit">{user.firstname}</button>
+                        </form>
+                      </li>
+                    );
+                  })}
+				</ul>
+              )}
+              <section class="main__chat">{messageItem}</section>
+            </>
+          ) : (
+            <>
+          <section class="main__chat">
+					  {messages[id] && Object.entries(messages[id])?.map(([id,msg]) => (
 						<Message key={id} msg={msg} modules={modules} formats={formats}/>
 					))}
 				</section>
@@ -178,10 +268,12 @@ const Content = ({ room, setRoom, socket }) => {
 			</button>
 		</form>
 				</section>
-			</div>
-		</div>
-	</div>
-	);
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Content;
