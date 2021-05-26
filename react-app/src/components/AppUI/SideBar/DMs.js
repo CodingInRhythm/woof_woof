@@ -4,6 +4,7 @@ import './DMs.css';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getDirectMessages } from '../../../store/direct_messages'
+import MainInterface from '../MainInterface';
 
 const DMPerson = ({recipient}) => {
 	const dispatch = useDispatch()
@@ -27,6 +28,7 @@ const DMPerson = ({recipient}) => {
 }
 
 const DMs = () => {
+	const history = useHistory()
 
 	// const user = useSelector(state => state.session.user);
 	// const userId = user.id;
@@ -54,7 +56,8 @@ const DMs = () => {
 			//FUNCTIONS
 		
 	const newMessage = () => {
-		console.log('working?')
+		console.log('here')
+		history.push('/dms/all')
 	}
 		
 	return (

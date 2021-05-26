@@ -57,6 +57,9 @@ function App() {
 				<Route path="/channels/:id" exact={true}>
 					<MainInterface />
 				</Route>
+				<Route path="/dms/" exact={true}>
+					<MainInterface />
+				</Route>
 				<Route path="/dm/:id" exact={true}>
 					<MainInterface />
 				</Route>
