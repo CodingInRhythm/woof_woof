@@ -58,6 +58,15 @@
 .main__chat-item {
 	display: flex;
 	margin-top: 10px;
+	position: relative;
+}
+
+.main__chat-item:hover {
+	background-color: whitesmoke;
+}
+
+.main__chat-item:hover .chat__extra-options{
+	display: flex;
 }
 
 .chat__avatar {
@@ -84,6 +93,27 @@
 .chat__text--link {
 	color: rgb(57, 113, 187);
 	font-size: 16px;
+}
+
+.chat__extra-options{
+	position: absolute;
+	top: -10px;
+	right: 0;
+	display: none;
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	background-color: white;
+}
+
+.chat__edit,
+.chat__delete{
+	font-size: 17px;
+	margin: 5px;
+}
+
+.chat__edit:hover,
+.chat__delete:hover{
+	color: grey;
 }
 
 .chat__username:hover,
