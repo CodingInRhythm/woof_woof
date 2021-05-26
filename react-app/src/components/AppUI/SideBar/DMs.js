@@ -57,7 +57,7 @@ const DMs = () => {
 			<ul className="dm__list">
 				{arr?.map((conversation, i) => <DMPerson recipient={conversation} key={i}/>)}
 				<li className="dm__item">
-					<button className="dm__add">
+					<button onClick={newMessage} className="dm__add">
 						<span className="dm__add--plussign">+</span>
 						<span className="dm__add">Add teammates</span>
 					</button>
