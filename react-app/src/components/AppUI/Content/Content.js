@@ -61,16 +61,17 @@ const Content = ({ room, setRoom }) => {
 		slice = "directMessages"
 	}
 
+	const messages = useSelector((state) => state[slice])
+
 	useEffect(() => {
 		if (!channel_messages[id]) {
 			dispatch(getChannelMessages(id));
 		}
-		if (!direct_messages[id]){
+		else if (!direct_messages[id]){
 			dispatch(getDirectMessages(id))
 		}
 	}, [room, dispatch, id]);
 
-	const messages = useSelector((state) => state[slice])
 
 	// console.log(messages[id]);
 	const messageItem = messages[id]?.map(msg => {
