@@ -31,6 +31,7 @@ const DMs = () => {
 	// const userId = user.id;
 
 	// const userComponents = users.map(user => {
+
 	// 	return (
 	// 		<li key={user.id} className="dm__item">
 	// 			<NavLink
@@ -49,6 +50,7 @@ const DMs = () => {
 	for (let i in conversations) {
 		arr.push(conversations[i]);
 	}
+
 
 	return (
 		<div class="dm">
@@ -85,7 +87,7 @@ const DMs = () => {
 				{/* {userComponents} */}
 
 				<li class="dm__item">
-					<button class="dm__add">
+					<button onClick={newMessage} class="dm__add">
 						<span class="dm__add--plussign">+</span>
 						<span class="dm__add">Add teammates</span>
 					</button>
