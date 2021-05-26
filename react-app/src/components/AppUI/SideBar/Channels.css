@@ -64,7 +64,11 @@
 	opacity: 0.5;
 }
 
-/* .active {
-	background: #038edf;
-	color: #ffffff;
+/* .channels__list li a {
+	padding: 10px 20px;
+}
+
+.channels__list li a:hover {
+	background-color: red;
+	color: #fff;
 } */

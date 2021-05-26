@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import React from 'react';
 import './DMs.css';
-import { NavLink, useHistory } from 'react-router-dom';
+import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { getDirectMessages } from '../../../store/direct_messages';
 
@@ -17,9 +17,18 @@ const DMPerson = ({ recipient }) => {
 		history.push(`/dm/${recipient.id}`);
 	};
 
+	let location = useLocation();
+	const getNavLinkClass = path => {
+		return location.pathname === path ? 'dm__button--active' : '';
+	};
+
 	return (
-		<li class="dm__item">
-			<button class="dm__button" id={`dm_${recipient.id}`} onClick={handleClick}>
+		<li key={recipient.id}>
+			<button
+				id={`dm_${recipient.id}`}
+				onClick={handleClick}
+				className={`dm__button` + ' ' + getNavLinkClass(`/dm/${recipient.id}`)}
+			>
 				<span>{`${recipient.firstname} ${recipient.lastname}`}</span>
 			</button>
 		</li>
@@ -50,7 +59,7 @@ const DMs = () => {
 	for (let i in conversations) {
 		arr.push(conversations[i]);
 	}
-
+	const newMessage = () => {};
 
 	return (
 		<div class="dm">
@@ -84,7 +93,6 @@ const DMs = () => {
 						<span>Nurs Asanov (Should I be able to text )</span>
 					</button>
 				</li> */}
-				{/* {userComponents} */}
 
 				<li class="dm__item">
 					<button onClick={newMessage} class="dm__add">

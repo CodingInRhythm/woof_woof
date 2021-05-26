@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 // import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './Channels.css';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const Nav = ({ channel, setRoom }) => {
 	const [isClicked, setIsClicked] = useState(false);
@@ -14,8 +14,17 @@ const Nav = ({ channel, setRoom }) => {
 		setRoom(`Channel: ${channel.id}`);
 	};
 
+	let location = useLocation();
+	const getNavLinkClass = path => {
+		return location.pathname === path ? 'channels__button--active' : '';
+	};
+
 	return (
-		<li key={channel.id} className="channels__button">
+		<li
+			key={channel.id}
+			// className="channels__button"
+			className={`channels__button` + ' ' + getNavLinkClass(`/channels/${channel.id}`)}
+		>
 			<NavLink onClick={handleClick} to={`/channels/${channel.id}`}>
 				<span>{channel.name}</span>
 			</NavLink>
@@ -47,6 +56,8 @@ const Channels = ({ setRoom }) => {
 	// 	);
 	// });
 
+	const addChannel = () => {};
+
 	return (
 		<div className="channels">
 			<h2 className="channels__heading">
@@ -55,27 +66,11 @@ const Channels = ({ setRoom }) => {
 				</span>
 			</h2>
 			<ul className="channels__list">
-				<li className="channels__item">
-					<button className="channels__button">
-						<span>general</span>
-					</button>
-				</li>
-				<li className="channels__item">
-					<button className="channels__button">
-						<span>2021-01-11-online</span>
-					</button>
-				</li>
-				<li className="channels__item">
-					<button className="channels__button">
-						<span>2021-01-group02-juice-and-the-thunks</span>
-					</button>
-				</li>
 				{arr?.map((channel, id) => (
 					<Nav channel={channel} setRoom={setRoom} key={id} />
 				))}
-				{/* {channelComponents} */}
 				<li className="channels__item">
-					<button className="channels__add">
+					<button className="channels__add" onclick={addChannel}>
 						<span className="dm__add--plussign">+</span>
 						<span className="dm__add">Add channels</span>
 					</button>
