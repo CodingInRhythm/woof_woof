@@ -5,7 +5,7 @@ import ava from '../../../images/ava.png';
 import ReactQuill from 'react-quill'; // ES6
 import { useDispatch, useSelector } from 'react-redux';
 import { getChannelMessages } from '../../../store/channel_messages';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { getDirectMessages } from '../../../store/direct_messages';
 
 const Content = ({ isAddDM, room, setRoom }) => {
@@ -50,8 +50,16 @@ const Content = ({ isAddDM, room, setRoom }) => {
 	const dispatch = useDispatch();
 	const channel_messages = useSelector(state => state.channelMessages);
 	const direct_messages = useSelector(state => state.directMessages);
+	const dms = useSelector((state) => state.dm_users)
 	const userId = useSelector((state) => state.session.user.id)
-	  
+
+	const history = useHistory();
+	 	 
+
+	const [searchParam, setSearchParam] = useState('')
+	const [matchingUsers, setMatchingUsers] = useState([])
+	
+	
 	let slice;
 	let roomNum;
 
@@ -71,6 +79,8 @@ const Content = ({ isAddDM, room, setRoom }) => {
 		slice = "directMessages"
 	}
 
+	//  USEEFFECTS
+
 	useEffect(() => {
 		if (!channel_messages[id]) {
 			dispatch(getChannelMessages(id));
@@ -79,6 +89,19 @@ const Content = ({ isAddDM, room, setRoom }) => {
 			dispatch(getDirectMessages(id))
 		}
 	}, [room, dispatch, id]);
+
+	useEffect(() => {
+		const fetchUsers = async () => {
+			const res = await fetch('/api/users/')
+			const data = await res.json()
+			console.log(searchParam)
+			setMatchingUsers(data.users.filter((user) => {
+				return user.firstname?.toLowerCase().indexOf(searchParam) === 0
+			}))
+			console.log(matchingUsers)
+		}
+		if (searchParam) fetchUsers()
+	}, [searchParam])
 
 	const messages = useSelector((state) => state[slice])
 
@@ -124,17 +147,46 @@ const Content = ({ isAddDM, room, setRoom }) => {
 		})
 	}
 	
-	console.log(messageItem)
+
+	//FUNCTIONS//
+
+	const handleSubmit = (e) => {
+		e.preventDefault()
+		
+		console.log(e.target.id)
+		/*need logic to check if user exits in dm store.
+		If it does, we need to link to that users DMs.  
+		*/
+		console.log(dms)
+		// if (e.target.id in dms){
+		history.push(`/dm/${e.target.id}`)
+		// }
+		// else {
+		// 	const addDm = async(recipientId) => {
+		// 		const res = await fetch(`/api/dms/${recipientId}`, {
+		// 			method: 'post',
+		// 			headers: {
+		// 				'Content-Header': 'application/json'
+		// 			},
+		// 			body: JSON.stringify({recipientId})
+		// 		})
+		// 	}
+		// 	addDm(e.target.id)
+		// } 
+	}
+	console.log(matchingUsers)
 
 	return (
     <div class="main">
       <header class="main__header">
         <div class="main__channel-info">
-          {isAddDM? (
-            <h1 class="main__h3">All Direct Messages</h1>
+          {isAddDM ? (
+            <div>
+              <h1 class="main__h3">All Direct Messages</h1>
+            </div>
           ) : (
-          <h1 class="main__h3">#2021-01-group02-juice-and-the-thunks</h1>
-		  )}
+            <h1 class="main__h3">#2021-01-group02-juice-and-the-thunks</h1>
+          )}
         </div>
         <div class="main__channel-members">
           <div>
@@ -148,18 +200,48 @@ const Content = ({ isAddDM, room, setRoom }) => {
         </div>
       </header>
       <div class="main__content">
-        <div class="main__container">
-          <section class="main__chat">{messageItem}</section>
-          <section class="main__chat-textarea">
-            <ReactQuill
-              placeholder={`Message #${messages[id]?.channel?.name}`}
-              modules={modules}
-              formats={formats}
-              inputClass="main__chat-textarea"
-            >
-              <div className="my-editing-area" />
-            </ReactQuill>
-          </section>
+        <div>
+          {isAddDM ? (
+            <>
+              <form>
+                <input
+                  type="text"
+                  name="searchParam"
+                  value={searchParam}
+                  onChange={(e) => setSearchParam(e.target.value)}
+                  placeholder="@somebody"
+                />
+              </form>
+              {matchingUsers.length && (
+                <ul>
+                  {matchingUsers.map((user, index) => {
+                    return (
+                      <li>
+                        <form id={user.id} onSubmit={handleSubmit}>
+                          <button type="submit">{user.firstname}</button>
+                        </form>
+                      </li>
+                    );
+                  })}
+				</ul>
+              )}
+              <section class="main__chat">{messageItem}</section>
+            </>
+          ) : (
+            <>
+              <section class="main__chat">{messageItem}</section>
+              <section class="main__chat-textarea">
+                <ReactQuill
+                  placeholder={`Message #${messages[id]?.channel?.name}`}
+                  modules={modules}
+                  formats={formats}
+                  inputClass="main__chat-textarea"
+                >
+                  <div className="my-editing-area" />
+                </ReactQuill>
+              </section>
+            </>
+          )}
         </div>
       </div>
     </div>
