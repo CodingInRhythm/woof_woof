@@ -24,14 +24,19 @@ const MainInterface = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		console.log("hi im loading")
+		
 	}, [])
 
 	useEffect(() => {
 		if (location.pathname.includes("dms")) {
-		setIsAddDM(true);
+			console.log("here")
+			setIsAddDM(true);
 		}
-	}, []);
+		else {
+			setIsAddDM(false)
+		}
+	}, [location.pathname]);
+	console.log(isAddDM)
 	/*Need to add: 
 	Search bar
 	components of rendered users
@@ -40,12 +45,9 @@ const MainInterface = () => {
 	return (
 		<>
 			<Navigation />
-			{isAddDM && (
-				<p>Hello</p>
-			)}
 			<div className="main-container">
 				<SideBar setRoom={setRoom} />
-				<Content room={room} setRoom={setRoom} />
+				<Content isAddDM={isAddDM} room={room} setRoom={setRoom} />
 			</div>
 		</>
 	);

@@ -47,8 +47,11 @@ const DMs = () => {
 			// });
 
 			
-			//UseSelector grabs our conversations
+	/*UseSelector grabs users' conversations.  State.dm_users has collection of all
+	conversations  already.  
+	*/
 	const conversations = useSelector(state => state.dm_users);
+	
 	let arr = []
 	for (let i in conversations){
 		arr.push(conversations[i])
@@ -56,10 +59,10 @@ const DMs = () => {
 			//FUNCTIONS
 		
 	const newMessage = () => {
-		console.log('here')
+		
 		history.push('/dms/all')
 	}
-		
+	//Component is mapping thru conversations
 	return (
 		<div class="dm">
 			<h2 class="dm__heading">
