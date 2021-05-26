@@ -65,7 +65,7 @@ const SignUpForm = () => {
 			<div className="login-container">
 				<div></div>
 				<div className="loginWrap">
-					<img src={logo} class="slack_logo" onClick={logoClick} alt="logo"></img>
+					<img src={logo} className="slack_logo" onClick={logoClick} alt="logo"></img>
 					<h1 className="login-form-header">Join Slack</h1>
 
 					<form onSubmit={onSignUp}>
@@ -167,7 +167,7 @@ const SignUpForm = () => {
 						</button>
 					</form>
 				</div>
-				<div class="signup-link">
+				<div className="signup-link">
 					<p className="switchLinkName">Already using Slack?</p>
 					<NavLink to="/login" className="switchLink">
 						Sign in here
