@@ -1,20 +1,27 @@
-import React, { useState, useEffect } from 'react';
-// import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, {useState, useEffect} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import './Channels.css';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addNewChannel } from '../../../store/channels';
+import { getChannelMessages } from '../../../store/channel_messages';
 
-const Nav = ({ channel, setRoom }) => {
-	const [isClicked, setIsClicked] = useState(false);
 
-	let handleClick = () => {
-		if (!isClicked) {
-			setIsClicked(true);
+const Nav = ({channel, setRoom}) =>{
+	const [isClicked, setIsClicked] = useState(false)
+	const dispatch = useDispatch()
+
+	let handleClick = (e)=>{
+		if (!isClicked){
+			setIsClicked(true)
+			dispatch(getChannelMessages(channel.id))
 		}
-		setRoom(`Channel: ${channel.id}`);
-	};
+		let element = document.querySelector(".channels__button--active")
+		element.classList.remove("channels__button--active")
+		e.target.classList.add("channels__button--active")
+		setRoom(`Channel: ${channel.id}`)
+	}
 
 	let location = useLocation();
 	const getNavLinkClass = path => {
@@ -33,6 +40,7 @@ const Nav = ({ channel, setRoom }) => {
 		</li>
 	);
 };
+
 
 const Channels = ({ setRoom }) => {
 	const channels = useSelector(state => state.channels);
@@ -83,6 +91,7 @@ const Channels = ({ setRoom }) => {
 				</span>
 			</h2>
 			<ul className="channels__list">
+
 				{arr?.map((channel, id) => (
 					<Nav channel={channel} setRoom={setRoom} key={id} />
 				))}
