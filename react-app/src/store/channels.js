@@ -38,8 +38,7 @@ export const addNewChannel = channel_obj => async dispatch => {
 	});
 	if (response.ok) {
 		const channel = await response.json();
-		console.log(channel);
-		dispatch(addChannel(channel));
+		dispatch(addChannel(channel.channel));
 		return channel;
 	} else {
 		throw response;
@@ -57,7 +56,7 @@ export default function channelReducer(state = initialState, action) {
 			return newState;
 		case ADD_CHANNEL:
 			newState = { ...state };
-			newState[action.channel.id] = action.channels;
+			newState[action.channel.id] = action.channel;
 			return newState;
 		default:
 			return state;
