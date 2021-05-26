@@ -105,15 +105,16 @@
 	background-color: white;
 }
 
-.chat__edit,
-.chat__delete{
+.chat__edit button,
+.chat__delete button{
 	font-size: 17px;
 	margin: 5px;
+	color: grey;
 }
 
-.chat__edit:hover,
-.chat__delete:hover{
-	color: grey;
+.chat__edit button:hover,
+.chat__delete button:hover{
+	color: black;
 }
 
 .chat__username:hover,

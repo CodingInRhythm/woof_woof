@@ -17,7 +17,7 @@ const DMPerson = ({ recipient }) => {
 
 		history.push(`/dm/${recipient.id}`)
 	}
-	
+
 	return(
 	<li className="dm__item">
 		<button className="dm__button" id={`dm_${recipient.id}`} onClick={handleClick}>
@@ -33,7 +33,7 @@ const DMs = () => {
 	let arr = []
 	for (let i in conversations){
 		arr.push(conversations[i])
-	}	
+	}
 	return (
 		<div className="dm">
 			<h2 className="dm__heading">

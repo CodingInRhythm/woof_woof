@@ -20,7 +20,7 @@ const Content = ({ room, setRoom, socket }) => {
 			['link', 'image'],
 			['clean'],
 		],
-	}; 
+	};
 	let formats = [
 		'header',
 		'bold',
@@ -36,28 +36,28 @@ const Content = ({ room, setRoom, socket }) => {
 		'link',
 		'image',
 	];
-	
-	
-	
+
+
+
 	//val 1 will either be channelId or userId
 	const hashingRoom = (val1, recipientId) => {
 		if (!recipientId) {
       return `Channel: ${val1}`
-		} 
+		}
 		else {
 			return `DM${val1 < recipientId ? val1 : recipientId}${val1 > recipientId ? val1 : recipientId}`;
 		}
 	}
-  
+
   const { id } = useParams();
 	const location = useLocation();
 	const dispatch = useDispatch();
 	const channel_messages = useSelector(state => state.channelMessages);
 	const direct_messages = useSelector(state => state.directMessages);
 	const userId = useSelector((state) => state.session.user.id)
-  
+
   const textInput = useRef(null)
-  
+
   let slice;
 	let roomNum;
 	if (location.pathname.includes('channel')) {
@@ -69,9 +69,11 @@ const Content = ({ room, setRoom, socket }) => {
 		setRoom(hashingRoom(userId, id));
 		slice = 'directMessages';
 	}
-  
+
+	let messages = useSelector(state => state[slice])
+
   let textField;
-  
+
   //Handle Send Message
 	const sendMessage = (e) => {
 		e.preventDefault();
@@ -91,7 +93,7 @@ const Content = ({ room, setRoom, socket }) => {
 			console.log(text)
 		}
 	}
- 
+
 	useEffect(() => {
 		if (location.pathname.includes("channel")) {
 			slice = 'channelMessages'
@@ -108,9 +110,6 @@ const Content = ({ room, setRoom, socket }) => {
 		}
 	}, [room, dispatch, id]);
 
-	console.log('slice----', slice);
-	console.log('roomnum----', room);
-	const messages = useSelector(state => state[slice]);
 
 	// console.log('messages id ----------------', messages[id]);
 
@@ -138,7 +137,7 @@ const Content = ({ room, setRoom, socket }) => {
 	// 	);
 	// });
 	// }
-			
+
 	return (
 		<div className="main">
 		<header className="main__header">
@@ -157,8 +156,8 @@ const Content = ({ room, setRoom, socket }) => {
 		<div class="main__content">
 			<div class="main__container">
 				<section class="main__chat">
-					{messages[id]?.map(msg => (
-						<Message key={msg.id} msg={msg} modules={modules} formats={formats}/>
+					{messages[id] && Object.entries(messages[id])?.map(([id,msg]) => (
+						<Message key={id} msg={msg} modules={modules} formats={formats}/>
 					))}
 				</section>
 				<section class="main__chat-textarea">
