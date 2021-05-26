@@ -11,7 +11,7 @@ import MainInterface from './components/AppUI/MainInterface';
 import Splash from './components/Splash';
 import Chat from './components/Chat';
 import { authenticate } from './store/session';
-// import Content from './components/AppUI/Content/Content';
+import PageNotFound from './components/auth/PageNotFound';
 
 function App() {
 	const user = useSelector(state => state.session.user);
@@ -42,9 +42,9 @@ function App() {
 				<Route path="/sign-up" exact={true}>
 					<SignUpForm />
 				</Route>
-				<Route path="/app_ui" exact={true}>
+				<ProtectedRoute path="/app_ui" exact={true}>
 					<MainInterface />
-				</Route>
+				</ProtectedRoute>
 				<Route path="/chatroom">
 					<Chat />
 				</Route>
@@ -54,20 +54,22 @@ function App() {
 				<ProtectedRoute path="/users/:userId" exact={true}>
 					<User />
 				</ProtectedRoute>
-				<Route path="/channels/:id" exact={true}>
+				<ProtectedRoute path="/channels/:id" exact={true}>
 					<MainInterface />
+
 				</Route>
 				<Route path="/dms/all" exact={true}>
 					<MainInterface />
 				</Route>
 				<Route path="/dm/:id" exact={true}>
+
 					<MainInterface />
-				</Route>
+				</ProtectedRoute>
 				{/* <ProtectedRoute path="/" exact={true} >
 					<h1>My Home Page</h1>
 				</ProtectedRoute> */}
 				<Route>
-					<h1>404 PAGE NOT FOUND</h1>
+					<PageNotFound />
 				</Route>
 			</Switch>
 		</BrowserRouter>

@@ -5,35 +5,35 @@ import Channels from './Channels';
 
 const SideBar = ({ setRoom }) => {
 	return (
-		<div class="sidebar">
-			<button class="workspace-menu">
-				<div class="workspace-menu__info">
-					<h1 class="workspace-menu__name">Juice Fans</h1>
-					<div class="workspace-menu__status">
-						<span class="workspace-menu__username">nasanov</span>
+		<div className="sidebar">
+			<button className="workspace-menu">
+				<div className="workspace-menu__info">
+					<h1 className="workspace-menu__name">Juice Fans</h1>
+					<div className="workspace-menu__status">
+						<span className="workspace-menu__username">nasanov</span>
 					</div>
 				</div>
-				<span class="workspace-icon">
-					<i class="far fa-edit"></i>
+				<span className="workspace-icon">
+					<i className="far fa-edit"></i>
 				</span>
 			</button>
 
-			<div class="threads">
-				<div class="threads__items">
-					<i class="far fa-comment-dots"></i>
-					<span class="threads__icon"></span> All Threads
+			<div className="threads">
+				<div className="threads__items">
+					<i className="far fa-comment-dots"></i>
+					<span className="threads__icon"></span> All Threads
 				</div>
-				<div class="threads__items">
-					<i class="fas fa-stream"></i>
-					<span class="threads__icon"></span> All unreads
+				<div className="threads__items">
+					<i className="fas fa-stream"></i>
+					<span className="threads__icon"></span> All unreads
 				</div>
-				<div class="threads__items">
-					<i class="far fa-comments"></i>
-					<span class="threads__icon"></span> All DMs
+				<div className="threads__items">
+					<i className="far fa-comments"></i>
+					<span className="threads__icon"></span> All DMs
 				</div>
-				<div class="threads__items">
-					<i class="far fa-bookmark"></i>
-					<span class="threads__icon"></span> Saved Items
+				<div className="threads__items">
+					<i className="far fa-bookmark"></i>
+					<span className="threads__icon"></span> Saved Items
 				</div>
 			</div>
 			<Channels setRoom={setRoom} />

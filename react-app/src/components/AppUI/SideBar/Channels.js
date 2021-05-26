@@ -1,28 +1,33 @@
 import React, {useState, useEffect} from 'react';
-// import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
 import './Channels.css';
 import { NavLink } from 'react-router-dom';
+import { getChannelMessages } from '../../../store/channel_messages';
 
 const Nav = ({channel, setRoom}) =>{
 	const [isClicked, setIsClicked] = useState(false)
+	const dispatch = useDispatch()
 
-	let handleClick = ()=>{
+	let handleClick = (e)=>{
 		if (!isClicked){
 			setIsClicked(true)
+			dispatch(getChannelMessages(channel.id))
 		}
+		let element = document.querySelector(".channels__button--active")
+		element.classList.remove("channels__button--active")
+		e.target.classList.add("channels__button--active")
 		setRoom(`Channel: ${channel.id}`)
 	}
 
 	return (
-		<li key={channel.id} className="channels__button">
-			<NavLink onClick={handleClick} to={`/channels/${channel.id}`}>
-				<span>{channel.name}</span>
-			</NavLink>
-		</li>
+		<NavLink onClick={handleClick} to={`/channels/${channel.id}`}>
+			<li className="channels__button">
+					{channel.name}
+			</li>
+		</NavLink>
 	)
 }
-
 
 const Channels = ({ setRoom }) => {
 	const channels = useSelector(state => state.channels);
@@ -37,7 +42,11 @@ const Channels = ({ setRoom }) => {
 	// const channelComponents = arr.map(channel => {
 	// 	return (
 	// 		<li key={channel.id} className="channels__button">
-	// 			<NavLink onClick={setRoom(`Channel: ${channel.id}`)} to={`/channels/${channel.id}`}>
+	// 			<NavLink
+	// 				activeClassName="active"
+	// 				onClick={setRoom(`Channel: ${channel.id}`)}
+	// 				to={`/channels/${channel.id}`}
+	// 			>
 	// 				<span>{channel.name}</span>
 	// 			</NavLink>
 	// 		</li>
@@ -67,7 +76,9 @@ const Channels = ({ setRoom }) => {
 						<span>2021-01-group02-juice-and-the-thunks</span>
 					</button>
 				</li>
-				{arr?.map(channel=> <Nav channel={channel} setRoom={setRoom}/>)}
+        
+				{arr?.map(channel=> <Nav channel={channel} setRoom={setRoom} key={channel.id}/>)}
+
 				{/* {channelComponents} */}
 				<li className="channels__item">
 					<button className="channels__add">

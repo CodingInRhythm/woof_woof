@@ -47,13 +47,13 @@ def dm_put(direct_message_id):
     if not current_user.is_authenticated:
         return {'errors': ['Unauthorized']}
 
-    message = request.json.message
+    message = request.json['message']
 
     direct_message = DirectMessage.query.get(direct_message_id)
     direct_message.message = message
     db.session.commit()
 
-    return {'direct_message':direct_message.to_dict_basic()}
+    return {'direct_message':direct_message.to_dict()}
 
 # DELETE specified direct message #
 @messages_routes.route('/dm/<int:direct_message_id>', methods=['DELETE'])
@@ -68,7 +68,7 @@ def dm_delete(direct_message_id):
     db.session.delete(direct_message)
     db.session.commit()
 
-    return {'message':'success'}
+    return {'direct_message':direct_message.to_dict_basic()}
 
 #################### CHANNEL MESSAGE ROUTES ####################
 
@@ -81,7 +81,7 @@ def channel_message_get(channel_id):
     if not current_user.is_authenticated:
         return {'errors': ['Unauthorized']}
 
-    channel_messages = ChannelMessage.query.filter_by(channel_id=channel_id).all()
+    channel_messages = ChannelMessage.query.filter_by(channel_id=channel_id).order_by(ChannelMessage.id).all()
     return {'channel_messages':[message.to_dict() for message in channel_messages]}
 
 
@@ -94,13 +94,13 @@ def channel_message_put(channel_message_id):
     if not current_user.is_authenticated:
         return {'errors': ['Unauthorized']}
 
-    message = request.json.message
+    message = request.json['message']
 
     channel_message = ChannelMessage.query.get(channel_message_id)
     channel_message.message = message
     db.session.commit()
 
-    return {'channel_message':channel_message.to_dict_basic()}
+    return {'channel_message':channel_message.to_dict()}
 
 # DELETE specified channel message #
 @messages_routes.route('/channel/<int:channel_message_id>', methods=['DELETE'])
@@ -115,4 +115,4 @@ def channel_message_delete(channel_message_id):
     db.session.delete(channel_message)
     db.session.commit()
 
-    return {'message':'success'}
+    return {'channel_message':channel_message.to_dict_basic()}

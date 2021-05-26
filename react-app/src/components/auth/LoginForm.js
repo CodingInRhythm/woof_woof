@@ -30,16 +30,16 @@ const LoginForm = () => {
 	};
 
 	const logoClick = () => {
-		history.push('/')
-	}
+		history.push('/');
+	};
 
 	const demoClick = async e => {
 		e.preventDefault();
-		await dispatch(login("demo@aa.io", "password"));
-	}
+		await dispatch(login('demo@aa.io', 'password'));
+	};
 
 	if (user) {
-		return <Redirect to="/" />;
+		return <Redirect to="app_ui" />;
 	}
 
 	return (
@@ -47,7 +47,7 @@ const LoginForm = () => {
 			<div className="login-container">
 				<div></div>
 				<div className="loginWrap">
-					<img src={logo} class="slack_logo" onClick={logoClick}></img>
+					<img src={logo} className="slack_logo" onClick={logoClick}></img>
 					<h1 className="login-form-header">Sign in to Slack</h1>
 					<form onSubmit={onLogin}>
 						{errors.length ? (
@@ -87,7 +87,7 @@ const LoginForm = () => {
 						</button>
 					</form>
 				</div>
-				<div class="signup-link">
+				<div className="signup-link">
 					<p className="switchLinkName">New to Slack?</p>
 					<NavLink to="/sign-up" className="switchLink">
 						Create an account

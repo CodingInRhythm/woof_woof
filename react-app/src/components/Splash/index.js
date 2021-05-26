@@ -102,9 +102,7 @@ function Splash(){
 
   //UseEffect
   useEffect(() => {
-    console.log(user);
     if(!user){
-      console.log("inside user")
       document.getElementById("nav_logout").classList.add("hidden")
       document.getElementById("nav_scroll_logout").classList.add("hidden")
       document.getElementById("nav_login").classList.remove("hidden")
@@ -113,7 +111,6 @@ function Splash(){
       document.getElementById("nav_scroll_signup").classList.remove("hidden")
     }
     else{
-      console.log("me")
       document.getElementById("nav_logout").classList.remove("hidden")
       document.getElementById("nav_scroll_logout").classList.remove("hidden")
       document.getElementById("nav_login").classList.add("hidden")
