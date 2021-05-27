@@ -65,9 +65,13 @@ const EditDelete = ({editOn, setEditOn, deleteOn, setDeleteOn, msg, date, module
     } else {
         return(
             <div className="chat__other-info">
-                <span className="chat__username">{msg.user.firstname + ' ' + msg.user.lastname}</span>
-                <span className="chat__date">{date}</span>
-                <p className="chat__text">{currentMessage}</p>
+                <div className="chat__other-header">
+                    <span className="chat__username">{msg.user.firstname + ' ' + msg.user.lastname}</span>
+                    <span className="chat__date">{date}</span>
+                </div>
+                <div className="chat__other-text">
+                    <p className="chat__text">{currentMessage}</p>
+                </div>
             </div>
         )
     }

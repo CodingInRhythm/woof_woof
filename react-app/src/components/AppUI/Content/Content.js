@@ -61,13 +61,13 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 
 
 	const history = useHistory();
-	 	 
+
 
 	const [searchParam, setSearchParam] = useState('')
 	const [matchingUsers, setMatchingUsers] = useState([])
-	
+
 	const textInput = useRef(null)
-  
+
 	let slice;
 	let roomNum;
 
@@ -109,6 +109,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 				}
 				socket.emit("dm", {sender_id:userId, recipient_id: id, message:text, room:hashingRoom(userId, id)})
 			} else{
+				console.log("HERE IN CHAT")
 				socket.emit("chat", {room:id, id:userId, message:text})
 			}
 			// console.log(text)
@@ -139,11 +140,11 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 		const fetchUsers = async () => {
 			const res = await fetch('/api/users/')
 			const data = await res.json()
-		
+
 			setMatchingUsers(data.users.filter((user) => {
 				return user.firstname?.toLowerCase().indexOf(searchParam) === 0
 			}))
-		
+
 		}
 		if (searchParam) fetchUsers()
 	}, [searchParam])
@@ -171,25 +172,25 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
             </div>
           </div>
         </Link>
-      );	
+      );
 		})
 	}
-	
+
 
 	//FUNCTIONS//
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		
+
 		console.log(e.target.id)
 		/*need logic to check if user exits in dm store.
-		If it does, we need to link to that users DMs.  
+		If it does, we need to link to that users DMs.
 		*/
-	
-		
+
+
 		history.push(`/dm/${e.target.id}`)
-	
- 
+
+
 	}
 	// console.log(matchingUsers)
 
