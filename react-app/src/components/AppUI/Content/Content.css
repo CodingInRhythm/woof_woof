@@ -1,13 +1,16 @@
 .main {
 	position: relative;
+	display: grid;
+	grid-template-rows: 75px 1fr;
+	grid-template-areas:
+	"header"
+	"main";
 	height: 100%;
-	flex: 1;
-	margin-left: 250px;
+	width: 100%;
 }
+
 .main__header {
-	position: absolute;
-	top: 0;
-	left: 0;
+	grid-area: header;
 	width: 100%;
 	height: 75px;
 	display: flex;
@@ -41,19 +44,24 @@
 	color: rgb(26, 26, 26);
 }
 .main__content {
-	position: relative;
-	top: 75px;
-	height: calc(100vh - 75px);
-	overflow-y: scroll;
-}
-.main__container {
-	padding: 10px 20px;
-	margin: 0 auto;
+	position: absolute;
+	grid-area: main;
+
+	padding-bottom: 180px;
+
+	height: 100%;
 	width: 100%;
+
 }
 
 .main__chat {
-	margin-bottom: 190px;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column-reverse;
+	overflow-y: auto;
+	overflow-x: wrap;
+	word-wrap: break-word;
 }
 
 .main__chat-item {
@@ -61,6 +69,8 @@
 	margin-top: 10px;
 	position: relative;
 	padding: 5px;
+	width: 100%;
+	overflow-x: wrap;
 }
 
 .main__chat-item-edit-delete {
@@ -95,9 +105,16 @@
 	font-size: 13px;
 	margin-left: 20px;
 }
+
+.chat__other-text{
+	width: 100%;
+}
 .chat__text {
+	box-sizing: border-box;
 	font-size: 16px;
 	margin: 0;
+	overflow-x: break-word;
+	width: 100%;
 }
 
 .chat__text--link {
@@ -108,7 +125,7 @@
 .chat__extra-options{
 	position: absolute;
 	top: -10px;
-	right: 0;
+	right: 10px;
 	display: none;
 	border: 1px solid lightgray;
 	border-radius: 5px;
@@ -138,10 +155,13 @@
 }
 
 .main__chat-textarea {
-	position: fixed;
+	position: absolute;
+	box-sizing: border-box;
 	bottom: 10px;
-	width: 70%;
+	height: 135px;
+	width: 97.5%;
 	background-color: white;
+	margin: 10px;
 }
 
 .main__chat-send {
@@ -166,6 +186,18 @@
 
 .chat__quill{
 	background-color: white;
+}
+
+.chat__other-info{
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 20px 1fr;
+	width: 100%;
+}
+
+.chat__other-header{
+	display: flex;
+	align-items: center;
 }
 
 .chat__other-info-delete-alert{

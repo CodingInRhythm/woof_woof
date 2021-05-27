@@ -61,13 +61,13 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 
 
 	const history = useHistory();
-	 	 
+
 
 	const [searchParam, setSearchParam] = useState('')
 	const [matchingUsers, setMatchingUsers] = useState([])
-	
+
 	const textInput = useRef(null)
-  
+
 	let slice;
 	let roomNum;
 
@@ -140,11 +140,11 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 		const fetchUsers = async () => {
 			const res = await fetch('/api/users/')
 			const data = await res.json()
-		
+
 			setMatchingUsers(data.users.filter((user) => {
 				return user.firstname?.toLowerCase().indexOf(searchParam) === 0
 			}))
-		
+
 		}
 		if (searchParam) fetchUsers()
 	}, [searchParam])
@@ -172,25 +172,25 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
             </div>
           </div>
         </Link>
-      );	
+      );
 		})
 	}
-	
+
 
 	//FUNCTIONS//
 
 	const handleSubmit = (e) => {
 		e.preventDefault()
-		
+
 		console.log(e.target.id)
 		/*need logic to check if user exits in dm store.
-		If it does, we need to link to that users DMs.  
+		If it does, we need to link to that users DMs.
 		*/
-	
-		
+
+
 		history.push(`/dm/${e.target.id}`)
-	
- 
+
+
 	}
 	console.log(matchingUsers)
 
@@ -218,62 +218,60 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
         </div>
       </header>
       <div class="main__content">
-        <div>
-          {isAddDM ? (
-            <>
-              <form>
-                <input
-                  type="text"
-                  name="searchParam"
-                  value={searchParam}
-                  onChange={(e) => setSearchParam(e.target.value)}
-                  placeholder="@somebody"
-                />
-              </form>
-              {matchingUsers.length && (
-                <ul>
-                  {matchingUsers.map((user, index) => {
-                    return (
-                      <li>
-                        <form id={user.id} onSubmit={handleSubmit}>
-                          <button type="submit">{user.firstname}</button>
-                        </form>
-                      </li>
-                    );
-                  })}
-				</ul>
-              )}
-              <section class="main__chat">{messageItem}</section>
-            </>
-          ) : (
-            <>
-          <section class="main__chat">
-					  {messages && messages[id] && Object.entries(messages[id])?.map(([id,msg]) => (
-						<Message key={id} msg={msg} modules={modules} formats={formats}/>
-					))}
-				</section>
-				<section class="main__chat-textarea">
-		<form onSubmit={sendMessage}>
-			<ReactQuill
-			// placeholder={`Message #${messages[id]?.channel?.name}`}
-			modules={modules}
-			formats={formats}
-			inputClass="main__chat-textarea"
-			id="input_field"
-			ref={textInput}
-			// onChange={handleChange}
-			>
-			<div className="my-editing-area"></div>
-			</ReactQuill>
-			<button className="main__chat-send" type="submit">
-			<i class="fas fa-paper-plane"></i>
-			</button>
-		</form>
-				</section>
-            </>
-          )}
-        </div>
-      </div>
+		{isAddDM ? (
+		<>
+			<form>
+			<input
+				type="text"
+				name="searchParam"
+				value={searchParam}
+				onChange={(e) => setSearchParam(e.target.value)}
+				placeholder="@somebody"
+			/>
+			</form>
+			{matchingUsers.length && (
+			<ul>
+				{matchingUsers.map((user, index) => {
+				return (
+					<li>
+					<form id={user.id} onSubmit={handleSubmit}>
+						<button type="submit">{user.firstname}</button>
+					</form>
+					</li>
+				);
+				})}
+			</ul>
+			)}
+			<section class="main__chat">{messageItem}</section>
+		</>
+		) : (
+		<>
+			<section class="main__chat">
+					{messages && messages[id] && Object.entries(messages[id])?.reverse().map(([id,msg]) => (
+					<Message key={id} msg={msg} modules={modules} formats={formats}/>
+				))}
+			</section>
+			<section class="main__chat-textarea">
+				<form onSubmit={sendMessage}>
+					<ReactQuill
+					// placeholder={`Message #${messages[id]?.channel?.name}`}
+					modules={modules}
+					formats={formats}
+					inputClass="main__chat-textarea"
+					id="input_field"
+					ref={textInput}
+					// onChange={handleChange}
+					>
+					<div className="my-editing-area"></div>
+					</ReactQuill>
+					<button className="main__chat-send" type="submit">
+					<i class="fas fa-paper-plane"></i>
+					</button>
+				</form>
+			</section>
+		</>
+		)}
+	</div>
     </div>
   );
 };
