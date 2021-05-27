@@ -47,8 +47,6 @@ const MainInterface = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
-
-
 		socket = io();
 		for (let channel in channels) {
 			socket.on('connect', () => {

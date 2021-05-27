@@ -9,9 +9,12 @@ import { getDirectMessages } from '../../../store/direct_messages';
 const DMPerson = ({ recipient }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
+
 	const [isClicked, setIsClicked] = useState(false);
 	const [newMessage, setNewMessage] = useState(false);
 	const [isLoaded, setIsLoaded] = useState(false)
+	const [numberMessages, setNumberMessages] = useState(0)
+
 	let location = useLocation();
 	const directMessageObj = useSelector(state => state.directMessages)
 	let directMessageChannel;
@@ -26,6 +29,7 @@ const DMPerson = ({ recipient }) => {
 		}
 		history.push(`/dm/${recipient.id}`)
 		setNewMessage(false)
+		setNumberMessages(0)
 	}
 
 	const getNavLinkClass = path => {
@@ -36,6 +40,7 @@ const DMPerson = ({ recipient }) => {
 		console.log("We have a new message!")
 		if(location.pathname !== `/dm/${recipient.id}` && isLoaded){
 			setNewMessage(true)
+			setNumberMessages(numberMessages + 1)
 		}
 		setIsLoaded(true)
 	},[directMessageChannel])
@@ -48,6 +53,7 @@ const DMPerson = ({ recipient }) => {
 				className={`dm__button` + ' ' + getNavLinkClass(`/dm/${recipient.id}`)}
 			>
 				<span className={newMessage ? "new_message" : ""}>{`${recipient.firstname} ${recipient.lastname}`}</span>
+				<span className={numberMessages > 0 ? "new_message-number" : "hidden"}>{numberMessages}</span>
 			</button>
 		</li>
 	);
