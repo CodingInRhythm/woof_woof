@@ -36,7 +36,6 @@ const Nav = ({ channel, setRoom }) => {
 	useEffect(() => {
 		console.log("We have a new message!")
 		if(location.pathname !== `/channels/${channel.id}` && isLoaded){
-			console.log("setting a class")
 			setNewMessage(true)
 			setNumberMessages(numberMessages + 1)
 		}

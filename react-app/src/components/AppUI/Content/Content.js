@@ -102,7 +102,6 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 
 			if (location.pathname.includes("dm")){
 				console.log("before dm")
-				console.log(dms)
 				if (!(id in dms)){
 					console.log(id)
 					console.log(dms)
