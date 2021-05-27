@@ -1,42 +1,54 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './Channels.css';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { addNewChannel } from '../../../store/channels';
 import { getChannelMessages } from '../../../store/channel_messages';
 
 const Nav = ({ channel, setRoom }) => {
 	const [isClicked, setIsClicked] = useState(false);
-	const history = useHistory();
+	const [isLoaded, setIsLoaded] = useState(false);
+	const [newMessage, setNewMessage] = useState(false);
 	const dispatch = useDispatch();
+	let location = useLocation();
+	const channelMessageObj = useSelector(state => state.channelMessages)
+	let channelMessageChannel;
+	if (channelMessageObj[channel.id] !== undefined){
+		channelMessageChannel = channelMessageObj[channel.id]
+	}
 
 	let handleClick = e => {
 		if (!isClicked) {
 			setIsClicked(true);
 			dispatch(getChannelMessages(channel.id));
 		}
-		// let element = document.querySelector(".channels__button--active")
-		// element.classList.remove("channels__button--active")
-		// e.target.classList.add("channels__button--active")
-		history.push(`/channels/${channel.id}`);
-		setRoom(`Channel: ${channel.id}`);
-	};
+		setRoom(`Channel: ${channel.id}`)
+		setNewMessage(false)
+	}
 
-	let location = useLocation();
 	const getNavLinkClass = path => {
 		return location.pathname === path ? 'channels__button--active' : '';
 	};
 
+	useEffect(() => {
+		console.log("We have a new message!")
+		if(location.pathname !== `/channels/${channel.id}` && isLoaded){
+			console.log("setting a class")
+			setNewMessage(true)
+		}
+		setIsLoaded(true)
+	},[channelMessageChannel])
+
 	return (
-		<li key={channel.id}>
-			<button
-				onClick={handleClick}
+		<NavLink onClick={handleClick} to={`/channels/${channel.id}`}>
+			<li
+				key={channel.id}
 				// className="channels__button"
 				className={`channels__button` + ' ' + getNavLinkClass(`/channels/${channel.id}`)}
 			>
-				<span>{channel.name}</span>
-			</button>
-		</li>
+				<span className={newMessage ? "new_message" : ""}>{channel.name}</span>
+			</li>
+		</NavLink>
 	);
 };
 

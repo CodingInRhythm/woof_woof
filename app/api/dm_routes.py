@@ -24,8 +24,8 @@ def direct_messages():
 
 # direct_messages.id, direct_messages.sender_id, direct_messages.recipient_id, users.id, users.firstname, users.lastname
 
-@dm_routes.route('/<int:recipient_id>', methods=["POST"])
-def add_dm(recipient_id):
-    print(recipient_id)
-    db.session.add(DirectMessage())
-    return "Hello"
+@dm_routes.route('/<int:id>')
+def new_dm_user(id):
+    new_dm_user = User.query.filter(User.id == id).all()
+    print (new_dm_user)
+    return {'dm_user': new_dm_user}

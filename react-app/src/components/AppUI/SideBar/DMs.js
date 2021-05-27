@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import React from 'react';
 import './DMs.css';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -10,18 +10,35 @@ const DMPerson = ({ recipient }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 	const [isClicked, setIsClicked] = useState(false);
+	const [newMessage, setNewMessage] = useState(false);
+	const [isLoaded, setIsLoaded] = useState(false)
 	let location = useLocation();
+	const directMessageObj = useSelector(state => state.directMessages)
+	let directMessageChannel;
+	if (directMessageObj[recipient.id] !== undefined){
+		directMessageChannel = directMessageObj[recipient.id]
+	}
+
 	const handleClick = () => {
 		if (!isClicked) {
 			dispatch(getDirectMessages(recipient.id));
 			setIsClicked(true);
 		}
-		history.push(`/dm/${recipient.id}`);
-	};
+		history.push(`/dm/${recipient.id}`)
+		setNewMessage(false)
+	}
 
 	const getNavLinkClass = path => {
 		return location.pathname === path ? 'dm__button--active' : '';
 	};
+
+	useEffect(() => {
+		console.log("We have a new message!")
+		if(location.pathname !== `/dm/${recipient.id}` && isLoaded){
+			setNewMessage(true)
+		}
+		setIsLoaded(true)
+	},[directMessageChannel])
 
 	return (
 		<li key={recipient.id}>
@@ -30,7 +47,7 @@ const DMPerson = ({ recipient }) => {
 				onClick={handleClick}
 				className={`dm__button` + ' ' + getNavLinkClass(`/dm/${recipient.id}`)}
 			>
-				<span>{`${recipient.firstname} ${recipient.lastname}`}</span>
+				<span className={newMessage ? "new_message" : ""}>{`${recipient.firstname} ${recipient.lastname}`}</span>
 			</button>
 		</li>
 	);
