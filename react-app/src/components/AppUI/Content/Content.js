@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getChannelMessages, addMessage as addChannelMessage } from '../../../store/channel_messages';
 import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { getDirectMessages } from '../../../store/direct_messages';
+import { addDMUser, getDMUser } from '../../../store/dm_people'
 
 
 const Content = ({ isAddDM, room, setRoom, socket }) => {
@@ -55,7 +56,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 	const dispatch = useDispatch();
 	const channel_messages = useSelector(state => state.channelMessages);
 	const direct_messages = useSelector(state => state.directMessages);
-	const dms = useSelector((state) => state.dm_users)
+	const dms = useSelector(state => state.dm_users)
 	const userId = useSelector((state) => state.session.user.id)
 
 
@@ -101,6 +102,12 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 
 			if (location.pathname.includes("dm")){
 				console.log("before dm")
+				console.log(dms)
+				if (!(id in dms)){
+					console.log(id)
+					console.log(dms)
+					dispatch(getDMUser(id))
+				}
 				socket.emit("dm", {sender_id:userId, recipient_id: id, message:text, room:hashingRoom(userId, id)})
 			} else{
 				socket.emit("chat", {room:id, id:userId, message:text})
