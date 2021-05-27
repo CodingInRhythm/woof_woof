@@ -5,6 +5,10 @@
 	align-items: center;
 	justify-content: flex-end;
 	height: 38px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
 }
 
 .main-nav a {

@@ -12,6 +12,8 @@ const Nav = ({ channel, setRoom }) => {
 	const [isClicked, setIsClicked] = useState(false);
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [newMessage, setNewMessage] = useState(false);
+	const [numberMessages, setNumberMessages] = useState(0)
+
 	const dispatch = useDispatch();
 	let location = useLocation();
 	const channelMessageObj = useSelector(state => state.channelMessages);
@@ -25,19 +27,20 @@ const Nav = ({ channel, setRoom }) => {
 			setIsClicked(true);
 			dispatch(getChannelMessages(channel.id));
 		}
-		setRoom(`Channel: ${channel.id}`);
-		setNewMessage(false);
-	};
+		setRoom(`Channel: ${channel.id}`)
+		setNewMessage(false)
+		setNumberMessages(0)
+	}
 
 	const getNavLinkClass = path => {
 		return location.pathname === path ? 'channels__button--active' : '';
 	};
 
 	useEffect(() => {
-		console.log('We have a new message!');
-		if (location.pathname !== `/channels/${channel.id}` && isLoaded) {
-			console.log('setting a class');
-			setNewMessage(true);
+		// console.log("We have a new message!")
+		if(location.pathname !== `/channels/${channel.id}` && isLoaded){
+			setNewMessage(true)
+			setNumberMessages(numberMessages + 1)
 		}
 		setIsLoaded(true);
 		return () => {
@@ -55,7 +58,8 @@ const Nav = ({ channel, setRoom }) => {
 				key={channel.id}
 				className={`channels__button` + ' ' + getNavLinkClass(`/channels/${channel.id}`)}
 			>
-				<span className={newMessage ? 'new_message' : ''}>{channel.name}</span>
+				<span className={newMessage ? "new_message" : ""}>{channel.name}</span>
+				<span className={numberMessages > 0 ? "new_message-number" : "hidden"}>{numberMessages}</span>
 			</li>
 		</NavLink>
 	);

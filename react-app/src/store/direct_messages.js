@@ -69,7 +69,6 @@ export const editDirectMessage = (recipient_id, message) => async (dispatch) => 
       return;
   }
 
-  console.log(data)
 
   dispatch(removeDirectMessage(data.direct_message.recipient_id, data.direct_message.id))
   dispatch(addDirectMessage(data.direct_message.recipient_id, data.direct_message))

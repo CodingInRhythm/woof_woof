@@ -5,11 +5,11 @@ import SideBar from './SideBar/SideBar';
 import Content from './Content/Content';
 import './MainInterface.css';
 
-import { Route, useParams, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getChannels } from '../../store/channels';
-import { getDMUsers } from '../../store/dm_people';
+import { getDMUsers, setOnlineStatusUser } from '../../store/dm_people';
 import { addChannelMessage } from "../../store/channel_messages"
 import { addDirectMessage } from "../../store/direct_messages"
 let socket;
@@ -47,21 +47,20 @@ const MainInterface = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
-
-
 		socket = io();
 		for (let channel in channels) {
 			socket.on('connect', () => {
 					socket.emit('join', {room:hashingRoom(channel)})
-					console.log("I have joined room:  ", hashingRoom(channel))
+					// console.log("I have joined room:  ", hashingRoom(channel))
 				})
 			}
 		for (let dm in dmUsers){
 			socket.on('connect', () => {
 				socket.emit('join', {room:hashingRoom(userId, dm)})
-				console.log("I have joined dm:  ", hashingRoom(userId, dm))
+				// console.log("I have joined dm:  ", hashingRoom(userId, dm))
 			})
 		}
+		dispatch(setOnlineStatusUser(userId, true))
 		socket.on("chat", (chat) => {
 				// when we recieve a chat, add it into our channelMessages object in redux
 				console.log("I'm a new chat-------", chat)
@@ -79,14 +78,15 @@ const MainInterface = () => {
 		})
 
 		return (()=>{
+			dispatch(setOnlineStatusUser(userId, false))
 			for (let channel in channels) {
 				socket.emit('leave', {room:hashingRoom(channel)})
-				console.log("I have left room:  ", hashingRoom(channel))
+				// console.log("I have left room:  ", hashingRoom(channel))
 				socket.disconnect()
 			}
 			for (let dm in dmUsers) {
 				socket.emit('leave', {room:hashingRoom(userId, dm)})
-				console.log("I have left dm:  ", hashingRoom(userId, dm))
+				// console.log("I have left dm:  ", hashingRoom(userId, dm))
 				socket.disconnect()
 			}
 		  })
@@ -95,14 +95,12 @@ const MainInterface = () => {
 
 	useEffect(() => {
 		if (location.pathname.includes("dms")) {
-			console.log("here")
 			setIsAddDM(true);
 		}
 		else {
 			setIsAddDM(false)
 		}
 	}, [location.pathname]);
-	console.log(isAddDM)
 	/*Need to add: 
 	Search bar
 	components of rendered users
