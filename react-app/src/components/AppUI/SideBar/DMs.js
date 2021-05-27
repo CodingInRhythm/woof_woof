@@ -41,7 +41,7 @@ const DMPerson = ({ recipient }) => {
 	}
 
 	useEffect(() => {
-		console.log("We have a new message!")
+		// console.log("We have a new message!")
 		if(location.pathname !== `/dm/${recipient.id}` && isLoaded){
 			setNewMessage(true)
 			setNumberMessages(numberMessages + 1)

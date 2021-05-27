@@ -101,7 +101,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 			editor.deleteText(0, text.length)
 
 			if (location.pathname.includes("dm")){
-				console.log("before dm")
+				// console.log("before dm")
 				if (!(id in dms)){
 					console.log(id)
 					console.log(dms)
@@ -111,7 +111,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 			} else{
 				socket.emit("chat", {room:id, id:userId, message:text})
 			}
-			console.log(text)
+			// console.log(text)
 		}
 
 	}
@@ -158,15 +158,15 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 		messageItem = Object.keys(messages).map(msg => {
 			return (
         <Link to={`/dm/${messages[msg].id}`}>
-          <div class="main__chat-item">
-            <div class="chat__image-container">
+          <div className="main__chat-item">
+            <div className="chat__image-container">
               <img
                 src={messages[msg].profile_photo}
                 alt="profile-photo"
-                class="chat__avatar"
+                className="chat__avatar"
               ></img>
             </div>
-            <div class="chat__other-info">
+            <div className="chat__other-info">
               {messages[msg].firstname + " " + messages[msg].lastname}
             </div>
           </div>
@@ -191,32 +191,32 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 	
  
 	}
-	console.log(matchingUsers)
+	// console.log(matchingUsers)
 
 	return (
-    <div class="main">
-      <header class="main__header">
-        <div class="main__channel-info">
+    <div className="main">
+      <header className="main__header">
+        <div className="main__channel-info">
           {isAddDM ? (
             <div>
-              <h1 class="main__h3">All Direct Messages</h1>
+              <h1 className="main__h3">All Direct Messages</h1>
             </div>
           ) : (
-            <h1 class="main__h3">#2021-01-group02-juice-and-the-thunks</h1>
+            <h1 className="main__h3">#2021-01-group02-juice-and-the-thunks</h1>
           )}
         </div>
-        <div class="main__channel-members">
+        <div className="main__channel-members">
           <div>
-            <i class="fas fa-user-friends"></i>{" "}
-            <span class="main_channel-members-h3">View Members</span>
+            <i className="fas fa-user-friends"></i>{" "}
+            <span className="main_channel-members-h3">View Members</span>
           </div>
           <div>
-            <i class="fas fa-user-plus"></i>{" "}
-            <span class="main_channel-members-h3">Add Members</span>
+            <i className="fas fa-user-plus"></i>{" "}
+            <span className="main_channel-members-h3">Add Members</span>
           </div>
         </div>
       </header>
-      <div class="main__content">
+      <div className="main__content">
         <div>
           {isAddDM ? (
             <>
@@ -242,16 +242,16 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
                   })}
 				</ul>
               )}
-              <section class="main__chat">{messageItem}</section>
+              <section className="main__chat">{messageItem}</section>
             </>
           ) : (
             <>
-          <section class="main__chat">
+          <section className="main__chat">
 					  {messages && messages[id] && Object.entries(messages[id])?.map(([id,msg]) => (
 						<Message key={id} msg={msg} modules={modules} formats={formats}/>
 					))}
 				</section>
-				<section class="main__chat-textarea">
+				<section className="main__chat-textarea">
 		<form onSubmit={sendMessage}>
 			<ReactQuill
 			// placeholder={`Message #${messages[id]?.channel?.name}`}
@@ -265,7 +265,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 			<div className="my-editing-area"></div>
 			</ReactQuill>
 			<button className="main__chat-send" type="submit">
-			<i class="fas fa-paper-plane"></i>
+			<i className="fas fa-paper-plane"></i>
 			</button>
 		</form>
 				</section>
