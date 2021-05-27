@@ -241,14 +241,14 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
           ) : (
             <>
           <section class="main__chat">
-					  {messages[id] && Object.entries(messages[id])?.map(([id,msg]) => (
+					  {messages && messages[id] && Object.entries(messages[id])?.map(([id,msg]) => (
 						<Message key={id} msg={msg} modules={modules} formats={formats}/>
 					))}
 				</section>
 				<section class="main__chat-textarea">
 		<form onSubmit={sendMessage}>
 			<ReactQuill
-			placeholder={`Message #${messages[id]?.channel?.name}`}
+			// placeholder={`Message #${messages[id]?.channel?.name}`}
 			modules={modules}
 			formats={formats}
 			inputClass="main__chat-textarea"

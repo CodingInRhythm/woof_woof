@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
 import './Channels.css';
 import { NavLink, useLocation } from 'react-router-dom';
 import { addNewChannel } from '../../../store/channels';
@@ -15,11 +14,12 @@ const Nav = ({ channel, setRoom }) => {
 			setIsClicked(true);
 			dispatch(getChannelMessages(channel.id));
 		}
-		let element = document.querySelector('.channels__button--active');
-		element.classList.remove('channels__button--active');
-		e.target.classList.add('channels__button--active');
-		setRoom(`Channel: ${channel.id}`);
-	};
+		// let element = document.querySelector(".channels__button--active")
+		// element.classList.remove("channels__button--active")
+		// e.target.classList.add("channels__button--active")
+		setRoom(`Channel: ${channel.id}`)
+	}
+
 
 	let location = useLocation();
 	const getNavLinkClass = path => {
