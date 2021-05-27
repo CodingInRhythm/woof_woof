@@ -127,10 +127,10 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 			setRoom(hashingRoom(userId, id))
 			slice = "directMessages"
 		}
-		if (!channel_messages[id]) {
+		if (!channel_messages[id] && slice === "channelMessages") {
 			dispatch(getChannelMessages(id));
 		}
-		if (!direct_messages[id]) {
+		if (!direct_messages[id] && slice === "directMessages") {
 			dispatch(getDirectMessages(id));
 		}
 	}, [room, dispatch, id]);
