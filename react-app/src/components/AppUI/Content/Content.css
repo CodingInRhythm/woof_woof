@@ -113,7 +113,7 @@
 	box-sizing: border-box;
 	font-size: 16px;
 	margin: 0;
-	overflow-x: break-word;
+	word-break: break-all;
 	width: 100%;
 }
 
