@@ -1,5 +1,5 @@
 /*************************** REACT IMPORTS ***************************/
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactQuill from 'react-quill'; // ES6
 
@@ -50,7 +50,7 @@ const EditDelete = ({editOn, setEditOn, deleteOn, setDeleteOn, msg, date, module
                     <div className="my-editing-area" />
                 </ReactQuill>
                 <button className="chat__other-info-cancel" onClick={()=>setEditOn(false)}>Cancel</button>
-                <button className="chat__other-info-confirm"  onClick={handleEdit}><i class="fas fa-check"></i> Save Changes</button>
+                <button className="chat__other-info-confirm"  onClick={handleEdit}><i className="fas fa-check"></i> Save Changes</button>
             </div>
         )
     } else if(deleteOn){

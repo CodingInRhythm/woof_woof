@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Redirect, NavLink, useHistory } from 'react-router-dom';
-import { login } from '../../store/session';
+import React from 'react';
+// import { useSelector, useDispatch } from 'react-redux';
+import { NavLink} from 'react-router-dom';
+// import { login } from '../../store/session';
 import './PageNotFound.css';
 import logo from '../../images/slackbot_sad.png';
 

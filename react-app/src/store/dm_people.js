@@ -44,7 +44,7 @@ export const getDMUser = (id) => async dispatch => {
 }
 
 export const setOnlineStatusUser = (id, status) => async dispatch => {
-	console.log("setting online status")
+	// console.log("setting online status")
 	const response = await fetch(`/api/users/online/${id}`, {
 		method:'PUT',
 		headers:{
@@ -52,8 +52,6 @@ export const setOnlineStatusUser = (id, status) => async dispatch => {
 		},
 		body: JSON.stringify({status}),
 	});
-	const data = await response.json()
-	console.log(data)
 }
 
 /*************************** REDUCER ***************************/
