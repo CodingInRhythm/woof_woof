@@ -60,7 +60,7 @@ const MainInterface = () => {
 				console.log("I have joined dm:  ", hashingRoom(userId, dm))
 			})
 		}
-		// dispatch(setOnlineStatusUser(userId, true))
+		dispatch(setOnlineStatusUser(userId, true))
 		socket.on("chat", (chat) => {
 				// when we recieve a chat, add it into our channelMessages object in redux
 				console.log("I'm a new chat-------", chat)
@@ -78,7 +78,7 @@ const MainInterface = () => {
 		})
 
 		return (()=>{
-			// dispatch(setOnlineStatusUser(userId, false))
+			dispatch(setOnlineStatusUser(userId, false))
 			for (let channel in channels) {
 				socket.emit('leave', {room:hashingRoom(channel)})
 				console.log("I have left room:  ", hashingRoom(channel))

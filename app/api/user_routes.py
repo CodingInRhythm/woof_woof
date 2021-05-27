@@ -1,5 +1,5 @@
 #################### IMPORTS ####################
-from flask import Blueprint, jsonify, session
+from flask import Blueprint, jsonify, session, request
 from flask_login import login_required, current_user
 from app.models import User
 
@@ -30,13 +30,13 @@ def online_status(userId):
         return {'errors': ['Unauthorized']}
 
     status= request.json['status']
-
-    user = User.query.get(id)
     print(status)
+    user = User.query.get(userId)
+    
     user.online_status = status
     db.session.commit()
 
-    return {user: user.to_dict_basic()}
+    return user.to_dict()
 
 # @user_routes.route('/offline/<int:id>', methods=['PUT'])
 # @login_required
