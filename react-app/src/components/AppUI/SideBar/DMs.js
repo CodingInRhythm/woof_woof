@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 // import React from 'react';
 import './DMs.css';
-import { NavLink, useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getDirectMessages } from '../../../store/direct_messages';
@@ -16,8 +16,8 @@ const DMPerson = ({ recipient }) => {
 			dispatch(getDirectMessages(recipient.id));
 			setIsClicked(true);
 		}
-		history.push(`/dm/${recipient.id}`)
-	}
+		history.push(`/dm/${recipient.id}`);
+	};
 
 	const getNavLinkClass = path => {
 		return location.pathname === path ? 'dm__button--active' : '';
