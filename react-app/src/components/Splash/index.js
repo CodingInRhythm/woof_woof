@@ -152,7 +152,7 @@ function Splash(){
               <h1 className="splash_main-1-text">Here is an amazing
                 <span className="splash_main-1-text-highlight"> Slack clone</span>
                 ! Want to check it out?</h1>
-              <Link to="/sign-up"><div className="splash_tryout_btn">Try for free</div></Link>
+              <Link to={user ? "/app_ui" : "/sign-up"}><div className="splash_tryout_btn">{user ? "Launch Slack" : "Try for free"}</div></Link>
               {/*Replace image with something more appropriate*/}
               <img className="splash_img" src={slack_screenshot} alt="slack" />
             </div>
