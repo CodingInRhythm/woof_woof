@@ -218,7 +218,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
         </div>
       </header>
       <div className="main__content">
-        <div>
+
           {isAddDM ? (
             <>
               <form>
@@ -247,32 +247,31 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
             </>
           ) : (
             <>
-          <section className="main__chat">
-					  {messages && messages[id] && Object.entries(messages[id])?.map(([id,msg]) => (
+          		<section className="main__chat">
+					  {messages && messages[id] && Object.entries(messages[id]).reverse()?.map(([id,msg]) => (
 						<Message key={id} msg={msg} modules={modules} formats={formats}/>
 					))}
 				</section>
 				<section className="main__chat-textarea">
-		<form onSubmit={sendMessage}>
-			<ReactQuill
-			// placeholder={`Message #${messages[id]?.channel?.name}`}
-			modules={modules}
-			formats={formats}
-			inputClass="main__chat-textarea"
-			id="input_field"
-			ref={textInput}
-			// onChange={handleChange}
-			>
-			<div className="my-editing-area"></div>
-			</ReactQuill>
-			<button className="main__chat-send" type="submit">
-			<i className="fas fa-paper-plane"></i>
-			</button>
-		</form>
+					<form onSubmit={sendMessage}>
+						<ReactQuill
+						// placeholder={`Message #${messages[id]?.channel?.name}`}
+						modules={modules}
+						formats={formats}
+						inputClass="main__chat-textarea"
+						id="input_field"
+						ref={textInput}
+						// onChange={handleChange}
+						>
+						<div className="my-editing-area"></div>
+						</ReactQuill>
+						<button className="main__chat-send" type="submit">
+						<i className="fas fa-paper-plane"></i>
+						</button>
+					</form>
 				</section>
             </>
           )}
-        </div>
       </div>
     </div>
   );
