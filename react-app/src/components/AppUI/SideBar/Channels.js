@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import './Channels.css';
-import { NavLink, useLocation } from 'react-router-dom';
+import './ContextMenu.css';
+import { useLocation, NavLink } from 'react-router-dom';
 import { addNewChannel } from '../../../store/channels';
 import { getChannelMessages } from '../../../store/channel_messages';
+import { ContextMenuWrapper, useContextMenuTrigger } from 'react-context-menu-wrapper';
+import MyContextMenu from './ContextMenu';
 
 const Nav = ({ channel, setRoom }) => {
 	const [isClicked, setIsClicked] = useState(false);
@@ -13,10 +16,10 @@ const Nav = ({ channel, setRoom }) => {
 
 	const dispatch = useDispatch();
 	let location = useLocation();
-	const channelMessageObj = useSelector(state => state.channelMessages)
+	const channelMessageObj = useSelector(state => state.channelMessages);
 	let channelMessageChannel;
-	if (channelMessageObj[channel.id] !== undefined){
-		channelMessageChannel = channelMessageObj[channel.id]
+	if (channelMessageObj[channel.id] !== undefined) {
+		channelMessageChannel = channelMessageObj[channel.id];
 	}
 
 	let handleClick = e => {
@@ -39,14 +42,20 @@ const Nav = ({ channel, setRoom }) => {
 			setNewMessage(true)
 			setNumberMessages(numberMessages + 1)
 		}
-		setIsLoaded(true)
-	},[channelMessageChannel])
+		setIsLoaded(true);
+		return () => {
+			setIsLoaded(false);
+		};
+	}, [channelMessageChannel]);
+
+	const menuId = 'channelMenu';
+	const someRef = useContextMenuTrigger({ menuId: menuId, data: { name: 'Channel', id: channel.id } });
 
 	return (
 		<NavLink onClick={handleClick} to={`/channels/${channel.id}`}>
 			<li
+				ref={someRef}
 				key={channel.id}
-				// className="channels__button"
 				className={`channels__button` + ' ' + getNavLinkClass(`/channels/${channel.id}`)}
 			>
 				<span className={newMessage ? "new_message" : ""}>{channel.name}</span>
@@ -94,8 +103,14 @@ const Channels = ({ setRoom }) => {
 			name: newChannelName,
 			is_channel: true,
 		};
-		dispatch(addNewChannel(payload));
+		if (newChannelName != '') {
+			dispatch(addNewChannel(payload));
+			setHidden(!isHidden);
+			setChannelName('');
+		}
 	};
+
+	const menuId = 'channelMenu';
 
 	return (
 		<div className="channels">
@@ -108,19 +123,23 @@ const Channels = ({ setRoom }) => {
 				{arr?.map((channel, id) => (
 					<Nav channel={channel} setRoom={setRoom} key={id} />
 				))}
+				<ContextMenuWrapper id={menuId}>
+					<MyContextMenu />
+				</ContextMenuWrapper>
+
 				<li className="channels__item">
 					<div className={`channel__add--form ${isHidden ? 'hidden' : null}`}>
 						<input
 							type="text"
 							placeholder="Channel name"
 							className="channels__add-input"
+							value={newChannelName}
 							onChange={e => setChannelName(e.target.value)}
 						></input>
 						<button className="channels__add--btn" onClick={addChannel}>
 							<span className="channels__add-plussign">+</span>
 						</button>
 					</div>
-
 					<button className="channels__add" onClick={toggleAddChannel}>
 						<span className="dm__add--plussign">+</span>
 						<span className="dm__add">Add channels</span>

@@ -1,7 +1,5 @@
 import React from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-import { NavLink} from 'react-router-dom';
-// import { login } from '../../store/session';
+import { NavLink } from 'react-router-dom';
 import './PageNotFound.css';
 import logo from '../../images/slackbot_sad.png';
 
@@ -11,7 +9,7 @@ const PageNotFound = () => {
 			<div className="login-container">
 				<div></div>
 				<div className="notfound__wrap">
-					<img src={logo} class="notfound__logo"></img>
+					<img src={logo} class="notfound__logo" alt="notfound__logo"></img>
 					<h1 className="notfound__text">I'm sorry, this page doesn't exist</h1>
 					<div className="notfound__links">
 						<div className="notfound__signup-link">
