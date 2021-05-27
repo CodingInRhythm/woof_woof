@@ -3,6 +3,12 @@ from flask_socketio import SocketIO, emit, join_room
 import os
 from .models.models import db, ChannelMessage, DirectMessage
 
+# Add after deploy
+# from engineio.payload import Payload
+
+# Payload.max_decode_packets = 500
+
+
 # Setting origins variable to all when in dev, actual heroku app-url in production
 
 if os.environ.get("FLASK_ENV") == "production":
@@ -29,6 +35,7 @@ def on_leave(data):
 
 @socketio.on("chat")
 def handle_chat(data):
+    print("RECEIVNG CHAT!!!!!!!!!")
     '''
     listening for 'chat' event.  Message received is data.  We emit message (data param) back to everyone on chat channel,
     broadcast True means all connected users will receive message,
@@ -37,7 +44,7 @@ def handle_chat(data):
     message = ChannelMessage(user_id = data['id'], channel_id = data['room'], message=data['message'])
     db.session.add(message)
     db.session.commit()
-
+    print(message.to_dict_basic())
     emit("chat", message.to_dict(), room="Channel: " + data['room'])
 
 @socketio.on("dm")

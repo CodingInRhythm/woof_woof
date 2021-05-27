@@ -102,7 +102,6 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 
 			if (location.pathname.includes("dm")){
 				console.log("before dm")
-				console.log(dms)
 				if (!(id in dms)){
 					console.log(id)
 					console.log(dms)
@@ -110,6 +109,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 				}
 				socket.emit("dm", {sender_id:userId, recipient_id: id, message:text, room:hashingRoom(userId, id)})
 			} else{
+				console.log("HERE IN CHAT")
 				socket.emit("chat", {room:id, id:userId, message:text})
 			}
 			console.log(text)

@@ -102,20 +102,20 @@
 }
 
 .new_message{
-	font-weight: bold;
-	color: red;
+	font-weight:900;
+	color: white;
 }
 
-.new_message:after {
-	content: 'New!';
-	display: inline-block;
-	margin-right: 0.2rem;
-	/* height: 20px; */
+.new_message-number {
+	line-height: 1.7;
 	background-color: red;
-	border-radius: 3px;
-	margin-left: 10px;
+	border-radius: 50%;
 	color: white;
-	padding: 3px;
+	height: 25px;
+	width: 25px;
 	font-size: 14px;
 	font-weight: 600;
+	margin-left: auto;
+	z-index: 100; 
+	text-align: center;
 }
