@@ -6,7 +6,6 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import { getDirectMessages } from '../../../store/direct_messages';
 
-
 const DMPerson = ({ recipient }) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -16,6 +15,7 @@ const DMPerson = ({ recipient }) => {
 			dispatch(getDirectMessages(recipient.id));
 			setIsClicked(true);
 		}
+	};
 	let location = useLocation();
 	const getNavLinkClass = path => {
 		return location.pathname === path ? 'dm__button--active' : '';
@@ -31,27 +31,23 @@ const DMPerson = ({ recipient }) => {
 				<span>{`${recipient.firstname} ${recipient.lastname}`}</span>
 			</button>
 		</li>
-
 	);
 };
 
 const DMs = () => {
-
 	const conversations = useSelector(state => state.dm_users);
 	const history = useHistory();
-	let arr = []
-	for (let i in conversations){
-		arr.push(conversations[i])
+	let arr = [];
+	for (let i in conversations) {
+		arr.push(conversations[i]);
 	}
 
 	//FUNCTIONS
-		
-	const newMessage = () => {
-		
-		history.push('/dms/all')
-	}
-	//Component is mapping thru conversations
 
+	const newMessage = () => {
+		history.push('/dms/all');
+	};
+	//Component is mapping thru conversations
 
 	return (
 		<div className="dm">
@@ -62,7 +58,9 @@ const DMs = () => {
 			</h2>
 
 			<ul className="dm__list">
-				{arr?.map((conversation, i) => <DMPerson recipient={conversation} key={i}/>)}
+				{arr?.map((conversation, i) => (
+					<DMPerson recipient={conversation} key={i} />
+				))}
 				<li className="dm__item">
 					<button onClick={newMessage} className="dm__add">
 						<span className="dm__add--plussign">+</span>
