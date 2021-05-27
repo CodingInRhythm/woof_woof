@@ -36,6 +36,10 @@ const DMPerson = ({ recipient }) => {
 		return location.pathname === path ? 'dm__button--active' : '';
 	};
 
+	const getOnlineStatus = () => {
+		return recipient.online_status ? 'dm__button--online' : ''
+	}
+
 	useEffect(() => {
 		console.log("We have a new message!")
 		if(location.pathname !== `/dm/${recipient.id}` && isLoaded){
@@ -50,7 +54,7 @@ const DMPerson = ({ recipient }) => {
 			<button
 				id={`dm_${recipient.id}`}
 				onClick={handleClick}
-				className={`dm__button` + ' ' + getNavLinkClass(`/dm/${recipient.id}`)}
+				className={`dm__button` + ' ' + getNavLinkClass(`/dm/${recipient.id}`) + ' ' + getOnlineStatus()}
 			>
 				<span className={newMessage ? "new_message" : ""}>{`${recipient.firstname} ${recipient.lastname}`}</span>
 				<span className={numberMessages > 0 ? "new_message-number" : "hidden"}>{numberMessages}</span>
