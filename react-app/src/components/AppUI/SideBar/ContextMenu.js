@@ -1,11 +1,10 @@
 import React from 'react';
 import './ContextMenu.css';
-import { useContextMenuEvent} from 'react-context-menu-wrapper';
+import { useContextMenuEvent } from 'react-context-menu-wrapper';
 
 // Edit channel
 import { useDispatch } from 'react-redux';
 import { deleteChannel } from '../../../store/channels';
-
 
 const MyContextMenu = () => {
 	const dispatch = useDispatch();
@@ -15,11 +14,13 @@ const MyContextMenu = () => {
 
 	const handleDeleteChannel = () => {
 		dispatch(deleteChannel(menuEvent.data.id));
-	}
+	};
 
 	return (
 		<div className="context-menu">
-			<p>This belongs to {menuEvent.data.name} with id {menuEvent.data.id}!</p>
+			{/* <p>
+				This belongs to {menuEvent.data.name} with id {menuEvent.data.id}!
+			</p> */}
 			<li>
 				<button className="context-menu--btn">
 					<span className="context-menu--text">
@@ -30,7 +31,7 @@ const MyContextMenu = () => {
 			<li>
 				<button className="context-menu--btn" onClick={handleDeleteChannel}>
 					<span className="context-menu--text">
-						<i class="fas fa-trash-alt"></i>Delete Channel
+						<i class="fas fa-trash-alt"></i>Leave Channel
 					</span>
 				</button>
 			</li>

@@ -22,9 +22,9 @@ export const editExistingChannel = channel => ({
 	channel,
 });
 
-export const removeChannel = channel_id => ({
+export const removeChannel = channel => ({
 	type: DELETE_CHANNEL,
-	channel_id,
+	channel,
 });
 
 /*************************** THUNKS ***************************/
@@ -80,7 +80,8 @@ export const deleteChannel = channel_id => async dispatch => {
 
 	if (response.ok) {
 		const channel = await response.json();
-		dispatch(removeChannel(channel.channel_id));
+		console.log(channel);
+		dispatch(removeChannel(channel.channel));
 	} else {
 		throw response;
 	}
@@ -106,7 +107,7 @@ export default function channelReducer(state = initialState, action) {
 			return newState;
 		case DELETE_CHANNEL:
 			newState = { ...state };
-			delete newState[action.channel_id]
+			delete newState[action.channel.id];
 			return newState;
 		default:
 			return state;

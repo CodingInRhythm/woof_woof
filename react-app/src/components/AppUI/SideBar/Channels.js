@@ -40,6 +40,9 @@ const Nav = ({ channel, setRoom }) => {
 			setNewMessage(true);
 		}
 		setIsLoaded(true);
+		return () => {
+			setIsLoaded(false);
+		};
 	}, [channelMessageChannel]);
 
 	const menuId = 'channelMenu';
@@ -96,8 +99,11 @@ const Channels = ({ setRoom }) => {
 			name: newChannelName,
 			is_channel: true,
 		};
-		dispatch(addNewChannel(payload));
-		setHidden(!isHidden);
+		if (newChannelName != '') {
+			dispatch(addNewChannel(payload));
+			setHidden(!isHidden);
+			setChannelName('');
+		}
 	};
 
 	const menuId = 'channelMenu';
@@ -123,6 +129,7 @@ const Channels = ({ setRoom }) => {
 							type="text"
 							placeholder="Channel name"
 							className="channels__add-input"
+							value={newChannelName}
 							onChange={e => setChannelName(e.target.value)}
 						></input>
 						<button className="channels__add--btn" onClick={addChannel}>

@@ -42,16 +42,16 @@ def edit_channel(channel_id):
     return {"channel": channel.to_dict()}
 
 
-# DELETE CHANNEL
+# LEAVE CHANNEL
 @channel_routes.route('/<int:channel_id>', methods=['POST'])
 def delete_channel(channel_id):
-    print("**********************")
-    print("test ", channel_id)
     if not current_user.is_authenticated:
         return {'errors': ['Unauthorized']}
 
+    user = User.query.filter(User.id == current_user.id).first()
     channel = Channel.query.get(channel_id)
-    db.session.delete(channel)
+
+    user.channels_in.remove(channel)
     db.session.commit()
 
     return {"channel": channel.to_dict()}
