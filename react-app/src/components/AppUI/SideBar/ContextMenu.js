@@ -1,69 +1,40 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React from 'react';
 import './ContextMenu.css';
+import { useContextMenuEvent} from 'react-context-menu-wrapper';
 
-const useContextMenu = () => {
-	const [xPos, setXPos] = useState('0px');
-	const [yPos, setYPos] = useState('0px');
-	const [showMenu, setShowMenu] = useState(false);
+// Edit channel
+import { useDispatch } from 'react-redux';
+import { deleteChannel } from '../../../store/channels';
 
-	const handleContextMenu = useCallback(
-		e => {
-			e.preventDefault();
-			setXPos(`${e.pageX}px`);
-			setYPos(`${e.pageY}px`);
-			setShowMenu(true);
-		},
-		[setXPos, setYPos]
-	);
 
-	const handleClick = useCallback(() => {
-		showMenu && setShowMenu(false);
-	}, [showMenu]);
+const MyContextMenu = () => {
+	const dispatch = useDispatch();
 
-	useEffect(() => {
-		document.addEventListener('click', handleClick);
-		document.addEventListener('contextmenu', handleContextMenu);
-		return () => {
-			document.addEventListener('click', handleClick);
-			document.removeEventListener('contextmenu', handleContextMenu);
-		};
-	});
+	const menuEvent = useContextMenuEvent();
+	if (!menuEvent || !menuEvent.data) return null;
 
-	return { xPos, yPos, showMenu };
-};
+	const handleDeleteChannel = () => {
+		dispatch(deleteChannel(menuEvent.data.id));
+	}
 
-const ContextMenu = ({ menu }) => {
-	const { xPos, yPos, showMenu } = useContextMenu();
 	return (
-		<>
-			{showMenu ? (
-				<div
-					className="contextmenu-container"
-					style={{
-						top: yPos,
-						left: xPos,
-					}}
-				>
-					<li>
-						<button className="context-menu--btn">
-							<span className="context-menu--text">
-								<i class="fas fa-pencil-alt"></i>Edit Channel
-							</span>
-						</button>
-					</li>
-					<li>
-						<button className="context-menu--btn">
-							<span className="context-menu--text">
-								<i class="fas fa-trash-alt"></i>Delete Channel
-							</span>
-						</button>
-					</li>
-				</div>
-			) : (
-				<></>
-			)}
-		</>
+		<div className="context-menu">
+			<p>This belongs to {menuEvent.data.name} with id {menuEvent.data.id}!</p>
+			<li>
+				<button className="context-menu--btn">
+					<span className="context-menu--text">
+						<i class="fas fa-pencil-alt"></i>Edit Channel
+					</span>
+				</button>
+			</li>
+			<li>
+				<button className="context-menu--btn" onClick={handleDeleteChannel}>
+					<span className="context-menu--text">
+						<i class="fas fa-trash-alt"></i>Delete Channel
+					</span>
+				</button>
+			</li>
+		</div>
 	);
 };
-
-export default ContextMenu;
+export default MyContextMenu;

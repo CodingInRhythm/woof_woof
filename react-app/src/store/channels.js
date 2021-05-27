@@ -22,9 +22,9 @@ export const editExistingChannel = channel => ({
 	channel,
 });
 
-export const removeChannel = channel => ({
+export const removeChannel = channel_id => ({
 	type: DELETE_CHANNEL,
-	channel,
+	channel_id,
 });
 
 /*************************** THUNKS ***************************/
@@ -57,31 +57,30 @@ export const addNewChannel = channel_obj => async dispatch => {
 	}
 };
 
-export const editChannel = (channel_id, name) => async dispatch => {
-	const response = await fetch(`/api/channels/${channel_id}`, {
-		method: 'PUT',
-		body: JSON.stringify(name),
-		headers: { 'Content-Type': 'application/json' },
-	});
+// export const editChannel = (channel_id, name) => async dispatch => {
+// 	const response = await fetch(`/api/channels/${channel_id}`, {
+// 		method: 'PUT',
+// 		body: JSON.stringify(name),
+// 		headers: { 'Content-Type': 'application/json' },
+// 	});
 
-	if (response.ok) {
-		const channel = await response.json();
-		dispatch(editExistingChannel(channel.channel));
-		return channel;
-	} else {
-		throw response;
-	}
-};
+// 	if (response.ok) {
+// 		const channel = await response.json();
+// 		dispatch(editExistingChannel(channel.channel));
+// 		return channel;
+// 	} else {
+// 		throw response;
+// 	}
+// };
 
 export const deleteChannel = channel_id => async dispatch => {
 	const response = await fetch(`/api/channels/${channel_id}`, {
-		method: 'DELETE',
+		method: 'POST',
 	});
 
 	if (response.ok) {
 		const channel = await response.json();
-		dispatch(removeChannel(channel.channel));
-		return channel;
+		dispatch(removeChannel(channel.channel_id));
 	} else {
 		throw response;
 	}
@@ -107,7 +106,7 @@ export default function channelReducer(state = initialState, action) {
 			return newState;
 		case DELETE_CHANNEL:
 			newState = { ...state };
-			// delete
+			delete newState[action.channel_id]
 			return newState;
 		default:
 			return state;

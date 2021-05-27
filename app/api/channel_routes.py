@@ -43,9 +43,10 @@ def edit_channel(channel_id):
 
 
 # DELETE CHANNEL
-@channel_routes.route('/', methods=['DELETE'])
+@channel_routes.route('/<int:channel_id>', methods=['POST'])
 def delete_channel(channel_id):
-
+    print("**********************")
+    print("test ", channel_id)
     if not current_user.is_authenticated:
         return {'errors': ['Unauthorized']}
 
