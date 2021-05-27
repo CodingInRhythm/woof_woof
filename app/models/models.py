@@ -115,6 +115,7 @@ class User(db.Model, UserMixin):
   hashed_password = db.Column(db.String(255), nullable = False)
   firstname = db.Column(db.String(40))
   lastname = db.Column(db.String(40))
+  is_visible = db.Column(db.Boolean, default = True, nullable = False)
   online_status = db.Column(db.Boolean, nullable = False, default=False)
   profile_photo = db.Column(db.String(255))
 

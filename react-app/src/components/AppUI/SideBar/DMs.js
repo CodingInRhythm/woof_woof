@@ -5,6 +5,7 @@ import { NavLink, useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { getDirectMessages } from '../../../store/direct_messages';
+import { hideUser } from "../../../store/dm_people";
 
 const DMPerson = ({ recipient }) => {
 	const dispatch = useDispatch();
@@ -31,7 +32,13 @@ const DMPerson = ({ recipient }) => {
 		setNewMessage(false)
 		setNumberMessages(0)
 	}
+	const removeDM = (e) => {
+		console.log('here')
+		let recipientid = e.target.id
 
+		
+		console.log(recipientid)
+	}
 	const getNavLinkClass = path => {
 		return location.pathname === path ? 'dm__button--active' : '';
 	};
@@ -39,6 +46,8 @@ const DMPerson = ({ recipient }) => {
 	const getOnlineStatus = () => {
 		return recipient.online_status ? 'dm__button--online' : ''
 	}
+
+
 
 	useEffect(() => {
 		console.log("We have a new message!")
@@ -50,26 +59,41 @@ const DMPerson = ({ recipient }) => {
 	},[directMessageChannel])
 
 	return (
-		<li key={recipient.id}>
-			<button
-				id={`dm_${recipient.id}`}
-				onClick={handleClick}
-				className={`dm__button` + ' ' + getNavLinkClass(`/dm/${recipient.id}`) + ' ' + getOnlineStatus()}
-			>
-				<span className={newMessage ? "new_message" : ""}>{`${recipient.firstname} ${recipient.lastname}`}</span>
-				<span className={numberMessages > 0 ? "new_message-number" : "hidden"}>{numberMessages}</span>
-			</button>
-		</li>
-	);
+    <li key={recipient.id}>
+      <button
+        id={`dm_${recipient.id}`}
+        onClick={handleClick}
+        className={
+          `dm__button` +
+          " " +
+          getNavLinkClass(`/dm/${recipient.id}`) +
+          " " +
+          getOnlineStatus()
+        }
+      >
+        <span
+          className={newMessage ? "new_message" : ""}
+        >{`${recipient.firstname} ${recipient.lastname}`}</span>
+
+        {numberMessages ? (
+          <span className="new_message-number">{numberMessages}</span>
+        ) : (
+          <button id={recipient.id} onClick={removeDM} className="remove-dm">x</button>
+        )}
+      </button>
+    </li>
+  );
 };
 
 const DMs = () => {
 	const conversations = useSelector(state => state.dm_users);
 	const history = useHistory();
 	let arr = [];
-	for (let i in conversations) {
-		arr.push(conversations[i]);
-	}
+	for (let user in conversations) {
+		if (user.isVisible) {
+		arr.push(conversations[user]);
+		}}
+	
 
 	//FUNCTIONS
 
