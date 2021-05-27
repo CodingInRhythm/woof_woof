@@ -248,7 +248,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
           ) : (
             <>
           		<section className="main__chat">
-					  {messages && messages[id] && Object.entries(messages[id])?.map(([id,msg]) => (
+					  {messages && messages[id] && Object.entries(messages[id]).reverse()?.map(([id,msg]) => (
 						<Message key={id} msg={msg} modules={modules} formats={formats}/>
 					))}
 				</section>
