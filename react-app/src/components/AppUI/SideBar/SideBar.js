@@ -2,6 +2,8 @@ import React from 'react';
 import './SideBar.css';
 import DMs from './DMs';
 import Channels from './Channels';
+// import ContextMenu from './ContextMenu';
+
 
 const SideBar = ({ setRoom }) => {
 	return (
@@ -36,6 +38,8 @@ const SideBar = ({ setRoom }) => {
 					<span className="threads__icon"></span> Saved Items
 				</div>
 			</div>
+
+			{/* <ContextMenu /> */}
 			<Channels setRoom={setRoom} />
 			<DMs />
 		</div>

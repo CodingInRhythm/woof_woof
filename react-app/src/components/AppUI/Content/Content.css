@@ -85,7 +85,7 @@
 	background-color: whitesmoke;
 }
 
-.main__chat-item:hover .chat__extra-options{
+.main__chat-item:hover .chat__extra-options {
 	display: flex;
 }
 
@@ -122,7 +122,7 @@
 	font-size: 16px;
 }
 
-.chat__extra-options{
+.chat__extra-options {
 	position: absolute;
 	top: -10px;
 	right: 10px;
@@ -133,14 +133,14 @@
 }
 
 .chat_edit-btn,
-.chat__delete-btn{
+.chat__delete-btn {
 	font-size: 17px;
 	margin: 5px;
 	color: grey;
 }
 
 .chat__edit button:hover,
-.chat__delete button:hover{
+.chat__delete button:hover {
 	color: black;
 }
 
@@ -184,7 +184,7 @@
 	background-color: #681e69;
 }
 
-.chat__quill{
+.chat__quill {
 	background-color: white;
 }
 
@@ -206,12 +206,12 @@
 	color: grey;
 }
 
-.chat__other-info-delete-message{
+.chat__other-info-delete-message {
 	font-weight: bold;
 	color: #4a154b;
 }
 
-.chat__other-info-cancel{
+.chat__other-info-cancel {
 	border-radius: 3px;
 	background-color: white;
 	color: black;
@@ -226,7 +226,7 @@
 	text-align: center;
 }
 
-.chat__other-info-confirm{
+.chat__other-info-confirm {
 	border-radius: 3px;
 	background-color: green;
 	color: #fff;
