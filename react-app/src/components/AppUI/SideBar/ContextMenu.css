@@ -1,0 +1,43 @@
+.contextmenu-container {
+	position: absolute;
+	width: 170px;
+	background: rgba(52, 1, 68, 0.979);
+	opacity: 0.93;
+	z-index: 20;
+	list-style-type: none;
+	border-radius: 5px;
+	padding: 12px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	margin-top: -25px;
+}
+
+.context-menu--btn {
+	padding: 5px 10px 5px 10px;
+	display: flex;
+	align-items: center;
+	border-radius: 5px;
+}
+.context-menu--btn:hover {
+	background-color: rgba(93, 2, 121, 0.979);
+	/* color: white;
+	font-size: 12px; */
+}
+
+.context-menu--text {
+	color: white;
+	font-size: 14px;
+}
+
+.fa-pencil-alt,
+.fa-trash-alt {
+	margin-right: 10px;
+}
+
+.fa-pencil-alt {
+	color: rgb(0, 183, 255);
+}
+.fa-trash-alt {
+	color: rgb(211, 3, 3);
+}

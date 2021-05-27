@@ -50,7 +50,7 @@ body {
 	overflow-y: scroll;
 	top: 38px;
 	bottom: 0;
-	z-index: 1;
+	z-index: 99;
 	width: 250px;
 	background: #3f0e40;
 	color: #fff;
@@ -69,22 +69,20 @@ body {
 	margin-right: 3px;
 }
 
+/* -------> SCROLL BAR STYLINGS <-------- */
 /* width */
 ::-webkit-scrollbar {
 	width: 8px;
 }
-
 /* Track */
 ::-webkit-scrollbar-track {
 	background: #350d36;
 }
-
 /* Handle */
 ::-webkit-scrollbar-thumb {
 	background: #906791;
 	margin-right: 5px;
 }
-
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
 	/* background: #ffffff; */

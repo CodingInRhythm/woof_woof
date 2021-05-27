@@ -17,9 +17,8 @@ const Nav = ({ channel, setRoom }) => {
 		// let element = document.querySelector(".channels__button--active")
 		// element.classList.remove("channels__button--active")
 		// e.target.classList.add("channels__button--active")
-		setRoom(`Channel: ${channel.id}`)
-	}
-
+		setRoom(`Channel: ${channel.id}`);
+	};
 
 	let location = useLocation();
 	const getNavLinkClass = path => {
@@ -78,6 +77,7 @@ const Channels = ({ setRoom }) => {
 			is_channel: true,
 		};
 		dispatch(addNewChannel(payload));
+		setHidden(!isHidden);
 	};
 
 	return (
