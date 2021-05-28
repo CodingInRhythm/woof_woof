@@ -1,8 +1,9 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import ava from '../../../images/ava.png';
 import './Navigation.css';
 import { useSelector } from 'react-redux';
+
+import UserProfileModal from '../UserProfile/UserProfileModal'
 
 function Navigation({ isLoaded }) {
 	const handleSearch = e => {
@@ -20,7 +21,7 @@ function Navigation({ isLoaded }) {
 				<input type="text" placeholder="Search..." className="nav-searchBar" />
 			</form>
 			<span className="username">{user.username}</span>
-			<img src={ava} className="nav-logo" alt="nav-logo" height="70" />
+			<UserProfileModal profileUser={user} classname={'nav-logo'}/>
 		</nav>
 	);
 }

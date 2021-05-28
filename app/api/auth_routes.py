@@ -1,9 +1,11 @@
 #################### IMPORTS ####################
 from flask import Blueprint, jsonify, session, request
 from app.models import User, db
+from app.aws import allowed_file, get_unique_filename, upload_file_to_s3
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+
 
 
 #################### SETUP ####################
@@ -66,12 +68,33 @@ def sign_up():
     Creates a new user and logs them in
     """
     form = SignUpForm()
+    image = form.data['profile_image']
+
+    if not allowed_file(image.filename):
+        return {"errors": "file type not permitted"}, 400
+
+    image.filename = get_unique_filename(image.filename)
+
+    upload = upload_file_to_s3(image)
+
+    if "url" not in upload:
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        return upload, 400
+
+    url = upload["url"]
+
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         user = User(
             username=form.data['username'],
             email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            firstname=form.data['firstname'],
+            lastname=form.data['lastname'],
+            profile_photo=url
+
         )
         db.session.add(user)
         db.session.commit()

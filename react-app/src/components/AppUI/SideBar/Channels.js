@@ -13,19 +13,20 @@ const Nav = ({ channel, setRoom }) => {
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [newMessage, setNewMessage] = useState(false);
 	const [numberMessages, setNumberMessages] = useState(0)
+	const [messageCount, setMessageCount] = useState(0)
 
 	const dispatch = useDispatch();
 	let location = useLocation();
 	const channelMessageObj = useSelector(state => state.channelMessages);
 	let channelMessageChannel;
-	if (channelMessageObj[channel.id] !== undefined) {
+	if (channelMessageObj[channel.id]) {
 		channelMessageChannel = channelMessageObj[channel.id];
 	}
 
 	let handleClick = e => {
 		if (!isClicked) {
-			setIsClicked(true);
 			dispatch(getChannelMessages(channel.id));
+			setIsClicked(true);
 		}
 		setRoom(`Channel: ${channel.id}`)
 		setNewMessage(false)
@@ -37,14 +38,16 @@ const Nav = ({ channel, setRoom }) => {
 	};
 
 	useEffect(() => {
-		// console.log("We have a new message!")
+		console.log("We have a new message!")
+		console.log(location.pathname, `/channels/${channel.id}`, isLoaded)
 		if(location.pathname !== `/channels/${channel.id}` && isLoaded){
 			setNewMessage(true)
-			setNumberMessages(numberMessages + 1)
+			setNumberMessages(numberMessages=>numberMessages + 1)
 		}
 		setIsLoaded(true);
 		return () => {
 			setIsLoaded(false);
+			// console.log(isLoaded)
 		};
 	}, [channelMessageChannel]);
 

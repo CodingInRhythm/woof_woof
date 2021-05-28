@@ -1,23 +1,23 @@
 #modal {
   position: fixed;
-  top: 50px;
+  top: 38px;
   right: 0;
-  left: 0;
+  left: 250px;
   bottom: 0;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
 }
 
 #modal-background {
   position: fixed;
-  top: 0;
+  top: 38px;
   right: 0;
-  left: 0;
+  left: 250px;
   bottom: 0;
-  background-color: var(--modalFadedBackground);
+  background-color: rgba(64,64,64,.5);
   animation: modalFadeIn .5s;
-  z-index: 98;
+  z-index: 99;
 }
 
 button:hover{
@@ -44,8 +44,8 @@ button:hover{
   margin: 2% 0;
   padding: 5px;
 
-  width: 400px;
-  height: auto;
+  width: 80%;
+  height: 80%;
   z-index: 99;
 
   animation: modalAnimation .5s, modalFadeIn 1s;

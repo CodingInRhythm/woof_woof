@@ -33,7 +33,7 @@ def seed_channel_messages():
         messages.append(
             {'user_id': user_id,
             'channel_id': channel_id,
-            'message': fake.sentence(nb_words=random.randint(1,15))}
+            'message': f'<p class="chat__text">{fake.sentence(nb_words=random.randint(1,15))}</p>'}
         )
 
     for message in messages:

@@ -49,6 +49,7 @@ export const getChannelMessages = channel_id => async dispatch => {
     data.channel_messages.forEach(message=>{
         obj[message.id]=message
     })
+    console.log('TEST')
 
 	dispatch(setChannelMessages(channel_id, obj))
 };

@@ -2,17 +2,19 @@ import React from 'react';
 import './SideBar.css';
 import DMs from './DMs';
 import Channels from './Channels';
+import { useSelector } from 'react-redux';
 // import ContextMenu from './ContextMenu';
 
 
 const SideBar = ({ setRoom }) => {
+	const user = useSelector(state=>state.session.user)
 	return (
 		<div className="sidebar">
 			<button className="workspace-menu">
 				<div className="workspace-menu__info">
 					<h1 className="workspace-menu__name">Juice Fans</h1>
 					<div className="workspace-menu__status">
-						<span className="workspace-menu__username">nasanov</span>
+						<span className="workspace-menu__username">{`  ${user.firstname} ${user.lastname}`}</span>
 					</div>
 				</div>
 				<span className="workspace-icon">

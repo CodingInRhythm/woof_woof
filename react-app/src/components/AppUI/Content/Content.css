@@ -20,6 +20,24 @@
 	justify-content: space-between;
 }
 
+.channels__header{
+	list-style: none;
+	font-weight: bolder;
+}
+
+.channels__header:before {
+	content: '\1F3E0     ';
+}
+
+.dms__header{
+	list-style: none;
+	font-weight: bolder;
+}
+
+.dms__header:before {
+	content: '\1F436     ';
+}
+
 .main__channel-members {
 	display: flex;
 	flex-direction: column;

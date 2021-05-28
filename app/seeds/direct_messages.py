@@ -26,7 +26,7 @@ def seed_direct_messages():
         messages.append(
             {'sender_id': sender_id,
             'recipient_id': recipient_id,
-            'message': fake.sentence(nb_words=random.randint(1,15))}
+            'message': f'<p class="chat__text">{fake.sentence(nb_words=random.randint(1,15))}</p>'}
         )
 
     for message in messages:

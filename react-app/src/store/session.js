@@ -63,11 +63,11 @@ export const authenticate = () => async (dispatch) => {
 
     const formData = new FormData();
     formData.append('username', username)
+    formData.append('email', email)
+    formData.append('password', password)
     formData.append('firstname', firstname)
     formData.append('lastname', lastname)
-    formData.append('email', email)
     formData.append("profile_image", profile_image);
-    formData.append('password', password)
 
 
     const response = await fetch("/api/auth/signup", {

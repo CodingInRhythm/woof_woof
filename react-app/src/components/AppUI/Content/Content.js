@@ -49,7 +49,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 	const { id } = useParams();
 	const location = useLocation();
 	const dispatch = useDispatch();
-	const channel_messages = useSelector(state => state.channelMessages);
+	const channels = useSelector(state => state.channels);
 	const direct_messages = useSelector(state => state.directMessages);
 	const dms = useSelector(state => state.dm_users);
 	const userId = useSelector(state => state.session.user.id);
@@ -118,7 +118,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 		if (window.localStorage.getItem(id.toString())) {
 			window.localStorage.removeItem(id.toString())
 		}
-		return 
+		return
 	}
 
 	//  USEEFFECTS
@@ -131,10 +131,10 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 			setRoom(hashingRoom(userId, id));
 			slice = 'directMessages';
 		}
-		if (!channel_messages[id] && slice === 'channelMessages') {
+		if (!messages[id] && slice === 'channelMessages') {
 			dispatch(getChannelMessages(id));
 		}
-		if (!direct_messages[id] && slice === 'directMessages') {
+		if (!messages[id] && slice === 'directMessages') {
 			dispatch(getDirectMessages(id));
 		}
 	}, [room, dispatch, id]);
@@ -161,7 +161,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
         <Link
           key={idx}
           onClick={() => handleClick(messages[msg].id)}
-	
+
           to={`/dm/${messages[msg].id}`}
         >
           <div className="main__chat-item">
@@ -212,7 +212,22 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 							<h1 className="main__h3">All Direct Messages</h1>
 						</div>
 					) : (
-						<h1 className="main__h3">#2021-01-group02-juice-and-the-thunks</h1>
+						<>
+							{slice==='channelMessages' &&
+								<li
+									className={`channels__header`}
+								>
+									{channels[id]?.name}
+								</li>
+							}
+							{slice==='directMessages' &&
+								<li
+									className={`dms__header`}
+								>
+									{`${dms[id]?.firstname} ${dms[id]?.lastname}`}
+								</li>
+							}
+						</>
 					)}
 				</div>
 				<div className="main__channel-members">
