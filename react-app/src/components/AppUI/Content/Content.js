@@ -124,6 +124,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 	//  USEEFFECTS
 
 	useEffect(() => {
+		localStorage.setItem('lastPage', location.pathname)
 		if (location.pathname.includes('channel')) {
 			slice = 'channelMessages';
 			setRoom(hashingRoom(id));

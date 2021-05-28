@@ -5,6 +5,7 @@ import ReactQuill from 'react-quill'; // ES6
 
 import {editChannelMessage, deleteChannelMessage} from '../../../store/channel_messages'
 import {editDirectMessage, deleteDirectMessage} from '../../../store/direct_messages'
+import UserProfileModal from '../UserProfile/UserProfileModal'
 import ava from '../../../images/ava.png';
 
 /*************************** HELPER COMPONENT ***************************/
@@ -19,7 +20,7 @@ const EditDelete = ({editOn, setEditOn, deleteOn, setDeleteOn, msg, date, module
         let textField = textInput.current.state.value
         if(textField && textField !== "<br>"){
             let editor = textInput.current.getEditor()
-            let text= editor.getText()
+			let text = textField.slice(0, 2) + " class='chat__text' " + textField.slice(2)
             if (msg.recipient_id && text!==currentMessage){
                 dispatch(editDirectMessage(msg.id, text))
             } else if (msg.channel_id && text!==currentMessage){
@@ -95,7 +96,7 @@ const Message = ({ msg, modules, formats}) => {
     return (
         <div className={editOn || deleteOn ? "main__chat-item-edit-delete" : "main__chat-item"}>
             <div className="chat__image-container">
-                <img src={msg.user?.profile_photo ? msg.user.profile_photo : ava} alt="profile-photo" className="chat__avatar"></img>
+                <UserProfileModal profileUser={msg.user} alt="profile-photo"/>
             </div>
             <EditDelete editOn={editOn} setEditOn={setEditOn} deleteOn={deleteOn} setDeleteOn={setDeleteOn} msg={msg} date={date} modules={modules} formats={formats}/>
             {!editOn && isUser && <div className="chat__extra-options">

@@ -15,7 +15,7 @@ const DMPerson = ({ recipient }) => {
 	const [newMessage, setNewMessage] = useState(false);
 	const [isLoaded, setIsLoaded] = useState(false)
 	const [numberMessages, setNumberMessages] = useState(0)
-  
+
 	let location = useLocation();
 	const directMessageObj = useSelector(state => state.directMessages);
 	let directMessageChannel;
@@ -28,15 +28,15 @@ const DMPerson = ({ recipient }) => {
 			dispatch(getDirectMessages(recipient.id));
 			setIsClicked(true);
 		}
-		history.push(`/dm/${recipient.id}`)
 		setNewMessage(false)
 		setNumberMessages(0)
+		history.push(`/dm/${recipient.id}`)
 	}
 	const removeDM = (e) => {
 		console.log('here')
 		let recipientid = e.target.id
 		window.localStorage.setItem(`${recipientid}`, `${recipientid}`)
-		
+
 		console.log(recipientid)
 	}
 	const getNavLinkClass = path => {
@@ -96,7 +96,7 @@ const DMs = () => {
 	Object.keys(window.localStorage).forEach((key) => {
 		invisibleArray.push(Number(key))
 	})
-	
+
 	for (let id of Object.keys(conversations)) {
 		if (!(invisibleArray.includes(Number(id)))) {
 			arr.push(conversations[id]);

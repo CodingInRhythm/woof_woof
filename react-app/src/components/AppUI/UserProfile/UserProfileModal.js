@@ -1,23 +1,25 @@
 /*************************** REACT IMPORTS ***************************/
 import React, { useState } from 'react';
-import ava from '../../../images/ava.png';
 
 
 /*************************** OTHER FILE IMPORTS ***************************/
 import { Modal } from '../../../context/Modal';
 import UserProfile from './UserProfile';
+import ProfilePhoto from './ProfilePhoto'
 
 /*************************** COMPONENTS ***************************/
 
-function UserProfileModal({profileUser, classname}) {
+function UserProfileModal({profileUser, alt}) {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <>
-        <img onClick={() => setShowModal(true)} src={profileUser.profile_photo ? profileUser.profile_photo : ava} className={classname} alt="" height="70" />
+        <div className='profile__modal-photo' onClick={() => setShowModal(true)}>
+          <ProfilePhoto profileUser={profileUser} alt={alt}/>
+        </div>
         {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-            <UserProfile profileUser={profileUser}/>
+            <UserProfile profileUser={profileUser} setShowModal={setShowModal}/>
         </Modal>
         )}
     </>

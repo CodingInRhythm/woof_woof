@@ -27,61 +27,90 @@ export const authenticate = () => async (dispatch) => {
     dispatch(setUser(data))
   }
 
-  export const login = (email, password) => async (dispatch)  => {
-    const response = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email,
-        password
-      })
-    });
-    const data = await response.json();
-    if (data.errors) {
-        return data;
-    }
-
-    dispatch(setUser(data))
-    return {};
+export const login = (email, password) => async (dispatch)  => {
+  const response = await fetch('/api/auth/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      email,
+      password
+    })
+  });
+  const data = await response.json();
+  if (data.errors) {
+      return data;
   }
 
-  export const logout = () => async (dispatch) => {
-    const response = await fetch("/api/auth/logout", {
-      headers: {
-        "Content-Type": "application/json",
-      }
-    });
+  dispatch(setUser(data))
+  return {};
+}
 
-    const data = await response.json();
-    dispatch(removeUser());
-  };
-
-
-  export const signUp = (username, firstname, lastname, email, profile_image, password) => async (dispatch)  => {
-
-    const formData = new FormData();
-    formData.append('username', username)
-    formData.append('email', email)
-    formData.append('password', password)
-    formData.append('firstname', firstname)
-    formData.append('lastname', lastname)
-    formData.append("profile_image", profile_image);
-
-
-    const response = await fetch("/api/auth/signup", {
-      method: "POST",
-      body: formData,
-    });
-    const data = await response.json();
-    if (data.errors) {
-        return data;
+export const logout = () => async (dispatch) => {
+  const response = await fetch("/api/auth/logout", {
+    headers: {
+      "Content-Type": "application/json",
     }
+  });
 
-    dispatch(setUser(data))
-    return {};
+  const data = await response.json();
+  dispatch(removeUser());
+};
+
+
+export const signUp = (username, firstname, lastname, email, profile_image, password) => async (dispatch)  => {
+
+  const formData = new FormData();
+  formData.append('username', username)
+  formData.append('email', email)
+  formData.append('password', password)
+  formData.append('firstname', firstname)
+  formData.append('lastname', lastname)
+  formData.append("profile_image", profile_image);
+
+  const response = await fetch("/api/auth/signup", {
+    method: "POST",
+    body: formData,
+  });
+  const data = await response.json();
+  if (data.errors) {
+      return data;
   }
+
+  dispatch(setUser(data))
+  return {};
+}
+
+
+export const editUser = ({id, username, firstname, lastname, email, profile_image}) => async (dispatch)  => {
+
+  const formData = new FormData();
+  formData.append('username', username)
+  formData.append('email', email)
+  formData.append('firstname', firstname)
+  formData.append('lastname', lastname)
+  formData.append("profile_image", profile_image);
+  console.log(formData.get('profile_image'))
+
+
+  const response = await fetch(`/api/auth/${id}`, {
+    method: "PUT",
+    body: formData,
+  });
+
+  const data = await response.json();
+
+  if (data.errors) {
+      return data;
+  }
+
+  dispatch(setUser(data))
+  return data;
+}
+
+
+
 
 export default function reducer(state=initialState, action) {
     switch (action.type) {

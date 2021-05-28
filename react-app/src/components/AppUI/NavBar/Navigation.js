@@ -21,7 +21,9 @@ function Navigation({ isLoaded }) {
 				<input type="text" placeholder="Search..." className="nav-searchBar" />
 			</form>
 			<span className="username">{user.username}</span>
-			<UserProfileModal profileUser={user} classname={'nav-logo'}/>
+			<div className="nav-logo">
+				<UserProfileModal profileUser={user}/>
+			</div>
 		</nav>
 	);
 }

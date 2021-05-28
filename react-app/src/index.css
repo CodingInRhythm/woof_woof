@@ -74,3 +74,15 @@ button {
 	height: 100%;
 	width: 100%;
 }
+
+:root {
+
+  --fadedGreyBlue: rgba(190, 202, 211,.55);
+  --lightCoral: rgba(253, 177, 150,1);
+  --sapphire: rgba(26, 88, 139, 1);
+
+  --modalBackground: var(--fadedGreyBlue);
+
+  --profileBackground: white;
+  --defaultProfPic: var(--lightCoral);
+}

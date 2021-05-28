@@ -84,15 +84,16 @@
 
 .main__chat-item {
 	display: flex;
-	margin-top: 10px;
+	margin: 5px 0;
 	position: relative;
 	padding: 5px;
 	width: 100%;
+	animation: fadeIn .5s;
 }
 
 .main__chat-item-edit-delete {
 	display: flex;
-	margin-top: 10px;
+	margin: 5px 0;
 	position: relative;
 	padding: 5px;
 	background-color: wheat;
@@ -106,8 +107,9 @@
 	display: flex;
 }
 
-.chat__avatar {
+.chat__image-container {
 	width: 44px;
+	height: 44px;
 	border-radius: 5px;
 	margin-right: 10px;
 }

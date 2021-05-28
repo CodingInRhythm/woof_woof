@@ -1,3 +1,33 @@
+
+
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+.profile__modal-photo{
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: var(--defaultProfPic);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* Standard */
+}
+
+.profile__modal-photo div{
+  font-size: 100%;
+}
+
 #modal {
   position: fixed;
   top: 38px;
@@ -15,8 +45,8 @@
   right: 0;
   left: 250px;
   bottom: 0;
-  background-color: rgba(64,64,64,.5);
-  animation: modalFadeIn .5s;
+  background-color: var(--modalBackground);
+  animation: fadeIn .5s;
   z-index: 99;
 }
 
@@ -33,20 +63,20 @@ button:hover{
   text-decoration: none;
   border:none;
   color: grey;
-  background-color: var(--background3);
   font-size: 20px;
 }
 
 #modal-content {
   position: absolute;
-  background-color: var(--modalBackground);
+  background-color: var(--profileBackground);
   border-radius: 10px;
   margin: 2% 0;
   padding: 5px;
 
-  width: 80%;
-  height: 80%;
+  min-width: 300px;
+  min-height: 300px;
+  max-height: 550px;
   z-index: 99;
 
-  animation: modalAnimation .5s, modalFadeIn 1s;
+  animation: modalAnimation .5s, fadeIn 1s;
 }

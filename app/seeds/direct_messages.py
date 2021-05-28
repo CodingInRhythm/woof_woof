@@ -15,8 +15,8 @@ def seed_direct_messages():
     user_count = len(User.query.all())
 
     messages = [
-        {'sender_id': 1, 'recipient_id': 2, "message":'Spicy?'},
-        {'sender_id': 2, 'recipient_id': 1, "message":'Spicy'},
+        {'sender_id': 1, 'recipient_id': 2, "message": '<p class="chat__text">Spicy?</p>'},
+        {'sender_id': 2, 'recipient_id': 1, "message": '<p class="chat__text">Spicy</p>'},
     ]
 
     for _ in range(100):
