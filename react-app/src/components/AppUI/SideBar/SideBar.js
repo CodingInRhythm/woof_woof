@@ -5,8 +5,7 @@ import Channels from './Channels';
 // import ContextMenu from './ContextMenu';
 import {useUserSearch} from '../../../context/UserSearch'
 
-
-const SideBar = ({ setRoom }) => {
+const SideBar = () => {
 	const {searchParam, setSearchParam, matchingUsers, setMatchingUsers} = useUserSearch()
 
 	const resetSearch = () => {
@@ -16,6 +15,7 @@ const SideBar = ({ setRoom }) => {
 		console.log(searchParam);
 		setMatchingUsers("")
 	}
+
 	return (
 		<div onClick={resetSearch} className="sidebar">
 			<button className="workspace-menu">
@@ -50,7 +50,7 @@ const SideBar = ({ setRoom }) => {
 			</div>
 
 			{/* <ContextMenu /> */}
-			<Channels setRoom={setRoom} />
+			<Channels />
 			<DMs />
 		</div>
 	);

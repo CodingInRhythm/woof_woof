@@ -9,7 +9,7 @@ import { ContextMenuWrapper, useContextMenuTrigger } from 'react-context-menu-wr
 import MyContextMenu from './ContextMenu';
 import { editChannel } from '../../../store/channels';
 
-const Nav = ({ channel, setRoom, editOn, setEditOn }) => {
+const Nav = ({ channel, editOn, setEditOn }) => {
 	const [isClicked, setIsClicked] = useState(false);
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [newMessage, setNewMessage] = useState(false);
@@ -30,10 +30,10 @@ const Nav = ({ channel, setRoom, editOn, setEditOn }) => {
 			setIsClicked(true);
 			dispatch(getChannelMessages(channel.id));
 		}
-		setRoom(`Channel: ${channel.id}`);
-		setNewMessage(false);
-		setNumberMessages(0);
-	};
+		setNewMessage(false)
+		setNumberMessages(0)
+	}
+
 
 	const getNavLinkClass = path => {
 		return location.pathname === path ? 'channels__button--active' : '';
@@ -102,7 +102,7 @@ const Nav = ({ channel, setRoom, editOn, setEditOn }) => {
 	}
 };
 
-const Channels = ({ setRoom }) => {
+const Channels = () => {
 	const channels = useSelector(state => state.channels);
 
 	let arr = [];
@@ -160,7 +160,8 @@ const Channels = ({ setRoom }) => {
 			</h2>
 			<ul className="channels__list">
 				{arr?.map((channel, id) => (
-					<Nav channel={channel} setRoom={setRoom} key={channel.id} editOn={editOn} setEditOn={setEditOn} />
+					<Nav channel={channel} key={channel.id} editOn={editOn} setEditOn={setEditOn} />
+
 
 				))}
 				<ContextMenuWrapper id={menuId}>
