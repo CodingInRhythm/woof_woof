@@ -59,7 +59,7 @@ const DMPerson = ({ dmusers, recipient }) => {
   console.log('BEFORE USE EFFECT', recipient.id);
 
   useEffect(() => {
-    // console.log("We have a new message!")
+    console.log(location.pathname)
     if (location.pathname !== `/dm/${recipient.id}` && isLoaded) {
       console.log('INSIDE USEEFFECT', recipient.id);
       setNewMessage(true);
