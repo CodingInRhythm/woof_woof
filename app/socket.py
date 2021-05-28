@@ -27,6 +27,7 @@ socketio = SocketIO(cors_allowed_origins=origins)
 def on_join(data):
     room=data['room']
     join_room(room)
+    print("joined!   ", room)
 
 
 @socketio.on('leave')
@@ -55,3 +56,8 @@ def handle_dm(data):
     db.session.commit()
     print(message.to_dict_basic())
     emit("dm", message.to_dict(), room=data["room"])
+
+@socketio.on("dm_change")
+def handle_dm_user_change(data):
+
+    emit("dm_change", {recipient_id:data["recipient_id"], sender_id:data["sender_id"]}, room="dm_user_change_room")

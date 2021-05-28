@@ -94,13 +94,19 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 	const sendMessage = (e) => {
 		e.preventDefault();
 		textField = textInput.current.state.value
-
+		console.log(textField)
 		if(textField && textField !== "<br>"){
+
 			let editor = textInput.current.getEditor()
 			let text= editor.getText()
 			editor.deleteText(0, text.length)
-
+			
 			if (location.pathname.includes("dm")){
+
+				if(!dms[id]){
+					console.log('dmchange emit')
+					socket.emit("dm_change", {recipientId: id, sender_id: userId})
+				}
 				// console.log("before dm")
 				if (!(id in dms)){
 					console.log(id)
@@ -109,15 +115,28 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 				}
 				socket.emit("dm", {sender_id:userId, recipient_id: id, message:text, room:hashingRoom(userId, id)})
 			} else{
-				console.log("HERE IN CHAT")
+				if (socket.disconnected){
+					console.log("insided disconnected socket")
+					// console.log('heeeeyyyyyy')
+					socket.emit('join', {room:hashingRoom(id)})
+					console.log("I have joined room:  ", hashingRoom(id))
+					
+				}
+				// socket.connected = true
+				// socket.disconnected = false
+				// console.log("before emit---", socket)
 				socket.emit("chat", {room:id, id:userId, message:text})
 			}
-			// console.log(text)
+			console.log(text)
 		}
 
 	}
 
 	//  USEEFFECTS
+
+	useEffect(() => {
+		console.log(socket)
+	},[socket])
 
 	useEffect(() => {
 		if (location.pathname.includes("channel")) {
