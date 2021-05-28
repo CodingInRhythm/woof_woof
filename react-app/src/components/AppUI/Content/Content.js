@@ -9,6 +9,7 @@ import { getChannelMessages, addMessage as addChannelMessage } from '../../../st
 import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { getDirectMessages } from '../../../store/direct_messages';
 import { addDMUser, getDMUser } from '../../../store/dm_people';
+import { useUserSearch } from "../../../context/UserSearch";
 
 const Content = ({ isAddDM, room, setRoom, socket }) => {
 	let modules = {
@@ -56,8 +57,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 
 	const history = useHistory();
 
-	const [searchParam, setSearchParam] = useState('');
-	const [matchingUsers, setMatchingUsers] = useState([]);
+	const { searchParam, setSearchParam, matchingUsers, setMatchingUsers } = useUserSearch();
 
 	const textInput = useRef(null);
 
@@ -143,14 +143,21 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 		const fetchUsers = async () => {
 			const res = await fetch('/api/users/');
 			const data = await res.json();
-
+			console.log('SEARCH PARAM', searchParam, "/n", 'matching users', matchingUsers)
 			setMatchingUsers(
 				data.users.filter(user => {
-					return user.firstname?.toLowerCase().indexOf(searchParam) === 0;
+					return (
+            user.firstname?.toLowerCase().indexOf(searchParam.toLowerCase()) ===
+              0 ||
+            user.lastname?.toLowerCase().indexOf(searchParam.toLowerCase()) === 0
+			||
+			`${user.firstname} ${user.lastname}`.toLowerCase().indexOf(searchParam.toLowerCase()) === 0
+          );
 				})
 			);
 		};
-		if (searchParam) fetchUsers();
+		if (searchParam.length > 0) fetchUsers()
+		else { setMatchingUsers([])}
 	}, [searchParam]);
 
 	let messageItem;
@@ -191,6 +198,9 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 		If it does, we need to link to that users DMs.
 		*/
 
+		setSearchParam("")
+		setMatchingUsers([])
+
 		history.push(`/dm/${e.target.id}`);
 	};
 	// console.log(matchingUsers)
@@ -204,90 +214,98 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 	};
 
 	return (
-		<div className="main">
-			<header className="main__header">
-				<div className="main__channel-info">
-					{isAddDM ? (
-						<div>
-							<h1 className="main__h3">All Direct Messages</h1>
-						</div>
-					) : (
-						<h1 className="main__h3">#2021-01-group02-juice-and-the-thunks</h1>
-					)}
-				</div>
-				<div className="main__channel-members">
-					<div>
-						<i className="fas fa-user-friends"></i>{' '}
-						<span className="main_channel-members-h3">View Members</span>
-					</div>
-					<div>
-						<i className="fas fa-user-plus"></i>{' '}
-						<span className="main_channel-members-h3">Add Members</span>
-					</div>
-				</div>
-			</header>
-			<div className="main__content">
-				{isAddDM ? (
-					<>
-						<form>
-							<input
-								type="text"
-								name="searchParam"
-								value={searchParam}
-								onChange={e => setSearchParam(e.target.value)}
-								placeholder="@somebody"
-							/>
-						</form>
-						{matchingUsers.length && (
-							<ul>
-								{matchingUsers.map((user, index) => {
-									return (
-										<li>
-											<form id={user.id} onSubmit={handleSubmit}>
-												<button type="submit">{user.firstname}</button>
-											</form>
-										</li>
-									);
-								})}
-							</ul>
-						)}
-						<section className="main__chat">{messageItem}</section>
-					</>
-				) : (
-					<>
-						<section className="main__chat">
-							{messages &&
-								messages[id] &&
-								Object.entries(messages[id])
-									.reverse()
-									?.map(([id, msg]) => (
-										<Message key={id} msg={msg} modules={modules} formats={formats} />
-									))}
-						</section>
-						<section className="main__chat-textarea">
-							<form onSubmit={sendMessage}>
-								<ReactQuill
-									// placeholder={`Message #${messages[id]?.channel?.name}`}
-									modules={modules}
-									formats={formats}
-									inputClass="main__chat-textarea"
-									onSubmit={editorContentChange}
-									id="input_field"
-									ref={textInput}
-									// onChange={handleChange}
-								>
-									<div className="my-editing-area"></div>
-								</ReactQuill>
-								<button className="main__chat-send" type="submit">
-									<i className="fas fa-paper-plane"></i>
-								</button>
-							</form>
-						</section>
-					</>
-				)}
-			</div>
-		</div>
-	);
+    <div className="main">
+      <header className="main__header">
+        <div className="main__channel-info">
+          {isAddDM ? (
+            <div>
+              <h1 className="main__h3">All Direct Messages</h1>
+            </div>
+          ) : (
+            <h1 className="main__h3">#2021-01-group02-juice-and-the-thunks</h1>
+          )}
+        </div>
+        <div className="main__channel-members">
+          <div>
+            <i className="fas fa-user-friends"></i>{" "}
+            <span className="main_channel-members-h3">View Members</span>
+          </div>
+          <div>
+            <i className="fas fa-user-plus"></i>{" "}
+            <span className="main_channel-members-h3">Add Members</span>
+          </div>
+        </div>
+      </header>
+      <div className="main__content">
+        {isAddDM ? (
+          <>
+            <form>
+              <input
+                // className="user__search"
+                type="text"
+                name="searchParam"
+                value={searchParam}
+                onChange={(e) => setSearchParam(e.target.value)}
+                placeholder="@somebody"
+              />
+            </form>
+            {matchingUsers.length > 0 && (
+              <ul>
+                {matchingUsers.map((user, index) => {
+                  return (
+                    <li>
+                      <form id={user.id} onSubmit={handleSubmit}>
+                        <button type="submit">
+                          {user.firstname} {user.lastname}
+                        </button>
+                      </form>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+            <section className="main__chat">{messageItem}</section>
+          </>
+        ) : (
+          <>
+            <section className="main__chat">
+              {messages &&
+                messages[id] &&
+                Object.entries(messages[id])
+                  .reverse()
+                  ?.map(([id, msg]) => (
+                    <Message
+                      key={id}
+                      msg={msg}
+                      modules={modules}
+                      formats={formats}
+                    />
+                  ))}
+            </section>
+            <section className="main__chat-textarea">
+              <form onSubmit={sendMessage}>
+                <ReactQuill
+                  // placeholder={`Message #${messages[id]?.channel?.name}`}
+                  modules={modules}
+                  formats={formats}
+                  inputClass="main__chat-textarea"
+                  onSubmit={editorContentChange}
+                  id="input_field"
+                  ref={textInput}
+                  // onChange={handleChange}
+                >
+                  <div className="my-editing-area"></div>
+                </ReactQuill>
+                <button className="main__chat-send" type="submit">
+                  <i className="fas fa-paper-plane"></i>
+                </button>
+              </form>
+            </section>
+          </>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default Content;

@@ -3,11 +3,21 @@ import './SideBar.css';
 import DMs from './DMs';
 import Channels from './Channels';
 // import ContextMenu from './ContextMenu';
+import {useUserSearch} from '../../../context/UserSearch'
 
 
 const SideBar = ({ setRoom }) => {
+	const {searchParam, setSearchParam, matchingUsers, setMatchingUsers} = useUserSearch()
+
+	const resetSearch = () => {
+		console.log('MAKING RESETET SEARCH?')
+		console.log(searchParam)
+		setSearchParam("")
+		console.log(searchParam);
+		setMatchingUsers("")
+	}
 	return (
-		<div className="sidebar">
+		<div onClick={resetSearch} className="sidebar">
 			<button className="workspace-menu">
 				<div className="workspace-menu__info">
 					<h1 className="workspace-menu__name">Juice Fans</h1>

@@ -43,24 +43,7 @@ const DMPerson = ({ dmusers, recipient }) => {
     let recipientid = e.target.id;
     window.localStorage.setItem(`${recipientid}`, `${recipientid}`);
     console.log(dmusers);
-	//need to, eventually, history.push(`/dms/newrecipientid`)
-	//to grab that id of the index before/after that was removed (aka recipientid)
-	//before would be easier?  Can just say if 0, make it 1 otherwise, the index of recipient -1.  
-	//how do i find index?  iteration. 
 
-
-	// for (let i =0; i < dmusers.length; i++) {
-	// 	if (dmusers[i].id === recipient.id) {
-	// 		//need to account for 1 remaining user, first user of group and rest of cases
-
-	// 		//1 remaining user
-	// 		if(i === 0) {
-
-	// 		}
-	// 		let newid = 
-	// 		history.push(`/dm/${recipient.id}`);
-	// 	}
-	// }
 	return history.push("/dms/all")
     console.log(recipientid);
   };
@@ -73,12 +56,12 @@ const DMPerson = ({ dmusers, recipient }) => {
   };
 
   //useeffect WHERE NOTIFICATIONS FIRE
-  console.log(recipient.id);
+  console.log('BEFORE USE EFFECT', recipient.id);
 
   useEffect(() => {
     // console.log("We have a new message!")
     if (location.pathname !== `/dm/${recipient.id}` && isLoaded) {
-      console.log(recipient.id);
+      console.log('INSIDE USEEFFECT', recipient.id);
       setNewMessage(true);
       setNumberMessages(numberMessages + 1);
     }
@@ -122,6 +105,7 @@ const DMPerson = ({ dmusers, recipient }) => {
 const DMs = () => {
   const conversations = useSelector((state) => state.dm_users);
   const history = useHistory();
+  const directMessageObj = useSelector((state) => state.directMessages);
   let arr = [];
   let invisibleArray = [];
   Object.keys(window.localStorage).forEach((key) => {
@@ -133,6 +117,12 @@ const DMs = () => {
       arr.push(conversations[id]);
     }
   }
+
+  //*************useEFECT*********************** */
+
+  useEffect(() => {
+	return 
+  },[directMessageObj])
 
   //FUNCTIONS
 
