@@ -112,12 +112,12 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 		}
 	};
 
-	const handleClick = (e) => {
+	const handleClick = (id) => {
 		//GOTTA figure out how to grab the messages user id to delete from local storage.
-		console.log(e.view.location.href)
-		// if (window.localStorage.getItem(id.toString())) {
-		// 	window.localStorage.removeItem(id.toString())
-		// }
+		console.log(id)
+		if (window.localStorage.getItem(id.toString())) {
+			window.localStorage.removeItem(id.toString())
+		}
 		return 
 	}
 
@@ -160,8 +160,8 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 			return (
         <Link
           key={idx}
-          onClick={handleClick}
-          id={msg}
+          onClick={() => handleClick(messages[msg].id)}
+	
           to={`/dm/${messages[msg].id}`}
         >
           <div className="main__chat-item">
