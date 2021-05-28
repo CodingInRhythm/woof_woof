@@ -118,7 +118,7 @@ const Content = ({ isAddDM, socket }) => {
 
 	useEffect(() => {
 		console.log("location.pathname")
-	}, [])
+	}, [location.pathname])
 
 	//  USEEFFECTS
 
