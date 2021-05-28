@@ -239,3 +239,17 @@
 	transition: all 1s;
 	text-align: center;
 }
+
+.ql-font-serif {
+  font-style: italic;
+}
+.user__search {
+	max-width: 732px;
+	width: 100%;
+	border-radius: 7px;
+	outline: none;
+	height: 24px;
+	border: 1px solid #cccccc;
+	padding: 0 0 0 10px;
+	font-size: 13px;
+}

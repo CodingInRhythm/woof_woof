@@ -18,10 +18,10 @@ const MainInterface = () => {
 	const dispatch = useDispatch();
 
   
-  	const location = useLocation()
+  const location = useLocation()
 		
 	const [isAddDM, setIsAddDM] = useState(false)
-  
+
 	const dmUsers = useSelector(state => state.dm_users)
 	const channels = useSelector(state => state.channels)
 	const userId = useSelector(state => state.session.user.id)
@@ -76,6 +76,7 @@ const MainInterface = () => {
 			// when we recieve a dm, add it into our directMessages object in redux
 			if (dm.recipient_id === userId){
 				console.log("I have recieved a dm---------", dm)
+				window.localStorage.removeItem(dm.sender_id.toString())
 				dispatch(addDirectMessage(dm.sender_id, dm))
 			} else{
 				console.log("I have send a dm---------", dm)
@@ -125,7 +126,7 @@ const MainInterface = () => {
 			setIsAddDM(false)
 		}
 	}, [location.pathname]);
-	/*Need to add: 
+	/*Need to add:
 	Search bar
 	components of rendered users
 	GET RID OF P TAG :)

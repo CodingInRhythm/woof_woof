@@ -3,6 +3,7 @@
 /*************************** TYPES ***************************/
 const SET_DMUSER = 'set/DMUSER';
 const ADD_DMUSER = 'add/DMUSER';
+const REMOVE_DMUSER = 'remove/DMUSER';
 /*************************** ACTIONS ***************************/
 const setDMUser = dm_users => ({
 	type: SET_DMUSER,
@@ -14,6 +15,11 @@ export const addDMUser = user => ({
 	user
 	}
 )
+
+const removeDMUser = userid => ({
+	type: REMOVE_DMUSER,
+	userid
+})
 
 /*************************** THUNKS ***************************/
 export const getDMUsers = () => async dispatch => {
@@ -43,6 +49,21 @@ export const getDMUser = (id) => async dispatch => {
 	dispatch(addDMUser(data))
 }
 
+export const hideUser = (userObj) => async dispatch => {
+	const response = await fetch(`/api/dms/${userObj.id}`, {
+		method: "PUT",
+		headers: {
+			'Content-Type' : 'application/json'
+		},
+		body: JSON.stringify({userObj})
+	});
+	const data = await response.json()
+	if (data.errors) {
+		return
+	}
+	dispatch(removeDMUser(userObj.id))
+}
+
 export const setOnlineStatusUser = (id, status) => async dispatch => {
 	// console.log("setting online status")
 	const response = await fetch(`/api/users/online/${id}`, {
@@ -53,6 +74,7 @@ export const setOnlineStatusUser = (id, status) => async dispatch => {
 		body: JSON.stringify({status}),
 	});
 }
+
 
 /*************************** REDUCER ***************************/
 
