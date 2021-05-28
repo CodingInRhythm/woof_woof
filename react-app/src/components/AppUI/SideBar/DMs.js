@@ -143,7 +143,7 @@ const DMs = () => {
 
       <ul className="dm__list">
         {arr?.map((conversation, i) => (
-          <DMPerson dmusers={arr} recipient={conversation} key={i} />
+          <DMPerson dmusers={arr} recipient={conversation} key={conversation.id} />
         ))}
         <ContextMenuWrapper id={menuId}>
           <MyContextMenu />

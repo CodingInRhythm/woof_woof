@@ -23,6 +23,7 @@ const Nav = ({ channel, setRoom }) => {
 	}
 
 	let handleClick = e => {
+	
 		if (!isClicked) {
 			setIsClicked(true);
 			dispatch(getChannelMessages(channel.id));
@@ -121,7 +122,7 @@ const Channels = ({ setRoom }) => {
 			</h2>
 			<ul className="channels__list">
 				{arr?.map((channel, id) => (
-					<Nav channel={channel} setRoom={setRoom} key={id} />
+					<Nav channel={channel} setRoom={setRoom} key={channel.id} />
 				))}
 				<ContextMenuWrapper id={menuId}>
 					<MyContextMenu />
