@@ -20,15 +20,15 @@ const Nav = ({ channel, editOn, setEditOn }) => {
 	let location = useLocation();
 	const channelMessageObj = useSelector(state => state.channelMessages);
 	let channelMessageChannel;
-	if (channelMessageObj[channel.id] !== undefined) {
+	if (channelMessageObj[channel.id]) {
 		channelMessageChannel = channelMessageObj[channel.id];
 	}
 
 	let handleClick = e => {
-	
+
 		if (!isClicked) {
-			setIsClicked(true);
 			dispatch(getChannelMessages(channel.id));
+			setIsClicked(true);
 		}
 		setNewMessage(false)
 		setNumberMessages(0)
@@ -48,6 +48,7 @@ const Nav = ({ channel, editOn, setEditOn }) => {
 		setIsLoaded(true);
 		return () => {
 			setIsLoaded(false);
+			// console.log(isLoaded)
 		};
 	}, [channelMessageChannel]);
 

@@ -58,6 +58,7 @@
 	background: #350d36;
 	cursor: pointer;
 }
+
 .channels__button--active,
 .channels__button--active:hover {
 	background: #038edf;
