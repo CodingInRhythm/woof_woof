@@ -16,8 +16,11 @@
 }
 
 #slack_logo{
+    font-size: 60px;
     width:45px;
-    margin-left: 25px;
+    margin-left: 10px;
+    color: grey;
+    margin-right: 15px;
 }
 .splash_nav-left{
     display: flex;

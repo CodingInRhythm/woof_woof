@@ -124,35 +124,64 @@ function Splash(){
     <div className="splash_container" id="splash_container">
       <nav className="splash_nav">
         <div className="splash_nav-left">
-          <img src={slack_logo} alt="logo" id="slack_logo"/>
-          <h1 className="nav_title">slack</h1>
+          {/* <img src={slack_logo} alt="logo" id="slack_logo"/> */}
+          <i class="fas fa-dog" id="slack_logo"></i>
+          <h1 className="nav_title">woof woof</h1>
         </div>
         <div className="splash_nav-right">
-          <Link to="/login" id="nav_login"><div className="splash_nav-link signin_btn">Sign In</div></Link>
-          <Link to="/sign-up" id="nav_signup"><div className="splash_nav-link tryout_btn">Try for free</div></Link>
-          <button id="nav_logout" className="splash_nav-link" onClick={onLogout}>Log out</button>
+          <Link to="/login" id="nav_login">
+            <div className="splash_nav-link signin_btn">Sign In</div>
+          </Link>
+          <Link to="/sign-up" id="nav_signup">
+            <div className="splash_nav-link tryout_btn">Try for free</div>
+          </Link>
+          <button
+            id="nav_logout"
+            className="splash_nav-link"
+            onClick={onLogout}
+          >
+            Log out
+          </button>
         </div>
       </nav>
       <nav className="splash_scrolling_nav hidden" id="splash_scrolling_nav">
         <div className="splash_scrolling_nav-left" onClick={scrollToTop}>
-          <img src={slack_logo} alt="logo" id="slack_logo"/>
-          <h1 className="splash_scolling_nav_title">slack</h1>
+          <img src={slack_logo} alt="logo" id="slack_logo" />
+          <h1 className="splash_scolling_nav_title">Woof Woof</h1>
         </div>
         <div className="splash_scrolling_nav-right">
-          <Link to="/login" id="nav_scroll_login"><div className="splash_scrolling_signin">Sign In</div></Link>
-          <Link to="/sign-up" id="nav_scroll_signup"><div className="splash_scrolling_tryout">Try for free</div></Link>
-          <button id="nav_scroll_logout" className="splash_nav-link" onClick={onLogout}>Log out</button>
+          <Link to="/login" id="nav_scroll_login">
+            <div className="splash_scrolling_signin">Sign In</div>
+          </Link>
+          <Link to="/sign-up" id="nav_scroll_signup">
+            <div className="splash_scrolling_tryout">Try for free</div>
+          </Link>
+          <button
+            id="nav_scroll_logout"
+            className="splash_nav-link"
+            onClick={onLogout}
+          >
+            Log out
+          </button>
         </div>
       </nav>
-      <button className="scroll-btn" id="scroll-btn">Continue</button>
+      <button className="scroll-btn" id="scroll-btn">
+        Continue
+      </button>
       <ScrollContainer className="splash_scroll_container">
         <ScrollPage page={0}>
           <Animator animation={SlideUp}>
             <div className="splash_main-1 splash_page">
-              <h1 className="splash_main-1-text">Here is an amazing
-                <span className="splash_main-1-text-highlight"> Slack clone</span>
-                ! Want to check it out?</h1>
-              <Link to={user ? "/app_ui" : "/sign-up"}><div className="splash_tryout_btn">{user ? "Launch Slack" : "Try for free"}</div></Link>
+              <h1 className="splash_main-1-text">
+                Here is an amazing
+                <span className="splash_main-1-text-highlight"> Woof Woof</span>
+                ! Want to check it out?
+              </h1>
+              <Link to={user ? "/app_ui" : "/sign-up"}>
+                <div className="splash_tryout_btn">
+                  {user ? "Launch Woof Woof" : "Try for free"}
+                </div>
+              </Link>
               {/*Replace image with something more appropriate*/}
               <img className="splash_img" src={slack_screenshot} alt="slack" />
             </div>
@@ -160,8 +189,7 @@ function Splash(){
         </ScrollPage>
         <ScrollPage page={1}>
           <Animator animation={SlideUp}>
-            <div>
-            </div>
+            <div></div>
           </Animator>
         </ScrollPage>
         <ScrollPage page={2}>
@@ -169,30 +197,54 @@ function Splash(){
             <div className="splash_main-2 splash_page">
               <div className="splash_main-2-left">
                 <h2>Technologies used to create this site</h2>
-                <br/><br/>
-                <h4>This project combines the power of a React frontend to dynamically display
-                  content with a Python backend to serve data and host websockets
+                <br />
+                <br />
+                <h4>
+                  This project combines the power of a React frontend to
+                  dynamically display content with a Python backend to serve
+                  data and host websockets
                 </h4>
               </div>
               <div className="splash_main-2-right">
-                <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" id="js_logo"><img src={js} className="splash-logo" alt="js-logo"/></a>
-                <a href="https://docs.python.org/3/" id="python_logo"><img src={python} className="splash-logo" alt="python-logo"/></a>
-                <a href="https://docs.docker.com/" id="docker_logo"><img src={docker} className="splash-logo" alt="docker-logo"/></a>
-                <a href="https://reactjs.org/" id="react_logo"><img src={react} className="splash-logo" alt="react-logo"/></a>
-                <a href="https://flask.palletsprojects.com/en/2.0.x/" id="flask_logo"><img src={flask} className="splash-logo" alt="flask-logo"/></a>
-                <a href="https://www.postgresql.org/" id="postgres_logo"><img src={postgres} className="splash-logo" alt="postgres-logo"/></a>
+                <a
+                  href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+                  id="js_logo"
+                >
+                  <img src={js} className="splash-logo" alt="js-logo" />
+                </a>
+                <a href="https://docs.python.org/3/" id="python_logo">
+                  <img src={python} className="splash-logo" alt="python-logo" />
+                </a>
+                <a href="https://docs.docker.com/" id="docker_logo">
+                  <img src={docker} className="splash-logo" alt="docker-logo" />
+                </a>
+                <a href="https://reactjs.org/" id="react_logo">
+                  <img src={react} className="splash-logo" alt="react-logo" />
+                </a>
+                <a
+                  href="https://flask.palletsprojects.com/en/2.0.x/"
+                  id="flask_logo"
+                >
+                  <img src={flask} className="splash-logo" alt="flask-logo" />
+                </a>
+                <a href="https://www.postgresql.org/" id="postgres_logo">
+                  <img
+                    src={postgres}
+                    className="splash-logo"
+                    alt="postgres-logo"
+                  />
+                </a>
               </div>
             </div>
           </Animator>
         </ScrollPage>
         <ScrollPage page={3}>
           <Animator animation={SlideUp}>
-            <div>
-            </div>
+            <div></div>
           </Animator>
         </ScrollPage>
         <ScrollPage page={4}>
-        <Animator animation={SlideUp}>
+          <Animator animation={SlideUp}>
             <div className="splash_main-3 splash_page">
               <h2>Created By</h2>
               <div className="splash_main-3-creator" id="creator-nurs">
@@ -219,10 +271,10 @@ function Splash(){
           </Animator>
         </ScrollPage>
       </ScrollContainer>
-      <br/>
+      <br />
       {/* <footer className="splash_footer">Hey I'm footer</footer> */}
     </div>
-  )
+  );
 }
 
 export default Splash

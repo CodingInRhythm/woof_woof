@@ -8,22 +8,25 @@ const SearchAll = () => {
     //*******************FETCH FUNCTION***************
 
 
-    useEffect(() => {
+    // useEffect(() => {
         
-        const fetchUsersDMs = async () => {
-            // let users = await fetch('/api/users/')
-            // let userData = await users.json()
-            // let channels = await fetch('/api/channels/all')
-            // let channelData = channels.json()
-            Promise.all([
-              fetch("/api/users/"),
-              fetch("/api/channels/all"),
-            ]).then(res => console.log(res))
-            
-        }
-
-        fetchUsersDMs()
-    },[searchAllParam])
+    //     const fetchUsersDMs = async () => {
+    //         // let users = await fetch('/api/users/')
+    //         // let userData = await users.json()
+    //         // let channels = await fetch('/api/channels/all')
+    //         // let channelData = channels.json()
+    //     //    Promise.all([
+    //     //       fetch("/api/users/"),
+    //     //       fetch("/api/channels/all"),
+    //     //     ]).then((res) => Promise.all(res.map((response) => response.json())))
+    //     //     .then((res) => 
+               
+    //     //     }
+    //     // )
+    // }
+    //     fetchUsersDMs()
+    //     console.log()
+    // },[searchAllParam])
     return (
         <form>
             <input
