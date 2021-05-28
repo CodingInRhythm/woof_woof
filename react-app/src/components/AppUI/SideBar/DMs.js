@@ -32,7 +32,13 @@ const DMPerson = ({ recipient }) => {
 		setNewMessage(false)
 		setNumberMessages(0)
 	}
-
+	const removeDM = (e) => {
+		console.log('here')
+		let recipientid = e.target.id
+		window.localStorage.setItem(`${recipientid}`, `${recipientid}`)
+		
+		console.log(recipientid)
+	}
 	const getNavLinkClass = path => {
 		return location.pathname === path ? 'dm__button--active' : '';
 	};
@@ -41,7 +47,10 @@ const DMPerson = ({ recipient }) => {
 		return recipient.online_status ? 'dm__button--online' : ''
 	}
 
+//useeffect WHERE NOTIFICATIONS FIRE
+
 	useEffect(() => {
+		console.log(recipient.id)
 		// console.log("We have a new message!")
 		if(location.pathname !== `/dm/${recipient.id}` && isLoaded){
 			setNewMessage(true)
@@ -54,29 +63,46 @@ const DMPerson = ({ recipient }) => {
 	// const dmRef = useContextMenuTrigger({ menuId: menuId, data: { name: 'DMs', id: recipient.id } });
 
 	return (
-		<li
-			key={recipient.id}
-			// ref={dmRef}
-		>
-			<button
-				id={`dm_${recipient.id}`}
-				onClick={handleClick}
-				className={`dm__button` + ' ' + getNavLinkClass(`/dm/${recipient.id}`) + ' ' + getOnlineStatus()}
-			>
-				<span className={newMessage ? "new_message" : ""}>{`${recipient.firstname} ${recipient.lastname}`}</span>
-				<span className={numberMessages > 0 ? "new_message-number" : "hidden"}>{numberMessages}</span>
-			</button>
-		</li>
-	);
+    <li key={recipient.id}>
+      <button
+        id={`dm_${recipient.id}`}
+        onClick={handleClick}
+        className={
+          `dm__button` +
+          " " +
+          getNavLinkClass(`/dm/${recipient.id}`) +
+          " " +
+          getOnlineStatus()
+        }
+      >
+        <span
+          className={newMessage ? "new_message" : ""}>{`${recipient.firstname} ${recipient.lastname}`}</span>
+
+        {numberMessages ? (
+          <span className="new_message-number">{numberMessages}</span>
+        ) : (
+          <button id={recipient.id} onClick={removeDM} className="remove-dm">x</button>
+        )}
+      </button>
+    </li>
+  );
 };
 
 const DMs = () => {
 	const conversations = useSelector(state => state.dm_users);
 	const history = useHistory();
 	let arr = [];
-	for (let i in conversations) {
-		arr.push(conversations[i]);
-	}
+	let invisibleArray = []
+	Object.keys(window.localStorage).forEach((key) => {
+		invisibleArray.push(Number(key))
+	})
+	
+	for (let id of Object.keys(conversations)) {
+		if (!(invisibleArray.includes(Number(id)))) {
+			arr.push(conversations[id]);
+		}
+  	}
+	console.log(arr)
 
 	//FUNCTIONS
 

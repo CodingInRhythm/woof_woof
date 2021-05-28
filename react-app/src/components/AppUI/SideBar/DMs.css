@@ -119,3 +119,21 @@
 	z-index: 100; 
 	text-align: center;
 }
+
+.remove-dm {
+	line-height: 1.7;
+	border-radius: 50%;
+	color: rgba(255, 255, 255, 50%);
+	height: 25px;
+	width: 25px;
+	font-size: 14px;
+	font-weight: 600;
+	margin-left: auto;
+	z-index: 100; 
+	text-align: center;
+	display: none;
+}
+
+.dm__button:hover > .remove-dm {
+	display: block;
+}
