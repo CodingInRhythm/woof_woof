@@ -112,6 +112,14 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 		}
 	};
 
+	const handleClick = (id) => {
+		
+		if (window.localStorage.getItem(id.toString())) {
+			window.localStorage.removeItem(id.toString())
+		}
+		return 
+	}
+
 	//  USEEFFECTS
 
 	useEffect(() => {
@@ -149,7 +157,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 	if (isAddDM) {
 		messageItem = Object.keys(messages).map(msg => {
 			return (
-				<Link to={`/dm/${messages[msg].id}`}>
+				<Link onClick={handleClick(messages[msg].id)} to={`/dm/${messages[msg].id}`}>
 					<div className="main__chat-item">
 						<div className="chat__image-container">
 							<img src={messages[msg].profile_photo} alt="profile-photo" className="chat__avatar"></img>

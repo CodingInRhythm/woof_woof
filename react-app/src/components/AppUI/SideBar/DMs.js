@@ -35,7 +35,7 @@ const DMPerson = ({ recipient }) => {
 	const removeDM = (e) => {
 		console.log('here')
 		let recipientid = e.target.id
-
+		window.localStorage.setItem(`${recipientid}`, `${recipientid}`)
 		
 		console.log(recipientid)
 	}
@@ -91,11 +91,17 @@ const DMs = () => {
 	const conversations = useSelector(state => state.dm_users);
 	const history = useHistory();
 	let arr = [];
-	for (let user in conversations) {
-		if (user.isVisible) {
-		arr.push(conversations[user]);
-		}}
+	let invisibleArray = []
+	Object.keys(window.localStorage).forEach((key) => {
+		invisibleArray.push(Number(key))
+	})
 	
+	for (let id of Object.keys(conversations)) {
+		if (!(invisibleArray.includes(Number(id)))) {
+			arr.push(conversations[id]);
+		}
+  	}
+	console.log(arr)
 
 	//FUNCTIONS
 
