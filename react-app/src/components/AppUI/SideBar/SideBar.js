@@ -1,4 +1,5 @@
 import React from 'react';
+import {useSelector} from 'react-redux'
 import './SideBar.css';
 import DMs from './DMs';
 import Channels from './Channels';
@@ -8,7 +9,7 @@ import {useUserSearch} from '../../../context/UserSearch'
 
 const SideBar = ({ setRoom }) => {
 	const {searchParam, setSearchParam, matchingUsers, setMatchingUsers} = useUserSearch()
-
+	const user = useSelector((state) => state.session.user)
 	const resetSearch = () => {
 		console.log('MAKING RESETET SEARCH?')
 		console.log(searchParam)
@@ -22,7 +23,7 @@ const SideBar = ({ setRoom }) => {
 				<div className="workspace-menu__info">
 					<h1 className="workspace-menu__name">Juice Fans</h1>
 					<div className="workspace-menu__status">
-						<span className="workspace-menu__username">nasanov</span>
+						<span className="workspace-menu__username">{user.username}</span>
 					</div>
 				</div>
 				<span className="workspace-icon">

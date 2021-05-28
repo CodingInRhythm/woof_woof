@@ -230,7 +230,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
         <div className="main__channel-members">
           <div>
             <i className="fas fa-user-friends"></i>{" "}
-            <span className="main_channel-members-h3">View Members</span>
+            <span className="main_channel-members-h3"></span>
           </div>
           <div>
             <i className="fas fa-user-plus"></i>{" "}
