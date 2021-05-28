@@ -239,3 +239,7 @@
 	transition: all 1s;
 	text-align: center;
 }
+
+.ql-font-serif {
+	font-style: italic;
+}

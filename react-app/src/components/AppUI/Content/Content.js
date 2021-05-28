@@ -87,7 +87,9 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 		textField = textInput.current.state.value;
 		if (textField && textField !== '<br>') {
 			let editor = textInput.current.getEditor();
-			let text = textField.slice(0, 2) + " class='chat__text' " + textField.slice(2)
+
+			// TODO: h2 for headings, pre for codeblock, etc
+			let text = textField.slice(0, 2) + " class='chat__text' " + textField.slice(2);
 
 			editor.deleteText(0, text.length);
 
@@ -175,14 +177,6 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 	};
 	// console.log(matchingUsers)
 
-	// function getQuillHtml() {
-	// 	return input_field.innerHTML;
-	// }
-	const editorContentChange = (content, delta, source, editor) => {
-		console.log(editor.getHTML()); // HTML/rich text
-		console.log(editor.getLength()); // number of characters
-	};
-
 	return (
 		<div className="main">
 			<header className="main__header">
@@ -251,7 +245,6 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 									modules={modules}
 									formats={formats}
 									inputClass="main__chat-textarea"
-									onSubmit={editorContentChange}
 									id="input_field"
 									ref={textInput}
 									// onChange={handleChange}
