@@ -259,7 +259,7 @@ const Content = ({ isAddDM, socket }) => {
 								placeholder="@somebody"
 							/>
 						</form>
-						{matchingUsers.length && (
+						{matchingUsers.length > 0 && (
 							<ul>
 								{matchingUsers.map((user, index) => {
 									return (
