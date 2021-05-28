@@ -4,12 +4,21 @@ import DMs from './DMs';
 import Channels from './Channels';
 import { useSelector } from 'react-redux';
 // import ContextMenu from './ContextMenu';
-
+import {useUserSearch} from '../../../context/UserSearch'
 
 const SideBar = ({ setRoom }) => {
 	const user = useSelector(state=>state.session.user)
+	const {searchParam, setSearchParam, matchingUsers, setMatchingUsers} = useUserSearch()
+
+	const resetSearch = () => {
+		console.log('MAKING RESETET SEARCH?')
+		console.log(searchParam)
+		setSearchParam("")
+		console.log(searchParam);
+		setMatchingUsers("")
+	}
 	return (
-		<div className="sidebar">
+		<div onClick={resetSearch} className="sidebar">
 			<button className="workspace-menu">
 				<div className="workspace-menu__info">
 					<h1 className="workspace-menu__name">Juice Fans</h1>
@@ -42,7 +51,7 @@ const SideBar = ({ setRoom }) => {
 			</div>
 
 			{/* <ContextMenu /> */}
-			<Channels setRoom={setRoom} />
+			<Channels />
 			<DMs />
 		</div>
 	);

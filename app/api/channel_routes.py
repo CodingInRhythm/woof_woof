@@ -4,6 +4,13 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 channel_routes = Blueprint('channels', __name__)
 
+#GET ALL CHANNELS IN DATABASE
+
+@channel_routes.route('/all')
+def all_channels():
+    channels = Channel.query.all()
+    print(channels)
+    return {"channels": [channel.to_dict() for channel in channels]}
 
 # GET CHANNELS FOR THE CURRENT USER
 @channel_routes.route('/')
@@ -28,16 +35,14 @@ def add_channel():
 
 
 # EDIT CHANNEL
-@channel_routes.route('/', methods=['PUT'])
+@channel_routes.route('/<int:channel_id>', methods=['PUT'])
 def edit_channel(channel_id):
 
     if not current_user.is_authenticated:
         return {'errors': ['Unauthorized']}
 
-    new_name = request.json['name']
-
     channel = Channel.query.get(channel_id)
-    channel.name = new_name
+    channel.name = request.json
     db.session.commit()
     return {"channel": channel.to_dict()}
 
