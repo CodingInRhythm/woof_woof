@@ -147,10 +147,10 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 		if (!channel_messages[id] && slice === "channelMessages") {
 			dispatch(getChannelMessages(id));
 		}
-		if (!direct_messages[id] && slice === "directMessages") {
+		if ((!direct_messages[id] && slice === "directMessages" )|| (direct_messages[id] && Object.keys(direct_messages[id].length === 0))) {
 			dispatch(getDirectMessages(id));
 		}
-	}, [room, dispatch, id]);
+	}, [room, dispatch, id, dms]);
 
 
 	useEffect(() => {
