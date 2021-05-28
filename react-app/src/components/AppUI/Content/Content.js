@@ -11,7 +11,7 @@ import { getDirectMessages } from '../../../store/direct_messages';
 import { addDMUser, getDMUser } from '../../../store/dm_people'
 
 
-const Content = ({ isAddDM, room, setRoom, socket }) => {
+const Content = ({ isAddDM, socket }) => {
 
 	let modules = {
 		toolbar: [
@@ -44,14 +44,14 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 	//val 1 will either be channelId or userId
 	const hashingRoom = (val1, recipientId) => {
 		if (!recipientId) {
-      return `Channel: ${val1}`
+		return `Channel: ${val1}`
 		}
 		else {
 			return `DM${val1 < recipientId ? val1 : recipientId}${val1 > recipientId ? val1 : recipientId}`;
 		}
 	}
 
-  const { id } = useParams();
+  	const { id } = useParams();
 	const location = useLocation();
 	const dispatch = useDispatch();
 	const channel_messages = useSelector(state => state.channelMessages);
@@ -69,28 +69,25 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 	const textInput = useRef(null)
 
 	let slice;
-	let roomNum;
+	useEffect(()=> {
+		console.log("content rerendering")
+	}, [])
 
-	//Check if path is for channel, dm or dm/all which will list dms and have
-	//search functionality
 	if (location.pathname.includes("channel")) {
-		roomNum = room.split(" ")[1];
 		slice = "channelMessages";
-		setRoom(hashingRoom(id));
 	}
 	else if (location.pathname === "/dms/all") {
 		slice = "dm_users"
 	}
 	else if (location.pathname.includes("dm")) {
-		roomNum = id
-		setRoom(hashingRoom(userId, id))
 		slice = "directMessages"
 	}
+
     let messages = useSelector(state => state[slice])
 
-  let textField;
+  	let textField;
 
-  //Handle Send Message
+  	//Handle Send Message
 	const sendMessage = (e) => {
 		e.preventDefault();
 		textField = textInput.current.state.value
@@ -113,22 +110,15 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 					socket.emit("dm_change", {recipient_id: id, sender_id: userId})
 				}
 			} else{
-				if (socket.disconnected){
-					console.log("insided disconnected socket")
-					// console.log('heeeeyyyyyy')
-					socket.emit('join', {room:hashingRoom(id)})
-					console.log("I have joined room:  ", hashingRoom(id))
-					
-				}
-				// socket.connected = true
-				// socket.disconnected = false
-				// console.log("before emit---", socket)
 				socket.emit("chat", {room:id, id:userId, message:text})
 			}
 			console.log(text)
 		}
-
 	}
+
+	useEffect(() => {
+		console.log("location.pathname")
+	}, [])
 
 	//  USEEFFECTS
 
@@ -139,18 +129,17 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 	useEffect(() => {
 		if (location.pathname.includes("channel")) {
 			slice = 'channelMessages'
-			setRoom(hashingRoom(id))
 		} else {
-			setRoom(hashingRoom(userId, id))
 			slice = "directMessages"
 		}
 		if (!channel_messages[id] && slice === "channelMessages") {
+			console.log("get channel messages")
 			dispatch(getChannelMessages(id));
 		}
 		if ((!direct_messages[id] && slice === "directMessages" )|| (direct_messages[id] && Object.keys(direct_messages[id].length === 0))) {
 			dispatch(getDirectMessages(id));
 		}
-	}, [room, dispatch, id, dms]);
+	}, [ dispatch, id, dms, location.pathname]);
 
 
 	useEffect(() => {

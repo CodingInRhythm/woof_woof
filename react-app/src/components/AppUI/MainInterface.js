@@ -18,9 +18,8 @@ const MainInterface = () => {
 	const dispatch = useDispatch();
 
   
-  const location = useLocation()
+  	const location = useLocation()
 		
-	const [room, setRoom] = useState('');
 	const [isAddDM, setIsAddDM] = useState(false)
   
 	const dmUsers = useSelector(state => state.dm_users)
@@ -93,23 +92,30 @@ const MainInterface = () => {
 
 		return (()=>{
 			dispatch(setOnlineStatusUser(userId, false))
-			for (let channel in channels) {
-				socket.emit('leave', {room:hashingRoom(channel)})
-				// console.log(socket.connected)
-				// console.log("I have left room:  ", hashingRoom(channel))
-				socket.disconnect()
-				// console.log(socket.connected)
-			}
-			for (let dm in dmUsers) {
-				socket.emit('leave', {room:hashingRoom(userId, dm)})
-				// console.log(socket.connected)
-				// console.log("I have left dm:  ", hashingRoom(userId, dm))
-				socket.disconnect()
-				// console.log(socket.connected)
-			}
+			// for (let channel in channels) {
+			// 	socket.emit('leave', {room:hashingRoom(channel)})
+			// 	// console.log(socket.connected)
+			// 	console.log("I have left room:  ", hashingRoom(channel))
+			// 	// console.log(socket.connected)
+			// }
+			// for (let dm in dmUsers) {
+			// 	socket.emit('leave', {room:hashingRoom(userId, dm)})
+			// 	// console.log(socket.connected)
+			// 	console.log("I have left dm:  ", hashingRoom(userId, dm))
+			// 	socket.disconnect()
+			// 	// console.log(socket.connected)
+			// }
+			// if (!(location.pathname.includes("dm") || location.pathname.includes("channels"))){
+			console.log("I'm disconnected")
+			socket.disconnect()
+			// }
+
 		  })
 	},[dmUsers, channels])
 
+	useEffect(()=> {
+		console.log("main interface rerendering")
+	}, [])
 
 	useEffect(() => {
 		if (location.pathname.includes("dms")) {
@@ -128,9 +134,9 @@ const MainInterface = () => {
 		<>
 			<Navigation />
 			<div className="main-container">
-				<SideBar setRoom={setRoom} />
+				<SideBar />
 
-				<Content isAddDM={isAddDM} room={room} setRoom={setRoom} socket={socket}/>
+				<Content isAddDM={isAddDM} socket={socket}/>
 
 			</div>
 		</>

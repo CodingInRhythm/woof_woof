@@ -5,7 +5,7 @@ import Channels from './Channels';
 // import ContextMenu from './ContextMenu';
 
 
-const SideBar = ({ setRoom }) => {
+const SideBar = () => {
 	return (
 		<div className="sidebar">
 			<button className="workspace-menu">
@@ -40,7 +40,7 @@ const SideBar = ({ setRoom }) => {
 			</div>
 
 			{/* <ContextMenu /> */}
-			<Channels setRoom={setRoom} />
+			<Channels />
 			<DMs />
 		</div>
 	);

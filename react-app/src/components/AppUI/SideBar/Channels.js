@@ -8,7 +8,7 @@ import { getChannelMessages } from '../../../store/channel_messages';
 import { ContextMenuWrapper, useContextMenuTrigger } from 'react-context-menu-wrapper';
 import MyContextMenu from './ContextMenu';
 
-const Nav = ({ channel, setRoom }) => {
+const Nav = ({ channel }) => {
 	const [isClicked, setIsClicked] = useState(false);
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [newMessage, setNewMessage] = useState(false);
@@ -27,7 +27,6 @@ const Nav = ({ channel, setRoom }) => {
 			setIsClicked(true);
 			dispatch(getChannelMessages(channel.id));
 		}
-		setRoom(`Channel: ${channel.id}`)
 		setNewMessage(false)
 		setNumberMessages(0)
 	}
@@ -65,7 +64,7 @@ const Nav = ({ channel, setRoom }) => {
 	);
 };
 
-const Channels = ({ setRoom }) => {
+const Channels = () => {
 	const channels = useSelector(state => state.channels);
 
 	let arr = [];
@@ -121,7 +120,7 @@ const Channels = ({ setRoom }) => {
 			</h2>
 			<ul className="channels__list">
 				{arr?.map((channel, id) => (
-					<Nav channel={channel} setRoom={setRoom} key={id} />
+					<Nav channel={channel} key={id} />
 				))}
 				<ContextMenuWrapper id={menuId}>
 					<MyContextMenu />
