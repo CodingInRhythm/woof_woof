@@ -87,7 +87,9 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 		textField = textInput.current.state.value;
 		if (textField && textField !== '<br>') {
 			let editor = textInput.current.getEditor();
-			let text = textField.slice(0, 2) + " class='chat__text' " + textField.slice(2)
+
+			// TODO: h2 for headings, pre for codeblock, etc
+			let text = textField.slice(0, 2) + " class='chat__text' " + textField.slice(2);
 
 			editor.deleteText(0, text.length);
 
@@ -205,107 +207,90 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 	};
 	// console.log(matchingUsers)
 
-	// function getQuillHtml() {
-	// 	return input_field.innerHTML;
-	// }
-	const editorContentChange = (content, delta, source, editor) => {
-		console.log(editor.getHTML()); // HTML/rich text
-		console.log(editor.getLength()); // number of characters
-	};
-
 	return (
-    <div className="main">
-      <header className="main__header">
-        <div className="main__channel-info">
-          {isAddDM ? (
-            <div>
-              <h1 className="main__h3">All Direct Messages</h1>
-            </div>
-          ) : (
-            <h1 className="main__h3">#2021-01-group02-juice-and-the-thunks</h1>
-          )}
-        </div>
-        <div className="main__channel-members">
-          <div>
-            <i className="fas fa-user-friends"></i>{" "}
-            <span className="main_channel-members-h3">View Members</span>
-          </div>
-          <div>
-            <i className="fas fa-user-plus"></i>{" "}
-            <span className="main_channel-members-h3">Add Members</span>
-          </div>
-        </div>
-      </header>
-      <div className="main__content">
-        {isAddDM ? (
-          <>
-            <form>
-              <input
-                // className="user__search"
-                type="text"
-                name="searchParam"
-                value={searchParam}
-                onChange={(e) => setSearchParam(e.target.value)}
-                placeholder="@somebody"
-              />
-            </form>
-            {matchingUsers.length > 0 && (
-              <ul>
-                {matchingUsers.map((user, index) => {
-                  return (
-                    <li>
-                      <form id={user.id} onSubmit={handleSubmit}>
-                        <button type="submit">
-                          {user.firstname} {user.lastname}
-                        </button>
-                      </form>
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
-            <section className="main__chat">{messageItem}</section>
-          </>
-        ) : (
-          <>
-            <section className="main__chat">
-              {messages &&
-                messages[id] &&
-                Object.entries(messages[id])
-                  .reverse()
-                  ?.map(([id, msg]) => (
-                    <Message
-                      key={id}
-                      msg={msg}
-                      modules={modules}
-                      formats={formats}
-                    />
-                  ))}
-            </section>
-            <section className="main__chat-textarea">
-              <form onSubmit={sendMessage}>
-                <ReactQuill
-                  // placeholder={`Message #${messages[id]?.channel?.name}`}
-                  modules={modules}
-                  formats={formats}
-                  inputClass="main__chat-textarea"
-                  onSubmit={editorContentChange}
-                  id="input_field"
-                  ref={textInput}
-                  // onChange={handleChange}
-                >
-                  <div className="my-editing-area"></div>
-                </ReactQuill>
-                <button className="main__chat-send" type="submit">
-                  <i className="fas fa-paper-plane"></i>
-                </button>
-              </form>
-            </section>
-          </>
-        )}
-      </div>
-    </div>
-  );
+		<div className="main">
+			<header className="main__header">
+				<div className="main__channel-info">
+					{isAddDM ? (
+						<div>
+							<h1 className="main__h3">All Direct Messages</h1>
+						</div>
+					) : (
+						<h1 className="main__h3">#2021-01-group02-juice-and-the-thunks</h1>
+					)}
+				</div>
+				<div className="main__channel-members">
+					<div>
+						<i className="fas fa-user-friends"></i>{' '}
+						<span className="main_channel-members-h3">View Members</span>
+					</div>
+					<div>
+						<i className="fas fa-user-plus"></i>{' '}
+						<span className="main_channel-members-h3">Add Members</span>
+					</div>
+				</div>
+			</header>
+			<div className="main__content">
+				{isAddDM ? (
+					<>
+						<form>
+							<input
+								type="text"
+								name="searchParam"
+								value={searchParam}
+								onChange={e => setSearchParam(e.target.value)}
+								placeholder="@somebody"
+							/>
+						</form>
+						{matchingUsers.length && (
+							<ul>
+								{matchingUsers.map((user, index) => {
+									return (
+										<li>
+											<form id={user.id} onSubmit={handleSubmit}>
+												<button type="submit">{user.firstname}</button>
+											</form>
+										</li>
+									);
+								})}
+							</ul>
+						)}
+						<section className="main__chat">{messageItem}</section>
+					</>
+				) : (
+					<>
+						<section className="main__chat">
+							{messages &&
+								messages[id] &&
+								Object.entries(messages[id])
+									.reverse()
+									?.map(([id, msg]) => (
+										<Message key={id} msg={msg} modules={modules} formats={formats} />
+									))}
+						</section>
+						<section className="main__chat-textarea">
+							<form onSubmit={sendMessage}>
+								<ReactQuill
+									// placeholder={`Message #${messages[id]?.channel?.name}`}
+									modules={modules}
+									formats={formats}
+									inputClass="main__chat-textarea"
+									id="input_field"
+									ref={textInput}
+									// onChange={handleChange}
+								>
+									<div className="my-editing-area"></div>
+								</ReactQuill>
+								<button className="main__chat-send" type="submit">
+									<i className="fas fa-paper-plane"></i>
+								</button>
+							</form>
+						</section>
+					</>
+				)}
+			</div>
+		</div>
+	);
 };
 
 export default Content;

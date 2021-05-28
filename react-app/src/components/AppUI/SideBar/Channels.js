@@ -7,12 +7,14 @@ import { addNewChannel } from '../../../store/channels';
 import { getChannelMessages } from '../../../store/channel_messages';
 import { ContextMenuWrapper, useContextMenuTrigger } from 'react-context-menu-wrapper';
 import MyContextMenu from './ContextMenu';
+import { editChannel } from '../../../store/channels';
 
-const Nav = ({ channel, setRoom }) => {
+const Nav = ({ channel, setRoom, editOn, setEditOn }) => {
 	const [isClicked, setIsClicked] = useState(false);
 	const [isLoaded, setIsLoaded] = useState(false);
 	const [newMessage, setNewMessage] = useState(false);
-	const [numberMessages, setNumberMessages] = useState(0)
+	const [numberMessages, setNumberMessages] = useState(0);
+	const [newChannelName, setNewChannelName] = useState(channel.name);
 
 	const dispatch = useDispatch();
 	let location = useLocation();
@@ -28,10 +30,10 @@ const Nav = ({ channel, setRoom }) => {
 			setIsClicked(true);
 			dispatch(getChannelMessages(channel.id));
 		}
-		setRoom(`Channel: ${channel.id}`)
-		setNewMessage(false)
-		setNumberMessages(0)
-	}
+		setRoom(`Channel: ${channel.id}`);
+		setNewMessage(false);
+		setNumberMessages(0);
+	};
 
 	const getNavLinkClass = path => {
 		return location.pathname === path ? 'channels__button--active' : '';
@@ -39,9 +41,9 @@ const Nav = ({ channel, setRoom }) => {
 
 	useEffect(() => {
 		// console.log("We have a new message!")
-		if(location.pathname !== `/channels/${channel.id}` && isLoaded){
-			setNewMessage(true)
-			setNumberMessages(numberMessages + 1)
+		if (location.pathname !== `/channels/${channel.id}` && isLoaded) {
+			setNewMessage(true);
+			setNumberMessages(numberMessages + 1);
 		}
 		setIsLoaded(true);
 		return () => {
@@ -50,20 +52,54 @@ const Nav = ({ channel, setRoom }) => {
 	}, [channelMessageChannel]);
 
 	const menuId = 'channelMenu';
-	const someRef = useContextMenuTrigger({ menuId: menuId, data: { name: 'Channel', id: channel.id } });
+	const channelRef = useContextMenuTrigger({
+		menuId: menuId,
+		data: { name: 'Channel', id: channel.id, channelName: channel.name },
+	});
 
-	return (
-		<NavLink onClick={handleClick} to={`/channels/${channel.id}`}>
-			<li
-				ref={someRef}
-				key={channel.id}
-				className={`channels__button` + ' ' + getNavLinkClass(`/channels/${channel.id}`)}
-			>
-				<span className={newMessage ? "new_message" : ""}>{channel.name}</span>
-				<span className={numberMessages > 0 ? "new_message-number" : "hidden"}>{numberMessages}</span>
+	const handleEditChannel = e => {
+		e.preventDefault();
+		dispatch(editChannel(channel.id, newChannelName));
+		setEditOn(null);
+	};
+
+	if (editOn === channel.id) {
+		return (
+			<li className="channels__button">
+				<input
+					type="text"
+					placeholder="Type new channel name"
+					value={newChannelName}
+					className="editInputForm"
+					onChange={e => setNewChannelName(e.target.value)}
+				></input>
+				<button className="channels__add--btn" onClick={handleEditChannel}>
+					<span className="channels__edit-btn">
+						<i class="fas fa-pen-square"></i>
+					</span>
+				</button>
+				<button className="channels__add--btn" onClick={() => setEditOn(null)}>
+					<span className="channels__edit-cancel">
+						<i class="fas fa-ban"></i>
+					</span>
+				</button>
 			</li>
-		</NavLink>
-	);
+		);
+	} else {
+		return (
+			<NavLink onClick={handleClick} to={`/channels/${channel.id}`}>
+				<li
+					ref={channelRef}
+					id={'channel_' + channel.id}
+					key={channel.id}
+					className={`channels__button` + ' ' + getNavLinkClass(`/channels/${channel.id}`)}
+				>
+					<span className={newMessage ? 'new_message' : ''}>{channel.name}</span>
+					<span className={numberMessages > 0 ? 'new_message-number' : 'hidden'}>{numberMessages}</span>
+				</li>
+			</NavLink>
+		);
+	}
 };
 
 const Channels = ({ setRoom }) => {
@@ -93,6 +129,8 @@ const Channels = ({ setRoom }) => {
 	const dispatch = useDispatch();
 	const [isHidden, setHidden] = useState('true');
 	const [newChannelName, setChannelName] = useState('');
+	const [editOn, setEditOn] = useState(null);
+
 	const user = useSelector(state => state.session.user);
 	const toggleAddChannel = () => {
 		setHidden(!isHidden);
@@ -122,10 +160,11 @@ const Channels = ({ setRoom }) => {
 			</h2>
 			<ul className="channels__list">
 				{arr?.map((channel, id) => (
-					<Nav channel={channel} setRoom={setRoom} key={channel.id} />
+					<Nav channel={channel} setRoom={setRoom} key={channel.id} editOn={editOn} setEditOn={setEditOn} />
+
 				))}
 				<ContextMenuWrapper id={menuId}>
-					<MyContextMenu />
+					<MyContextMenu setEditOn={setEditOn} />
 				</ContextMenuWrapper>
 
 				<li className="channels__item">

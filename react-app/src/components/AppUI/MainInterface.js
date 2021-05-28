@@ -17,12 +17,11 @@ let socket;
 const MainInterface = () => {
 	const dispatch = useDispatch();
 
-  
-  const location = useLocation()
-		
+    const location = useLocation()
+
 	const [room, setRoom] = useState('');
 	const [isAddDM, setIsAddDM] = useState(false)
-  
+
 	const dmUsers = useSelector(state => state.dm_users)
 	const channels = useSelector(state => state.channels)
 	const userId = useSelector(state => state.session.user.id)
@@ -102,7 +101,7 @@ const MainInterface = () => {
 			setIsAddDM(false)
 		}
 	}, [location.pathname]);
-	/*Need to add: 
+	/*Need to add:
 	Search bar
 	components of rendered users
 	GET RID OF P TAG :)
