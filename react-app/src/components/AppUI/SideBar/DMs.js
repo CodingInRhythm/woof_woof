@@ -47,9 +47,10 @@ const DMPerson = ({ recipient }) => {
 		return recipient.online_status ? 'dm__button--online' : ''
 	}
 
-
+//useeffect WHERE NOTIFICATIONS FIRE
 
 	useEffect(() => {
+		console.log(recipient.id)
 		// console.log("We have a new message!")
 		if(location.pathname !== `/dm/${recipient.id}` && isLoaded){
 			setNewMessage(true)
