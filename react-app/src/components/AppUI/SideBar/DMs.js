@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 // import React from 'react';
 import './DMs.css';
-import { NavLink, useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-
+import { ContextMenuWrapper, useContextMenuEvent, useContextMenuTrigger } from 'react-context-menu-wrapper';
 import { getDirectMessages } from '../../../store/direct_messages';
-import { hideUser } from "../../../store/dm_people";
+import MyContextMenu from './ContextMenu';
 
 const DMPerson = ({ recipient }) => {
 	const dispatch = useDispatch();
@@ -15,12 +15,12 @@ const DMPerson = ({ recipient }) => {
 	const [newMessage, setNewMessage] = useState(false);
 	const [isLoaded, setIsLoaded] = useState(false)
 	const [numberMessages, setNumberMessages] = useState(0)
-
+  
 	let location = useLocation();
-	const directMessageObj = useSelector(state => state.directMessages)
+	const directMessageObj = useSelector(state => state.directMessages);
 	let directMessageChannel;
-	if (directMessageObj[recipient.id] !== undefined){
-		directMessageChannel = directMessageObj[recipient.id]
+	if (directMessageObj[recipient.id] !== undefined) {
+		directMessageChannel = directMessageObj[recipient.id];
 	}
 
 	const handleClick = () => {
@@ -50,13 +50,16 @@ const DMPerson = ({ recipient }) => {
 
 
 	useEffect(() => {
-		console.log("We have a new message!")
+		// console.log("We have a new message!")
 		if(location.pathname !== `/dm/${recipient.id}` && isLoaded){
 			setNewMessage(true)
 			setNumberMessages(numberMessages + 1)
 		}
-		setIsLoaded(true)
-	},[directMessageChannel])
+		setIsLoaded(true);
+	}, [directMessageChannel]);
+
+	// const menuId = 'durect_messages-menu';
+	// const dmRef = useContextMenuTrigger({ menuId: menuId, data: { name: 'DMs', id: recipient.id } });
 
 	return (
     <li key={recipient.id}>
@@ -72,8 +75,7 @@ const DMPerson = ({ recipient }) => {
         }
       >
         <span
-          className={newMessage ? "new_message" : ""}
-        >{`${recipient.firstname} ${recipient.lastname}`}</span>
+          className={newMessage ? "new_message" : ""}>{`${recipient.firstname} ${recipient.lastname}`}</span>
 
         {numberMessages ? (
           <span className="new_message-number">{numberMessages}</span>
@@ -102,6 +104,8 @@ const DMs = () => {
 	};
 	//Component is mapping thru conversations
 
+	const menuId = 'durect_messages-menu';
+
 	return (
 		<div className="dm">
 			<h2 className="dm__heading">
@@ -114,6 +118,9 @@ const DMs = () => {
 				{arr?.map((conversation, i) => (
 					<DMPerson recipient={conversation} key={i} />
 				))}
+				<ContextMenuWrapper id={menuId}>
+					<MyContextMenu />
+				</ContextMenuWrapper>
 				<li className="dm__item">
 					<button onClick={newMessage} className="dm__add">
 						<span className="dm__add--plussign">+</span>

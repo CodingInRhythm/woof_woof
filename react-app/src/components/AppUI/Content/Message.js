@@ -1,5 +1,5 @@
 /*************************** REACT IMPORTS ***************************/
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactQuill from 'react-quill'; // ES6
 
@@ -50,19 +50,21 @@ const EditDelete = ({editOn, setEditOn, deleteOn, setDeleteOn, msg, date, module
                     <div className="my-editing-area" />
                 </ReactQuill>
                 <button className="chat__other-info-cancel" onClick={()=>setEditOn(false)}>Cancel</button>
-                <button className="chat__other-info-confirm"  onClick={handleEdit}><i class="fas fa-check"></i> Save Changes</button>
+                <button className="chat__other-info-confirm"  onClick={handleEdit}><i className="fas fa-check"></i> Save Changes</button>
             </div>
         )
     } else if(deleteOn){
         return (
             <div className="chat__other-info-delete">
                 <h2 className="chat__other-info-delete-alert">Message will be permanently deleted. Are you sure?</h2>
-                <h2 className="chat__other-info-delete-message">{msg.message}</h2>
+                <div dangerouslySetInnerHTML={{ __html: currentMessage }}></div>
                 <button className="chat__other-info-cancel" onClick={()=>setDeleteOn(false)}>Cancel</button>
                 <button className="chat__other-info-confirm" onClick={handleDelete}>Confirm Delete</button>
             </div>
         )
     } else {
+		// const div = document.createElement("div")
+		// div.innerHTML = currentMessage;
         return(
             <div className="chat__other-info">
                 <div className="chat__other-header">
@@ -70,7 +72,8 @@ const EditDelete = ({editOn, setEditOn, deleteOn, setDeleteOn, msg, date, module
                     <span className="chat__date">{date}</span>
                 </div>
                 <div className="chat__other-text">
-                    <p className="chat__text">{currentMessage}</p>
+					<div dangerouslySetInnerHTML={{ __html: currentMessage }}></div>
+                    {/* <div className="chat__text">{div}</div> */}
                 </div>
             </div>
         )

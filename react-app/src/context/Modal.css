@@ -1,0 +1,52 @@
+#modal {
+  position: fixed;
+  top: 50px;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+#modal-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: var(--modalFadedBackground);
+  animation: modalFadeIn .5s;
+  z-index: 98;
+}
+
+button:hover{
+  cursor: pointer;
+}
+
+.modalButton{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border:none;
+  color: grey;
+  background-color: var(--background3);
+  font-size: 20px;
+}
+
+#modal-content {
+  position: absolute;
+  background-color: var(--modalBackground);
+  border-radius: 10px;
+  margin: 2% 0;
+  padding: 5px;
+
+  width: 400px;
+  height: auto;
+  z-index: 99;
+
+  animation: modalAnimation .5s, modalFadeIn 1s;
+}

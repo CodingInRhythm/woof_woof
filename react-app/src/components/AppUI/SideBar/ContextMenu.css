@@ -1,0 +1,121 @@
+/* .contextmenu-container {
+	position: absolute;
+	width: 170px;
+	background: rgba(52, 1, 68, 0.979);
+	opacity: 0.93;
+	z-index: 20;
+	list-style-type: none;
+	border-radius: 5px;
+	padding: 12px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	margin-top: -25px;
+}
+
+.context-menu--btn {
+	padding: 5px 10px 5px 10px;
+	display: flex;
+	align-items: center;
+	border-radius: 5px;
+}
+.context-menu--btn:hover {
+	background-color: rgba(93, 2, 121, 0.979);
+}
+
+.context-menu--text {
+	color: white;
+	font-size: 14px;
+}
+
+.fa-pencil-alt,
+.fa-trash-alt {
+	margin-right: 10px;
+}
+
+.fa-pencil-alt {
+	color: rgb(0, 183, 255);
+}
+.fa-trash-alt {
+	color: rgb(211, 3, 3);
+} */
+
+.context-menu {
+	box-shadow: inset rgba(0, 0, 0, 0.2) 0 0 0 1px, rgba(0, 0, 0, 0.4) 0 3px 3px;
+	background-color: #510061;
+	width: 200px;
+	user-select: none;
+	height: 90px;
+
+	opacity: 0.93;
+	list-style-type: none;
+	border-radius: 5px;
+	padding: 12px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.context-menu *:first-child {
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+}
+
+.context-menu *:last-child {
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.context-menu p {
+	text-align: center;
+	padding: 10px;
+	color: rgb(248, 248, 248);
+	margin: 0;
+}
+
+.context-menu button {
+	background-color: transparent;
+	padding: 10px;
+	width: 100%;
+}
+
+.context-menu button,
+.button {
+	font-size: inherit;
+	cursor: pointer;
+	color: #2f2f2f;
+	border: none;
+}
+
+.button {
+	background-color: #00c4a7;
+	padding: 10px 20px;
+	color: #fff;
+}
+
+.context-menu--btn {
+	padding: 5px 10px 5px 10px;
+	display: flex;
+	align-items: center;
+	border-radius: 5px;
+}
+.context-menu--btn:hover {
+	background-color: rgba(93, 2, 121, 0.979);
+}
+
+.context-menu--text {
+	color: white;
+	font-size: 14px;
+}
+
+.fa-pencil-alt,
+.fa-trash-alt {
+	margin-right: 10px;
+}
+
+.fa-pencil-alt {
+	color: rgb(0, 183, 255);
+}
+.fa-trash-alt {
+	color: rgb(211, 3, 3);
+}
