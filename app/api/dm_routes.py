@@ -29,3 +29,7 @@ def new_dm_user(id):
     new_dm_user = User.query.filter(User.id == id).all()
     print (new_dm_user)
     return {'dm_user': new_dm_user}
+
+@dm_routes.route('/<int:id>', methods=["PUT"])
+def edit_dm_user(id):
+    pass

@@ -9,6 +9,7 @@ import { getChannelMessages, addMessage as addChannelMessage } from '../../../st
 import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { getDirectMessages } from '../../../store/direct_messages';
 import { addDMUser, getDMUser } from '../../../store/dm_people';
+import { useUserSearch } from "../../../context/UserSearch";
 
 const Content = ({ isAddDM, room, setRoom, socket }) => {
 	let modules = {
@@ -56,8 +57,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 
 	const history = useHistory();
 
-	const [searchParam, setSearchParam] = useState('');
-	const [matchingUsers, setMatchingUsers] = useState([]);
+	const { searchParam, setSearchParam, matchingUsers, setMatchingUsers } = useUserSearch();
 
 	const textInput = useRef(null);
 
@@ -78,7 +78,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 		slice = 'directMessages';
 	}
 	let messages = useSelector(state => state[slice]);
-
+	console.log(messages)
 	let textField;
 
 	//Handle Send Message
@@ -114,6 +114,15 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 		}
 	};
 
+	const handleClick = (id) => {
+		//GOTTA figure out how to grab the messages user id to delete from local storage.
+		console.log(id)
+		if (window.localStorage.getItem(id.toString())) {
+			window.localStorage.removeItem(id.toString())
+		}
+		return 
+	}
+
 	//  USEEFFECTS
 
 	useEffect(() => {
@@ -136,30 +145,48 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 		const fetchUsers = async () => {
 			const res = await fetch('/api/users/');
 			const data = await res.json();
-
+			console.log('SEARCH PARAM', searchParam, "/n", 'matching users', matchingUsers)
 			setMatchingUsers(
 				data.users.filter(user => {
-					return user.firstname?.toLowerCase().indexOf(searchParam) === 0;
+					return (
+            user.firstname?.toLowerCase().indexOf(searchParam.toLowerCase()) ===
+              0 ||
+            user.lastname?.toLowerCase().indexOf(searchParam.toLowerCase()) === 0
+			||
+			`${user.firstname} ${user.lastname}`.toLowerCase().indexOf(searchParam.toLowerCase()) === 0
+          );
 				})
 			);
 		};
-		if (searchParam) fetchUsers();
+		if (searchParam.length > 0) fetchUsers()
+		else { setMatchingUsers([])}
 	}, [searchParam]);
 
 	let messageItem;
 
 	if (isAddDM) {
-		messageItem = Object.keys(messages).map(msg => {
+		messageItem = Object.keys(messages).map((msg, idx) => {
 			return (
-				<Link to={`/dm/${messages[msg].id}`}>
-					<div className="main__chat-item">
-						<div className="chat__image-container">
-							<img src={messages[msg].profile_photo} alt="profile-photo" className="chat__avatar"></img>
-						</div>
-						<div className="chat__other-info">{messages[msg].firstname + ' ' + messages[msg].lastname}</div>
-					</div>
-				</Link>
-			);
+        <Link
+          key={idx}
+          onClick={() => handleClick(messages[msg].id)}
+	
+          to={`/dm/${messages[msg].id}`}
+        >
+          <div className="main__chat-item">
+            <div className="chat__image-container">
+              <img
+                src={messages[msg].profile_photo}
+                alt="profile-photo"
+                className="chat__avatar"
+              ></img>
+            </div>
+            <div className="chat__other-info">
+              {messages[msg].firstname + " " + messages[msg].lastname}
+            </div>
+          </div>
+        </Link>
+      );
 		});
 	}
 
@@ -172,6 +199,9 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 		/*need logic to check if user exits in dm store.
 		If it does, we need to link to that users DMs.
 		*/
+
+		setSearchParam("")
+		setMatchingUsers([])
 
 		history.push(`/dm/${e.target.id}`);
 	};

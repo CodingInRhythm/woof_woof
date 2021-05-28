@@ -4,6 +4,13 @@ from flask_login import current_user, login_user, logout_user, login_required
 
 channel_routes = Blueprint('channels', __name__)
 
+#GET ALL CHANNELS IN DATABASE
+
+@channel_routes.route('/all')
+def all_channels():
+    channels = Channel.query.all()
+    print(channels)
+    return {"channels": [channel.to_dict() for channel in channels]}
 
 # GET CHANNELS FOR THE CURRENT USER
 @channel_routes.route('/')
