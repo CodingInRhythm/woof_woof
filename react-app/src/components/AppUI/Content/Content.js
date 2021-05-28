@@ -10,6 +10,8 @@ import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { getDirectMessages } from '../../../store/direct_messages';
 import { addDMUser, getDMUser } from '../../../store/dm_people';
 import { useUserSearch } from "../../../context/UserSearch";
+import SearchAll from "../Search/SearchAll"
+
 
 const Content = ({ isAddDM, room, setRoom, socket }) => {
 	let modules = {
@@ -301,6 +303,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
                 </button>
               </form>
             </section>
+			<SearchAll />
           </>
         )}
       </div>
