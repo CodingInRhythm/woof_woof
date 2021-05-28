@@ -59,5 +59,5 @@ def handle_dm(data):
 
 @socketio.on("dm_change")
 def handle_dm_user_change(data):
-
-    emit("dm_change", {recipient_id:data["recipient_id"], sender_id:data["sender_id"]}, room="dm_user_change_room")
+    print("I have recieved data------", data["recipient_id"])
+    emit("dm_change", data, room="dm_user_change_room")

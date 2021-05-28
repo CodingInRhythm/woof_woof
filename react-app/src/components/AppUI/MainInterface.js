@@ -58,14 +58,14 @@ const MainInterface = () => {
 		for (let dm in dmUsers){
 			socket.on('connect', () => {
 				socket.emit('join', {room:hashingRoom(userId, dm)})
-				console.log(socket.connected)
-				console.log("I have joined dm:  ", hashingRoom(userId, dm))
+				// console.log(socket.connected)
+				// console.log("I have joined dm:  ", hashingRoom(userId, dm))
 			})
 		}
 		socket.on('connect', () => {
 			socket.emit('join', {room:"dm_user_change_room"})
-			console.log(socket.connected)
-			console.log("I have joined dm_user_change_room")
+			// console.log(socket.connected)
+			// console.log("I have joined dm_user_change_room")
 		})
 		dispatch(setOnlineStatusUser(userId, true))
 		socket.on("chat", (chat) => {
@@ -84,9 +84,10 @@ const MainInterface = () => {
 			}
 		})
 		socket.on("dm_change", (data) => {
-			console.log("There was a dm change----", data)
-			if (data.recipient_id === userId){
-				dispatch(getDMUsers)
+			console.log("There was a dm change----", Number(data.recipient_id),"  ", userId)
+			if (Number(data.recipient_id) === userId){
+				console.log("right before dispatch")
+				dispatch(getDMUsers())
 			}
 		})
 
@@ -95,14 +96,14 @@ const MainInterface = () => {
 			for (let channel in channels) {
 				socket.emit('leave', {room:hashingRoom(channel)})
 				// console.log(socket.connected)
-				console.log("I have left room:  ", hashingRoom(channel))
+				// console.log("I have left room:  ", hashingRoom(channel))
 				socket.disconnect()
 				// console.log(socket.connected)
 			}
 			for (let dm in dmUsers) {
 				socket.emit('leave', {room:hashingRoom(userId, dm)})
 				// console.log(socket.connected)
-				console.log("I have left dm:  ", hashingRoom(userId, dm))
+				// console.log("I have left dm:  ", hashingRoom(userId, dm))
 				socket.disconnect()
 				// console.log(socket.connected)
 			}

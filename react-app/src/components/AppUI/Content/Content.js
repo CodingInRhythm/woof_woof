@@ -102,11 +102,6 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 			editor.deleteText(0, text.length)
 			
 			if (location.pathname.includes("dm")){
-
-				if(!dms[id]){
-					console.log('dmchange emit')
-					socket.emit("dm_change", {recipientId: id, sender_id: userId})
-				}
 				// console.log("before dm")
 				if (!(id in dms)){
 					console.log(id)
@@ -114,6 +109,9 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 					dispatch(getDMUser(id))
 				}
 				socket.emit("dm", {sender_id:userId, recipient_id: id, message:text, room:hashingRoom(userId, id)})
+				if(!dms[id]){
+					socket.emit("dm_change", {recipient_id: id, sender_id: userId})
+				}
 			} else{
 				if (socket.disconnected){
 					console.log("insided disconnected socket")
