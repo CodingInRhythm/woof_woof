@@ -78,7 +78,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 		slice = 'directMessages';
 	}
 	let messages = useSelector(state => state[slice]);
-
+	console.log(messages)
 	let textField;
 
 	//Handle Send Message
@@ -112,11 +112,12 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 		}
 	};
 
-	const handleClick = (id) => {
-		
-		if (window.localStorage.getItem(id.toString())) {
-			window.localStorage.removeItem(id.toString())
-		}
+	const handleClick = (e) => {
+		//GOTTA figure out how to grab the messages user id to delete from local storage.
+		console.log(e.view.location.href)
+		// if (window.localStorage.getItem(id.toString())) {
+		// 	window.localStorage.removeItem(id.toString())
+		// }
 		return 
 	}
 
@@ -155,17 +156,28 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 	let messageItem;
 
 	if (isAddDM) {
-		messageItem = Object.keys(messages).map(msg => {
+		messageItem = Object.keys(messages).map((msg, idx) => {
 			return (
-				<Link onClick={handleClick(messages[msg].id)} to={`/dm/${messages[msg].id}`}>
-					<div className="main__chat-item">
-						<div className="chat__image-container">
-							<img src={messages[msg].profile_photo} alt="profile-photo" className="chat__avatar"></img>
-						</div>
-						<div className="chat__other-info">{messages[msg].firstname + ' ' + messages[msg].lastname}</div>
-					</div>
-				</Link>
-			);
+        <Link
+          key={idx}
+          onClick={handleClick}
+          id={msg}
+          to={`/dm/${messages[msg].id}`}
+        >
+          <div className="main__chat-item">
+            <div className="chat__image-container">
+              <img
+                src={messages[msg].profile_photo}
+                alt="profile-photo"
+                className="chat__avatar"
+              ></img>
+            </div>
+            <div className="chat__other-info">
+              {messages[msg].firstname + " " + messages[msg].lastname}
+            </div>
+          </div>
+        </Link>
+      );
 		});
 	}
 
