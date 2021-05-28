@@ -10,6 +10,7 @@ import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { getDirectMessages } from '../../../store/direct_messages';
 import { addDMUser, getDMUser } from '../../../store/dm_people';
 import { useUserSearch } from "../../../context/UserSearch";
+import ProfilePhoto from "../UserProfile/ProfilePhoto"
 
 
 const Content = ({ isAddDM, socket }) => {
@@ -114,7 +115,7 @@ const Content = ({ isAddDM, socket }) => {
 	};
 
 	const handleClick = (id) => {
-		//GOTTA figure out how to grab the messages user id to delete from local storage.
+		
 		console.log(id)
 		if (window.localStorage.getItem(id.toString())) {
 			window.localStorage.removeItem(id.toString())
@@ -177,11 +178,7 @@ const Content = ({ isAddDM, socket }) => {
         >
           <div className="main__chat-item">
             <div className="chat__image-container">
-              <img
-                src={messages[msg].profile_photo}
-                alt="profile-photo"
-                className="chat__avatar"
-              ></img>
+             <ProfilePhoto profileUser={messages[msg]} alt={messages[msg].username}/>
             </div>
             <div className="chat__other-info">
               {messages[msg].firstname + " " + messages[msg].lastname}
