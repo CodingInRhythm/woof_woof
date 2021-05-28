@@ -130,6 +130,7 @@ const Content = ({ isAddDM, socket }) => {
 	//  USEEFFECTS
 
 	useEffect(() => {
+		localStorage.setItem('lastPage', location.pathname)
 		if (location.pathname.includes("channel")) {
 			slice = 'channelMessages'
 		} else {

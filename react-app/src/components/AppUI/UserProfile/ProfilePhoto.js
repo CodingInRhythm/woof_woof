@@ -7,7 +7,7 @@ import './ProfilePhoto.css'
 
 
 /*************************** COMPONENTS ***************************/
-const UserProfile = ({profileUser, alt})=>{
+const ProfilePhoto = ({profileUser, alt})=>{
     return(
         <>
             {profileUser?.profile_photo ?
@@ -19,4 +19,4 @@ const UserProfile = ({profileUser, alt})=>{
 }
 
 /*************************** EXPORT ***************************/
-export default UserProfile;
+export default ProfilePhoto;
