@@ -160,7 +160,7 @@ const Channels = () => {
 				</span>
 			</h2>
 			<ul className="channels__list">
-				{arr?.map((channel, id) => (
+				{channels && Object.entries(channels)?.map(([id, channel]) => (
 					<Nav channel={channel} key={channel.id} editOn={editOn} setEditOn={setEditOn} />
 
 

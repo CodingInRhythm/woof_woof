@@ -108,6 +108,7 @@
 }
 
 .chat__image-container {
+	margin-right: 10px;
     position: relative;
     width: 44px;
     height: 44px;
