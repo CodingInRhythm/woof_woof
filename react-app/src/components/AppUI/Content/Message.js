@@ -41,12 +41,6 @@ const EditDelete = ({editOn, setEditOn, deleteOn, setDeleteOn, msg, date, module
         }
     }
 
-    const handleUserClick = (e)=>{
-        if (!dms[msg.user.id]){
-            dispatch(getDMUser(msg.user.id));
-        }
-    }
-
     if (editOn){
         return(
             <div className="chat__other-info-edit">
@@ -78,7 +72,7 @@ const EditDelete = ({editOn, setEditOn, deleteOn, setDeleteOn, msg, date, module
         return(
             <div className="chat__other-info">
                 <div className="chat__other-header">
-                    <Link className="chat__username" to={`/dm/${msg.user.id}`} onClick={handleUserClick}>{msg.user.firstname + ' ' + msg.user.lastname}</Link>
+                    <Link className="chat__username" to={`/dm/${msg.user.id}`}>{msg.user.firstname + ' ' + msg.user.lastname}</Link>
                     <span className="chat__date">{date}</span>
                 </div>
                 <div className="chat__other-text">

@@ -154,7 +154,6 @@ const Content = ({ isAddDM, socket }) => {
 		bottomRef.current.scrollIntoView({ behavior: "smooth" })
 	}
 
-
 	/******************** USE EFFECTS ********************/
 	useEffect(() => {
 		console.log("location.pathname")
@@ -179,6 +178,7 @@ const Content = ({ isAddDM, socket }) => {
 		}
 		// else if ((!messages[id] && slice === "directMessages" ) || (direct_messages[id] && Object.keys(direct_messages[id].length === 0))) {
 		else if (!messages[id] && slice === "directMessages" ) {
+			dispatch(getDMUser(id));
 			dispatch(getDirectMessages(id));
 		}
 	}, [ dispatch, id, dms, location.pathname]);
@@ -205,7 +205,7 @@ const Content = ({ isAddDM, socket }) => {
 
 	/******************** INNER COMPONENT ********************/
 	if (isAddDM) {
-		messageItem = Object.keys(messages).reverse().map((msg, idx) => {
+		messageItem = Object.keys(messages).map((msg, idx) => {
 			return (
 				<Link
 				key={idx}
@@ -271,36 +271,36 @@ const Content = ({ isAddDM, socket }) => {
 			<div className="main__content">
 				{isAddDM ? (
 					<>
-						<form autocomplete="off" className='main__add-teammate'>
-							<h2 className='main__add-teammate-header'>To:</h2>
-							<input
-								className='main__add-teammate-input'
-								type="text"
-								name="searchParam"
-								value={searchParam}
-								onChange={e => setSearchParam(e.target.value)}
-								placeholder="@somebody"
-							/>
-						{matchingUsers.length > 0 && (
-							<ul className='main__add-teammate-list'>
-								{matchingUsers.map((user, index) => {
-									return (
-										<li className='main__add-teammate-item'>
-											<form id={user.id} onSubmit={handleSubmit}>
-												<button className='main__add-teammate-button' type="submit">
+						<div className='main__add-teammate-div'>
+							<form autocomplete="off" className='main__add-teammate'>
+								<h2 className='main__add-teammate-header'>To:</h2>
+								<input
+									className='main__add-teammate-input'
+									type="text"
+									name="searchParam"
+									value={searchParam}
+									onChange={e => setSearchParam(e.target.value)}
+									placeholder="@somebody"
+								/>
+							{matchingUsers.length > 0 && (
+								<ul className='main__add-teammate-list'>
+									{matchingUsers.map((user, index) => {
+										return (
+											<li className='main__add-teammate-item'>
+												<Link name={user.id} to={`/dm/${user.id}`} >
 													<div className='main__add-teammate-image'>
 
 													</div>
 													{user.firstname}{user.lastname}{user.username}{user.email}
-												</button>
-											</form>
-										</li>
-									);
-								})}
-							</ul>
-						)}
-						</form>
-						<section className="main__chat">{messageItem}</section>
+												</Link>
+											</li>
+										);
+									})}
+								</ul>
+							)}
+							</form>
+							<section className="main__add-teammate-existing">{messageItem}</section>
+						</div>
 					</>
 				) : (
 					<>
