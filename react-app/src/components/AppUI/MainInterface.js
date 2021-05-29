@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getChannels } from '../../store/channels';
-import { getDMUsers, setOnlineStatusUser } from '../../store/dm_people';
+import { getDMUser, getDMUsers, setOnlineStatusUser } from '../../store/dm_people';
 import { addChannelMessage } from "../../store/channel_messages"
 import { addDirectMessage } from "../../store/direct_messages"
 let socket;
@@ -20,9 +20,8 @@ const MainInterface = () => {
   
   const location = useLocation()
 		
-	const [room, setRoom] = useState('');
 	const [isAddDM, setIsAddDM] = useState(false)
-  
+
 	const dmUsers = useSelector(state => state.dm_users)
 	const channels = useSelector(state => state.channels)
 	const userId = useSelector(state => state.session.user.id)
@@ -51,15 +50,22 @@ const MainInterface = () => {
 		for (let channel in channels) {
 			socket.on('connect', () => {
 					socket.emit('join', {room:hashingRoom(channel)})
-					// console.log("I have joined room:  ", hashingRoom(channel))
+					console.log(socket.connected)
+					console.log("I have joined room:  ", hashingRoom(channel))
 				})
 			}
 		for (let dm in dmUsers){
 			socket.on('connect', () => {
 				socket.emit('join', {room:hashingRoom(userId, dm)})
+				// console.log(socket.connected)
 				// console.log("I have joined dm:  ", hashingRoom(userId, dm))
 			})
 		}
+		socket.on('connect', () => {
+			socket.emit('join', {room:"dm_user_change_room"})
+			// console.log(socket.connected)
+			// console.log("I have joined dm_user_change_room")
+		})
 		dispatch(setOnlineStatusUser(userId, true))
 		socket.on("chat", (chat) => {
 				// when we recieve a chat, add it into our channelMessages object in redux
@@ -77,22 +83,40 @@ const MainInterface = () => {
 				dispatch(addDirectMessage(dm.recipient_id, dm))
 			}
 		})
+		socket.on("dm_change", (data) => {
+			console.log("There was a dm change----", Number(data.recipient_id),"  ", userId)
+			if (Number(data.recipient_id) === userId){
+				console.log("right before dispatch")
+				dispatch(getDMUsers())
+			}
+		})
 
 		return (()=>{
 			dispatch(setOnlineStatusUser(userId, false))
-			for (let channel in channels) {
-				socket.emit('leave', {room:hashingRoom(channel)})
-				// console.log("I have left room:  ", hashingRoom(channel))
-				socket.disconnect()
-			}
-			for (let dm in dmUsers) {
-				socket.emit('leave', {room:hashingRoom(userId, dm)})
-				// console.log("I have left dm:  ", hashingRoom(userId, dm))
-				socket.disconnect()
-			}
+			// for (let channel in channels) {
+			// 	socket.emit('leave', {room:hashingRoom(channel)})
+			// 	// console.log(socket.connected)
+			// 	console.log("I have left room:  ", hashingRoom(channel))
+			// 	// console.log(socket.connected)
+			// }
+			// for (let dm in dmUsers) {
+			// 	socket.emit('leave', {room:hashingRoom(userId, dm)})
+			// 	// console.log(socket.connected)
+			// 	console.log("I have left dm:  ", hashingRoom(userId, dm))
+			// 	socket.disconnect()
+			// 	// console.log(socket.connected)
+			// }
+			// if (!(location.pathname.includes("dm") || location.pathname.includes("channels"))){
+			console.log("I'm disconnected")
+			socket.disconnect()
+			// }
+
 		  })
 	},[dmUsers, channels])
 
+	useEffect(()=> {
+		console.log("main interface rerendering")
+	}, [])
 
 	useEffect(() => {
 		if (location.pathname.includes("dms")) {
@@ -102,7 +126,7 @@ const MainInterface = () => {
 			setIsAddDM(false)
 		}
 	}, [location.pathname]);
-	/*Need to add: 
+	/*Need to add:
 	Search bar
 	components of rendered users
 	GET RID OF P TAG :)
@@ -111,9 +135,9 @@ const MainInterface = () => {
 		<>
 			<Navigation />
 			<div className="main-container">
-				<SideBar setRoom={setRoom} />
+				<SideBar />
 
-				<Content isAddDM={isAddDM} room={room} setRoom={setRoom} socket={socket}/>
+				<Content isAddDM={isAddDM} socket={socket}/>
 
 			</div>
 		</>

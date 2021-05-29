@@ -59,7 +59,7 @@ const DMPerson = ({ dmusers, recipient }) => {
   console.log('BEFORE USE EFFECT', recipient.id);
 
   useEffect(() => {
-    // console.log("We have a new message!")
+    console.log(location.pathname)
     if (location.pathname !== `/dm/${recipient.id}` && isLoaded) {
       console.log('INSIDE USEEFFECT', recipient.id);
       setNewMessage(true);
@@ -92,7 +92,7 @@ const DMPerson = ({ dmusers, recipient }) => {
           <span className="new_message-number">{numberMessages}</span>
         )}
       </button>
-	  {numberMessages < 1 && ( 
+	  {numberMessages < 1 && (
       <button id={recipient.id} onClick={removeDM} className="remove-dm">
         x
       </button>
@@ -121,7 +121,7 @@ const DMs = () => {
   //*************useEFECT*********************** */
 
   useEffect(() => {
-	return 
+	return
   },[directMessageObj])
 
   //FUNCTIONS

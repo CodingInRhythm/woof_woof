@@ -15,13 +15,13 @@ def seed_channel_messages():
     channel_count = len(Channel.query.all())
 
     messages = [
-        {'user_id': 1, 'channel_id': 1, "message":'Demo?'},
-        {'user_id': 2, 'channel_id': 1, "message":'Demo'},
-        {'user_id': 3, 'channel_id': 1, "message":'Demo?'},
-        {'user_id': 4, 'channel_id': 1, "message":'Juice'},
-        {'user_id': 5, 'channel_id': 1, "message":'Demo?'},
-        {'user_id': 7, 'channel_id': 1, "message":'Demo'},
-        {'user_id': 6, 'channel_id': 1, "message":'Bucks'},
+        {'user_id': 1, 'channel_id': 1, "message": '<p class="chat__text">Demo?</p>'},
+        {'user_id': 2, 'channel_id': 1, "message": '<p class="chat__text">Demo</p>'},
+        {'user_id': 3, 'channel_id': 1, "message": '<p class="chat__text">Demo?</p>'},
+        {'user_id': 4, 'channel_id': 1, "message": '<p class="chat__text">Juice</p>'},
+        {'user_id': 5, 'channel_id': 1, "message": '<p class="chat__text">Demo?</p>'},
+        {'user_id': 7, 'channel_id': 1, "message": '<p class="chat__text">Demo</p>'},
+        {'user_id': 6, 'channel_id': 1, "message": '<p class="chat__text">Bucks</p>'},
     ]
 
     for _ in range(200):
@@ -33,7 +33,7 @@ def seed_channel_messages():
         messages.append(
             {'user_id': user_id,
             'channel_id': channel_id,
-            'message': fake.sentence(nb_words=random.randint(1,15))}
+            'message': f'<p class="chat__text">{fake.sentence(nb_words=random.randint(1,15))}</p>'}
         )
 
     for message in messages:

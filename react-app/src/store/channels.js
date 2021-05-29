@@ -57,21 +57,21 @@ export const addNewChannel = channel_obj => async dispatch => {
 	}
 };
 
-// export const editChannel = (channel_id, name) => async dispatch => {
-// 	const response = await fetch(`/api/channels/${channel_id}`, {
-// 		method: 'PUT',
-// 		body: JSON.stringify(name),
-// 		headers: { 'Content-Type': 'application/json' },
-// 	});
+export const editChannel = (channel_id, name) => async dispatch => {
+	const response = await fetch(`/api/channels/${channel_id}`, {
+		method: 'PUT',
+		body: JSON.stringify(name),
+		headers: { 'Content-Type': 'application/json' },
+	});
 
-// 	if (response.ok) {
-// 		const channel = await response.json();
-// 		dispatch(editExistingChannel(channel.channel));
-// 		return channel;
-// 	} else {
-// 		throw response;
-// 	}
-// };
+	if (response.ok) {
+		const channel = await response.json();
+		dispatch(editExistingChannel(channel.channel));
+		return channel;
+	} else {
+		throw response;
+	}
+};
 
 export const deleteChannel = channel_id => async dispatch => {
 	const response = await fetch(`/api/channels/${channel_id}`, {
@@ -103,7 +103,7 @@ export default function channelReducer(state = initialState, action) {
 			return newState;
 		case EDIT_CHANNEL:
 			newState = { ...state };
-			// edit
+			newState[action.channel.id] = action.channel;
 			return newState;
 		case DELETE_CHANNEL:
 			newState = { ...state };

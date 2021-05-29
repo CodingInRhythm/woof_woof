@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 // import NavBar from './components/NavBar';
@@ -14,6 +14,8 @@ import { authenticate } from './store/session';
 import PageNotFound from './components/auth/PageNotFound';
 
 function App() {
+	const channels = useSelector(state=>state.channels)
+	const firstChannel = channels[Object.keys(channels)[0]]
 	const [loaded, setLoaded] = useState(false);
 	const dispatch = useDispatch();
 
@@ -42,7 +44,7 @@ function App() {
 					<SignUpForm />
 				</Route>
 				<ProtectedRoute path="/app_ui" exact={true}>
-					<MainInterface />
+					<Redirect to={localStorage.getItem('lastPage') ? localStorage.getItem('lastPage') : '/dms/all'} />
 				</ProtectedRoute>
 				<Route path="/chatroom">
 					<Chat />

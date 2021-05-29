@@ -3,11 +3,12 @@ import {useSelector} from 'react-redux'
 import './SideBar.css';
 import DMs from './DMs';
 import Channels from './Channels';
+import { useSelector } from 'react-redux';
 // import ContextMenu from './ContextMenu';
 import {useUserSearch} from '../../../context/UserSearch'
 
-
 const SideBar = ({ setRoom }) => {
+	const user = useSelector(state=>state.session.user)
 	const {searchParam, setSearchParam, matchingUsers, setMatchingUsers} = useUserSearch()
 	const user = useSelector((state) => state.session.user)
 	const resetSearch = () => {
@@ -23,7 +24,7 @@ const SideBar = ({ setRoom }) => {
 				<div className="workspace-menu__info">
 					<h1 className="workspace-menu__name">Juice Fans</h1>
 					<div className="workspace-menu__status">
-						<span className="workspace-menu__username">{user.username}</span>
+						<span className="workspace-menu__username">{`  ${user.username}`}</span>
 					</div>
 				</div>
 				<span className="workspace-icon">
@@ -51,7 +52,7 @@ const SideBar = ({ setRoom }) => {
 			</div>
 
 			{/* <ContextMenu /> */}
-			<Channels setRoom={setRoom} />
+			<Channels />
 			<DMs />
 		</div>
 	);

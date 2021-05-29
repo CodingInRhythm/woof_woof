@@ -45,6 +45,7 @@
 	align-items: center;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
+	line-height: 1.5;
 }
 
 .dm__button span {
@@ -101,13 +102,13 @@
 	padding-bottom: 35px;
 }
 
-.new_message{
-	font-weight:900;
+.new_message {
+	font-weight: 900;
 	color: white;
+	line-height: 1.4;
 }
 
 .new_message-number {
-	line-height: 1.7;
 	background-color: red;
 	border-radius: 50%;
 	color: white;
@@ -116,10 +117,9 @@
 	font-size: 14px;
 	font-weight: 600;
 	margin-left: auto;
-	z-index: 100; 
+	z-index: 100;
 	text-align: center;
 }
-
 .remove-dm {
 	line-height: 1.7;
 	border-radius: 50%;
@@ -130,7 +130,7 @@
 	font-size: 14px;
 	font-weight: 600;
 	margin-left: auto;
-	z-index: 100; 
+	z-index: 100;
 	text-align: center;
 	visibility: none;
 }
