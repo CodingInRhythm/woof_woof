@@ -185,6 +185,19 @@ class User(db.Model, UserMixin):
       'profile_photo' : self.profile_photo
     }
 
+  def to_dict_search(self, user_id):
+    return {
+      "id": self.id,
+      "username": self.username,
+      "email": self.email,
+      'firstname' : self.firstname,
+      'lastname' : self.lastname,
+      'online_status' : self.online_status,
+      'profile_photo' : self.profile_photo,
+      'sender_messages' : [message.to_dict_basic() for message in self.sender_messages if message.recipient_id==int(user_id)],
+      'recipient_messages' : [message.to_dict_basic() for message in self.recipient_messages if message.sender_id==int(user_id)]
+    }
+
 
 # CHANNEL TABLE #
 class Channel(db.Model):

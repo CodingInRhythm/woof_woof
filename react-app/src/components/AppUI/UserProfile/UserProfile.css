@@ -22,7 +22,7 @@
     grid-area: errors;
 }
 
-.profile__photo-div{
+.profile__photo-outer-container{
     grid-area: pic;
     width: 100%;
     display: flex;
@@ -30,20 +30,12 @@
     align-items: center;
 }
 
-.profile__photo{
+.profile__photo-container{
     position: relative;
     width: 150px;
     height: 150px;
-    border-radius: 10px;
-    background-color: var(--defaultProfPic);
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
-    -webkit-user-select: none; /* Safari */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* IE10+/Edge */
-    user-select: none; /* Standard */
+    font-size: 3vw;
 }
 
 .profile__photo:hover{
@@ -93,7 +85,7 @@
 .profile__button{
     grid-area: button;
 	border-radius: 3px;
-	background-color: #4a154b;
+	background-color: var(--primaryColor);
 	color: #fff;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-weight: bold;

@@ -69,7 +69,6 @@ button {
 	text-align: left;
 	cursor: pointer;
 }
-
 #root{
 	height: 100%;
 	width: 100%;
@@ -79,10 +78,21 @@ button {
 
   --fadedGreyBlue: rgba(190, 202, 211,.55);
   --lightCoral: rgba(253, 177, 150,1);
+  --processCyan: rgba(0, 174, 214,1);
   --sapphire: rgba(26, 88, 139, 1);
+  --yellowGreen: rgba(55, 174, 15,1);
+  --texasGreen: rgba(25, 162, 58,1);
+  --darkTexasGreen: rgb(25, 139, 51);
+  --kellyGreen: rgba(95, 195, 20,1);
+
+  --primaryColor: var(--texasGreen);
+  --primaryColorDark: var(--darkTexasGreen);
+  --secondaryColor: var(--kellyGreen);
+
+  --sideBarHover: var(--primaryColor);
 
   --modalBackground: var(--fadedGreyBlue);
 
   --profileBackground: white;
-  --defaultProfPic: var(--lightCoral);
+  --defaultProfPic: var(--processCyan);
 }

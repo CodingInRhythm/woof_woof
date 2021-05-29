@@ -57,6 +57,8 @@ const Content = ({ isAddDM, socket }) => {
 	const dms = useSelector(state => state.dm_users);
 	const userId = useSelector(state => state.session.user.id);
 
+	const bottomRef = useRef(null)
+
 	const history = useHistory();
 
 	const { searchParam, setSearchParam, matchingUsers, setMatchingUsers } = useUserSearch();
@@ -80,59 +82,6 @@ const Content = ({ isAddDM, socket }) => {
 	let textField;
 
 	let messageItem;
-
-
-	/******************** USE EFFECTS ********************/
-	useEffect(() => {
-		console.log("location.pathname")
-	}, [location.pathname])
-
-	//  Get messages if not in store
-	useEffect(() => {
-		localStorage.setItem('lastPage', location.pathname)
-
-		// if (location.pathname.includes("channel")) {
-		// 		slice = 'channelMessages'
-		// } else if (location.pathname.includes("dm/")){
-		// 		slice = "directMessages"
-		// }
-
-		if (!messages[id] && slice === "channelMessages") {
-			dispatch(getChannelMessages(id));
-		}
-		// else if ((!messages[id] && slice === "directMessages" ) || (direct_messages[id] && Object.keys(direct_messages[id].length === 0))) {
-		else if (!messages[id] && slice === "directMessages" ) {
-			dispatch(getDirectMessages(id));
-		}
-	}, [ dispatch, id, dms, location.pathname]);
-
-
-	useEffect(() => {
-		const fetchUsers = async () => {
-			const res = await fetch('/api/search/',{
-				method: 'POST',
-				headers : {
-					'Content-Type' : 'application/json'
-				},
-				body: JSON.stringify({searchParam}),
-			});
-			const data = await res.json();
-			console.log('SEARCH PARAM', searchParam, "/n", 'matching users', matchingUsers)
-			setMatchingUsers(data.users)
-			// setMatchingUsers(
-			// 	data.users.filter(user => {
-			// 		return (
-			// 			user.firstname?.toLowerCase().indexOf(searchParam.toLowerCase()) === 0 ||
-            // 			user.lastname?.toLowerCase().indexOf(searchParam.toLowerCase()) === 0 ||
-			// 			`${user.firstname} ${user.lastname}`.toLowerCase().indexOf(searchParam.toLowerCase()) === 0
-			// 		);
-			// 	})
-			// );
-		};
-
-		if (searchParam.length > 0) fetchUsers()
-		else { setMatchingUsers([])}
-	}, [searchParam]);
 
 
 	/******************** FUNCTIONS ********************/
@@ -200,26 +149,80 @@ const Content = ({ isAddDM, socket }) => {
 	};
 	// console.log(matchingUsers)
 
+
+	const scrollToBottom = () => {
+		bottomRef.current.scrollIntoView({ behavior: "smooth" })
+	}
+
+
+	/******************** USE EFFECTS ********************/
+	useEffect(() => {
+		console.log("location.pathname")
+	}, [location.pathname])
+
+	useEffect(() => {
+		scrollToBottom()
+	}, [messages[id]])
+
+	//  Get messages if not in store
+	useEffect(() => {
+		localStorage.setItem('lastPage', location.pathname)
+
+		// if (location.pathname.includes("channel")) {
+		// 		slice = 'channelMessages'
+		// } else if (location.pathname.includes("dm/")){
+		// 		slice = "directMessages"
+		// }
+
+		if (!messages[id] && slice === "channelMessages") {
+			dispatch(getChannelMessages(id));
+		}
+		// else if ((!messages[id] && slice === "directMessages" ) || (direct_messages[id] && Object.keys(direct_messages[id].length === 0))) {
+		else if (!messages[id] && slice === "directMessages" ) {
+			dispatch(getDirectMessages(id));
+		}
+	}, [ dispatch, id, dms, location.pathname]);
+
+
+	useEffect(() => {
+		const fetchUsers = async () => {
+			const res = await fetch('/api/search/',{
+				method: 'POST',
+				headers : {
+					'Content-Type' : 'application/json'
+				},
+				body: JSON.stringify({searchParam}),
+			});
+			const data = await res.json();
+			setMatchingUsers(data.users)
+			console.log(data.users[0])
+		};
+
+		if (searchParam.length > 0) fetchUsers()
+		else { setMatchingUsers([])}
+	}, [searchParam]);
+
+
 	/******************** INNER COMPONENT ********************/
 	if (isAddDM) {
-		messageItem = Object.keys(messages).map((msg, idx) => {
+		messageItem = Object.keys(messages).reverse().map((msg, idx) => {
 			return (
-        <Link
-          key={idx}
-          onClick={() => handleClick(messages[msg].id)}
+				<Link
+				key={idx}
+				onClick={() => handleClick(messages[msg].id)}
 
-          to={`/dm/${messages[msg].id}`}
-        >
-          <div className="main__chat-item">
-            <div className="chat__image-container">
-             <ProfilePhoto profileUser={messages[msg]} alt={messages[msg].username}/>
-            </div>
-            <div className="chat__other-info">
-              {messages[msg].firstname + " " + messages[msg].lastname}
-            </div>
-          </div>
-        </Link>
-      );
+				to={`/dm/${messages[msg].id}`}
+				>
+				<div className="main__chat-item">
+					<div className="chat__image-container">
+						<ProfilePhoto profileUser={messages[msg]} alt={messages[msg].username}/>
+					</div>
+					<div className="chat__other-info">
+						{messages[msg].firstname + " " + messages[msg].lastname}
+					</div>
+				</div>
+				</Link>
+			);
 		});
 	}
 
@@ -248,7 +251,7 @@ const Content = ({ isAddDM, socket }) => {
 								<li
 									className={`dms__header`}
 								>
-									{`${dms[id]?.firstname} ${dms[id]?.lastname}`}
+									{dms[id]?.firstname && `${dms[id]?.firstname} ${dms[id]?.lastname}`}
 								</li>
 							}
 						</>
@@ -268,33 +271,41 @@ const Content = ({ isAddDM, socket }) => {
 			<div className="main__content">
 				{isAddDM ? (
 					<>
-						<form autocomplete="off">
+						<form autocomplete="off" className='main__add-teammate'>
+							<h2 className='main__add-teammate-header'>To:</h2>
 							<input
+								className='main__add-teammate-input'
 								type="text"
 								name="searchParam"
 								value={searchParam}
 								onChange={e => setSearchParam(e.target.value)}
 								placeholder="@somebody"
 							/>
-						</form>
 						{matchingUsers.length > 0 && (
-							<ul>
+							<ul className='main__add-teammate-list'>
 								{matchingUsers.map((user, index) => {
 									return (
-										<li>
+										<li className='main__add-teammate-item'>
 											<form id={user.id} onSubmit={handleSubmit}>
-												<button type="submit">{user.firstname}</button>
+												<button className='main__add-teammate-button' type="submit">
+													<div className='main__add-teammate-image'>
+
+													</div>
+													{user.firstname}{user.lastname}{user.username}{user.email}
+												</button>
 											</form>
 										</li>
 									);
 								})}
 							</ul>
 						)}
+						</form>
 						<section className="main__chat">{messageItem}</section>
 					</>
 				) : (
 					<>
 						<section className="main__chat">
+							<div ref={bottomRef}/>
 							{messages &&
 								messages[id] &&
 								Object.entries(messages[id])

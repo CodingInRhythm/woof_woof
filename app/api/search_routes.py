@@ -13,6 +13,5 @@ search_routes = Blueprint('search', __name__)
 @search_routes.route('/', methods=['GET','POST'])
 def search():
     value=request.json['searchParam']
-    print(value)
-    users = User.query.filter(User.firstname.ilike(f'{value}%')).limit(10).all()
-    return {"users": [user.to_dict() for user in users]}
+    users = User.query.filter(User.firstname.ilike(f'{value}%') | User.lastname.ilike(f'{value}%') | User.username.ilike(f'{value}%') | User.email.ilike(f'{value}%')).limit(15).all()
+    return {"users": [user.to_dict_search(session['_user_id']) for user in users]}
