@@ -66,7 +66,7 @@ const SignUpForm = () => {
 				<div></div>
 				<div className="loginWrap">
 					<img src={logo} className="slack_logo" onClick={logoClick} alt="logo"></img>
-					<h1 className="login-form-header">Join Slack</h1>
+					<h1 className="login-form-header">Join Woof Woof!</h1>
 
 					<form onSubmit={onSignUp}>
 						<div>

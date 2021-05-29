@@ -2,8 +2,8 @@
 	padding: 0;
 	background-color: var(--primaryColorDark);
 	display: flex;
-	align-items: center;
-	justify-content: flex-end;
+	align-items: space-between;
+	justify-content: space-between;
 	height: 38px;
 	position: fixed;
 	top: 0;
@@ -29,11 +29,12 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	
 }
 
 .nav-searchBar {
 	max-width: 732px;
-	width: 100%;
+	width: 500px;
 	border-radius: 7px;
 	outline: none;
 	height: 24px;
@@ -41,6 +42,11 @@
 	padding: 0 0 0 10px;
 
 	font-size: 13px;
+}
+
+.main-nav > form {
+	display: flex;
+	align-items: center;
 }
 
 .nav-logo {
@@ -61,4 +67,21 @@
 .username {
 	color: #fff;
 	margin-right: 13px;
+}
+
+.search-container {
+	background-color: black;
+}
+
+.search-item:hover {
+	background-color: rgba(173, 216, 230, 0.39)
+}
+
+.user_ele, .channel_ele {
+	color: white;
+}
+
+.username_logo {
+	display: flex;
+	align-items: center;
 }
