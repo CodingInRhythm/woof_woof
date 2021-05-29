@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 /*************************** OTHER FILE IMPORTS ***************************/
 
 import ProfilePhoto from '../UserProfile/ProfilePhoto'
-import {editUser} from '../../../store/session'
+import {editUser, logout} from '../../../store/session'
 import './UserProfile.css'
 
 
@@ -50,6 +50,13 @@ const UserProfile = ({profileUser, setShowModal})=>{
         } else {
             setErrors(editedUser.errors)
         }
+    }
+
+    //Logout
+    const onLogout = async e => {
+      e.preventDefault();
+      await dispatch(logout())
+      history.push('/')
     }
 
     return(
@@ -110,7 +117,7 @@ const UserProfile = ({profileUser, setShowModal})=>{
                 <div className='profile__email-div'>
                     {isUser ? <input
                         className='profile__email-input'
-                        type='text'
+                        type='email'
                         placeholder='Email'
                         value={email}
                         onChange={(e)=>setEmail(e.target.value)}
@@ -118,9 +125,11 @@ const UserProfile = ({profileUser, setShowModal})=>{
                     <div className='profile__email'>{profileUser.email}</div>
                     }
                 </div>
-                <div>
+                {isUser &&
+                <>
                     <button className='profile__button' type='submit'>Save Changes</button>
-                </div>
+                    <button className='profile__logout' onClick={onLogout}>Log out</button>
+                </>}
             </form>
         </div>
     )
