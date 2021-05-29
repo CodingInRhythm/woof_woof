@@ -45,7 +45,12 @@
 }
 
 .main-nav > form {
+	position: absolute;
+	top: 5px;
+	left: 300px;
 	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	align-items: center;
 }
 
@@ -71,8 +76,13 @@
 
 .search-container {
 	background-color: black;
+	width: 100%;
+	border-radius: 5px;
 }
 
+.search-item {
+	list-style-type: none;
+}
 .search-item:hover {
 	background-color: rgba(173, 216, 230, 0.39)
 }
