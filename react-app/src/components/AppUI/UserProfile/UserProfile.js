@@ -63,8 +63,8 @@ const UserProfile = ({profileUser, setShowModal})=>{
                         <li key={error}>{error}</li>
                     ))}
                 </ul>
-                <div className='profile__photo-div'>
-                    <div className='profile__photo'>
+                <div className='profile__photo-outer-container'>
+                    <div className='profile__photo-container'>
                         <ProfilePhoto profileUser={profileUser} alt={'profile-photo'}/>
                         {isUser &&
                             <div className='profile__photo-input'>

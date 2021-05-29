@@ -1,6 +1,6 @@
 .main-nav {
 	padding: 0;
-	background-color: #350d36;
+	background-color: var(--primaryColorDark);
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;

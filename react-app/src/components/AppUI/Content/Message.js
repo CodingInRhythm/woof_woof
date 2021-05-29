@@ -1,15 +1,18 @@
 /*************************** REACT IMPORTS ***************************/
 import React, { useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom'
 import ReactQuill from 'react-quill'; // ES6
 
 import {editChannelMessage, deleteChannelMessage} from '../../../store/channel_messages'
 import {editDirectMessage, deleteDirectMessage} from '../../../store/direct_messages'
+import { getDMUser } from '../../../store/dm_people';
 import UserProfileModal from '../UserProfile/UserProfileModal'
 import ava from '../../../images/ava.png';
 
 /*************************** HELPER COMPONENT ***************************/
 const EditDelete = ({editOn, setEditOn, deleteOn, setDeleteOn, msg, date, modules, formats}) =>{
+	const dms = useSelector(state => state.dm_users);
     const dispatch = useDispatch()
     const [currentMessage, setCurrentMessage] = useState(msg.message)
 
@@ -69,7 +72,7 @@ const EditDelete = ({editOn, setEditOn, deleteOn, setDeleteOn, msg, date, module
         return(
             <div className="chat__other-info">
                 <div className="chat__other-header">
-                    <span className="chat__username">{msg.user.firstname + ' ' + msg.user.lastname}</span>
+                    <Link className="chat__username" to={`/dm/${msg.user.id}`}>{msg.user.firstname + ' ' + msg.user.lastname}</Link>
                     <span className="chat__date">{date}</span>
                 </div>
                 <div className="chat__other-text">

@@ -17,9 +17,9 @@ let socket;
 const MainInterface = () => {
 	const dispatch = useDispatch();
 
-  
+
   const location = useLocation()
-		
+
 	const [isAddDM, setIsAddDM] = useState(false)
 
 	const dmUsers = useSelector(state => state.dm_users)
@@ -136,9 +136,7 @@ const MainInterface = () => {
 			<Navigation />
 			<div className="main-container">
 				<SideBar />
-
 				<Content isAddDM={isAddDM} socket={socket}/>
-
 			</div>
 		</>
 	);
