@@ -1,21 +1,8 @@
-.profile__div{
-    /* width: 100%; */
-    /* height: 100%; */
-}
-
 .profile__main{
     width: 100%;
     height: 100%;
-    display: grid;
-    grid-template-rows:  4fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-areas:
-    "pic"
-    "errors"
-    "firstname"
-    "lastname"
-    "username"
-    "email"
-    "button";
+    display: flex;
+    flex-direction: column;
 }
 
 .profile__errors{
@@ -36,6 +23,7 @@
     height: 150px;
     cursor: pointer;
     font-size: 3vw;
+    margin: 10px 0;
 }
 
 .profile__photo:hover{
@@ -73,7 +61,7 @@
 .profile__lastname-input,
 .profile__username-input,
 .profile__email-input{
-    margin: 5px;
+    margin: 10px 5px;
 	width: 90%;
 	height: 30px;
 	border-radius: 5px;
@@ -82,30 +70,12 @@
 	font-size: 17px;
 }
 
-.profile__button{
-    grid-area: button;
-	border-radius: 3px;
-	background-color: var(--primaryColor);
-	color: #fff;
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-weight: bold;
-	line-height: 21px;
-	width: 90%;
-	margin-left: 5%;
-	margin-bottom: 10px;
-	height: 40px;
-	border-radius: 5px;
-	outline: 0;
-	border: none;
-	transition: all 1s;
-	text-align: center;
-}
 
 .profile__firstname,
 .profile__lastname,
 .profile__username,
 .profile__email{
-    margin: 5px;
+    margin: 10px 5px;
 	width: 90%;
 	height: 30px;
 	outline: 0;
@@ -154,4 +124,43 @@
     justify-content: center;
     align-content: center;
 
+}
+
+.profile__button{
+    grid-area: button;
+    border-radius: 3px;
+    background-color: var(--primaryColor);
+    color: #fff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    line-height: 21px;
+    width: 90%;
+    margin: 2px 0;
+    margin-left: 5%;
+    height: 40px;
+    border-radius: 5px;
+    outline: 0;
+    border: none;
+    transition: all 1s;
+    text-align: center;
+}
+
+.profile__logout{
+    grid-area: logout;
+    border-radius: 3px;
+    background-color: whitesmoke;
+    color: black;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    line-height: 21px;
+    width: 90%;
+    margin: 10px 0;
+    margin-left: 5%;
+    height: 40px;
+    border-radius: 5px;
+    outline: 0;
+    border: none;
+    transition: all 1s;
+    text-align: center;
+    border: 1px solid #cccccc;
 }

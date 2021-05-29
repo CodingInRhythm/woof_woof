@@ -178,7 +178,9 @@ const Content = ({ isAddDM, socket }) => {
 		}
 		// else if ((!messages[id] && slice === "directMessages" ) || (direct_messages[id] && Object.keys(direct_messages[id].length === 0))) {
 		else if (!messages[id] && slice === "directMessages" ) {
-			dispatch(getDMUser(id));
+			if (!dms[id]){
+				dispatch(getDMUser(id));
+			}
 			dispatch(getDirectMessages(id));
 		}
 	}, [ dispatch, id, dms, location.pathname]);
@@ -287,7 +289,7 @@ const Content = ({ isAddDM, socket }) => {
 									{matchingUsers.map((user, index) => {
 										return (
 											<li className='main__add-teammate-item'>
-												<Link name={user.id} to={`/dm/${user.id}`} >
+												<Link name={user.id} to={`/dm/${user.id}`}>
 													<div className='main__add-teammate-image'>
 
 													</div>
