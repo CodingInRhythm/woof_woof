@@ -44,6 +44,11 @@
 	font-size: 13px;
 }
 
+.main-nav > form {
+	display: flex;
+	align-items: center;
+}
+
 .nav-logo {
 	width: 28px;
 	height: 28px;
@@ -74,4 +79,9 @@
 
 .user_ele, .channel_ele {
 	color: white;
+}
+
+.username_logo {
+	display: flex;
+	align-items: center;
 }
