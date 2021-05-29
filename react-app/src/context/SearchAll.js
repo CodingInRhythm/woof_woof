@@ -5,12 +5,12 @@ export const SearchAllContext = createContext();
 export const useSearchAll = () => useContext(SearchAllContext);
 
 export const SearchAllProvider = (props) => {
-  const [searchAllParam, setSearchParam] = useState("");
+  const [searchAllParam, setSearchAllParam] = useState("");
   const [matchingEles, setMatchingEles] = useState([]);
 
   return (
     <SearchAllContext.Provider
-      value={{ searchAllParam, setSearchParam, matchingEles, setMatchingEles }}
+      value={{ searchAllParam, setSearchAllParam, matchingEles, setMatchingEles }}
     >
       {props.children}
     </SearchAllContext.Provider>

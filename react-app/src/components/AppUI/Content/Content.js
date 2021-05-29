@@ -218,6 +218,7 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
 	return (
     <div className="main">
       <header className="main__header">
+        <SearchAll />
         <div className="main__channel-info">
           {isAddDM ? (
             <div>
@@ -303,7 +304,6 @@ const Content = ({ isAddDM, room, setRoom, socket }) => {
                 </button>
               </form>
             </section>
-			<SearchAll />
           </>
         )}
       </div>
