@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900');
 html,
 body {
-	box-sizing: border-box;
 	position: relative;
 	width: 100%;
 	height: 100%;
@@ -28,13 +27,14 @@ body {
 	color: #fff;
 }
 .workspace-menu__status:before {
-	content: '';
-	display: inline-block;
+	/* content: ''; */
+	content: '\1F436';
 	margin-right: 0.2rem;
-	width: 9px;
+	/* width: 9px;
 	height: 9px;
+	display: inline-block;
 	background: #00ffba;
-	border-radius: 50%;
+	border-radius: 50%; */
 }
 .workspace-menu__username {
 	opacity: 0.6;
@@ -45,15 +45,16 @@ body {
 	color: #fff;
 }
 .workspace-menu:hover {
-	background: #350d36;
+	background: var(--primaryColor);
 }
+
 .sidebar {
-	overflow-y: scroll;
+	overflow-y: auto;
 	top: 38px;
 	bottom: 0;
 	z-index: 99;
 	width: 250px;
-	background: #3f0e40;
+	background: var(--primaryColor);
 	color: #fff;
 }
 .threads {
@@ -71,17 +72,18 @@ body {
 }
 
 /* -------> SCROLL BAR STYLINGS <-------- */
+
 /* width */
 ::-webkit-scrollbar {
 	width: 8px;
 }
 /* Track */
 ::-webkit-scrollbar-track {
-	background: #350d36;
+	background: var(--primaryColor);
 }
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: #906791;
+	background: var(--secondaryColor);;
 	margin-right: 5px;
 }
 /* Handle on hover */

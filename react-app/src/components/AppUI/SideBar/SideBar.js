@@ -22,7 +22,7 @@ const SideBar = ({ setRoom }) => {
 				<div className="workspace-menu__info">
 					<h1 className="workspace-menu__name">Juice Fans</h1>
 					<div className="workspace-menu__status">
-						<span className="workspace-menu__username">{`  ${user.username}`}</span>
+						<span className="workspace-menu__username">{`  ${user.firstname} ${user.lastname}`}</span>
 					</div>
 				</div>
 				<span className="workspace-icon">

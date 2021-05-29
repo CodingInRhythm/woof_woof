@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 /*************************** OTHER FILE IMPORTS ***************************/
 
 import ProfilePhoto from '../UserProfile/ProfilePhoto'
-import {editUser} from '../../../store/session'
+import {editUser, logout} from '../../../store/session'
 import './UserProfile.css'
 
 
@@ -52,6 +52,13 @@ const UserProfile = ({profileUser, setShowModal})=>{
         }
     }
 
+    //Logout
+    const onLogout = async e => {
+      e.preventDefault();
+      await dispatch(logout())
+      history.push('/')
+    }
+
     return(
         <div className='profile__div'>
             <form
@@ -63,8 +70,8 @@ const UserProfile = ({profileUser, setShowModal})=>{
                         <li key={error}>{error}</li>
                     ))}
                 </ul>
-                <div className='profile__photo-div'>
-                    <div className='profile__photo'>
+                <div className='profile__photo-outer-container'>
+                    <div className='profile__photo-container'>
                         <ProfilePhoto profileUser={profileUser} alt={'profile-photo'}/>
                         {isUser &&
                             <div className='profile__photo-input'>
@@ -110,7 +117,7 @@ const UserProfile = ({profileUser, setShowModal})=>{
                 <div className='profile__email-div'>
                     {isUser ? <input
                         className='profile__email-input'
-                        type='text'
+                        type='email'
                         placeholder='Email'
                         value={email}
                         onChange={(e)=>setEmail(e.target.value)}
@@ -118,9 +125,11 @@ const UserProfile = ({profileUser, setShowModal})=>{
                     <div className='profile__email'>{profileUser.email}</div>
                     }
                 </div>
-                <div>
+                {isUser &&
+                <>
                     <button className='profile__button' type='submit'>Save Changes</button>
-                </div>
+                    <button className='profile__logout' onClick={onLogout}>Log out</button>
+                </>}
             </form>
         </div>
     )

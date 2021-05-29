@@ -13,6 +13,7 @@ from .api.auth_routes import auth_routes
 from .api.channel_routes import channel_routes
 from .api.dm_routes import dm_routes
 from .api.messages_routes import messages_routes
+from .api.search_routes import search_routes
 
 from .seeds import seed_commands
 
@@ -80,8 +81,8 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(channel_routes, url_prefix='/api/channels')
 app.register_blueprint(dm_routes, url_prefix='/api/dms')
-
 app.register_blueprint(messages_routes, url_prefix='/api/messages')
+app.register_blueprint(search_routes, url_prefix='/api/search')
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
