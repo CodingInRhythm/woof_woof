@@ -56,28 +56,26 @@ const SearchAll = () => {
     return (
       <form>
         <input
+          className="nav-searchBar"
           type="text"
           value={searchAllParam}
           onChange={(e) => setSearchAllParam(e.target.value)}
         ></input>
         {matchingEles.length > 0 && (
-          <ul>
+          <ul className="search-container">
             {matchingEles.map((ele, index) => {
               return (
-                <li key={index}>
+                <li className="search-item"key={index}>
                   <button
                     onClick={(e) => handleSubmit(e)}
                     id={ele.id}
-                    className={
-                      ele.firstname
-                        ? "user_ele"
-                        : "channel_ele"
-                    }
+                    className={ele.firstname ? "user_ele" : "channel_ele"}
                     type="submit"
                   >
+
                     {ele.firstname
-                      ? `${ele.firstname} ${ele.lastname}`
-                      : ele.name}
+                      ? `User: ${ele.firstname} ${ele.lastname}`
+                      : `# ${ele.name}`}
                   </button>
                 </li>
               );

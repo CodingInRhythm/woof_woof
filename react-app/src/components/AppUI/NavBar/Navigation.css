@@ -2,8 +2,8 @@
 	padding: 0;
 	background-color: #350d36;
 	display: flex;
-	align-items: center;
-	justify-content: flex-end;
+	align-items: space-between;
+	justify-content: space-between;
 	height: 38px;
 	position: fixed;
 	top: 0;
@@ -29,11 +29,12 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	
 }
 
 .nav-searchBar {
 	max-width: 732px;
-	width: 100%;
+	width: 500px;
 	border-radius: 7px;
 	outline: none;
 	height: 24px;
@@ -61,4 +62,16 @@
 .username {
 	color: #fff;
 	margin-right: 13px;
+}
+
+.search-container {
+	background-color: black;
+}
+
+.search-item:hover {
+	background-color: rgba(173, 216, 230, 0.39)
+}
+
+.user_ele, .channel_ele {
+	color: white;
 }

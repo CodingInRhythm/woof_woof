@@ -3,14 +3,12 @@ import {useSelector} from 'react-redux'
 import './SideBar.css';
 import DMs from './DMs';
 import Channels from './Channels';
-import { useSelector } from 'react-redux';
 // import ContextMenu from './ContextMenu';
 import {useUserSearch} from '../../../context/UserSearch'
 
 const SideBar = ({ setRoom }) => {
 	const user = useSelector(state=>state.session.user)
 	const {searchParam, setSearchParam, matchingUsers, setMatchingUsers} = useUserSearch()
-	const user = useSelector((state) => state.session.user)
 	const resetSearch = () => {
 		console.log('MAKING RESETET SEARCH?')
 		console.log(searchParam)
