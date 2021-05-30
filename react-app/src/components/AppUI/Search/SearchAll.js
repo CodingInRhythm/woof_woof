@@ -65,19 +65,23 @@ const SearchAll = () => {
           <ul className="search-container">
             {matchingEles.map((ele, index) => {
               return (
-                <li className="search-item"key={index}>
-                  <button
-                    onClick={(e) => handleSubmit(e)}
-                    id={ele.id}
-                    className={ele.firstname ? "user_ele" : "channel_ele"}
-                    type="submit"
-                  >
-
-                    {ele.firstname
-                      ? `User: ${ele.firstname} ${ele.lastname}`
-                      : `# ${ele.name}`}
-                  </button>
-                </li>
+                // <li className="use_ele channel_ele search-item" key={index}>
+                <button
+                  key={index}
+                  onClick={(e) => handleSubmit(e)}
+                  id={ele.id}
+                  className={ele.firstname ? "user_ele" : "channel_ele"}
+                  type="submit"
+                >
+                  {ele.firstname ? (
+                    <span className={ele.online_status ? "online_user" : ""}>
+                      {`${ele.firstname} ${ele.lastname}`}
+                    </span>
+                  ) : (
+                    <span>{`# ${ele.name}`}</span>
+                  )}
+                </button>
+                // </li>
               );
             })}
           </ul>
