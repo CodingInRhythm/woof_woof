@@ -190,7 +190,7 @@ const Content = ({ isAddDM, socket }) => {
 
 	useEffect(() => {
 		const fetchUsers = async () => {
-			const res = await fetch('/api/search/',{
+			const res = await fetch('/api/search/users',{
 				method: 'POST',
 				headers : {
 					'Content-Type' : 'application/json'

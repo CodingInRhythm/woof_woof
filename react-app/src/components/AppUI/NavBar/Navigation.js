@@ -14,7 +14,7 @@ function Navigation({ isLoaded }) {
 
 	return (
     <nav className="main-nav">
-      <NavLink to="/">
+      <NavLink to="/" className='main-nav-home'>
         <i className="fas fa-home"></i>
       </NavLink>
       <SearchAll />

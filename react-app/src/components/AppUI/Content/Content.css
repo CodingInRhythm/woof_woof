@@ -310,6 +310,12 @@
 	align-items: center;
 }
 
+.main__add-teammate-input:focus + .main__add-teammate-list {
+	display:flex;
+	flex-direction: column;
+}
+
+
 .main__add-teammate-list{
 	position: absolute;
 	background-color: white;
@@ -321,6 +327,7 @@
 	border-radius: 10px;
 	padding: 10px 0;
 	z-index: 2;
+	display: none;
 }
 
 .main__add-teammate-item{
