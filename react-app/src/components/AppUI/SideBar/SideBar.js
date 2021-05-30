@@ -1,5 +1,6 @@
 import React from 'react';
 import {useSelector} from 'react-redux'
+import { useHistory } from 'react-router';
 import './SideBar.css';
 import DMs from './DMs';
 import Channels from './Channels';
@@ -7,6 +8,7 @@ import Channels from './Channels';
 import {useUserSearch} from '../../../context/UserSearch'
 
 const SideBar = ({ setRoom }) => {
+	const history = useHistory()
 	const user = useSelector(state=>state.session.user)
 	const {searchParam, setSearchParam, matchingUsers, setMatchingUsers} = useUserSearch()
 	const resetSearch = () => {
@@ -26,7 +28,7 @@ const SideBar = ({ setRoom }) => {
 					</div>
 				</div>
 				<span className="workspace-icon">
-					<i className="far fa-edit"></i>
+					<i className="fas fa-paw" onClick={()=>history.push('/dms/all')}></i>
 				</span>
 			</button>
 

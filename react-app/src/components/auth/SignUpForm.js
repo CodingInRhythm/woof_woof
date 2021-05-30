@@ -108,7 +108,7 @@ const SignUpForm = () => {
 						<div>
 							<input
 								id="email"
-								type="text"
+								type="email"
 								required
 								onChange={updateEmail}
 								placeholder="name@email.com"

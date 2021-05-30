@@ -1,5 +1,5 @@
 /*************************** REACT IMPORTS ***************************/
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import ReactQuill from 'react-quill'; // ES6
@@ -29,7 +29,6 @@ const EditDelete = ({editOn, setEditOn, deleteOn, setDeleteOn, msg, date, module
             } else if (msg.channel_id && text!==currentMessage){
                 dispatch(editChannelMessage(msg.id, text))
             }
-            setEditOn(false)
         }
     }
 
@@ -94,6 +93,10 @@ const Message = ({ msg, modules, formats}) => {
 	let date = new Date(msg?.created_at).toDateString() + ' ' + new Date(msg?.created_at).toLocaleTimeString();
 
     const isUser = msg.sender_id===user.id || msg.user_id===user.id
+
+    useEffect(()=>{
+        setEditOn(false)
+    },[msg])
 
 
     return (

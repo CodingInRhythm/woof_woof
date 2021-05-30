@@ -43,7 +43,7 @@
 .login-btn,
 .demo-btn {
 	border-radius: 3px;
-	background-color: #4a154b;
+	background-color: var(--primaryColorDark);
 	color: #fff;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-weight: bold;
@@ -61,11 +61,11 @@
 
 .login-btn:hover,
 .demo-btn:hover {
-	background-color: rgba(91, 27, 92, 0.9);
+	background-color: var(--primaryColor);
 }
 
 .login-input:focus .photo-upload--input:focus {
-	border: 1px solid #4a154b;
+	border: 1px solid var(--primaryColorDark);
 }
 
 .switchLinkName {
@@ -133,13 +133,13 @@
 }
 
 .photo-upload--input:focus {
-	border: 1px solid #4a154b;
+	border: 1px solid var(--primaryColorDark);
 }
 
 .photo-upload--btn {
 	font-size: 14px;
 	color: #fff;
-	background-color: #4a154b;
+	background-color: var(--primaryColorDark);
 	padding: 12px 8px;
 	border-radius: 5px;
 	transition: all 0.5s;
@@ -166,13 +166,13 @@
 }
 
 .photo-upload--btn:hover {
-	background-color: rgba(91, 27, 92, 0.9);
+	background-color: var(--primaryColor);
 }
 
 /* input[type='file']::file-selector-button {
 	font-size: 24px;
 	color: #fff;
-	background-color: #4a154b;
+	background-color: var(--primaryColorDark);
 	padding: 0px 8px;
 	border-radius: 3px;
 	transition: all 0.5s;
@@ -181,5 +181,5 @@
 }
 
 input[type='file']::file-selector-button:hover {
-	background-color: rgba(91, 27, 92, 0.9);
+	background-color: var(--primaryColor);
 } */

@@ -160,7 +160,9 @@ const Content = ({ isAddDM, socket }) => {
 	}, [location.pathname])
 
 	useEffect(() => {
-		scrollToBottom()
+		if(bottomRef.current){
+			scrollToBottom()
+		}
 	}, [messages[id]])
 
 	//  Get messages if not in store
@@ -206,7 +208,7 @@ const Content = ({ isAddDM, socket }) => {
 
 
 	/******************** INNER COMPONENT ********************/
-	if (isAddDM) {
+	if (location.pathname.includes("dms")) {
 		messageItem = Object.keys(messages).map((msg, idx) => {
 			return (
 				<Link

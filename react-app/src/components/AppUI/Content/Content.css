@@ -81,7 +81,8 @@
 }
 
 .main__chat-item {
-	display: flex;
+	display: grid;
+	grid-template-columns: 55px 1fr;
 	margin: 5px 0;
 	position: relative;
 	padding: 5px;
@@ -90,7 +91,8 @@
 }
 
 .main__chat-item-edit-delete {
-	display: flex;
+	display: grid;
+	grid-template-columns: 55px 1fr;
 	margin: 5px 0;
 	position: relative;
 	padding: 5px;
@@ -181,6 +183,7 @@
 	background-color: white;
 	margin: 10px;
 	border-radius: 5px;
+
 }
 
 .main__chat-send {
@@ -204,7 +207,11 @@
 }
 
 .chat__quill {
+	box-sizing: border-box;
+	bottom: 10px;
+	width: 97.5%;
 	background-color: white;
+	word-break: break-all;
 }
 
 .chat__other-info{
