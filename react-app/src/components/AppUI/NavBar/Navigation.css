@@ -105,3 +105,7 @@
 .online_user::before {
 	content: '\1F436';
 }
+
+.channel_img::before {
+	content: '\1F3E0';
+}

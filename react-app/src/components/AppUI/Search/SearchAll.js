@@ -12,7 +12,7 @@ const SearchAll = () => {
         console.log(e.target.className)
         setSearchAllParam("");
         setMatchingEles([]);
-        if (e.target.className === "user_ele") {
+        if (e.target.className.includes("user_ele")) {
             history.push(`/dm/${e.target.id}`);
         }
         else {
@@ -74,11 +74,17 @@ const SearchAll = () => {
                   type="submit"
                 >
                   {ele.firstname ? (
-                    <span className={ele.online_status ? "online_user" : ""}>
+                    <span
+                      id={ele.id}
+                      className={ele.online_status ? "user_ele online_user" : ""}
+                    >
                       {`${ele.firstname} ${ele.lastname}`}
                     </span>
                   ) : (
-                    <span>{`# ${ele.name}`}</span>
+                    <span
+                      id={ele.id} className="channel_img">
+                      {`# ${ele.name}`}
+                    </span>
                   )}
                 </button>
                 // </li>
