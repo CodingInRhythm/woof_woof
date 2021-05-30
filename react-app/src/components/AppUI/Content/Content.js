@@ -32,17 +32,15 @@ const Content = ({ isAddDM, socket }) => {
 		],
 		keyboard: {
 			bindings: {
-			  tab: {
-				key: 13,
-				handler: function() {
-				  // do nothing
-				}
-			  },
-			  'remove enter': {
+			  newline: {
 				key: 13,
 				shiftKey: true,
-				collapsed: true,
-				prefix: /\t$/,
+				handler: function() {
+
+				}
+			  },
+			  enter: {
+				key: 13,
 				handler: function() {
 				  // do nothing
 				}
@@ -253,8 +251,8 @@ const Content = ({ isAddDM, socket }) => {
 	const handleKeyPress = (e) => {
 		e.preventDefault();
 		// console.log(e.key)
-		let value = textInput.current.state.value;
-		// console.log(value)
+		let value = textInput.current;
+		console.log(value.getEditor().keyboard)
 		if (value && value !== '<p><br></p>' && e.key  === 'Enter'){
 			sendMessage(e);
 		}
