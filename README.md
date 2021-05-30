@@ -1,98 +1,77 @@
-# Flask React Project
+# Welcome to the Woof Woof
 
-This is the backend for the Flask React project.
+![logo]( <!-- Link goes here -->)
 
-## Getting started
+[LiveLink](https://woofwoof-app.herokuapp.com/)
 
-1. Clone this repository (only this branch)
+Woof Woof is a clone of [Slack](https://www.slack.com), a popular chat application that allows people to post messages to public channels or send private Direct Messages.
 
-   ```bash
-   git clone https://github.com/appacademy-starters/python-project-starter.git
-   ```
+## Technologies
+- React/Redux
+- Python
+- Flask
+- SQLAlchemy
+- PostgresQL
+- WebSockets
 
-2. Install dependencies
+## Features
+<!-- screenshot of the splash page -->
+### Database Schema
+![db](https://github.com/CodingInRhythm/slack_clone/blob/main/wiki/images/Slack_Schema.JPG)
 
-      ```bash
-      pipenv install --dev -r dev-requirements.txt && pipenv install -r requirements.txt
-      ```
+### Authentication
+- Users can sign up, and log in
+<!-- screenshot of the login page -->
 
-3. Create a **.env** file based on the example with proper settings for your
-   development environment
-4. Setup your PostgreSQL user, password and database and make sure it matches your **.env** file
+<!-- screenshot of the sidebar -->
+### Channels
+- Users can see all channels to which hw/she belongs
+- Users can leave a channel
+- Users can create a channel
 
-5. Get into your pipenv, migrate your database, seed your database, and run your flask app
+### DMs
+<!-- screenshot of the dm's with online status -->
+- Users can see all conversations on the side bar
+- Users can send and receive messages from other users.
+- Users with whom you communicate will have green status if they are online.
 
-   ```bash
-   pipenv shell
-   ```
+### Search
+- Users can search all channels, including channels that user does not belongs to
+- Users can search all other users
 
-   ```bash
-   flask db upgrade
-   ```
 
-   ```bash
-   flask seed all
-   ```
+### Notifications
+- User can see red notifications with the number of unread messages on the sidebar to the right of the dm or channel.
 
-   ```bash
-   flask run
-   ```
+<!-- screenshot of notifications -->
+### Live chat
+- Live chat is implemented by using Socket.io library. It enables real-time, bidirectional and event-based communication.
+- It works in both channels and DMs
 
-6. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
 
-***
-*IMPORTANT!*
-   If you add any python dependencies to your pipfiles, you'll need to regenerate your requirements.txt before deployment.
-   You can do this by running:
 
-   ```bash
-   pipenv lock -r > requirements.txt
-   ```
 
-*ALSO IMPORTANT!*
-   psycopg2-binary MUST remain a dev dependency because you can't install it on apline-linux.
-   There is a layer in the Dockerfile that will install psycopg2 (not binary) for us.
-***
+Here's what it looks like in action: <!-- livechat gif -->
 
-## Deploy to Heroku
+![Chat in action]()
 
-1. Create a new project on Heroku
-2. Under Resources click "Find more add-ons" and add the add on called "Heroku Postgres"
-3. Install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line)
-4. Run
+## Installation
+This project can be run by following these steps:
 
-   ```bash
-   heroku login
-   ```
+- Clone the repo into your desired folder.
+- Run `pipenv install` from the root project directory.
+- Run `npm install` from the react-app directory
+- Create a .env file in the root directory (use .env.example).
+- Run `pipenv shell` command
+- Run `flask run` command from the root directory and `npm start` from the react-app directory
 
-5. Login to the heroku container registry
+## Future Improvements
 
-   ```bash
-   heroku container:login
-   ```
+- Ability to create private channels
+- Implement event-based fetching on scrolled
+- Bookmark the messages
+- live `typing ...` notification
 
-6. Update the `REACT_APP_BASE_URL` variable in the Dockerfile.
-   This should be the full URL of your Heroku app: i.e. "https://flask-react-aa.herokuapp.com"
-7. Push your docker container to heroku from the root directory of your project.
-   This will build the dockerfile and push the image to your heroku container registry
+For additional information, checkout our [Wiki](https://github.com/CodingInRhythm/slack_clone/wiki) page.
 
-   ```bash
-   heroku container:push web -a {NAME_OF_HEROKU_APP}
-   ```
-
-8. Release your docker container to heroku
-
-   ```bash
-   heroku container:release web -a {NAME_OF_HEROKU_APP}
-   ```
-
-9. set up your database:
-
-   ```bash
-   heroku run -a {NAME_OF_HEROKU_APP} flask db upgrade
-   heroku run -a {NAME_OF_HEROKU_APP} flask seed all
-   ```
-
-10. Under Settings find "Config Vars" and add any additional/secret .env variables.
-
-11. profit
+> Developed By: [Brent Arimoto](https://github.com/brentarimoto), [Nurs Asanov](https://github.com/nasanov), [Alex Clough](https://github.com/CodingInRhythm), [Zane Preudhomme](https://github.com/zpreudhomme)
