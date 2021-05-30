@@ -45,7 +45,12 @@
 }
 
 .main-nav > form {
+	position: absolute;
+	top: 5px;
+	left: 300px;
 	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	align-items: center;
 }
 
@@ -71,17 +76,36 @@
 
 .search-container {
 	background-color: black;
+	width: 100%;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
 }
 
-.search-item:hover {
-	background-color: rgba(173, 216, 230, 0.39)
+/* .search-item {
+	list-style-type: none;
 }
+.search-item:hover {
+	background-color: rgba(173, 216, 230, 0.39);
+	cursor: grab;
+} */
 
 .user_ele, .channel_ele {
 	color: white;
 }
 
+.user_ele:hover, .channel_ele:hover {
+	background-color: rgba(173, 216, 230, 0.39)
+}
 .username_logo {
 	display: flex;
 	align-items: center;
+}
+
+.online_user::before {
+	content: '\1F436';
+}
+
+.channel_img::before {
+	content: '\1F3E0';
 }

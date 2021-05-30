@@ -12,7 +12,7 @@ const SearchAll = () => {
         console.log(e.target.className)
         setSearchAllParam("");
         setMatchingEles([]);
-        if (e.target.className === "user_ele") {
+        if (e.target.className.includes("user_ele")) {
             history.push(`/dm/${e.target.id}`);
         }
         else {
@@ -65,19 +65,29 @@ const SearchAll = () => {
           <ul className="search-container">
             {matchingEles.map((ele, index) => {
               return (
-                <li className="search-item"key={index}>
-                  <button
-                    onClick={(e) => handleSubmit(e)}
-                    id={ele.id}
-                    className={ele.firstname ? "user_ele" : "channel_ele"}
-                    type="submit"
-                  >
-
-                    {ele.firstname
-                      ? `User: ${ele.firstname} ${ele.lastname}`
-                      : `# ${ele.name}`}
-                  </button>
-                </li>
+                // <li className="use_ele channel_ele search-item" key={index}>
+                <button
+                  key={index}
+                  onClick={(e) => handleSubmit(e)}
+                  id={ele.id}
+                  className={ele.firstname ? "user_ele" : "channel_ele"}
+                  type="submit"
+                >
+                  {ele.firstname ? (
+                    <span
+                      id={ele.id}
+                      className={ele.online_status ? "user_ele online_user" : ""}
+                    >
+                      {`${ele.firstname} ${ele.lastname}`}
+                    </span>
+                  ) : (
+                    <span
+                      id={ele.id} className="channel_img">
+                      {`# ${ele.name}`}
+                    </span>
+                  )}
+                </button>
+                // </li>
               );
             })}
           </ul>
