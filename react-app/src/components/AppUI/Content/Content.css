@@ -1,5 +1,4 @@
 .main {
-	position: relative;
 	display: grid;
 	grid-template-rows: 75px 1fr;
 	grid-template-areas:
@@ -62,28 +61,28 @@
 	color: rgb(26, 26, 26);
 }
 .main__content {
-	position: absolute;
 	grid-area: main;
+	position: relative;
+	display: grid;
+	grid-template-rows: 1fr 155px;
 
-	padding-bottom: 180px;
-
-	height: 100%;
+	height: 90vh;
 	width: 100%;
 
 }
 
 .main__chat {
+	padding: 10px;
 	width: 100%;
 	height: 100%;
 	display: flex;
 	flex-direction: column-reverse;
 	overflow-y: auto;
-	overflow-x: wrap;
-	word-wrap: break-word;
 }
 
 .main__chat-item {
-	display: flex;
+	display: grid;
+	grid-template-columns: 55px 1fr;
 	margin: 5px 0;
 	position: relative;
 	padding: 5px;
@@ -92,7 +91,8 @@
 }
 
 .main__chat-item-edit-delete {
-	display: flex;
+	display: grid;
+	grid-template-columns: 55px 1fr;
 	margin: 5px 0;
 	position: relative;
 	padding: 5px;
@@ -108,10 +108,11 @@
 }
 
 .chat__image-container {
-	width: 44px;
-	height: 44px;
-	border-radius: 5px;
 	margin-right: 10px;
+    position: relative;
+    width: 44px;
+    height: 44px;
+    font-size: 1vw;
 }
 
 .chat__username {
@@ -181,10 +182,12 @@
 	width: 97.5%;
 	background-color: white;
 	margin: 10px;
+	border-radius: 5px;
+
 }
 
 .main__chat-send {
-	background-color: #4a154b;
+	background-color: var(--primaryColor);
 	color: #fff;
 	width: 35px;
 	height: 35px;
@@ -204,7 +207,11 @@
 }
 
 .chat__quill {
+	box-sizing: border-box;
+	bottom: 10px;
+	width: 97.5%;
 	background-color: white;
+	word-break: break-all;
 }
 
 .chat__other-info{
@@ -227,7 +234,7 @@
 
 .chat__other-info-delete-message {
 	font-weight: bold;
-	color: #4a154b;
+	color: var(--primaryColor);
 }
 
 .chat__other-info-cancel {
@@ -272,4 +279,60 @@
 	border: 1px solid #cccccc;
 	padding: 0 0 0 10px;
 	font-size: 13px;
+}
+
+.main__add-teammate{
+	position: relative;
+	display: grid;
+	grid-template-columns: 50px 1fr;
+	width: 100%;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+}
+
+.main__add-teammate-header{
+	margin: 1px 10px 1px 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 18px;
+	padding-bottom: 3px;
+}
+
+.main__add-teammate-input{
+	flex-grow: 1;
+	margin: 1px;
+	height: 50px;
+	font-size: 15px;
+	border: none;
+	outline: none;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.main__add-teammate-list{
+	position: absolute;
+	background-color: white;
+	top: 40px;
+	left: 20px;
+	right: 20px;
+	list-style: none;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	border-radius: 10px;
+	padding: 10px 0;
+	z-index: 2;
+}
+
+.main__add-teammate-item{
+	padding: 5px 15px;
+	background-color: white;
+}
+
+.main__add-teammate-item:hover{
+	color: white;
+	background-color: var(--sapphire);
+}
+
+.main__add-teammate-button{
+	color: inherit;
 }

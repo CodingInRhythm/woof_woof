@@ -6,17 +6,20 @@ import App from './App';
 import configureStore from './store';
 import ModalProvider from './context/Modal'
 import UserSearchContext from './context/UserSearch'
+import SearchAllProvider from './context/SearchAll';
 
 const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
     <ModalProvider>
-      <UserSearchContext>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </UserSearchContext>
+      <SearchAllProvider>
+        <UserSearchContext>
+          <Provider store={store}>
+            <App />
+          </Provider>
+        </UserSearchContext>
+      </SearchAllProvider>
     </ModalProvider>
   </React.StrictMode>,
   document.getElementById("root")

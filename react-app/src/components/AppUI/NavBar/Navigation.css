@@ -1,9 +1,9 @@
 .main-nav {
 	padding: 0;
-	background-color: #350d36;
+	background-color: var(--primaryColorDark);
 	display: flex;
-	align-items: center;
-	justify-content: flex-end;
+	align-items: space-between;
+	justify-content: space-between;
 	height: 38px;
 	position: fixed;
 	top: 0;
@@ -29,11 +29,12 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	
 }
 
 .nav-searchBar {
 	max-width: 732px;
-	width: 100%;
+	width: 500px;
 	border-radius: 7px;
 	outline: none;
 	height: 24px;
@@ -41,6 +42,16 @@
 	padding: 0 0 0 10px;
 
 	font-size: 13px;
+}
+
+.main-nav > form {
+	position: absolute;
+	top: 5px;
+	left: 300px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .nav-logo {
@@ -61,4 +72,40 @@
 .username {
 	color: #fff;
 	margin-right: 13px;
+}
+
+.search-container {
+	background-color: black;
+	width: 100%;
+	border-radius: 5px;
+	display: flex;
+	flex-direction: column;
+}
+
+/* .search-item {
+	list-style-type: none;
+}
+.search-item:hover {
+	background-color: rgba(173, 216, 230, 0.39);
+	cursor: grab;
+} */
+
+.user_ele, .channel_ele {
+	color: white;
+}
+
+.user_ele:hover, .channel_ele:hover {
+	background-color: rgba(173, 216, 230, 0.39)
+}
+.username_logo {
+	display: flex;
+	align-items: center;
+}
+
+.online_user::before {
+	content: '\1F436';
+}
+
+.channel_img::before {
+	content: '\1F3E0';
 }

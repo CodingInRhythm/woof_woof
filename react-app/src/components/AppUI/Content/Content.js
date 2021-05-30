@@ -1,19 +1,26 @@
+/*************************** REACT IMPORTS ***************************/
 import React, { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import './Content.css';
-import ava from '../../../images/ava.png';
-import ReactQuill from 'react-quill'; // ES6
-import Message from './Message';
 import { useDispatch, useSelector } from 'react-redux';
-import { getChannelMessages, addMessage as addChannelMessage } from '../../../store/channel_messages';
 import { useParams, useLocation, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import ReactQuill from 'react-quill'; // ES6
+
+
+/*************************** OTHER FILE IMPORTS ***************************/
+import { getChannelMessages, addMessage as addChannelMessage } from '../../../store/channel_messages';
 import { getDirectMessages } from '../../../store/direct_messages';
 import { addDMUser, getDMUser } from '../../../store/dm_people';
 import { useUserSearch } from "../../../context/UserSearch";
+import ProfilePhoto from "../UserProfile/ProfilePhoto"
+import Message from './Message';
+import './Content.css';
 
-
+/*************************** COMPONENTS ***************************/
 const Content = ({ isAddDM, socket }) => {
 
+
+
+	/******************** VARIABLES********************/
 	let modules = {
 		toolbar: [
 			[{ header: [1, 2, false] }],
@@ -40,14 +47,6 @@ const Content = ({ isAddDM, socket }) => {
 		'image',
 	];
 
-	//val 1 will either be channelId or userId
-	const hashingRoom = (val1, recipientId) => {
-		if (!recipientId) {
-			return `Channel: ${val1}`;
-		} else {
-			return `DM${val1 < recipientId ? val1 : recipientId}${val1 > recipientId ? val1 : recipientId}`;
-		}
-	};
 
 	const { id } = useParams();
 
@@ -58,6 +57,8 @@ const Content = ({ isAddDM, socket }) => {
 	const dms = useSelector(state => state.dm_users);
 	const userId = useSelector(state => state.session.user.id);
 
+	const bottomRef = useRef(null)
+
 	const history = useHistory();
 
 	const { searchParam, setSearchParam, matchingUsers, setMatchingUsers } = useUserSearch();
@@ -65,9 +66,6 @@ const Content = ({ isAddDM, socket }) => {
 	const textInput = useRef(null);
 
 	let slice;
-	useEffect(()=> {
-		console.log("content rerendering")
-	}, [])
 
 	if (location.pathname.includes("channel")) {
 		slice = "channelMessages";
@@ -75,13 +73,26 @@ const Content = ({ isAddDM, socket }) => {
 	else if (location.pathname === "/dms/all") {
 		slice = "dm_users"
 	}
-	else if (location.pathname.includes("dm")) {
+	else if (location.pathname.includes("dm/")) {
 		slice = "directMessages"
 	}
 
     let messages = useSelector(state => state[slice])
 
-  	let textField;
+	let textField;
+
+	let messageItem;
+
+
+	/******************** FUNCTIONS ********************/
+	//val 1 will either be channelId or userId
+	const hashingRoom = (val1, recipientId) => {
+		if (!recipientId) {
+			return `Channel: ${val1}`;
+		} else {
+			return `DM${val1 < recipientId ? val1 : recipientId}${val1 > recipientId ? val1 : recipientId}`;
+		}
+	};
 
 	//Handle Send Message
 	const sendMessage = e => {
@@ -114,7 +125,7 @@ const Content = ({ isAddDM, socket }) => {
 	};
 
 	const handleClick = (id) => {
-		//GOTTA figure out how to grab the messages user id to delete from local storage.
+
 		console.log(id)
 		if (window.localStorage.getItem(id.toString())) {
 			window.localStorage.removeItem(id.toString())
@@ -122,78 +133,6 @@ const Content = ({ isAddDM, socket }) => {
 		return
 	}
 
-	useEffect(() => {
-		console.log("location.pathname")
-	}, [location.pathname])
-
-	//  USEEFFECTS
-
-	useEffect(() => {
-		localStorage.setItem('lastPage', location.pathname)
-		if (location.pathname.includes("channel")) {
-			slice = 'channelMessages'
-		} else {
-			slice = "directMessages"
-		}
-		if (!messages[id] && slice === "channelMessages") {
-			console.log("get channel messages")
-			dispatch(getChannelMessages(id));
-		}
-		if ((!messages[id] && slice === "directMessages" )|| (direct_messages[id] && Object.keys(direct_messages[id].length === 0))) {
-			dispatch(getDirectMessages(id));
-		}
-	}, [ dispatch, id, dms, location.pathname]);
-
-	useEffect(() => {
-		const fetchUsers = async () => {
-			const res = await fetch('/api/users/');
-			const data = await res.json();
-			console.log('SEARCH PARAM', searchParam, "/n", 'matching users', matchingUsers)
-			setMatchingUsers(
-				data.users.filter(user => {
-					return (
-            user.firstname?.toLowerCase().indexOf(searchParam.toLowerCase()) ===
-              0 ||
-            user.lastname?.toLowerCase().indexOf(searchParam.toLowerCase()) === 0
-			||
-			`${user.firstname} ${user.lastname}`.toLowerCase().indexOf(searchParam.toLowerCase()) === 0
-          );
-				})
-			);
-		};
-		if (searchParam.length > 0) fetchUsers()
-		else { setMatchingUsers([])}
-	}, [searchParam]);
-
-	let messageItem;
-
-	if (isAddDM) {
-		messageItem = Object.keys(messages).map((msg, idx) => {
-			return (
-        <Link
-          key={idx}
-          onClick={() => handleClick(messages[msg].id)}
-
-          to={`/dm/${messages[msg].id}`}
-        >
-          <div className="main__chat-item">
-            <div className="chat__image-container">
-              <img
-                src={messages[msg].profile_photo}
-                alt="profile-photo"
-                className="chat__avatar"
-              ></img>
-            </div>
-            <div className="chat__other-info">
-              {messages[msg].firstname + " " + messages[msg].lastname}
-            </div>
-          </div>
-        </Link>
-      );
-		});
-	}
-
-	//FUNCTIONS//
 
 	const handleSubmit = e => {
 		e.preventDefault();
@@ -210,6 +149,91 @@ const Content = ({ isAddDM, socket }) => {
 	};
 	// console.log(matchingUsers)
 
+
+	const scrollToBottom = () => {
+		bottomRef.current.scrollIntoView({ behavior: "smooth" })
+	}
+
+	/******************** USE EFFECTS ********************/
+	useEffect(() => {
+		console.log("location.pathname")
+	}, [location.pathname])
+
+	useEffect(() => {
+		if(bottomRef.current){
+			scrollToBottom()
+		}
+	}, [messages[id]])
+
+	//  Get messages if not in store
+	useEffect(() => {
+		localStorage.setItem('lastPage', location.pathname)
+
+		// if (location.pathname.includes("channel")) {
+		// 		slice = 'channelMessages'
+		// } else if (location.pathname.includes("dm/")){
+		// 		slice = "directMessages"
+		// }
+
+		if (!messages[id] && slice === "channelMessages") {
+			dispatch(getChannelMessages(id));
+		}
+		// else if ((!messages[id] && slice === "directMessages" ) || (direct_messages[id] && Object.keys(direct_messages[id].length === 0))) {
+		else if (!messages[id] && slice === "directMessages" ) {
+			if (!dms[id]){
+				dispatch(getDMUser(id));
+			}
+			dispatch(getDirectMessages(id));
+		}
+	}, [ dispatch, id, dms, location.pathname]);
+
+
+	useEffect(() => {
+		const fetchUsers = async () => {
+			const res = await fetch('/api/search/',{
+				method: 'POST',
+				headers : {
+					'Content-Type' : 'application/json'
+				},
+				body: JSON.stringify({searchParam}),
+			});
+			const data = await res.json();
+			setMatchingUsers(data.users)
+			console.log(data.users[0])
+		};
+
+		if (searchParam.length > 0) fetchUsers()
+		else { setMatchingUsers([])}
+	}, [searchParam]);
+
+
+	/******************** INNER COMPONENT ********************/
+	if (location.pathname.includes("dms")) {
+		messageItem = Object.keys(messages).map((msg, idx) => {
+			return (
+				<Link
+				key={idx}
+				onClick={() => handleClick(messages[msg].id)}
+
+				to={`/dm/${messages[msg].id}`}
+				>
+				<div className="main__chat-item">
+					<div className="chat__image-container">
+						<ProfilePhoto profileUser={messages[msg]} alt={messages[msg].username}/>
+					</div>
+					<div className="chat__other-info">
+						{messages[msg].firstname + " " + messages[msg].lastname}
+					</div>
+				</div>
+				</Link>
+			);
+		});
+	}
+
+	//FUNCTIONS//
+
+
+	/******************** MAIN COMPONENT ********************/
 	return (
 		<div className="main">
 			<header className="main__header">
@@ -231,7 +255,7 @@ const Content = ({ isAddDM, socket }) => {
 								<li
 									className={`dms__header`}
 								>
-									{`${dms[id]?.firstname} ${dms[id]?.lastname}`}
+									{dms[id]?.firstname && `${dms[id]?.firstname} ${dms[id]?.lastname}`}
 								</li>
 							}
 						</>
@@ -251,33 +275,41 @@ const Content = ({ isAddDM, socket }) => {
 			<div className="main__content">
 				{isAddDM ? (
 					<>
-						<form>
-							<input
-								type="text"
-								name="searchParam"
-								value={searchParam}
-								onChange={e => setSearchParam(e.target.value)}
-								placeholder="@somebody"
-							/>
-						</form>
-						{matchingUsers.length > 0 && (
-							<ul>
-								{matchingUsers.map((user, index) => {
-									return (
-										<li>
-											<form id={user.id} onSubmit={handleSubmit}>
-												<button type="submit">{user.firstname}</button>
-											</form>
-										</li>
-									);
-								})}
-							</ul>
-						)}
-						<section className="main__chat">{messageItem}</section>
+						<div className='main__add-teammate-div'>
+							<form autocomplete="off" className='main__add-teammate'>
+								<h2 className='main__add-teammate-header'>To:</h2>
+								<input
+									className='main__add-teammate-input'
+									type="text"
+									name="searchParam"
+									value={searchParam}
+									onChange={e => setSearchParam(e.target.value)}
+									placeholder="@somebody"
+								/>
+							{matchingUsers.length > 0 && (
+								<ul className='main__add-teammate-list'>
+									{matchingUsers.map((user, index) => {
+										return (
+											<li className='main__add-teammate-item'>
+												<Link name={user.id} to={`/dm/${user.id}`}>
+													<div className='main__add-teammate-image'>
+
+													</div>
+													{user.firstname}{user.lastname}{user.username}{user.email}
+												</Link>
+											</li>
+										);
+									})}
+								</ul>
+							)}
+							</form>
+							<section className="main__add-teammate-existing">{messageItem}</section>
+						</div>
 					</>
 				) : (
 					<>
 						<section className="main__chat">
+							<div ref={bottomRef}/>
 							{messages &&
 								messages[id] &&
 								Object.entries(messages[id])
@@ -311,4 +343,6 @@ const Content = ({ isAddDM, socket }) => {
 	);
 };
 
+
+/*************************** EXPORT ***************************/
 export default Content;

@@ -67,6 +67,7 @@ button:hover{
 }
 
 #modal-content {
+  transform: translateY(-20%);
   position: absolute;
   background-color: var(--profileBackground);
   border-radius: 10px;
@@ -78,5 +79,5 @@ button:hover{
   max-height: 550px;
   z-index: 99;
 
-  animation: modalAnimation .5s, fadeIn 1s;
+  animation: fadeIn .5s;
 }

@@ -9,7 +9,7 @@ channel_routes = Blueprint('channels', __name__)
 @channel_routes.route('/all')
 def all_channels():
     channels = Channel.query.all()
-    print(channels)
+    print('hello world')
     return {"channels": [channel.to_dict() for channel in channels]}
 
 # GET CHANNELS FOR THE CURRENT USER

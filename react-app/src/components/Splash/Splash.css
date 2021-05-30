@@ -6,7 +6,7 @@
     margin: 0;
     height: 50px;
     padding-top: 15px;
-    background-color: #561557;
+    background-color: var(--primaryColor);
 }
 
 .splash_nav h1{
@@ -16,8 +16,11 @@
 }
 
 #slack_logo{
+    font-size: 60px;
     width:45px;
-    margin-left: 25px;
+    margin-left: 10px;
+    color: grey;
+    margin-right: 15px;
 }
 .splash_nav-left{
     display: flex;
@@ -30,7 +33,7 @@
 }
 
 .splash_container{
-    background-color: #561557;
+    background-color: var(--primaryColor);
     transition: all 1s ease;
 }
 
@@ -60,29 +63,29 @@
 
 .tryout_btn{
     background-color: white;
-    color: #561557
+    color: var(--primaryColor)
 }
 
 .tryout_btn:hover{
-    border: 1px solid #471247
+    border: 1px solid var(--secondaryColor)
 }
 
 #nav_logout{
-    color:#561557;
+    color:var(--primaryColor);
     background: white;
 }
 
 #nav_logout:hover{
-    border: 1px solid #471247
+    border: 1px solid var(--secondaryColor)
 }
 
 #nav_scroll_logout{
     color: white;
-    background: #561557
+    background: var(--primaryColor)
 }
 
 #nav_scroll_logout:hover{
-    background: #471247
+    background: var(--secondaryColor)
 }
 
 .splash_scrolling_nav{
@@ -130,12 +133,12 @@
     height: 40px;
     margin-right: 15px;
     font-size: 14px;
-    color: #561557;
-    border: 1px solid #561557;
+    color: var(--primaryColor);
+    border: 1px solid var(--primaryColor);
 }
 
 .splash_scrolling_signin:hover{
-    border: 2px solid #561557;
+    border: 2px solid var(--primaryColor);
 }
 
 .splash_scrolling_tryout{
@@ -151,12 +154,12 @@
     height: 40px;
     margin-right: 15px;
     font-size: 14px;
-    background-color: #561557;
+    background-color: var(--primaryColor);
     color: white
 }
 
 .splash_scrolling_tryout:hover{
-    background-color: #471247;
+    background-color: var(--secondaryColor);
 }
 
 .splash_page{
@@ -203,7 +206,7 @@
     padding: 20px 40px;
     font-size: 14px;
     background-color: white;
-    color: #561557;
+    color: var(--primaryColor);
     margin-bottom: 25px;
 }
 
@@ -250,7 +253,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(3, 100px 100px 10px);
-    grid-template-areas: 
+    grid-template-areas:
     "js ."
     "js python"
     ". python"
@@ -298,7 +301,7 @@
     height: 500px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 100px 1fr;
-    grid-template-areas: 
+    grid-template-areas:
     "created created created created"
     "nurs alex brent zane"
 }

@@ -55,7 +55,7 @@
 
 .channels__button:hover,
 .threads__items:hover {
-	background: #350d36;
+	background:  var(--sideBarHover);
 	cursor: pointer;
 }
 
@@ -65,8 +65,8 @@
 	color: #ffffff;
 }
 .channels__button:before {
-	content: '#';
-	opacity: 0.5;
+	content: '\1F3E0';
+	opacity: 1;
 }
 
 /* .channels__list li a {

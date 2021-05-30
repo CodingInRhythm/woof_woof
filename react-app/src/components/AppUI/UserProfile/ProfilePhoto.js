@@ -7,16 +7,16 @@ import './ProfilePhoto.css'
 
 
 /*************************** COMPONENTS ***************************/
-const UserProfile = ({profileUser, alt})=>{
+const ProfilePhoto = ({profileUser, alt})=>{
     return(
-        <>
+        <div className='profile__photo-div'>
             {profileUser?.profile_photo ?
             <img className='profile__photo-pic' src={profileUser?.profile_photo} alt={alt}/> :
-            <h2>{profileUser?.firstname[0]}</h2>
+            <h2 className='profile__photo-pic-default'>{profileUser?.firstname && profileUser.firstname[0]}</h2>
             }
-        </>
+        </div>
     )
 }
 
 /*************************** EXPORT ***************************/
-export default UserProfile;
+export default ProfilePhoto;

@@ -13,7 +13,7 @@ const PageNotFound = () => {
 					<h1 className="notfound__text">I'm sorry, this page doesn't exist</h1>
 					<div className="notfound__links">
 						<div className="notfound__signup-link">
-							<p className="switchLinkName">New to Slack?</p>
+							<p className="switchLinkName">New to Woof Woof?</p>
 							<NavLink to="/sign-up" className="switchLink">
 								Create an account
 							</NavLink>
