@@ -30,6 +30,25 @@ const Content = ({ isAddDM, socket }) => {
 			['link', 'image'],
 			['clean'],
 		],
+		keyboard: {
+			bindings: {
+			  tab: {
+				key: 13,
+				handler: function() {
+				  // do nothing
+				}
+			  },
+			  'remove enter': {
+				key: 13,
+				shiftKey: true,
+				collapsed: true,
+				prefix: /\t$/,
+				handler: function() {
+				  // do nothing
+				}
+			  }
+			}
+		  }
 	};
 	let formats = [
 		'header',
@@ -231,7 +250,15 @@ const Content = ({ isAddDM, socket }) => {
 	}
 
 	//FUNCTIONS//
-
+	const handleKeyPress = (e) => {
+		e.preventDefault();
+		// console.log(e.key)
+		let value = textInput.current.state.value;
+		// console.log(value)
+		if (value && value !== '<p><br></p>' && e.key  === 'Enter'){
+			sendMessage(e);
+		}
+	}
 
 	/******************** MAIN COMPONENT ********************/
 	return (
@@ -319,7 +346,7 @@ const Content = ({ isAddDM, socket }) => {
 									))}
 						</section>
 						<section className="main__chat-textarea">
-							<form onSubmit={sendMessage}>
+							<form onSubmit={sendMessage} onKeyUp={handleKeyPress}>
 								<ReactQuill
 									// placeholder={`Message #${messages[id]?.channel?.name}`}
 									modules={modules}
