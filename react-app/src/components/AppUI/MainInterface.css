@@ -1,5 +1,5 @@
 .main-container {
-	position: relative;
+	position: fixed;
 	bottom: 0;
 	padding-top: 38px;
 	width: 100%;
