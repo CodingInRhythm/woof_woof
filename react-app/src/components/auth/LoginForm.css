@@ -25,6 +25,7 @@
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
+	align-items: center;
 }
 
 .login-input,
@@ -113,6 +114,15 @@
 	margin-bottom: 20px;
 }
 
+
+#fa-dog_green-large_login{ 
+	color: var(--primaryColor);
+	height: 50%;
+	font-size: 3.5em;
+	height: 35px;
+	margin-bottom: 20px;
+}
+
 .slack_logo:hover{
 	cursor: pointer;
 }
@@ -148,6 +158,9 @@
 	height: 40px;
 	text-align: center;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .photo-upload--filename {
@@ -169,6 +182,9 @@
 	background-color: var(--primaryColor);
 }
 
+#actual-btn-text {
+	font-size: .75rem;
+}
 /* input[type='file']::file-selector-button {
 	font-size: 24px;
 	color: #fff;
@@ -183,3 +199,7 @@
 input[type='file']::file-selector-button:hover {
 	background-color: var(--primaryColor);
 } */
+
+.signupform {
+	box-sizing: border-box;
+}
