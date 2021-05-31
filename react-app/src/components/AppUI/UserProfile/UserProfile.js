@@ -65,11 +65,6 @@ const UserProfile = ({profileUser, setShowModal})=>{
                 className='profile__main'
                 onSubmit = { handleSubmit }
             >
-                <ul className='profile__errors'>
-                    {errors?.map((error)=>(
-                        <li key={error}>{error}</li>
-                    ))}
-                </ul>
                 <div className='profile__photo-outer-container'>
                     <div className='profile__photo-container'>
                         <ProfilePhoto profileUser={profileUser} alt={'profile-photo'}/>
@@ -81,6 +76,18 @@ const UserProfile = ({profileUser, setShowModal})=>{
                     }
                     </div>
                 </div>
+                {errors.length ? (
+							<div className="errorsContainer">
+								<span>The following errors occurred:</span>
+								<ul className="errorsList">
+									{errors.map((error, idx) => (
+										<li key={idx}>{error}</li>
+									))}
+								</ul>
+							</div>
+						) : (
+							<div></div>
+						)}
                 <div className='profile__firstname-div'>
                     {isUser ? <input
                         className='profile__firstname-input'

@@ -99,25 +99,23 @@ const Content = ({ isAddDM, socket }) => {
 		e.preventDefault();
 		textField = textInput.current.state.value;
 		if (textField && textField !== '<br>') {
-			let editor = textInput.current.getEditor();
+			const editor = textInput.current.getEditor();
+			const justText = editor.getText()
 
 			// TODO: h2 for headings, pre for codeblock, etc
-			let text = textField.slice(0, 2) + " class='chat__text' " + textField.slice(2);
+			const text = textField.slice(0, 2) + " class='chat__text'" + textField.slice(2);
 
 			editor.deleteText(0, text.length);
 
-			if (location.pathname.includes('dm')) {
-				// console.log("before dm")
+			if (location.pathname.includes('dm') && justText.length>1){
 				if (!(id in dms)) {
-					console.log(id);
-					console.log(dms);
 					dispatch(getDMUser(id));
 				}
 				socket.emit("dm", {sender_id:userId, recipient_id: id, message:text, room:hashingRoom(userId, id)})
 				if(!dms[id]){
 					socket.emit("dm_change", {recipient_id: id, sender_id: userId})
 				}
-			} else{
+			} else if (justText.length>1){
 				socket.emit("chat", {room:id, id:userId, message:text})
 			}
 			console.log(text)
