@@ -202,4 +202,5 @@ input[type='file']::file-selector-button:hover {
 
 .signupform {
 	box-sizing: border-box;
+	width: 100%;
 }

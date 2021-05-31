@@ -78,7 +78,7 @@ const SignUpForm = () => {
           ></i>
           <h1 className="login-form-header">Join Woof Woof!</h1>
 
-          <form onSubmit={onSignUp}>
+          <form className="signupform" onSubmit={onSignUp}>
             <div>
               <input
                 name="username"
