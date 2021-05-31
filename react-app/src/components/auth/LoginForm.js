@@ -7,7 +7,7 @@ import logo from '../../images/slack_logo-ebd02d1.svg';
 
 const LoginForm = () => {
 	const [errors, setErrors] = useState([]);
-	const [email, setEmail] = useState('');
+	const [credential, setCredential] = useState('');
 	const [password, setPassword] = useState('');
 	const user = useSelector(state => state.session.user);
 	const dispatch = useDispatch();
@@ -15,14 +15,14 @@ const LoginForm = () => {
 
 	const onLogin = async e => {
 		e.preventDefault();
-		const data = await dispatch(login(email, password));
+		const data = await dispatch(login(credential, password));
 		if (data.errors) {
 			setErrors(data.errors);
 		}
 	};
 
-	const updateEmail = e => {
-		setEmail(e.target.value);
+	const updateCredential = e => {
+		setCredential(e.target.value);
 	};
 
 	const updatePassword = e => {
@@ -63,11 +63,11 @@ const LoginForm = () => {
 							<div></div>
 						)}
 						<input
-							id="email"
+							id="credential"
 							type="text"
 							required
-							onChange={updateEmail}
-							placeholder="name@email.com"
+							onChange={updateCredential}
+							placeholder="Username/Email"
 							className="login-input"
 						/>
 						<input
@@ -76,7 +76,7 @@ const LoginForm = () => {
 							value={password}
 							onChange={updatePassword}
 							required
-							placeholder="password"
+							placeholder="Password"
 							className="login-input"
 						/>
 						<button type="submit" id="submitButton" className="login-btn">

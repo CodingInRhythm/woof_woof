@@ -219,6 +219,21 @@
 	grid-template-columns: 1fr;
 	grid-template-rows: 20px 1fr;
 	width: 100%;
+	font-weight: bold;
+}
+
+.chat__other-info-lastmessage{
+	color: grey;
+	background-color: whitesmoke;
+	margin: 0px 5px 0 5px;
+	border-radius: 5px;
+	font-size: 90%;
+	border: 1px solid rgba(0, 0, 0, 0.05);
+	display: flex;
+	align-items: center;
+	padding: 0 5px 0 5px;
+	width: fit-content;
+	display: flex;
 }
 
 .chat__other-header{
@@ -310,6 +325,18 @@
 	align-items: center;
 }
 
+.main__add-teammate-input:focus + .main__add-teammate-list {
+	display:flex;
+}
+
+.main__add-teammate-list:hover{
+	display: flex;
+}
+
+.main__add-teammate-list:active{
+	display: flex;
+}
+
 .main__add-teammate-list{
 	position: absolute;
 	background-color: white;
@@ -321,11 +348,49 @@
 	border-radius: 10px;
 	padding: 10px 0;
 	z-index: 2;
+	display: none;
+	flex-direction: column;
 }
 
 .main__add-teammate-item{
 	padding: 5px 15px;
 	background-color: white;
+	display: grid;
+	grid-template-columns: 30px 1fr;
+	grid-template-rows: 1fr 1fr;
+	grid-template-areas:
+	"pic name"
+	"pic user_email";
+	align-items: center;
+}
+
+.main__add-teammate-image{
+	grid-area: pic;
+	height: 28px;
+	width: 28px;
+	font-size: 60%;
+}
+
+.main__add-teammate-name{
+	grid-area: name;
+	display: flex;
+	height: 100%;
+	margin-left: 10px;
+	font-size: 90%;
+
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.main__add-teammate-user_email{
+	grid-area: user_email;
+	display: flex;
+	margin: 0 0 0 10px;
+	font-size: 80%;
+	color: grey;
+
+    margin-block-start: 0;
+    margin-block-end: 0;
 }
 
 .main__add-teammate-item:hover{

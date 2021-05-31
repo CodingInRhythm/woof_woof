@@ -1,18 +1,25 @@
 .main-nav {
 	padding: 0;
 	background-color: var(--primaryColorDark);
-	display: flex;
-	align-items: space-between;
-	justify-content: space-between;
+	display: grid;
+	grid-template-columns: 200px 1fr 200px;
 	height: 38px;
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
-	z-index: 2;
+	z-index: 98;
 }
 
-.main-nav a {
+/* HOME BUTTON */
+.nav-logo {
+	width: 28px;
+	height: 28px;
+	margin-right: 15px;
+	border-radius: 5px;
+}
+
+.main-nav-home{
 	display: block;
 	padding: 10px 17px;
 	font-size: 17px;
@@ -21,6 +28,11 @@
 	margin-right: 5px;
 }
 
+.fa-home {
+	color: #fff;
+}
+
+/* SEARCH */
 .nav-search {
 	width: 40%;
 	position: relative;
@@ -29,12 +41,23 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	
+
+}
+
+.nav-searchBar-form {
+	margin: 0px 5%;
+	width: 70%;
+	position: relative;
+	justify-self: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
 }
 
 .nav-searchBar {
-	max-width: 732px;
-	width: 500px;
+	width: 100%;
 	border-radius: 7px;
 	outline: none;
 	height: 24px;
@@ -44,42 +67,27 @@
 	font-size: 13px;
 }
 
-.main-nav > form {
-	position: absolute;
-	top: 5px;
-	left: 300px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+.nav-searchBar:focus + .search-container {
+	display:flex
 }
 
-.nav-logo {
-	width: 28px;
-	height: 28px;
-	margin-right: 15px;
-	border-radius: 5px;
-}
-
-.nav-logo:hover {
-	cursor: pointer;
-}
-
-.fa-home {
-	color: #fff;
-}
-
-.username {
-	color: #fff;
-	margin-right: 13px;
+.search-container:hover {
+	display:flex
 }
 
 .search-container {
-	background-color: black;
+	position: absolute;
+	box-sizing: border-box;
+	top:40px;
+	background-color: white;
 	width: 100%;
 	border-radius: 5px;
-	display: flex;
+	display: none;
 	flex-direction: column;
+	justify-content: center;
+	color: black;
+	z-index: 99;
+	border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 /* .search-item {
@@ -90,8 +98,26 @@
 	cursor: grab;
 } */
 
+.searchAll__user-item,
+.searchAll__channel-item{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.searchAll__secondary-info{
+	margin: 0 0 0 10px;
+	font-size: 80%;
+	color: grey;
+}
+
+
 .user_ele, .channel_ele {
-	color: white;
+	color: black;
+	display: flex;
+	align-items: center;
+	height: 30px;
+	padding: 5px;
 }
 
 .user_ele:hover, .channel_ele:hover {
@@ -108,4 +134,19 @@
 
 .channel_img::before {
 	content: '\1F3E0';
+}
+
+/* USER INFO */
+.username_logo {
+	justify-self: flex-end;
+}
+
+.username {
+	color: #fff;
+	margin-right: 13px;
+}
+
+
+.nav-logo:hover {
+	cursor: pointer;
 }
