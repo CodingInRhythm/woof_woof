@@ -55,7 +55,8 @@ const Content = ({ isAddDM, socket }) => {
 	const channels = useSelector(state => state.channels);
 	const direct_messages = useSelector(state => state.directMessages);
 	const dms = useSelector(state => state.dm_users);
-	const userId = useSelector(state => state.session.user.id);
+	const user = useSelector(state => state.session.user);
+	const userId = user.id
 
 	const bottomRef = useRef(null)
 
@@ -208,6 +209,29 @@ const Content = ({ isAddDM, socket }) => {
 	/******************** INNER COMPONENT ********************/
 	if (location.pathname.includes("dms")) {
 		messageItem = Object.keys(messages).map((msg, idx) => {
+			let person;
+			let mostRecentMessage;
+			if (direct_messages[messages[msg].id]){
+				let values = Object.values(direct_messages[messages[msg].id])
+				if (values.length){
+					person=values[values.length-1].user.firstname
+					mostRecentMessage=values[values.length-1].message
+				}
+			} else {
+				let recipient_message = messages[msg].recipient_messages[0]
+				let sender_message = messages[msg].sender_messages[0]
+				if (recipient_message && sender_message){
+					person= sender_message.id > recipient_message.id ? messages[msg].firstname : user.firstname
+					mostRecentMessage = sender_message.id > recipient_message.id ? sender_message.message : recipient_message.message
+				} else if (recipient_message){
+					person = user.firstname
+					mostRecentMessage = recipient_message.message
+				} else if (sender_message){
+					person = messages[msg].firstname
+					mostRecentMessage = sender_message.message
+				}
+			}
+
 			return (
 				<Link
 				key={idx}
@@ -221,6 +245,7 @@ const Content = ({ isAddDM, socket }) => {
 					</div>
 					<div className="chat__other-info">
 						{messages[msg].firstname + " " + messages[msg].lastname}
+						{person && <div className="chat__other-info-lastmessage"><div>{person}:</div> <div dangerouslySetInnerHTML={{ __html: mostRecentMessage }}></div></div>}
 					</div>
 				</div>
 				</Link>
@@ -274,7 +299,7 @@ const Content = ({ isAddDM, socket }) => {
 				{isAddDM ? (
 					<>
 						<div className='main__add-teammate-div'>
-							<form autocomplete="off" className='main__add-teammate'>
+							<form autoComplete="off" className='main__add-teammate'>
 								<h2 className='main__add-teammate-header'>To:</h2>
 								<input
 									className='main__add-teammate-input'
@@ -288,14 +313,13 @@ const Content = ({ isAddDM, socket }) => {
 								<ul className='main__add-teammate-list'>
 									{matchingUsers.map((user, index) => {
 										return (
-											<li className='main__add-teammate-item'>
-												<Link name={user.id} to={`/dm/${user.id}`}>
-													<div className='main__add-teammate-image'>
-
-													</div>
-													{user.firstname}{user.lastname}{user.username}{user.email}
-												</Link>
-											</li>
+											<Link name={user.id} to={`/dm/${user.id}`} className='main__add-teammate-item'>
+												<div className='main__add-teammate-image'>
+													<ProfilePhoto profileUser={user} alt={user.username}/>
+												</div>
+												<span className='main__add-teammate-name'>{`${user.firstname} ${user.lastname}`}</span>
+												<span className='main__add-teammate-user_email'>{`${user.username} (${user.email})`}</span>
+											</Link>
 										);
 									})}
 								</ul>

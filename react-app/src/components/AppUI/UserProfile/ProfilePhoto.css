@@ -2,7 +2,7 @@
     position: relative;
     width: 100%;
     height: 100%;
-    border-radius: 10px;
+    border-radius: 20%;
     font-size: 150%;
     background-color: var(--defaultProfPic);
     display: flex;
@@ -19,7 +19,7 @@
     object-fit: cover;
     width: 100%;
     height: 100%;
-    border-radius: 5px;
+    border-radius: 5%;
 }
 
 .profile__photo-pic-default{

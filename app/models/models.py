@@ -1,4 +1,5 @@
 #################### IMPORTS ####################
+from flask import session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
@@ -171,7 +172,9 @@ class User(db.Model, UserMixin):
       'online_status' : self.online_status,
       'profile_photo' : self.profile_photo,
       'channels_owned' : [channel.to_dict_basic() for channel in self.channels_owned],
-      'channels_in' : [channel.to_dict_basic() for channel in self.channels_in]
+      'channels_in' : [channel.to_dict_basic() for channel in self.channels_in],
+      'sender_messages' : [message.to_dict_basic() for i, message in enumerate(self.sender_messages) if (message.recipient_id==int(session['_user_id']) and (i==len(self.sender_messages)-1))],
+      'recipient_messages' : [message.to_dict_basic() for i, message in enumerate(self.recipient_messages) if (message.sender_id==int(session['_user_id']) and (i==len(self.recipient_messages)-1))],
     }
 
   def to_dict_basic(self):

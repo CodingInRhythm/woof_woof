@@ -8,7 +8,6 @@ from app.forms import EditForm
 from flask_login import current_user, login_user, logout_user, login_required
 
 
-
 #################### SETUP ####################
 auth_routes = Blueprint('auth', __name__)
 
