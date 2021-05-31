@@ -183,7 +183,7 @@ const SignUpForm = () => {
           </form>
         </div>
         <div className="signup-link">
-          <p className="switchLinkName">Already using Slack?</p>
+          <p className="switchLinkName">Already using Woof Woof?</p>
           <NavLink to="/login" className="switchLink">
             Sign in here
           </NavLink>
