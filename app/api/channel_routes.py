@@ -34,6 +34,19 @@ def add_channel():
     return {"channel": channel.to_dict()}
 
 
+# JOIN NEW CHANNEL
+@channel_routes.route('/join', methods=['POST'])
+def join_channel():
+    print(request.json)
+    user = User.query.get(request.json['user_id'])
+    # print("********************************")
+    channel = Channel.query.get(request.json['channel_id'])
+    channel.users_in.append(user)
+    db.session.commit()
+    print(channel)
+    return {"channel": channel.to_dict()}
+
+
 # EDIT CHANNEL
 @channel_routes.route('/<int:channel_id>', methods=['PUT'])
 def edit_channel(channel_id):

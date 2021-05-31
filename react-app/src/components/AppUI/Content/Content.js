@@ -7,6 +7,8 @@ import ReactQuill from 'react-quill'; // ES6
 
 
 /*************************** OTHER FILE IMPORTS ***************************/
+import { authenticate } from '../../../store/session';
+import { joinChannel } from '../../../store/channels';
 import { getChannelMessages, addMessage as addChannelMessage } from '../../../store/channel_messages';
 import { getDirectMessages } from '../../../store/direct_messages';
 import { addDMUser, getDMUser } from '../../../store/dm_people';
@@ -96,6 +98,8 @@ const Content = ({ isAddDM, socket }) => {
 	let textField;
 
 	let messageItem;
+
+	let isChannelIn = channels[id]
 
 
 	/******************** FUNCTIONS ********************/
@@ -277,6 +281,14 @@ const Content = ({ isAddDM, socket }) => {
 		}
 	}
 
+	const handleJoin =(e) => {
+		const channel_obj = {
+			user_id: user.id,
+			channel_id: id
+		}
+		dispatch(joinChannel(channel_obj))
+	}
+
 	/******************** MAIN COMPONENT ********************/
 	return (
 		<div className="main">
@@ -307,14 +319,18 @@ const Content = ({ isAddDM, socket }) => {
 				</div>
 				{slice==='channelMessages' &&
 				<div className="main__channel-members">
-					<div>
+					{/* <div>
 						<i className="fas fa-user-friends"></i>{' '}
 						<span className="main_channel-members-h3">View Members</span>
 					</div>
 					<div>
 						<i className="fas fa-user-plus"></i>{' '}
 						<span className="main_channel-members-h3">Add Members</span>
-					</div>
+					</div> */}
+					{!isChannelIn && <div>
+						<i className="fas fa-user-plus" onClick={handleJoin}></i>{' '}
+						<span className="main_channel-members-h3">Join</span>
+					</div>}
 				</div>}
 			</header>
 			<div className="main__content">
@@ -362,6 +378,7 @@ const Content = ({ isAddDM, socket }) => {
 										<Message key={id} msg={msg} modules={modules} formats={formats} />
 									))}
 						</section>
+						{slice === "directMessages" || isChannelIn &&
 						<section className="main__chat-textarea">
 							<form onSubmit={sendMessage} onKeyUp={handleKeyPress}>
 								<ReactQuill
@@ -379,7 +396,7 @@ const Content = ({ isAddDM, socket }) => {
 									<i className="fas fa-paper-plane"></i>
 								</button>
 							</form>
-						</section>
+						</section>}
 					</>
 				)}
 			</div>

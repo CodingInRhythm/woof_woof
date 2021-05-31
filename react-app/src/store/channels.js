@@ -57,6 +57,22 @@ export const addNewChannel = channel_obj => async dispatch => {
 	}
 };
 
+export const joinChannel = channel_obj => async dispatch => {
+	const response = await fetch(`/api/channels/join`, {
+		method: 'POST',
+		body: JSON.stringify(channel_obj),
+		headers: { 'Content-Type': 'application/json' },
+	});
+	if (response.ok) {
+		const channel = await response.json();
+		dispatch(addChannel(channel.channel));
+
+		return channel;
+	} else {
+		throw response;
+	}
+};
+
 export const editChannel = (channel_id, name) => async dispatch => {
 	const response = await fetch(`/api/channels/${channel_id}`, {
 		method: 'PUT',
