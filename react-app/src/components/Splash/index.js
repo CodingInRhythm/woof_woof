@@ -125,8 +125,8 @@ function Splash(){
       <nav className="splash_nav">
         <div className="splash_nav-left">
           {/* <img src={slack_logo} alt="logo" id="slack_logo"/> */}
-          <i class="fas fa-dog" id="slack_logo"></i>
-          <h1 className="nav_title">woof woof</h1>
+          <i class="fas fa-dog"></i>
+          <h1 className="nav_title">Woof Woof</h1>
         </div>
         <div className="splash_nav-right">
           <Link to="/login" id="nav_login">
@@ -146,7 +146,8 @@ function Splash(){
       </nav>
       <nav className="splash_scrolling_nav hidden" id="splash_scrolling_nav">
         <div className="splash_scrolling_nav-left" onClick={scrollToTop}>
-          <img src={slack_logo} alt="logo" id="slack_logo" />
+          {/* <img src={slack_logo} alt="logo" id="slack_logo" /> */}
+          <i class="fas fa-dog_green fa-dog"></i>
           <h1 className="splash_scolling_nav_title">Woof Woof</h1>
         </div>
         <div className="splash_scrolling_nav-right">
@@ -173,9 +174,13 @@ function Splash(){
           <Animator animation={SlideUp}>
             <div className="splash_main-1 splash_page">
               <h1 className="splash_main-1-text">
-                Here is an amazing
-                <span className="splash_main-1-text-highlight"> Woof Woof</span>
-                ! Want to check it out?
+                Welcome to
+                <span className="splash_main-1-text-highlight">
+                  {" "}
+                  Woof Woof!
+                </span>
+                <br></br>
+                <em>The </em> app to connect with fellow dog lovers!
               </h1>
               <Link to={user ? "/app_ui" : "/sign-up"}>
                 <div className="splash_tryout_btn">
