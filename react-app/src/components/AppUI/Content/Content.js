@@ -378,7 +378,7 @@ const Content = ({ isAddDM, socket }) => {
 										<Message key={id} msg={msg} modules={modules} formats={formats} />
 									))}
 						</section>
-						{slice === "directMessages" || isChannelIn &&
+						{(slice === "directMessages" || isChannelIn) &&
 						<section className="main__chat-textarea">
 							<form onSubmit={sendMessage} onKeyUp={handleKeyPress}>
 								<ReactQuill
