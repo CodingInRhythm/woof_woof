@@ -20,12 +20,15 @@ Woof Woof is a clone of [Slack](https://www.slack.com), a popular chat applicati
 - WebSockets
 
 ## Features
+#### Splash Page
+![gif](https://github.com/CodingInRhythm/slack_clone/blob/main/wiki/images/Peek%202021-05-31%2013-59.gif)
+
 #### Main Page
 ![main](https://github.com/CodingInRhythm/slack_clone/blob/main/wiki/images/ui-main.png)
 
 #### User Modal Form
 ![modal](https://github.com/CodingInRhythm/slack_clone/blob/main/wiki/images/ui-modal-profile.png)
-<!-- screenshot of the splash page -->
+
 
 ### Database Schema
 ![db](https://github.com/CodingInRhythm/slack_clone/blob/main/wiki/images/Slack_Schema.JPG)
@@ -58,17 +61,10 @@ Woof Woof is a clone of [Slack](https://www.slack.com), a popular chat applicati
 
 ![notifications](https://github.com/CodingInRhythm/slack_clone/blob/main/wiki/images/ui-notifications.png)
 
-<!-- screenshot of notifications -->
 ### Live chat
 - Live chat is implemented by using Socket.io library. It enables real-time, bidirectional and event-based communication.
 - It works in both channels and DMs
 
-
-
-
-Here's what it looks like in action: <!-- livechat gif -->
-
-![Chat in action]()
 
 ## Installation
 This project can be run by following these steps:
