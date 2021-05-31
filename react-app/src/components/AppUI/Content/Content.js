@@ -17,9 +17,6 @@ import './Content.css';
 
 /*************************** COMPONENTS ***************************/
 const Content = ({ isAddDM, socket }) => {
-
-
-
 	/******************** VARIABLES********************/
 	let modules = {
 		toolbar: [
@@ -30,6 +27,22 @@ const Content = ({ isAddDM, socket }) => {
 			['link', 'image'],
 			['clean'],
 		],
+		keyboard: {
+			bindings: {
+				// 'shift enter': {
+				// 	key: 13,
+				// 	shiftKey: true,
+				// 	handler: function (range, context) {
+				// 	},
+				// },
+				enter: {
+					key: 13,
+					handler: function () {
+						// do nothing
+					},
+				},
+			},
+		},
 	};
 	let formats = [
 		'header',
@@ -254,7 +267,15 @@ const Content = ({ isAddDM, socket }) => {
 	}
 
 	//FUNCTIONS//
-
+	const handleKeyPress = (e) => {
+		e.preventDefault();
+		// console.log(e.key)
+		let value = textInput.current;
+		console.log(value.getEditor().keyboard)
+		if (value && value !== '<p><br></p>' && e.key  === 'Enter'){
+			sendMessage(e);
+		}
+	}
 
 	/******************** MAIN COMPONENT ********************/
 	return (
@@ -284,6 +305,7 @@ const Content = ({ isAddDM, socket }) => {
 						</>
 					)}
 				</div>
+				{slice==='channelMessages' &&
 				<div className="main__channel-members">
 					<div>
 						<i className="fas fa-user-friends"></i>{' '}
@@ -293,7 +315,7 @@ const Content = ({ isAddDM, socket }) => {
 						<i className="fas fa-user-plus"></i>{' '}
 						<span className="main_channel-members-h3">Add Members</span>
 					</div>
-				</div>
+				</div>}
 			</header>
 			<div className="main__content">
 				{isAddDM ? (
@@ -341,7 +363,7 @@ const Content = ({ isAddDM, socket }) => {
 									))}
 						</section>
 						<section className="main__chat-textarea">
-							<form onSubmit={sendMessage}>
+							<form onSubmit={sendMessage} onKeyUp={handleKeyPress}>
 								<ReactQuill
 									// placeholder={`Message #${messages[id]?.channel?.name}`}
 									modules={modules}

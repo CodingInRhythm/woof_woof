@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './PageNotFound.css';
-import logo from '../../images/slackbot_sad.png';
+import logo from '../../images/sad-dog1.png';
 
 const PageNotFound = () => {
 	return (
@@ -9,7 +9,7 @@ const PageNotFound = () => {
 			<div className="login-container">
 				<div></div>
 				<div className="notfound__wrap">
-					<img src={logo} class="notfound__logo" alt="notfound__logo"></img>
+					<img src={logo} className="notfound__logo" alt="notfound__logo"></img>
 					<h1 className="notfound__text">I'm sorry, this page doesn't exist</h1>
 					<div className="notfound__links">
 						<div className="notfound__signup-link">
