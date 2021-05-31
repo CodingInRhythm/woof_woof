@@ -41,7 +41,7 @@ const SideBar = ({ setRoom }) => {
 					<i className="fas fa-stream"></i>
 					<span className="threads__icon"></span> All unreads
 				</div>
-				<div className="threads__items">
+				<div className="threads__items" onClick={()=>history.push('/dms/all')}>
 					<i className="far fa-comments"></i>
 					<span className="threads__icon"></span> All DMs
 				</div>
