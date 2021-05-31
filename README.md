@@ -1,6 +1,11 @@
-# Welcome to the Woof Woof
 
-![logo](https://github.com/CodingInRhythm/slack_clone/blob/main/wiki/images/logo.png)
+<div align="center">
+   <h1>Welcome to the Woof Woof <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="25px"> </h1>
+</div>
+
+<div align="center">
+  <img src="https://github.com/CodingInRhythm/slack_clone/blob/main/wiki/images/logo.png">
+</div>
 
 [LiveLink](https://woofwoof-app.herokuapp.com/)
 
@@ -15,7 +20,10 @@ Woof Woof is a clone of [Slack](https://www.slack.com), a popular chat applicati
 - WebSockets
 
 ## Features
+#### Main Page
 ![main](https://github.com/CodingInRhythm/slack_clone/blob/main/wiki/images/ui-main.png)
+
+#### User Modal Form
 ![modal](https://github.com/CodingInRhythm/slack_clone/blob/main/wiki/images/ui-modal-profile.png)
 <!-- screenshot of the splash page -->
 
