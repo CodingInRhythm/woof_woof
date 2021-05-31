@@ -2,11 +2,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: lightgrey;
     margin: 0;
-    height: 50px;
+    height: 65px;
     padding-top: 15px;
+    padding-bottom: 15px;
+    position: sticky;
     background-color: var(--primaryColor);
+    z-index: 3;
+    border-bottom: 1px solid white
 }
 
 .splash_nav h1{
@@ -103,6 +106,7 @@
 
 .splash_scrolling_nav-left{
     display: flex;
+    padding-left: 15px;
 }
 
 .splash_scrolling_nav-left:hover{
@@ -173,7 +177,7 @@
 }
 
 .splash_main-1{
-    margin-top: 45px;
+    margin-top: 150px;
 }
 
 .splash_main-1-text,
@@ -400,4 +404,14 @@
 
 .hidden{
     display: none;
+}
+
+.fa-dog {
+    color: rgba(245, 245, 245, 0.884);
+    height: 50%;
+    font-size: 2em;
+}
+
+.fa-dog_green {
+    color: var(--primaryColor);
 }
