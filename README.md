@@ -55,6 +55,7 @@ Woof Woof is a clone of [Slack](https://www.slack.com), a popular chat applicati
 
 ### Notifications
 - User can see red notifications with the number of unread messages on the sidebar to the right of the dm or channel.
+
 ![notifications](https://github.com/CodingInRhythm/slack_clone/blob/main/wiki/images/ui-notifications.png)
 
 <!-- screenshot of notifications -->
