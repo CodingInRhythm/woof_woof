@@ -1,5 +1,5 @@
 /*************************** REACT IMPORTS ***************************/
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -7,7 +7,7 @@ import ReactQuill from 'react-quill'; // ES6
 
 
 /*************************** OTHER FILE IMPORTS ***************************/
-import { authenticate } from '../../../store/session';
+// import { authenticate } from '../../../store/session';
 import { joinChannel } from '../../../store/channels';
 import { getChannelMessages, addMessage as addChannelMessage } from '../../../store/channel_messages';
 import { getDirectMessages } from '../../../store/direct_messages';
@@ -136,13 +136,10 @@ const Content = ({ isAddDM, socket }) => {
 			} else if (justText.length>1){
 				socket.emit("chat", {room:id, id:userId, message:text})
 			}
-			console.log(text)
 		}
 	};
 
 	const handleClick = (id) => {
-
-		console.log(id)
 		if (window.localStorage.getItem(id.toString())) {
 			window.localStorage.removeItem(id.toString())
 		}
@@ -152,15 +149,11 @@ const Content = ({ isAddDM, socket }) => {
 
 	const handleSubmit = e => {
 		e.preventDefault();
-
-		console.log(e.target.id);
 		/*need logic to check if user exits in dm store.
 		If it does, we need to link to that users DMs.
 		*/
-
 		setSearchParam("")
 		setMatchingUsers([])
-
 		history.push(`/dm/${e.target.id}`);
 	};
 	// console.log(matchingUsers)
@@ -171,9 +164,9 @@ const Content = ({ isAddDM, socket }) => {
 	}
 
 	/******************** USE EFFECTS ********************/
-	useEffect(() => {
-		console.log("location.pathname")
-	}, [location.pathname])
+	// useEffect(() => {
+	// 	console.log("location.pathname")
+	// }, [location.pathname])
 
 	useEffect(() => {
 		if(bottomRef.current){
@@ -215,7 +208,6 @@ const Content = ({ isAddDM, socket }) => {
 			});
 			const data = await res.json();
 			setMatchingUsers(data.users)
-			console.log(data.users[0])
 		};
 
 		if (searchParam.length > 0) fetchUsers()
@@ -273,9 +265,7 @@ const Content = ({ isAddDM, socket }) => {
 	//FUNCTIONS//
 	const handleKeyPress = (e) => {
 		e.preventDefault();
-		// console.log(e.key)
 		let value = textInput.current;
-		console.log(value.getEditor().keyboard)
 		if (value && value !== '<p><br></p>' && e.key  === 'Enter'){
 			sendMessage(e);
 		}
@@ -288,7 +278,6 @@ const Content = ({ isAddDM, socket }) => {
 		}
 		dispatch(joinChannel(channel_obj))
 	}
-
 	/******************** MAIN COMPONENT ********************/
 	return (
 		<div className="main">
@@ -301,11 +290,14 @@ const Content = ({ isAddDM, socket }) => {
 					) : (
 						<>
 							{slice==='channelMessages' &&
+							<>
 								<li
 									className={`channels__header`}
 								>
 									{channels[id]?.name}
 								</li>
+								<span className="channels__header--members"><i class="fas fa-users"></i>    </span><span className="channels__header--count">{channels[id]?.users_in?.length}</span>
+							</>
 							}
 							{slice==='directMessages' &&
 								<li

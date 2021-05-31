@@ -38,14 +38,13 @@ const DMPerson = ({ dmusers, recipient }) => {
     setNumberMessages(0);
   };
   const removeDM = (e) => {
-    console.log("here");
+    // console.log("here");
 	e.preventDefault()
     let recipientid = e.target.id;
     window.localStorage.setItem(`${recipientid}`, `${recipientid}`);
-    console.log(dmusers);
+    // console.log(dmusers);
 
 	return history.push("/dms/all")
-    console.log(recipientid);
   };
   const getNavLinkClass = (path) => {
     return location.pathname === path ? "dm__button--active" : "";
@@ -56,12 +55,11 @@ const DMPerson = ({ dmusers, recipient }) => {
   };
 
   //useeffect WHERE NOTIFICATIONS FIRE
-  console.log('BEFORE USE EFFECT', recipient.id);
+//   console.log('BEFORE USE EFFECT', recipient.id);
 
   useEffect(() => {
-    console.log(location.pathname)
     if (location.pathname !== `/dm/${recipient.id}` && isLoaded) {
-      console.log('INSIDE USEEFFECT', recipient.id);
+    //   console.log('INSIDE USEEFFECT', recipient.id);
       setNewMessage(true);
       setNumberMessages(numberMessages + 1);
     }

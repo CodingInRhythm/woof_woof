@@ -7,7 +7,7 @@ from app.models import User
 
 #################### FUNCTIONS ####################
 def user_exists(form, field):
-    print("Checking if user exists", field.data)
+    # print("Checking if user exists", field.data)
     credential = field.data
     user = User.query.filter((User.email==credential) | (User.username==credential)).first()
     if not user:
@@ -15,7 +15,7 @@ def user_exists(form, field):
 
 
 def password_matches(form, field):
-    print("Checking if password matches")
+    # print("Checking if password matches")
     password = field.data
     credential = form.data['credential']
     user = User.query.filter((User.email==credential) | (User.username==credential)).first()

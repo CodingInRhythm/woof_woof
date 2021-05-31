@@ -11,7 +11,7 @@ const SearchAll = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(e.target.className)
+        // console.log(e.target.className)
         setSearchAllParam("");
         setMatchingEles([]);
         if (e.target.className.includes("user_ele")) {

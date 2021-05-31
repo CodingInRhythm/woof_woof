@@ -25,9 +25,6 @@ const removeDMUser = userid => ({
 export const getDMUsers = () => async dispatch => {
 	const response = await fetch(`/api/dms/`);
 	const data = await response.json();
-	console.log('****************************');
-	console.log(data);
-	console.log('****************************');
 	if (data.errors) {
 		return;
 	}

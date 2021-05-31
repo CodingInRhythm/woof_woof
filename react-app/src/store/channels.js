@@ -96,7 +96,6 @@ export const deleteChannel = channel_id => async dispatch => {
 
 	if (response.ok) {
 		const channel = await response.json();
-		console.log(channel);
 		dispatch(removeChannel(channel.channel));
 	} else {
 		throw response;

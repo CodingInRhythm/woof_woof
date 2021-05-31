@@ -9,7 +9,6 @@ channel_routes = Blueprint('channels', __name__)
 @channel_routes.route('/all')
 def all_channels():
     channels = Channel.query.all()
-    print('hello world')
     return {"channels": [channel.to_dict() for channel in channels]}
 
 # GET CHANNELS FOR THE CURRENT USER
@@ -37,13 +36,10 @@ def add_channel():
 # JOIN NEW CHANNEL
 @channel_routes.route('/join', methods=['POST'])
 def join_channel():
-    print(request.json)
     user = User.query.get(request.json['user_id'])
-    # print("********************************")
     channel = Channel.query.get(request.json['channel_id'])
     channel.users_in.append(user)
     db.session.commit()
-    print(channel)
     return {"channel": channel.to_dict()}
 
 
