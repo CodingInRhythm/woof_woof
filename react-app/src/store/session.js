@@ -91,7 +91,6 @@ export const editUser = ({id, username, firstname, lastname, email, profile_imag
   formData.append('firstname', firstname)
   formData.append('lastname', lastname)
   formData.append("profile_image", profile_image);
-  console.log(formData.get('profile_image'))
 
 
   const response = await fetch(`/api/auth/${id}`, {

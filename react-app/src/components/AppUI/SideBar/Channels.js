@@ -48,7 +48,6 @@ const Nav = ({ channel, editOn, setEditOn }) => {
 		setIsLoaded(true);
 		return () => {
 			setIsLoaded(false);
-			// console.log(isLoaded)
 		};
 	}, [channelMessageChannel]);
 

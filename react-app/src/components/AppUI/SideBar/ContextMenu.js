@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './ContextMenu.css';
 import { useContextMenuEvent } from 'react-context-menu-wrapper';
 import { useDispatch } from 'react-redux';
@@ -9,12 +9,6 @@ const MyContextMenu = ({ setEditOn }) => {
 	const menuEvent = useContextMenuEvent();
 
 	if (!menuEvent || !menuEvent.data) return null;
-
-	console.group('**************');
-	console.log(menuEvent.data.channelName);
-	console.log(menuEvent.data.name);
-	console.log(menuEvent.data.id);
-	console.groupEnd('**************');
 
 	const handleDeleteChannel = () => {
 		dispatch(deleteChannel(menuEvent.data.id));

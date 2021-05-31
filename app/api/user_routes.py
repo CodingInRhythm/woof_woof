@@ -29,10 +29,9 @@ def online_status(userId):
     if not current_user.is_authenticated:
         return {'errors': ['Unauthorized']}
 
-    status= request.json['status']
-    print(status)
+    status = request.json['status']
     user = User.query.get(userId)
-    
+
     user.online_status = status
     db.session.commit()
 

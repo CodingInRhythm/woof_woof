@@ -2,8 +2,8 @@
 	display: grid;
 	grid-template-rows: 75px 1fr;
 	grid-template-areas:
-	"header"
-	"main";
+		'header'
+		'main';
 	height: 100%;
 	width: 100%;
 }
@@ -19,16 +19,28 @@
 	justify-content: space-between;
 }
 
-.channels__header{
+.channels__header {
 	list-style: none;
 	font-weight: bolder;
+}
+
+.channels__header--members,
+.channels__header--count {
+	color: #333;
+	margin-top: 5px;
+	font-size: 13px;
+	margin-left: 2px;
+}
+
+.channels__header--count {
+	margin-left: 3px;
 }
 
 .channels__header:before {
 	content: '\1F3E0     ';
 }
 
-.dms__header{
+.dms__header {
 	list-style: none;
 	font-weight: bolder;
 }
@@ -68,7 +80,6 @@
 
 	height: 90vh;
 	width: 100%;
-
 }
 
 .main__chat {
@@ -87,7 +98,7 @@
 	position: relative;
 	padding: 5px;
 	width: 100%;
-	animation: fadeIn .5s;
+	animation: fadeIn 0.5s;
 }
 
 .main__chat-item-edit-delete {
@@ -109,10 +120,10 @@
 
 .chat__image-container {
 	margin-right: 10px;
-    position: relative;
-    width: 44px;
-    height: 44px;
-    font-size: 1vw;
+	position: relative;
+	width: 44px;
+	height: 44px;
+	font-size: 1vw;
 }
 
 .chat__username {
@@ -126,7 +137,7 @@
 	margin-left: 20px;
 }
 
-.chat__other-text{
+.chat__other-text {
 	width: 100%;
 }
 .chat__text {
@@ -183,7 +194,6 @@
 	background-color: white;
 	margin: 10px;
 	border-radius: 5px;
-
 }
 
 .main__chat-send {
@@ -214,7 +224,7 @@
 	word-break: break-all;
 }
 
-.chat__other-info{
+.chat__other-info {
 	display: grid;
 	grid-template-columns: 1fr;
 	grid-template-rows: 20px 1fr;
@@ -222,7 +232,7 @@
 	font-weight: bold;
 }
 
-.chat__other-info-lastmessage{
+.chat__other-info-lastmessage {
 	color: grey;
 	background-color: whitesmoke;
 	margin: 0px 5px 0 5px;
@@ -236,12 +246,12 @@
 	display: flex;
 }
 
-.chat__other-header{
+.chat__other-header {
 	display: flex;
 	align-items: center;
 }
 
-.chat__other-info-delete-alert{
+.chat__other-info-delete-alert {
 	font-weight: bold;
 	font-size: 15px;
 	color: grey;
@@ -283,7 +293,7 @@
 }
 
 .ql-font-serif {
-  font-style: italic;
+	font-style: italic;
 }
 .user__search {
 	max-width: 732px;
@@ -296,7 +306,7 @@
 	font-size: 13px;
 }
 
-.main__add-teammate{
+.main__add-teammate {
 	position: relative;
 	display: grid;
 	grid-template-columns: 50px 1fr;
@@ -304,7 +314,7 @@
 	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
 }
 
-.main__add-teammate-header{
+.main__add-teammate-header {
 	margin: 1px 10px 1px 20px;
 	display: flex;
 	justify-content: center;
@@ -313,7 +323,7 @@
 	padding-bottom: 3px;
 }
 
-.main__add-teammate-input{
+.main__add-teammate-input {
 	flex-grow: 1;
 	margin: 1px;
 	height: 50px;
@@ -326,18 +336,18 @@
 }
 
 .main__add-teammate-input:focus + .main__add-teammate-list {
-	display:flex;
-}
-
-.main__add-teammate-list:hover{
 	display: flex;
 }
 
-.main__add-teammate-list:active{
+.main__add-teammate-list:hover {
 	display: flex;
 }
 
-.main__add-teammate-list{
+.main__add-teammate-list:active {
+	display: flex;
+}
+
+.main__add-teammate-list {
 	position: absolute;
 	background-color: white;
 	top: 40px;
@@ -352,52 +362,52 @@
 	flex-direction: column;
 }
 
-.main__add-teammate-item{
+.main__add-teammate-item {
 	padding: 5px 15px;
 	background-color: white;
 	display: grid;
 	grid-template-columns: 30px 1fr;
 	grid-template-rows: 1fr 1fr;
 	grid-template-areas:
-	"pic name"
-	"pic user_email";
+		'pic name'
+		'pic user_email';
 	align-items: center;
 }
 
-.main__add-teammate-image{
+.main__add-teammate-image {
 	grid-area: pic;
 	height: 28px;
 	width: 28px;
 	font-size: 60%;
 }
 
-.main__add-teammate-name{
+.main__add-teammate-name {
 	grid-area: name;
 	display: flex;
 	height: 100%;
 	margin-left: 10px;
 	font-size: 90%;
 
-    margin-block-start: 0;
-    margin-block-end: 0;
+	margin-block-start: 0;
+	margin-block-end: 0;
 }
 
-.main__add-teammate-user_email{
+.main__add-teammate-user_email {
 	grid-area: user_email;
 	display: flex;
 	margin: 0 0 0 10px;
 	font-size: 80%;
 	color: grey;
 
-    margin-block-start: 0;
-    margin-block-end: 0;
+	margin-block-start: 0;
+	margin-block-end: 0;
 }
 
-.main__add-teammate-item:hover{
+.main__add-teammate-item:hover {
 	color: white;
 	background-color: var(--sapphire);
 }
 
-.main__add-teammate-button{
+.main__add-teammate-button {
 	color: inherit;
 }
