@@ -15,30 +15,35 @@ Woof Woof is a clone of [Slack](https://www.slack.com), a popular chat applicati
 - WebSockets
 
 ## Features
+![main](https://github.com/CodingInRhythm/slack_clone/blob/main/wiki/images/ui-main.png)
+![modal](https://github.com/CodingInRhythm/slack_clone/blob/main/wiki/images/ui-modal-profile.png)
 <!-- screenshot of the splash page -->
+
 ### Database Schema
 ![db](https://github.com/CodingInRhythm/slack_clone/blob/main/wiki/images/Slack_Schema.JPG)
 
 ### Authentication
 - Users can sign up, and log in
-<!-- screenshot of the login page -->
 
-<!-- screenshot of the sidebar -->
+![register](https://github.com/CodingInRhythm/slack_clone/blob/main/wiki/images/ui-register.png)
+
+
 ### Channels
 - Users can see all channels to which hw/she belongs
 - Users can leave a channel
 - Users can create a channel
+![channels](https://github.com/CodingInRhythm/slack_clone/blob/main/wiki/images/ui-channels.png)
 
 ### DMs
-<!-- screenshot of the dm's with online status -->
 - Users can see all conversations on the side bar
 - Users can send and receive messages from other users.
 - Users with whom you communicate will have green status if they are online.
+![dms](https://github.com/CodingInRhythm/slack_clone/blob/main/wiki/images/ui-dms.png)
 
 ### Search
 - Users can search all channels, including channels that user does not belongs to
 - Users can search all other users
-
+![search](https://github.com/CodingInRhythm/slack_clone/blob/main/wiki/images/ui-search.png)
 
 ### Notifications
 - User can see red notifications with the number of unread messages on the sidebar to the right of the dm or channel.
