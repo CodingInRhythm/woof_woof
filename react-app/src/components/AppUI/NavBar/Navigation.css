@@ -71,6 +71,10 @@
 	display:flex
 }
 
+.search-container:hover {
+	display:flex
+}
+
 .search-container {
 	position: absolute;
 	box-sizing: border-box;
