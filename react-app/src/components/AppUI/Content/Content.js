@@ -176,6 +176,10 @@ const Content = ({ isAddDM, socket }) => {
 
 	//  Get messages if not in store
 	useEffect(() => {
+		if ((localStorage.getItem('lastPage') === location.pathname) && (location.pathname !== "/dms/all")){
+			localStorage.setItem('refreshPage', location.pathname)
+			history.push('/dms/all')
+		}
 		localStorage.setItem('lastPage', location.pathname)
 
 		// if (location.pathname.includes("channel")) {
@@ -217,6 +221,12 @@ const Content = ({ isAddDM, socket }) => {
 
 	/******************** INNER COMPONENT ********************/
 	if (location.pathname.includes("dms")) {
+		if (localStorage.getItem("refreshPage")){
+			let url = localStorage.getItem("refreshPage")
+			localStorage.removeItem("refreshPage")
+			localStorage.removeItem("lastPage")
+			history.push(url);
+		}
 		messageItem = Object.keys(messages).map((msg, idx) => {
 			let person;
 			let mostRecentMessage;
