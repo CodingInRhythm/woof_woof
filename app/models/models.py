@@ -161,6 +161,21 @@ class User(db.Model, UserMixin):
   def check_password(self, password):
     return check_password_hash(self.password, password)
 
+  def lastSenderMessage(self, messages):
+    correct_messages=[message for message in messages if message.recipient_id==int(session['_user_id'])]
+    if correct_messages:
+      return [correct_messages[-1].to_dict()]
+    else:
+      return []
+
+  def lastRecipientMessage(self, messages):
+    correct_messages=[message for message in messages if message.sender_id==int(session['_user_id'])]
+    if correct_messages:
+      return [correct_messages[-1].to_dict()]
+    else:
+      return []
+
+
 
   def to_dict(self):
     return {
@@ -173,8 +188,8 @@ class User(db.Model, UserMixin):
       'profile_photo' : self.profile_photo,
       'channels_owned' : [channel.to_dict_basic() for channel in self.channels_owned],
       'channels_in' : [channel.to_dict_basic() for channel in self.channels_in],
-      'sender_messages' : [message.to_dict_basic() for i, message in enumerate(self.sender_messages) if (message.recipient_id==int(session['_user_id']) and (i==len(self.sender_messages)-1))],
-      'recipient_messages' : [message.to_dict_basic() for i, message in enumerate(self.recipient_messages) if (message.sender_id==int(session['_user_id']) and (i==len(self.recipient_messages)-1))],
+      'sender_messages' : self.lastSenderMessage(self.sender_messages),
+      'recipient_messages' : self.lastRecipientMessage(self.recipient_messages),
     }
 
   def to_dict_basic(self):
