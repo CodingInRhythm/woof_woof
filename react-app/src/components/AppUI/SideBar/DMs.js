@@ -92,7 +92,7 @@ const DMPerson = ({ dmusers, recipient }) => {
       </button>
 	  {numberMessages < 1 && (
       <button id={recipient.id} onClick={removeDM} className="remove-dm">
-        x
+        <span className="x">x</span>
       </button>
 	  )
 		}

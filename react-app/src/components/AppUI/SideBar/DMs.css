@@ -133,15 +133,20 @@
 	margin-left: auto;
 	z-index: 100;
 	text-align: center;
-	visibility: none;
+	
 }
 
-.remove-dm:hover {
+.x {
+	display: none;
+}
+
+.remove-dm:hover .x {
 	display:block;
-	visibility: visible;
+	
 }
 
 .dm__li {
 	display: flex;
 	flex-direction: row;
 }
+
