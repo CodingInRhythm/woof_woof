@@ -40,7 +40,7 @@ Woof Woof is a clone of [Slack](https://www.slack.com), a popular chat applicati
 
 
 ### Channels
-- Users can see all channels to which hw/she belongs
+- Users can see all channels to which he/she belongs
 - Users can leave a channel
 - Users can create a channel
 ![channels](https://github.com/CodingInRhythm/slack_clone/blob/main/wiki/images/ui-channels.png)
