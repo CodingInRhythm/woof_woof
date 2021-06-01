@@ -5,6 +5,7 @@ const SET_CHANNEL = 'set/CHANNEL';
 const ADD_CHANNEL = 'add/CHANNEL';
 const EDIT_CHANNEL = 'edit/CHANNEL';
 const DELETE_CHANNEL = 'delete/CHANNEL';
+const RESET_CHANNEL = 'reset/CHANNEL';
 
 /*************************** ACTIONS ***************************/
 const setChannels = channels => ({
@@ -25,6 +26,10 @@ export const editExistingChannel = channel => ({
 export const removeChannel = channel => ({
 	type: DELETE_CHANNEL,
 	channel,
+});
+
+export const resetChannels = () => ({
+	type: RESET_CHANNEL,
 });
 
 /*************************** THUNKS ***************************/
@@ -124,6 +129,8 @@ export default function channelReducer(state = initialState, action) {
 			newState = { ...state };
 			delete newState[action.channel.id];
 			return newState;
+        case RESET_CHANNEL:
+            return {...initialState}
 		default:
 			return state;
 	}

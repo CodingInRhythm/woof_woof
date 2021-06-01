@@ -1,7 +1,15 @@
+/*************************** OTHER FILE IMPORTS ***************************/
+import {resetChannelMessages} from './channel_messages'
+import {resetChannels} from './channels'
+import {resetDirectMessages} from './direct_messages'
+import {resetDMUsers} from './dm_people'
+
+/*************************** TYPES ***************************/
 // constants
 const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 
+/*************************** ACTIONS ***************************/
 const setUser = (user) => ({
     type: SET_USER,
     payload: user
@@ -13,6 +21,7 @@ const removeUser = () => ({
 
 const initialState = { user: null };
 
+/*************************** THUNKS ***************************/
 export const authenticate = () => async (dispatch) => {
     const response = await fetch('/api/auth/',{
       headers: {
@@ -56,6 +65,10 @@ export const logout = () => async (dispatch) => {
 
   const data = await response.json();
   dispatch(removeUser());
+  dispatch(resetChannelMessages())
+  dispatch(resetChannels())
+  dispatch(resetDirectMessages())
+  dispatch(resetDMUsers())
 };
 
 

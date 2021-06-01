@@ -1,7 +1,7 @@
 #################### IMPORTS ####################
 from flask import Blueprint, jsonify, session, request
 from app.models import User, db
-from app.aws import allowed_file, get_unique_filename, upload_file_to_s3
+from app.aws import allowed_file, get_unique_filename, upload_file_to_s3, delete_file_from_s3
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from app.forms import EditForm
@@ -138,6 +138,8 @@ def edit_user(id):
             return upload, 400
 
         url = upload["url"]
+
+        # delete_file_from_s3(user.profile_photo)
 
 
     form['csrf_token'].data = request.cookies['csrf_token']

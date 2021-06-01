@@ -4,6 +4,7 @@
 const SET_DMUSER = 'set/DMUSER';
 const ADD_DMUSER = 'add/DMUSER';
 const REMOVE_DMUSER = 'remove/DMUSER';
+const RESET_DMUSER = 'reset/DMUSER';
 /*************************** ACTIONS ***************************/
 const setDMUser = dm_users => ({
 	type: SET_DMUSER,
@@ -20,6 +21,11 @@ const removeDMUser = userid => ({
 	type: REMOVE_DMUSER,
 	userid
 })
+
+export const resetDMUsers = () => ({
+	type: RESET_DMUSER,
+	}
+)
 
 /*************************** THUNKS ***************************/
 export const getDMUsers = () => async dispatch => {
@@ -87,6 +93,8 @@ export default function dmuserReducer(state = initialState, action) {
 			newState = {...state}
 			newState[action.user.id] = action.user
 			return newState
+		case RESET_DMUSER:
+			return {...initialState}
 		default:
 			return state;
 	}

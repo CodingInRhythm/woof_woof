@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import {useSearchAll} from '../../../context/SearchAll'
 import {useHistory} from 'react-router-dom'
+import ProfilePhoto from '../UserProfile/ProfilePhoto'
 
 const SearchAll = () => {
 
@@ -93,13 +94,16 @@ const SearchAll = () => {
                       id={ele.id}
                       className={`${'searchAll__user-item'} ${ele.online_status ? "user_ele online_user" : ""}`}
                     >
+                      <div className='searchAll_user-photo'>
+                        <ProfilePhoto profileUser={ele} alt={'profile-photo'}/>
+                      </div>
                       {`${ele.firstname} ${ele.lastname}`}
                       <p className='searchAll__secondary-info'>{ele.username}</p>
                     </span>
                   ) : (
                     <span
                       id={ele.id} className="searchAll__channel-item">
-                      {`# ${ele.name}`}
+                      {`${ele.name}`}
                       <p className='searchAll__secondary-info'>{`${ele.owner.firstname} ${ele.owner.lastname}`}</p>
                     </span>
                   )}

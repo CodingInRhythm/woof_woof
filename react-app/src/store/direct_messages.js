@@ -7,6 +7,8 @@ const ADD_DIRECT_MESSAGE = "add/DIRECT_MESSAGE";
 
 const DELETE_DIRECT_MESSAGE = "delete/DIRECT_MESSAGE";
 
+const RESET_DIRECT_MESSAGE = "reset/DIRECT_MESSAGE";
+
 /*************************** ACTIONS ***************************/
 
 //Action to set the messages from a particular recipient,
@@ -30,6 +32,9 @@ const removeDirectMessage = (recipient_id, direct_message_id)=> ({
     direct_message_id
 });
 
+export const resetDirectMessages = ()=> ({
+    type: RESET_DIRECT_MESSAGE,
+});
 
 
 /*************************** THUNKS ***************************/
@@ -108,6 +113,8 @@ export default function directMessageReducer(state = initialState, action) {
       newState = {...state}
       delete newState[action.recipient_id][action.direct_message_id]
       return newState
+    case RESET_DIRECT_MESSAGE:
+      return {...initialState}
     default:
       return state;
   }

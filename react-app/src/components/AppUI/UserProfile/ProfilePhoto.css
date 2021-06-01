@@ -3,7 +3,7 @@
     width: 100%;
     height: 100%;
     border-radius: 20%;
-    font-size: 150%;
+    font-size: inherit;
     background-color: var(--defaultProfPic);
     display: flex;
     justify-content: center;
