@@ -41,3 +41,13 @@ def upload_file_to_s3(file, acl="public-read"):
         return {"errors": str(e)}
 
     return {"url": f"{S3_LOCATION}{file.filename}"}
+
+
+def delete_file_from_s3(key):
+    try:
+        s3.delete_object(Bucket='s1ack', Key=key)
+    except Exception as e:
+        # in case the our s3 upload fails
+        return {"errors": str(e)}
+
+    return {"success":"success"}

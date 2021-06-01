@@ -9,6 +9,8 @@ const ADD_CHANNEL_MESSAGE = 'add/CHANNEL_MESSAGES'
 
 const DELETE_CHANNEL_MESSAGE = "delete/CHANNEL_MESSAGE";
 
+const RESET_CHANNEL_MESSAGE = "reset/CHANNEL_MESSAGE";
+
 
 /*************************** ACTIONS ***************************/
 const setChannelMessages = (channel_id, messages) => ({
@@ -34,6 +36,11 @@ const removeChannelMessage = (channel_id, channel_message_id)=> ({
     channel_id,
     channel_message_id
 });
+
+export const resetChannelMessages = ()=> ({
+    type: RESET_CHANNEL_MESSAGE,
+});
+
 
 /*************************** THUNKS ***************************/
 export const getChannelMessages = channel_id => async dispatch => {
@@ -116,6 +123,8 @@ export default function channelMessageReducer(state=initialState, action) {
             newState = {...state}
             delete newState[action.channel_id][action.channel_message_id]
             return newState
+        case RESET_CHANNEL_MESSAGE:
+            return {...initialState}
         default:
             return state;
     }
