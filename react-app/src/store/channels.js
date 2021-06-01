@@ -128,6 +128,7 @@ export default function channelReducer(state = initialState, action) {
 		case DELETE_CHANNEL:
 			newState = { ...state };
 			delete newState[action.channel.id];
+			return newState
         case RESET_CHANNEL:
             return {...initialState}
 		default:
