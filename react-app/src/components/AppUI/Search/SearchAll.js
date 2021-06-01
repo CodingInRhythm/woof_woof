@@ -92,7 +92,7 @@ const SearchAll = () => {
                   {ele.firstname ? (
                     <span
                       id={ele.id}
-                      className={`${'searchAll__user-item'} ${ele.online_status ? "user_ele online_user" : ""}`}
+                      className={`${'searchAll__user-item'} ${ele.online_status ? "user_ele" : ""}`}
                     >
                       <div className='searchAll_user-photo'>
                         <ProfilePhoto profileUser={ele} alt={'profile-photo'}/>
