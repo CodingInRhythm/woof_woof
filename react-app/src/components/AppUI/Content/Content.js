@@ -386,7 +386,7 @@ const Content = ({ isAddDM, socket }) => {
 								Object.entries(messages[id])
 									.reverse()
 									?.map(([id, msg]) => (
-										<Message key={id} msg={msg} modules={modules} formats={formats} />
+										<Message key={msg.id+(msg.channel_id ? 'channel' : 'dm')} msg={msg} modules={modules} formats={formats} />
 									))}
 						</section>
 						{(slice === "directMessages" || isChannelIn) &&
