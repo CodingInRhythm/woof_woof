@@ -1,5 +1,5 @@
 /*************************** REACT IMPORTS ***************************/
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useLocation, useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -11,7 +11,7 @@ import ReactQuill from 'react-quill'; // ES6
 import { joinChannel } from '../../../store/channels';
 import { getChannelMessages, addMessage as addChannelMessage } from '../../../store/channel_messages';
 import { getDirectMessages } from '../../../store/direct_messages';
-import { addDMUser, getDMUser } from '../../../store/dm_people';
+import { getDMUser } from '../../../store/dm_people';
 import { useUserSearch } from "../../../context/UserSearch";
 import ProfilePhoto from "../UserProfile/ProfilePhoto"
 import Message from './Message';
@@ -72,6 +72,8 @@ const Content = ({ isAddDM, socket }) => {
 	const dms = useSelector(state => state.dm_users);
 	const user = useSelector(state => state.session.user);
 	const userId = user.id
+
+	const [firstLoad, setFirstLoad] = useState(true)
 
 	const bottomRef = useRef(null)
 
@@ -147,15 +149,15 @@ const Content = ({ isAddDM, socket }) => {
 	}
 
 
-	const handleSubmit = e => {
-		e.preventDefault();
-		/*need logic to check if user exits in dm store.
-		If it does, we need to link to that users DMs.
-		*/
-		setSearchParam("")
-		setMatchingUsers([])
-		history.push(`/dm/${e.target.id}`);
-	};
+	// const handleSubmit = e => {
+	// 	e.preventDefault();
+	// 	/*need logic to check if user exits in dm store.
+	// 	If it does, we need to link to that users DMs.
+	// 	*/
+	// 	setSearchParam("")
+	// 	setMatchingUsers([])
+	// 	history.push(`/dm/${e.target.id}`);
+	// };
 	// console.log(matchingUsers)
 
 
@@ -163,10 +165,34 @@ const Content = ({ isAddDM, socket }) => {
 		bottomRef.current.scrollIntoView({ behavior: "smooth" })
 	}
 
+	//FUNCTIONS//
+	const handleKeyPress = (e) => {
+		e.preventDefault();
+		let value = textInput.current;
+		if (value && value !== '<p><br></p>' && e.key  === 'Enter'){
+			sendMessage(e);
+		}
+	}
+
+	const handleJoin =(e) => {
+		const channel_obj = {
+			user_id: user.id,
+			channel_id: id
+		}
+		dispatch(joinChannel(channel_obj))
+	}
+
 	/******************** USE EFFECTS ********************/
 	// useEffect(() => {
 	// 	console.log("location.pathname")
 	// }, [location.pathname])
+
+	useEffect(() => {
+		if(!firstLoad){
+			dispatch(getChannelMessages(id));
+		}
+		setFirstLoad(false)
+	}, [user.profile_photo])
 
 	useEffect(() => {
 		if(bottomRef.current){
@@ -271,23 +297,6 @@ const Content = ({ isAddDM, socket }) => {
 			);
 		});
 	}
-
-	//FUNCTIONS//
-	const handleKeyPress = (e) => {
-		e.preventDefault();
-		let value = textInput.current;
-		if (value && value !== '<p><br></p>' && e.key  === 'Enter'){
-			sendMessage(e);
-		}
-	}
-
-	const handleJoin =(e) => {
-		const channel_obj = {
-			user_id: user.id,
-			channel_id: id
-		}
-		dispatch(joinChannel(channel_obj))
-	}
 	/******************** MAIN COMPONENT ********************/
 	return (
 		<div className="main">
@@ -306,7 +315,7 @@ const Content = ({ isAddDM, socket }) => {
 								>
 									{channels[id]?.name}
 								</li>
-								<span className="channels__header--members"><i class="fas fa-users"></i>    </span><span className="channels__header--count">{channels[id]?.users_in?.length}</span>
+								<span className="channels__header--members"><i className="fas fa-users"></i>    </span><span className="channels__header--count">{channels[id]?.users_in?.length}</span>
 							</>
 							}
 							{slice==='directMessages' &&

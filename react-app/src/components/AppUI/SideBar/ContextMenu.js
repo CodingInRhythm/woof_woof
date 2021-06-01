@@ -31,14 +31,14 @@ const MyContextMenu = ({ setEditOn }) => {
 					onClick={toggleEditChannel}
 				>
 					<span className="context-menu--text">
-						<i className="fas fa-pencil-alt"></i>Edit Channel
+						<i className="fas fa-pencil-alt context--menu-text-icon"></i>Edit Channel
 					</span>
 				</button>
 			</li>
 			<li>
 				<button className="context-menu--btn" onClick={handleDeleteChannel}>
 					<span className="context-menu--text">
-						<i className="fas fa-trash-alt"></i>Leave Channel
+						<i className="fas fa-trash-alt context--menu-text-icon"></i>Leave Channel
 					</span>
 				</button>
 			</li>
