@@ -1,27 +1,26 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import {useSearchAll} from '../../../context/SearchAll'
-import {useHistory} from 'react-router-dom'
 import ProfilePhoto from '../UserProfile/ProfilePhoto'
 
 const SearchAll = () => {
 
     const {searchAllParam, setSearchAllParam, matchingEles, setMatchingEles} = useSearchAll()
-    let history = useHistory()
+    // let history = useHistory()
     //*******************FETCH FUNCTION***************
 
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        // console.log(e.target.className)
-        setSearchAllParam("");
-        setMatchingEles([]);
-        if (e.target.className.includes("user_ele")) {
-            history.push(`/dm/${e.target.id}`);
-        }
-        else {
-            history.push(`/channels/${e.target.id}`)
-        }
-    }
+    // const handleSubmit = (e) => {
+    //     e.preventDefault()
+    //     // console.log(e.target.className)
+    //     setSearchAllParam("");
+    //     setMatchingEles([]);
+    //     if (e.target.className.includes("user_ele")) {
+    //         history.push(`/dm/${e.target.id}`);
+    //     }
+    //     else {
+    //         history.push(`/channels/${e.target.id}`)
+    //     }
+    // }
 
     useEffect(() => {
 

@@ -9,7 +9,7 @@ import ReactQuill from 'react-quill'; // ES6
 /*************************** OTHER FILE IMPORTS ***************************/
 // import { authenticate } from '../../../store/session';
 import { joinChannel } from '../../../store/channels';
-import { getChannelMessages, addMessage as addChannelMessage } from '../../../store/channel_messages';
+import { getChannelMessages } from '../../../store/channel_messages';
 import { getDirectMessages } from '../../../store/direct_messages';
 import { getDMUser } from '../../../store/dm_people';
 import { useUserSearch } from "../../../context/UserSearch";

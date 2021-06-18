@@ -20,7 +20,7 @@ import postgres from "../../images/technologies/postgres_logo.png"
 import react from "../../images/technologies/react_logo.png"
 import docker from "../../images/technologies/docker_logo.png"
 import slack_screenshot from "../../images/slack_clone_screenshot.png"
-import slack_logo from "../../images/slack_logo.png"
+// import slack_logo from "../../images/slack_logo.png"
 
 
 

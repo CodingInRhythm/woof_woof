@@ -5,8 +5,6 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   ContextMenuWrapper,
-  useContextMenuEvent,
-  useContextMenuTrigger,
 } from "react-context-menu-wrapper";
 import { getDirectMessages } from "../../../store/direct_messages";
 import MyContextMenu from "./ContextMenu";
@@ -22,7 +20,7 @@ const DMPerson = ({ dmusers, recipient }) => {
 
   let location = useLocation();
   const directMessageObj = useSelector((state) => state.directMessages);
-  const dms = useSelector((state) => state.dm_users);
+  // const dms = useSelector((state) => state.dm_users);
   let directMessageChannel;
   if (directMessageObj[recipient.id] !== undefined) {
     directMessageChannel = directMessageObj[recipient.id];

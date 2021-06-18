@@ -42,13 +42,10 @@ const MainInterface = () => {
 			socket = io();
 
 			socket.on('connect', () => {
-				console.log(channels, dmUsers)
 				for (let channel in channels) {
-					console.log(channel)
 					socket.emit('join', {room:hashingRoom(channel)})
 				}
 				for (let dm in dmUsers){
-					console.log(userId, dm)
 					socket.emit('join', {room:hashingRoom(userId, dm)})
 				}
 				socket.emit('join', {room:"dm_user_change_room"})

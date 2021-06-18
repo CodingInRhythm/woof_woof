@@ -2,7 +2,6 @@
 import React, {useState, useEffect} from 'react'
 import {Route} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import { io } from "socket.io-client";
 import MessageWindow from './MessageWindow'
 import "./chat.css"
 
@@ -12,7 +11,6 @@ import {getChannelMessages} from '../../store/channel_messages'
 import {getDirectMessages} from '../../store/direct_messages'
 
 // outside of your component, initialize the socket variable
-let socket;
 
 /*************************** COMPONENTS ***************************/
 const Chat = () => {
@@ -32,7 +30,7 @@ const Chat = () => {
   const hashingRoom = (val1, recipientId) => {
     if (!recipientId) {
       return `Channel: ${val1}`
-    } 
+    }
     else {
       return `DM${val1 < recipientId ? val1 : recipientId}${val1 > recipientId ? val1 : recipientId}`;
     }
@@ -46,14 +44,16 @@ const Chat = () => {
     document.getElementById("chat1").classList.add("red-chat")
     document.getElementById("chat2").classList.remove("red-chat")
     document.getElementById("chat1_notice").classList.add("hidden")
-    // dispatch(getChannelMessages(1)) //getChannelMessages fetches msgs from dB puts them in store 
+    // dispatch(getChannelMessages(1)) //getChannelMessages fetches msgs from dB puts them in store
     setRoom(hashingRoom(1)) // room == num will function in child component, MessageWindow
   }
 
-  const joinChat2 = async (e) => {
+  const joinChat2 = (e) => {
     e.preventDefault();
     if (!channels[2]){
-      dispatch(getChannelMessages(2))
+      (async ()=>{
+        await dispatch(getChannelMessages(2))
+      })()
     }
     document.getElementById("chat2").classList.add("red-chat")
     document.getElementById("chat1").classList.remove("red-chat")
@@ -62,18 +62,20 @@ const Chat = () => {
     setRoom(hashingRoom(2))
 
   };
-  let recipientId;
-  const joinDm = async (e) => {
+
+  const joinDm = (e) => {
     e.preventDefault()
     let recipientId = Number(e.target.id)
-    dispatch(getDirectMessages(recipientId))
+    (async ()=>{
+      await dispatch(getDirectMessages(recipientId))
+    })()
     setRoom(hashingRoom(userId, recipientId))
   }
 
   useEffect(() => {
     dispatch(getChannelMessages(1))
     dispatch(getChannelMessages(2))
-  }, [])
+  }, [dispatch])
   //USEFFECTS
 
   useEffect(async ()=>{

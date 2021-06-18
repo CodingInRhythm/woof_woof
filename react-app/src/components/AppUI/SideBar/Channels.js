@@ -142,7 +142,7 @@ const Channels = () => {
 			name: newChannelName,
 			is_channel: true,
 		};
-		if (newChannelName != '') {
+		if (newChannelName !== '') {
 			dispatch(addNewChannel(payload));
 			setHidden(!isHidden);
 			setChannelName('');
