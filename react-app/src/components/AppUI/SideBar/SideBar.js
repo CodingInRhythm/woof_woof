@@ -33,10 +33,10 @@ const SideBar = ({ setRoom }) => {
 			</button>
 
 			<div className="threads">
-				<div className="threads__items">
+				{/* <div className="threads__items">
 					<i className="far fa-comment-dots"></i>
 					<span className="threads__icon"></span> All Threads
-				</div>
+				</div> */}
 				{/* <div className="threads__items">
 					<i className="fas fa-stream"></i>
 					<span className="threads__icon"></span> All unreads

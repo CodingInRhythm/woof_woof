@@ -46,7 +46,7 @@ def handle_chat(data):
     db.session.add(message)
     db.session.commit()
     # print(message.to_dict_basic())
-    emit("chat", message.to_dict(), room="Channel: " + data['room'])
+    emit("chat", message.to_dict(), room=data['roomHash'])
 
 @socketio.on("dm")
 def handle_dm(data):
