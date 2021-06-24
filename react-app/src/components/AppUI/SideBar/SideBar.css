@@ -6,8 +6,6 @@ body {
 	height: 100%;
 	font-size: 17px;
 	font-family: 'Lato', Helvetica, sans-serif;
-
-	/* color: #555459; */
 }
 
 .workspace-menu {
@@ -27,14 +25,8 @@ body {
 	color: #fff;
 }
 .workspace-menu__status:before {
-	/* content: ''; */
 	content: '\1F436';
 	margin-right: 0.2rem;
-	/* width: 9px;
-	height: 9px;
-	display: inline-block;
-	background: #00ffba;
-	border-radius: 50%; */
 }
 .workspace-menu__username {
 	opacity: 0.6;
@@ -85,8 +77,4 @@ body {
 ::-webkit-scrollbar-thumb {
 	background: var(--secondaryColor);;
 	margin-right: 5px;
-}
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-	/* background: #ffffff; */
 }

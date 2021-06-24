@@ -1,7 +1,6 @@
 .dm {
 	margin: 0.5rem 0 1.5rem;
 	margin-right: 10px;
-	/* padding-right: 18px; */
 }
 
 .dm__button,
@@ -60,24 +59,11 @@
 }
 
 .dm__button:before {
-	/* content: '\1F4A4'; */
 	content: '\1F436';
-	/* display: inline-block;
-	margin-right: 0.2rem;
-	height: 10px;
-	background: #696969;
-	border-radius: 50%;
-	margin-right: 10px; */
 }
 
 .dm__button--online:before {
 	content: '\1F436';
-	/* display: inline-block;
-	margin-right: 0.2rem;
-	height: 10px;
-	background: #00ffba;
-	border-radius: 50%;
-	margin-right: 10px; */
 }
 
 .dm__button--active,
@@ -124,7 +110,6 @@
 .remove-dm {
 	line-height: 1.7;
 	border-radius: 50%;
-	/* color: rgba(255, 255, 255, 50%); */
 	color: pink;
 	height: 25px;
 	width: 25px;

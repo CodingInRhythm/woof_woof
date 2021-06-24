@@ -1,7 +1,6 @@
 .channels {
 	margin: 0.5rem 0 1.5rem;
 	margin-right: 10px;
-	/* padding-right: 18px; */
 }
 .channels__button,
 .channels__heading {
@@ -69,15 +68,6 @@
 	content: '\1F3E0';
 	opacity: 1;
 }
-
-/* .channels__list li a {
-	padding: 10px 20px;
-}
-
-.channels__list li a:hover {
-	background-color: red;
-	color: #fff;
-} */
 
 .hidden {
 	display: none;
