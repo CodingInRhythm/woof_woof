@@ -53,7 +53,6 @@ const MainInterface = () => {
 			dispatch(setOnlineStatusUser(userId, true))
 
 			socket.on("chat", (chat) => {
-
 					// when we recieve a chat, add it into our channelMessages object in redux
 					dispatch(addChannelMessage(chat.channel_id, chat))
 			})
@@ -67,28 +66,27 @@ const MainInterface = () => {
 					dispatch(addDirectMessage(dm.recipient_id, dm))
 				}
 			})
-
+			socket.on("dm_change", (data) => {
 				if (parseInt(data.recipient_id) === userId){
 					(async ()=>{
 						socket.emit('join', {room:hashingRoom(userId, parseInt(data.sender_id))})
 						await dispatch(getDMUsers())
 						await dispatch(getDirectMessages(data.sender_id))
-
-					})()
+	
+				})()
 				} else if (parseInt(data.sender_id) === userId){
 					// console.log("right before dispatch")
 					socket.emit('join', {room:hashingRoom(userId, parseInt(data.recipient_id))})
 					dispatch(getDirectMessages(data.recipient_id))
 				}
 			})
-
 			setFirstLoad(true)
 
 			return (()=>{
 				dispatch(setOnlineStatusUser(userId, false))
-			  })
+			})
 		}
-	},[channels])
+	}, [channels])
 
 	useEffect(() => {
 		(async () =>{
