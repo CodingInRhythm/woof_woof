@@ -120,13 +120,10 @@ const Content = ({ isAddDM, socket }) => {
 			editor.deleteText(0, text.length);
 
 			if (location.pathname.includes('dm') && justText.length>1){
-				if (!(id in dms)) {
-					dispatch(getDMUser(id));
-				}
-				socket.emit("dm", {sender_id:userId, recipient_id: id, message:text, room:hashingRoom(userId, id)})
-				if(!dms[id]){
+				if (Object.keys(direct_messages[id]).length<1) {
 					socket.emit("dm_change", {recipient_id: id, sender_id: userId})
 				}
+				socket.emit("dm", {sender_id:userId, recipient_id: id, message:text, room:hashingRoom(userId, id)})
 			} else if (justText.length>1){
 				socket.emit("chat", {room:id, id:userId, message:text, roomHash:hashingRoom(id)})
 			}
