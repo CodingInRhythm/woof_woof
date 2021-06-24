@@ -143,21 +143,17 @@ def edit_user(id):
 
         url = upload["url"]
 
-        # delete_file_from_s3(user.profile_photo)
-
 
     form['csrf_token'].data = request.cookies['csrf_token']
 
     if form.validate_on_submit():
         if form.data['username'] and form.data['username']!= user.username:
             existing_user = User.query.filter(User.username==form.data['username']).first()
-            # print('TESTING INSIDE SUBMIT1', existing_user)
             if existing_user:
                 return {"errors": ["Username is already taken"]}, 409
             user.username=form.data['username']
         if form.data['email'] and form.data['email']!= user.email:
             existing_user = User.query.filter(User.email==form.data['email']).first()
-            # print('TESTING INSIDE SUBMIT2', existing_user)
             if existing_user:
                 return {"errors": ["Email is already in use"]}, 409
             user.email=form.data['email']

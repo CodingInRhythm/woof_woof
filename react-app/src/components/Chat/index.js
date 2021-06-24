@@ -44,8 +44,7 @@ const Chat = () => {
     document.getElementById("chat1").classList.add("red-chat")
     document.getElementById("chat2").classList.remove("red-chat")
     document.getElementById("chat1_notice").classList.add("hidden")
-    // dispatch(getChannelMessages(1)) //getChannelMessages fetches msgs from dB puts them in store
-    setRoom(hashingRoom(1)) // room == num will function in child component, MessageWindow
+    setRoom(hashingRoom(1)) 
   }
 
   const joinChat2 = (e) => {
@@ -58,7 +57,6 @@ const Chat = () => {
     document.getElementById("chat2").classList.add("red-chat")
     document.getElementById("chat1").classList.remove("red-chat")
     document.getElementById("chat2_notice").classList.add("hidden")
-    // dispatch(getChannelMessages(2))
     setRoom(hashingRoom(2))
 
   };
@@ -103,8 +101,6 @@ const Chat = () => {
     setOnLoad(true)
   },[channels[2]])
 
-  //RETURN STATEMENT
-    //add conditional logic to check if user
 
   return (
       <>

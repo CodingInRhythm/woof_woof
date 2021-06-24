@@ -20,14 +20,9 @@ const MyContextMenu = ({ setEditOn }) => {
 
 	return (
 		<div className="context-menu">
-			{/* <p>
-				This belongs to {menuEvent.data.name} with id {menuEvent.data.id}!
-			</p> */}
-
 			<li>
 				<button
 					className="context-menu--btn"
-					// onClick={handleEditChannel}
 					onClick={toggleEditChannel}
 				>
 					<span className="context-menu--text">

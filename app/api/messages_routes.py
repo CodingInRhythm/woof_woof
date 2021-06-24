@@ -14,18 +14,6 @@ messages_routes = Blueprint('messages', __name__)
 
 #################### DIRECT MESSAGE ROUTES ####################
 
-# # GET all dm's from current user
-
-# def dm_get_all():
-#     '''
-#     GET all of user's DMs
-#     '''
-
-#     if not current_user.is_authenticated:
-#         return {'errors': ['Unauthorized']}
-
-#     direct_messages = DirectMessage.query.filter(DirectMessage.sender_id.in_)
-
 # GET  all dm's from current user and another specified user #
 @messages_routes.route('/dm/<int:recipient_id>')
 def dm_get(recipient_id):

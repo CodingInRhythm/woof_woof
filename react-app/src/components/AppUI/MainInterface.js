@@ -26,7 +26,6 @@ const MainInterface = () => {
 	const dmUsers = useSelector(state => state.dm_users)
 	const channels = useSelector(state => state.channels)
 	const userId = useSelector(state => state.session.user.id)
-	// const directMessages = useSelector(state => state.directMessages)
 
 	const hashingRoom = (val1, recipientId) => {
 		if (!recipientId) {
@@ -62,19 +61,14 @@ const MainInterface = () => {
 			socket.on("dm", (dm) => {
 				// when we recieve a dm, add it into our directMessages object in redux
 				if (dm.recipient_id === userId){
-					// console.log("I have recieved a dm---------", dm)
 					window.localStorage.removeItem(dm.sender_id.toString())
 					dispatch(addDirectMessage(dm.sender_id, dm))
 				} else{
-					// console.log("I have send a dm---------", dm)
 					dispatch(addDirectMessage(dm.recipient_id, dm))
 				}
 			})
 
-			socket.on("dm_change", (data) => {
-				// console.log("There was a dm change----", Number(data.recipient_id),"  ", userId)
 				if (parseInt(data.recipient_id) === userId){
-					// console.log("right before dispatch")
 					(async ()=>{
 						socket.emit('join', {room:hashingRoom(userId, parseInt(data.sender_id))})
 						await dispatch(getDMUsers())
@@ -92,23 +86,6 @@ const MainInterface = () => {
 
 			return (()=>{
 				dispatch(setOnlineStatusUser(userId, false))
-				// for (let channel in channels) {
-				// 	socket.emit('leave', {room:hashingRoom(channel)})
-				// 	// console.log(socket.connected)
-				// 	console.log("I have left room:  ", hashingRoom(channel))
-				// 	// console.log(socket.connected)
-				// }
-				// for (let dm in dmUsers) {
-				// 	socket.emit('leave', {room:hashingRoom(userId, dm)})
-				// 	// console.log(socket.connected)
-				// 	console.log("I have left dm:  ", hashingRoom(userId, dm))
-				// 	socket.disconnect()
-				// 	// console.log(socket.connected)
-				// }
-				// if (!(location.pathname.includes("dm") || location.pathname.includes("channels"))){
-				// console.log("I'm disconnected")
-				// socket.disconnect()
-				// }
 			  })
 		}
 	},[channels])
