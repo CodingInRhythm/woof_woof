@@ -67,24 +67,26 @@ def sign_up():
     """
     form = SignUpForm()
     image = form.data['profile_image']
+    url=None
 
     if image=='null' or image=='undefined':
         image=None
 
-    if not allowed_file(image.filename):
-        return {"errors": "file type not permitted"}, 400
+    if image:
+        if not allowed_file(image.filename):
+            return {"errors": "file type not permitted"}, 400
 
-    image.filename = get_unique_filename(image.filename)
+        image.filename = get_unique_filename(image.filename)
 
-    upload = upload_file_to_s3(image)
+        upload = upload_file_to_s3(image)
 
-    if "url" not in upload:
-        # if the dictionary doesn't have a url key
-        # it means that there was an error when we tried to upload
-        # so we send back that error message
-        return upload, 400
+        if "url" not in upload:
+            # if the dictionary doesn't have a url key
+            # it means that there was an error when we tried to upload
+            # so we send back that error message
+            return upload, 400
 
-    url = upload["url"]
+        url = upload["url"]
 
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
