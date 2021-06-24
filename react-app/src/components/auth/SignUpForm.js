@@ -74,7 +74,7 @@ const SignUpForm = () => {
           <i
             onClick={logoClick}
             id="fa-dog_green-large_login"
-            class="fas fa-dog"
+            className="fas fa-dog"
           ></i>
           <h1 className="login-form-header">Join Woof Woof!</h1>
 
