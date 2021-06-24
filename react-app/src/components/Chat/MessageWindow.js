@@ -1,19 +1,12 @@
 import React, { useState } from "react";
 import { useSelector} from 'react-redux'
-// import { io } from "socket.io-client";
-// import { addChannelMessage } from "../../store/channel_messages";
 
 let socket;
 
 const MessageWindow = ({recipientid, room}) => {
   //STATE VARIABLES
 
-  // const dispatch = useDispatch()
-
   const [chatInput, setChatInput] = useState("");
-
-  // const [firstLoad, setFirstLoad] = useState(false);
-  // const [otherLoad, setOtherLoad] = useState(false);
 
   const newMessages = []
 
@@ -45,35 +38,6 @@ const MessageWindow = ({recipientid, room}) => {
   const updateChatInput = (e) => {
     setChatInput(e.target.value);
   };
-
-  // useEffect(()=>{
-  //   socket = io()
-  //   if (room === "1" && firstLoad === false){
-  //     socket.on('connect', ()=>{
-  //       socket.emit('join', {room:room})
-  //     })
-  //     setFirstLoad(true)
-  //   } 
-  //   if (room === "2" && otherLoad === false){
-  //     socket.on('connect', ()=>{
-  //       socket.emit('join', {room:room})
-  //     })
-  //     setOtherLoad(true)
-  //   }
-
-
-  //   socket.on("chat", (chat) => {
-  //       // when we recieve a chat, add it into our messages array in state
-  //       console.log(chat)
-  //       dispatch(addMessage(chat.channel_id, chat))
-  //   })
-
-  //   return (()=>{
-  //     socket.emit('leave', {room:room})
-  //     // socket.disconnect()
-  //   })
-  // },[room])
-
 
   return (
       <div>

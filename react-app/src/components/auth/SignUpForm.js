@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, NavLink, useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
-// import logo from '../../images/slack_logo-ebd02d1.svg';
 
 const SignUpForm = () => {
 	const [username, setUsername] = useState('');
@@ -19,7 +18,6 @@ const SignUpForm = () => {
 	const onSignUp = async e => {
 		e.preventDefault();
 		if (password === repeatPassword) {
-			// await dispatch(signUp(username, email, password));
 			await dispatch(signUp(username, firstName, lastName, email, photo, password))
 		}
 	};

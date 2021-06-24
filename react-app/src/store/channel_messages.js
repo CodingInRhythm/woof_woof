@@ -5,8 +5,6 @@ const SET_CHANNEL_MESSAGES = 'set/CHANNEL_MESSAGES';
 
 const ADD_CHANNEL_MESSAGE = 'add/CHANNEL_MESSAGES'
 
-// const EDIT_CHANNEL_MESSAGE = "edit/CHANNEL_MESSAGE";
-
 const DELETE_CHANNEL_MESSAGE = "delete/CHANNEL_MESSAGE";
 
 const RESET_CHANNEL_MESSAGE = "reset/CHANNEL_MESSAGE";
@@ -24,12 +22,6 @@ export const addChannelMessage = (channel_id, message)=> ({
     channel_id,
     message
 });
-
-// const changeChannelMessage = (channel_id, message)=> ({
-//     type: EDIT_CHANNEL_MESSAGE,
-//     channel_id,
-//     message
-// });
 
 const removeChannelMessage = (channel_id, channel_message_id)=> ({
     type: DELETE_CHANNEL_MESSAGE,
@@ -113,12 +105,6 @@ export default function channelMessageReducer(state=initialState, action) {
             newState[action.channel_id]={...newState[action.channel_id]}
             newState[action.channel_id][action.message.id]=action.message
             return newState
-        // case EDIT_CHANNEL_MESSAGE:
-        //     newState = {...state}
-        //     newState[action.channel_id]={...newState[action.channel_id]}
-        //     console.log(newState[action.channel_id][action.message.id] === action.message)
-        //     newState[action.channel_id][action.message.id]=action.message
-        //     return newState
         case DELETE_CHANNEL_MESSAGE:
             newState = {...state}
             delete newState[action.channel_id][action.channel_message_id]

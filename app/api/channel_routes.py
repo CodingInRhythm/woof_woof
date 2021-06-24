@@ -24,7 +24,6 @@ def channels():
 @channel_routes.route('/', methods=['POST'])
 def add_channel():
     users_in = [User.query.get(request.json['user_id'])]
-    # print("********************************")
     channel = Channel(name=request.json['name'], user_id=request.json['user_id'],
                       is_channel=request.json['is_channel'], users_in=users_in)
 

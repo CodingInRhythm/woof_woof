@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-// import React from 'react';
 import "./DMs.css";
 import { useHistory, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  ContextMenuWrapper,
-} from "react-context-menu-wrapper";
+import {  ContextMenuWrapper } from "react-context-menu-wrapper";
 import { getDirectMessages } from "../../../store/direct_messages";
 import MyContextMenu from "./ContextMenu";
 
@@ -20,7 +17,6 @@ const DMPerson = ({ dmusers, recipient }) => {
 
   let location = useLocation();
   const directMessageObj = useSelector((state) => state.directMessages);
-  // const dms = useSelector((state) => state.dm_users);
   let directMessageChannel;
   if (directMessageObj[recipient.id] !== undefined) {
     directMessageChannel = directMessageObj[recipient.id];
@@ -36,12 +32,10 @@ const DMPerson = ({ dmusers, recipient }) => {
     setNumberMessages(0);
   };
   const removeDM = (e) => {
-    // console.log("here");
 	  e.preventDefault()
     console.log()
    
     window.localStorage.setItem(`${recipient.id}`, `${recipient.id}`);
-    // console.log(dmusers);
 
 	return history.push("/dms/all")
   };
@@ -54,19 +48,14 @@ const DMPerson = ({ dmusers, recipient }) => {
   };
 
   //useeffect WHERE NOTIFICATIONS FIRE
-//   console.log('BEFORE USE EFFECT', recipient.id);
 
   useEffect(() => {
     if (location.pathname !== `/dm/${recipient.id}` && isLoaded) {
-    //   console.log('INSIDE USEEFFECT', recipient.id);
       setNewMessage(true);
       setNumberMessages(numberMessages + 1);
     }
     setIsLoaded(true);
   }, [directMessageChannel]);
-
-  // const menuId = 'durect_messages-menu';
-  // const dmRef = useContextMenuTrigger({ menuId: menuId, data: { name: 'DMs', id: recipient.id } });
 
   return (
     <li className="dm__li" key={recipient.id}>

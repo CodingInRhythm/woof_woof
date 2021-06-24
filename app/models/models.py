@@ -60,7 +60,6 @@ class ChannelMessage(db.Model):
       "user_id": self.user_id,
       "channel_id": self.channel_id,
       "message": self.message,
-      # "created_at": self.created_at,
     }
 
 # DIRECT MESSAGE JOIN TABLE #

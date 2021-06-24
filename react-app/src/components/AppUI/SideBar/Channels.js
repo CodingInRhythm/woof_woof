@@ -40,7 +40,6 @@ const Nav = ({ channel, editOn, setEditOn }) => {
 	};
 
 	useEffect(() => {
-		// console.log("We have a new message!")
 		if (location.pathname !== `/channels/${channel.id}` && isLoaded) {
 			setNewMessage(true);
 			setNumberMessages(numberMessages + 1);
@@ -109,22 +108,6 @@ const Channels = () => {
 	for (let i in channels) {
 		arr.push(channels[i]);
 	}
-	// const handleRoom = () => {
-	// 	setRoom(`Channel: ${channel.id}`)
-	// };
-	// const channelComponents = arr.map(channel => {
-	// 	return (
-	// 		<li key={channel.id} className="channels__button">
-	// 			<NavLink
-	// 				activeClassName="active"
-	// 				onClick={setRoom(`Channel: ${channel.id}`)}
-	// 				to={`/channels/${channel.id}`}
-	// 			>
-	// 				<span>{channel.name}</span>
-	// 			</NavLink>
-	// 		</li>
-	// 	);
-	// });
 
 	const dispatch = useDispatch();
 	const [isHidden, setHidden] = useState('true');

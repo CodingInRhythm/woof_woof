@@ -68,7 +68,6 @@ export const hideUser = (userObj) => async dispatch => {
 }
 
 export const setOnlineStatusUser = (id, status) => async dispatch => {
-	// console.log("setting online status")
 	const response = await fetch(`/api/users/online/${id}`, {
 		method:'PUT',
 		headers:{
