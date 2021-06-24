@@ -4,9 +4,9 @@ import os
 from .models.models import db, ChannelMessage, DirectMessage
 
 # Add after deploy
-# from engineio.payload import Payload
+from engineio.payload import Payload
 
-# Payload.max_decode_packets = 500
+Payload.max_decode_packets = 500
 
 
 # Setting origins variable to all when in dev, actual heroku app-url in production

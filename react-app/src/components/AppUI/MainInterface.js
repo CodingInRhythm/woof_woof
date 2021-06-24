@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getChannels } from '../../store/channels';
 import { getDMUsers, setOnlineStatusUser } from '../../store/dm_people';
 import { addChannelMessage } from "../../store/channel_messages"
-import { addDirectMessage } from "../../store/direct_messages"
+import { addDirectMessage, getDirectMessages } from "../../store/direct_messages"
 let socket;
 
 const MainInterface = () => {
@@ -73,9 +73,18 @@ const MainInterface = () => {
 
 			socket.on("dm_change", (data) => {
 				// console.log("There was a dm change----", Number(data.recipient_id),"  ", userId)
-				if (Number(data.recipient_id) === userId){
+				if (parseInt(data.recipient_id) === userId){
 					// console.log("right before dispatch")
-					dispatch(getDMUsers())
+					(async ()=>{
+						socket.emit('join', {room:hashingRoom(userId, parseInt(data.sender_id))})
+						await dispatch(getDMUsers())
+						await dispatch(getDirectMessages(data.sender_id))
+
+					})()
+				} else if (parseInt(data.sender_id) === userId){
+					// console.log("right before dispatch")
+					socket.emit('join', {room:hashingRoom(userId, parseInt(data.recipient_id))})
+					dispatch(getDirectMessages(data.recipient_id))
 				}
 			})
 
