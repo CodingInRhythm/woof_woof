@@ -47,7 +47,6 @@ const LoginForm = () => {
         <div></div>
         <div className="loginWrap">
           <i onClick={logoClick} id="fa-dog_green-large_login" class="fas fa-dog"></i>
-          {/* <img src={logo} className="slack_logo" onClick={logoClick}></img> */}
           <h1 className="login-form-header">Sign in to Woof Woof</h1>
           <form onSubmit={onLogin}>
             {errors.length ? (

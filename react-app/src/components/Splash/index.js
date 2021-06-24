@@ -20,8 +20,6 @@ import postgres from "../../images/technologies/postgres_logo.png"
 import react from "../../images/technologies/react_logo.png"
 import docker from "../../images/technologies/docker_logo.png"
 import slack_screenshot from "../../images/slack_clone_screenshot.png"
-// import slack_logo from "../../images/slack_logo.png"
-
 
 
 function Splash(){
@@ -124,7 +122,6 @@ function Splash(){
     <div className="splash_container" id="splash_container">
       <nav className="splash_nav">
         <div className="splash_nav-left">
-          {/* <img src={slack_logo} alt="logo" id="slack_logo"/> */}
           <i class="fas fa-dog"></i>
           <h1 className="nav_title">Woof Woof</h1>
         </div>
@@ -146,7 +143,6 @@ function Splash(){
       </nav>
       <nav className="splash_scrolling_nav hidden" id="splash_scrolling_nav">
         <div className="splash_scrolling_nav-left" onClick={scrollToTop}>
-          {/* <img src={slack_logo} alt="logo" id="slack_logo" /> */}
           <i class="fas fa-dog_green fa-dog"></i>
           <h1 className="splash_scolling_nav_title">Woof Woof</h1>
         </div>
@@ -187,7 +183,6 @@ function Splash(){
                   {user ? "Launch Woof Woof" : "Try for free"}
                 </div>
               </Link>
-              {/*Replace image with something more appropriate*/}
               <img className="splash_img" src={slack_screenshot} alt="slack" />
             </div>
           </Animator>
@@ -277,7 +272,6 @@ function Splash(){
         </ScrollPage>
       </ScrollContainer>
       <br />
-      {/* <footer className="splash_footer">Hey I'm footer</footer> */}
     </div>
   );
 }

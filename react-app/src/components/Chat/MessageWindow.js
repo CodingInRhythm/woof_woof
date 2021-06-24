@@ -1,19 +1,12 @@
 import React, { useState } from "react";
 import { useSelector} from 'react-redux'
-// import { io } from "socket.io-client";
-// import { addChannelMessage } from "../../store/channel_messages";
 
 let socket;
 
 const MessageWindow = ({recipientid, room}) => {
   //STATE VARIABLES
 
-  // const dispatch = useDispatch()
-
   const [chatInput, setChatInput] = useState("");
-
-  // const [firstLoad, setFirstLoad] = useState(false);
-  // const [otherLoad, setOtherLoad] = useState(false);
 
   const newMessages = []
 

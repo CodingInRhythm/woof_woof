@@ -63,12 +63,6 @@ const SignUpForm = () => {
       <div className="login-container">
         <div></div>
         <div className="loginWrap">
-          {/* <img
-            src={logo}
-            className="slack_logo"
-            onClick={logoClick}
-            alt="logo"
-          ></img> */}
           <i
             onClick={logoClick}
             id="fa-dog_green-large_login"
@@ -139,18 +133,6 @@ const SignUpForm = () => {
               <label for="actual-btn" className="photo-upload--btn">
                 <span id="actual-btn-text">Choose File</span>
               </label>
-
-              {/* <input
-								id="photo-btn"
-								type="input"
-								onChange={updatePhoto}
-								placeholder="profile_photo.jpg"
-								className="photo-upload--input"
-								value={photo}
-							/>
-							<button className="photo-upload--btn">
-								<i class="fas fa-file-upload"></i>
-							</button> */}
             </div>
             <div>
               <input
