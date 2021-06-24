@@ -7,7 +7,6 @@ import ReactQuill from 'react-quill'; // ES6
 
 
 /*************************** OTHER FILE IMPORTS ***************************/
-// import { authenticate } from '../../../store/session';
 import { joinChannel } from '../../../store/channels';
 import { getChannelMessages } from '../../../store/channel_messages';
 import { getDirectMessages } from '../../../store/direct_messages';
@@ -31,16 +30,9 @@ const Content = ({ isAddDM, socket }) => {
 		],
 		keyboard: {
 			bindings: {
-				// 'shift enter': {
-				// 	key: 13,
-				// 	shiftKey: true,
-				// 	handler: function (range, context) {
-				// 	},
-				// },
 				enter: {
 					key: 13,
 					handler: function () {
-						// do nothing
 					},
 				},
 			},
@@ -187,22 +179,10 @@ const Content = ({ isAddDM, socket }) => {
 
 	//  Get messages if not in store
 	useEffect(() => {
-		// if ((localStorage.getItem('lastPage') === location.pathname) && (location.pathname !== "/dms/all")){
-		// 	localStorage.setItem('refreshPage', location.pathname)
-		// 	history.push('/dms/all')
-		// }
-		// localStorage.setItem('lastPage', location.pathname)
-
-		// if (location.pathname.includes("channel")) {
-		// 		slice = 'channelMessages'
-		// } else if (location.pathname.includes("dm/")){
-		// 		slice = "directMessages"
-		// }
 
 		if (!messages[id] && slice === "channelMessages") {
 			dispatch(getChannelMessages(id));
 		}
-		// else if ((!messages[id] && slice === "directMessages" ) || (direct_messages[id] && Object.keys(direct_messages[id].length === 0))) {
 		else if (!messages[id] && slice === "directMessages" ) {
 			if (!dms[id]){
 				dispatch(getDMUser(id));
@@ -315,14 +295,6 @@ const Content = ({ isAddDM, socket }) => {
 				</div>
 				{slice==='channelMessages' &&
 				<div className="main__channel-members">
-					{/* <div>
-						<i className="fas fa-user-friends"></i>{' '}
-						<span className="main_channel-members-h3">View Members</span>
-					</div>
-					<div>
-						<i className="fas fa-user-plus"></i>{' '}
-						<span className="main_channel-members-h3">Add Members</span>
-					</div> */}
 					{!isChannelIn && <div>
 						<i className="fas fa-user-plus" onClick={handleJoin}></i>{' '}
 						<span className="main_channel-members-h3">Join</span>
@@ -378,13 +350,11 @@ const Content = ({ isAddDM, socket }) => {
 						<section className="main__chat-textarea">
 							<form onSubmit={sendMessage} onKeyUp={handleKeyPress}>
 								<ReactQuill
-									// placeholder={`Message #${messages[id]?.channel?.name}`}
 									modules={modules}
 									formats={formats}
 									inputClass="main__chat-textarea"
 									id="input_field"
 									ref={textInput}
-									// onChange={handleChange}
 								>
 									<div className="my-editing-area"></div>
 								</ReactQuill>

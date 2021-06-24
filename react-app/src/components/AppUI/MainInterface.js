@@ -26,7 +26,6 @@ const MainInterface = () => {
 	const dmUsers = useSelector(state => state.dm_users)
 	const channels = useSelector(state => state.channels)
 	const userId = useSelector(state => state.session.user.id)
-	// const directMessages = useSelector(state => state.directMessages)
 
 	const hashingRoom = (val1, recipientId) => {
 		if (!recipientId) {
