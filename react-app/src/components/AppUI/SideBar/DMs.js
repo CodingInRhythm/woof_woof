@@ -33,7 +33,6 @@ const DMPerson = ({ dmusers, recipient }) => {
   };
   const removeDM = (e) => {
 	  e.preventDefault()
-    console.log()
    
     window.localStorage.setItem(`${recipient.id}`, `${recipient.id}`);
 

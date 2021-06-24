@@ -134,7 +134,6 @@
 
 .photo-upload--form {
 	display: flex;
-	/* justify-content: space-between; */
 }
 
 .photo-upload--input {
@@ -185,20 +184,6 @@
 #actual-btn-text {
 	font-size: .75rem;
 }
-/* input[type='file']::file-selector-button {
-	font-size: 24px;
-	color: #fff;
-	background-color: var(--primaryColorDark);
-	padding: 0px 8px;
-	border-radius: 3px;
-	transition: all 0.5s;
-	margin-top: 0;
-	height: 40px;
-}
-
-input[type='file']::file-selector-button:hover {
-	background-color: var(--primaryColor);
-} */
 
 .signupform {
 	box-sizing: border-box;

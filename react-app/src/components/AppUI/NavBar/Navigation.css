@@ -90,14 +90,6 @@
 	border: 1px solid rgba(0, 0, 0, 0.15);
 }
 
-/* .search-item {
-	list-style-type: none;
-}
-.search-item:hover {
-	background-color: rgba(173, 216, 230, 0.39);
-	cursor: grab;
-} */
-
 .searchAll__user-item,
 .searchAll__channel-item{
 	display: flex;

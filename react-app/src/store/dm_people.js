@@ -45,7 +45,6 @@ export const getDMUsers = () => async dispatch => {
 export const getDMUser = (id) => async dispatch => {
 	const response = await fetch(`/api/users/${id}`);
 	const data = await response.json()
-	console.log(data)
 	if (data.errors) {
 		return
 	}

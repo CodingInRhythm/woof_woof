@@ -98,11 +98,6 @@ const MainInterface = () => {
 			setIsAddDM(false)
 		}
 	}, [location.pathname]);
-	/*Need to add:
-	Search bar
-	components of rendered users
-	GET RID OF P TAG :)
-	*/
 	return (
 		<>
 			<Navigation socket={socket}/>
