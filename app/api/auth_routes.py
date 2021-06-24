@@ -1,6 +1,6 @@
 #################### IMPORTS ####################
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, db, Channel
 from app.aws import allowed_file, get_unique_filename, upload_file_to_s3, delete_file_from_s3
 from app.forms import LoginForm
 from app.forms import SignUpForm
@@ -98,6 +98,8 @@ def sign_up():
 
         )
         db.session.add(user)
+        channel = Channel.query.get(2)
+        channel.users_in.append(user)
         db.session.commit()
         login_user(user)
         return user.to_dict()
