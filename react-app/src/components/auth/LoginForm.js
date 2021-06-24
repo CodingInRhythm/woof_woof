@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, NavLink, useHistory } from 'react-router-dom';
 import { login } from '../../store/session';
 import './LoginForm.css';
-// import logo from '../../images/slack_logo-ebd02d1.svg';
 
 const LoginForm = () => {
 	const [errors, setErrors] = useState([]);

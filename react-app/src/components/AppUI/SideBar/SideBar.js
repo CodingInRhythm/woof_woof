@@ -4,7 +4,6 @@ import { useHistory } from 'react-router';
 import './SideBar.css';
 import DMs from './DMs';
 import Channels from './Channels';
-// import ContextMenu from './ContextMenu';
 import {useUserSearch} from '../../../context/UserSearch'
 
 const SideBar = ({ setRoom }) => {

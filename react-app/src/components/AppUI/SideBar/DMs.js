@@ -58,9 +58,6 @@ const DMPerson = ({ dmusers, recipient }) => {
     setIsLoaded(true);
   }, [directMessageChannel]);
 
-  // const menuId = 'durect_messages-menu';
-  // const dmRef = useContextMenuTrigger({ menuId: menuId, data: { name: 'DMs', id: recipient.id } });
-
   return (
     <li className="dm__li" key={recipient.id}>
       <button
