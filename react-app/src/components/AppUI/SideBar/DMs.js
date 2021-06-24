@@ -37,9 +37,10 @@ const DMPerson = ({ dmusers, recipient }) => {
   };
   const removeDM = (e) => {
     // console.log("here");
-	e.preventDefault()
-    let recipientid = e.target.id;
-    window.localStorage.setItem(`${recipientid}`, `${recipientid}`);
+	  e.preventDefault()
+    console.log()
+   
+    window.localStorage.setItem(`${recipient.id}`, `${recipient.id}`);
     // console.log(dmusers);
 
 	return history.push("/dms/all")
