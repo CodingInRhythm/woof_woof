@@ -1,6 +1,6 @@
 #################### IMPORTS ####################
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, db, Channel
 from app.aws import allowed_file, get_unique_filename, upload_file_to_s3, delete_file_from_s3
 from app.forms import LoginForm
 from app.forms import SignUpForm
@@ -67,24 +67,26 @@ def sign_up():
     """
     form = SignUpForm()
     image = form.data['profile_image']
+    url=None
 
     if image=='null' or image=='undefined':
         image=None
 
-    if not allowed_file(image.filename):
-        return {"errors": "file type not permitted"}, 400
+    if image:
+        if not allowed_file(image.filename):
+            return {"errors": "file type not permitted"}, 400
 
-    image.filename = get_unique_filename(image.filename)
+        image.filename = get_unique_filename(image.filename)
 
-    upload = upload_file_to_s3(image)
+        upload = upload_file_to_s3(image)
 
-    if "url" not in upload:
-        # if the dictionary doesn't have a url key
-        # it means that there was an error when we tried to upload
-        # so we send back that error message
-        return upload, 400
+        if "url" not in upload:
+            # if the dictionary doesn't have a url key
+            # it means that there was an error when we tried to upload
+            # so we send back that error message
+            return upload, 400
 
-    url = upload["url"]
+        url = upload["url"]
 
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
@@ -98,6 +100,8 @@ def sign_up():
 
         )
         db.session.add(user)
+        channel = Channel.query.get(2)
+        channel.users_in.append(user)
         db.session.commit()
         login_user(user)
         return user.to_dict()
