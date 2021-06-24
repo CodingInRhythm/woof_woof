@@ -7,9 +7,9 @@ import SearchAll from '../Search/SearchAll'
 import UserProfileModal from '../UserProfile/UserProfileModal'
 
 function Navigation({ isLoaded }) {
-	const handleSearch = e => {
-		e.preventDefault();
-	};
+	// const handleSearch = e => {
+	// 	e.preventDefault();
+	// };
 	const user = useSelector(state => state.session.user);
 
 	return (

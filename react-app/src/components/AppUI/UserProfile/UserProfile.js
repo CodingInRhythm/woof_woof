@@ -71,7 +71,7 @@ const UserProfile = ({profileUser, setShowModal})=>{
                         {isUser &&
                             <div className='profile__photo-input'>
                                 <input type="file" id="profpic-btn" onChange={(e)=>setPhoto(e.target.files[0])} hidden/>
-                                <label htmlFor="profpic-btn" class="profile__photo-button">{photo?.name ? photo?.name : 'New Image'}</label>
+                                <label htmlFor="profpic-btn" className="profile__photo-button">{photo?.name ? photo?.name : 'New Image'}</label>
                             </div>
                     }
                     </div>

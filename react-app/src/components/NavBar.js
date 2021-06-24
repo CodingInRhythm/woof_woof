@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
 
-const NavBar = () => {
+const NavBar = ({socket}) => {
 	return (
 		<nav>
 			<ul>
@@ -32,7 +32,7 @@ const NavBar = () => {
 					</NavLink>
 				</li>
 				<li>
-					<LogoutButton />
+					<LogoutButton socket={socket}/>
 				</li>
 			</ul>
 		</nav>

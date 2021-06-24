@@ -12,7 +12,7 @@ import UserProfileModal from '../UserProfile/UserProfileModal'
 
 /*************************** HELPER COMPONENT ***************************/
 const EditDelete = ({editOn, setEditOn, deleteOn, setDeleteOn, msg, date, modules, formats}) =>{
-	const dms = useSelector(state => state.dm_users);
+	// const dms = useSelector(state => state.dm_users);
     const dispatch = useDispatch()
     const [currentMessage, setCurrentMessage] = useState(msg.message)
 

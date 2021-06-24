@@ -9,7 +9,7 @@ import ReactQuill from 'react-quill'; // ES6
 /*************************** OTHER FILE IMPORTS ***************************/
 // import { authenticate } from '../../../store/session';
 import { joinChannel } from '../../../store/channels';
-import { getChannelMessages, addMessage as addChannelMessage } from '../../../store/channel_messages';
+import { getChannelMessages } from '../../../store/channel_messages';
 import { getDirectMessages } from '../../../store/direct_messages';
 import { getDMUser } from '../../../store/dm_people';
 import { useUserSearch } from "../../../context/UserSearch";
@@ -136,7 +136,7 @@ const Content = ({ isAddDM, socket }) => {
 					socket.emit("dm_change", {recipient_id: id, sender_id: userId})
 				}
 			} else if (justText.length>1){
-				socket.emit("chat", {room:id, id:userId, message:text})
+				socket.emit("chat", {room:id, id:userId, message:text, roomHash:hashingRoom(id)})
 			}
 		}
 	};
@@ -202,11 +202,11 @@ const Content = ({ isAddDM, socket }) => {
 
 	//  Get messages if not in store
 	useEffect(() => {
-		if ((localStorage.getItem('lastPage') === location.pathname) && (location.pathname !== "/dms/all")){
-			localStorage.setItem('refreshPage', location.pathname)
-			history.push('/dms/all')
-		}
-		localStorage.setItem('lastPage', location.pathname)
+		// if ((localStorage.getItem('lastPage') === location.pathname) && (location.pathname !== "/dms/all")){
+		// 	localStorage.setItem('refreshPage', location.pathname)
+		// 	history.push('/dms/all')
+		// }
+		// localStorage.setItem('lastPage', location.pathname)
 
 		// if (location.pathname.includes("channel")) {
 		// 		slice = 'channelMessages'

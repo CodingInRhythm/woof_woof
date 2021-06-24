@@ -42,7 +42,7 @@
 	align-items: center;
 	border-top-right-radius: 5px;
 	border-bottom-right-radius: 5px;
-	justify-content: start;
+	justify-content: flex-start;
 	line-height: 1.4;
 }
 .channels__button span {
