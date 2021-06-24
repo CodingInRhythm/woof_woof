@@ -6,21 +6,7 @@ import ProfilePhoto from '../UserProfile/ProfilePhoto'
 const SearchAll = () => {
 
     const {searchAllParam, setSearchAllParam, matchingEles, setMatchingEles} = useSearchAll()
-    // let history = useHistory()
     //*******************FETCH FUNCTION***************
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault()
-    //     // console.log(e.target.className)
-    //     setSearchAllParam("");
-    //     setMatchingEles([]);
-    //     if (e.target.className.includes("user_ele")) {
-    //         history.push(`/dm/${e.target.id}`);
-    //     }
-    //     else {
-    //         history.push(`/channels/${e.target.id}`)
-    //     }
-    // }
 
     useEffect(() => {
 
@@ -35,31 +21,6 @@ const SearchAll = () => {
           const data = await res.json();
           setMatchingEles(data.values)
       };
-
-        //     Promise.all([
-        //         fetch("/api/users/"),
-        //         fetch("/api/channels/all"),
-        //     ]).then((res) => Promise.all(res.map((response) => response.json())))
-        //     .then((res) => {
-        //         let users = res[0].users
-        //         let channels = res[1].channels
-        //         let matches = []
-        //         console.log(users, channels)
-        //         matches.push(users.filter((user) => {
-        //             return (
-        //                 user.firstname?.toLowerCase().indexOf(searchAllParam.toLowerCase()) ===
-        //                 0 ||
-        //                 user.lastname?.toLowerCase().indexOf(searchAllParam.toLowerCase()) === 0
-        //                 ||
-        //                 `${user.firstname} ${user.lastname}`.toLowerCase().indexOf(searchAllParam.toLowerCase()) === 0
-        //             )
-        //         }))
-        //        setMatchingEles(matches[0].concat(channels.filter((channel) => {
-        //             return (
-        //                 channel.name.toLowerCase().indexOf(searchAllParam.toLowerCase()) === 0
-        //             );
-        //         })))
-        // })}
 
         if (searchAllParam.length > 0) fetchUsersDMs()
         else {setMatchingEles([])}

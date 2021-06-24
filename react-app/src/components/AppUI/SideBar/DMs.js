@@ -36,12 +36,9 @@ const DMPerson = ({ dmusers, recipient }) => {
     setNumberMessages(0);
   };
   const removeDM = (e) => {
-    // console.log("here");
 	  e.preventDefault()
-    console.log()
    
     window.localStorage.setItem(`${recipient.id}`, `${recipient.id}`);
-    // console.log(dmusers);
 
 	return history.push("/dms/all")
   };
@@ -54,11 +51,9 @@ const DMPerson = ({ dmusers, recipient }) => {
   };
 
   //useeffect WHERE NOTIFICATIONS FIRE
-//   console.log('BEFORE USE EFFECT', recipient.id);
 
   useEffect(() => {
     if (location.pathname !== `/dm/${recipient.id}` && isLoaded) {
-    //   console.log('INSIDE USEEFFECT', recipient.id);
       setNewMessage(true);
       setNumberMessages(numberMessages + 1);
     }

@@ -12,10 +12,7 @@ const SideBar = ({ setRoom }) => {
 	const user = useSelector(state=>state.session.user)
 	const {searchParam, setSearchParam, matchingUsers, setMatchingUsers} = useUserSearch()
 	const resetSearch = () => {
-		// console.log('MAKING RESETET SEARCH?')
-		// console.log(searchParam)
 		setSearchParam("")
-		// console.log(searchParam);
 		setMatchingUsers("")
 	}
 	return (

@@ -149,18 +149,6 @@ const Content = ({ isAddDM, socket }) => {
 	}
 
 
-	// const handleSubmit = e => {
-	// 	e.preventDefault();
-	// 	/*need logic to check if user exits in dm store.
-	// 	If it does, we need to link to that users DMs.
-	// 	*/
-	// 	setSearchParam("")
-	// 	setMatchingUsers([])
-	// 	history.push(`/dm/${e.target.id}`);
-	// };
-	// console.log(matchingUsers)
-
-
 	const scrollToBottom = () => {
 		bottomRef.current.scrollIntoView({ behavior: "smooth" })
 	}
@@ -183,9 +171,6 @@ const Content = ({ isAddDM, socket }) => {
 	}
 
 	/******************** USE EFFECTS ********************/
-	// useEffect(() => {
-	// 	console.log("location.pathname")
-	// }, [location.pathname])
 
 	useEffect(() => {
 		if(!firstLoad){

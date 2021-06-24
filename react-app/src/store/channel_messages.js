@@ -113,12 +113,6 @@ export default function channelMessageReducer(state=initialState, action) {
             newState[action.channel_id]={...newState[action.channel_id]}
             newState[action.channel_id][action.message.id]=action.message
             return newState
-        // case EDIT_CHANNEL_MESSAGE:
-        //     newState = {...state}
-        //     newState[action.channel_id]={...newState[action.channel_id]}
-        //     console.log(newState[action.channel_id][action.message.id] === action.message)
-        //     newState[action.channel_id][action.message.id]=action.message
-        //     return newState
         case DELETE_CHANNEL_MESSAGE:
             newState = {...state}
             delete newState[action.channel_id][action.channel_message_id]
