@@ -6,13 +6,10 @@ import ReactQuill from 'react-quill'; // ES6
 
 import {editChannelMessage, deleteChannelMessage} from '../../../store/channel_messages'
 import {editDirectMessage, deleteDirectMessage} from '../../../store/direct_messages'
-// import { getDMUser } from '../../../store/dm_people';
 import UserProfileModal from '../UserProfile/UserProfileModal'
-// import ava from '../../../images/ava.png';
 
 /*************************** HELPER COMPONENT ***************************/
 const EditDelete = ({editOn, setEditOn, deleteOn, setDeleteOn, msg, date, modules, formats}) =>{
-	// const dms = useSelector(state => state.dm_users);
     const dispatch = useDispatch()
     const [currentMessage, setCurrentMessage] = useState(msg.message)
 
@@ -22,7 +19,6 @@ const EditDelete = ({editOn, setEditOn, deleteOn, setDeleteOn, msg, date, module
         e.preventDefault();
         let textField = textInput.current.state.value
         if(textField && textField !== "<br>"){
-            // let editor = textInput.current.getEditor()
 			let text = textField.slice(0, 2) + " class='chat__text' " + textField.slice(2)
             if (msg.recipient_id && text!==currentMessage){
                 dispatch(editDirectMessage(msg.id, text))
@@ -66,8 +62,6 @@ const EditDelete = ({editOn, setEditOn, deleteOn, setDeleteOn, msg, date, module
             </div>
         )
     } else {
-		// const div = document.createElement("div")
-		// div.innerHTML = currentMessage;
         return(
             <div className="chat__other-info">
                 <div className="chat__other-header">
@@ -76,7 +70,6 @@ const EditDelete = ({editOn, setEditOn, deleteOn, setDeleteOn, msg, date, module
                 </div>
                 <div className="chat__other-text">
 					<div dangerouslySetInnerHTML={{ __html: currentMessage }}></div>
-                    {/* <div className="chat__text">{div}</div> */}
                 </div>
             </div>
         )

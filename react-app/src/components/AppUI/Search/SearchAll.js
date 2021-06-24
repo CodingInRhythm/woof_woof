@@ -40,7 +40,6 @@ const SearchAll = () => {
           <ul className="search-container">
             {matchingEles.map((ele, index) => {
               return (
-                // <li className="use_ele channel_ele search-item" key={index}>
                 <Link
                   key={index}
                   onClick={(e) => setSearchAllParam('')}
@@ -68,7 +67,6 @@ const SearchAll = () => {
                     </span>
                   )}
                 </Link>
-                // </li>
               );
             })}
           </ul>

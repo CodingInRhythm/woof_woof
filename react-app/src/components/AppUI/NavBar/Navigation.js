@@ -7,9 +7,6 @@ import SearchAll from '../Search/SearchAll'
 import UserProfileModal from '../UserProfile/UserProfileModal'
 
 function Navigation({ isLoaded }) {
-	// const handleSearch = e => {
-	// 	e.preventDefault();
-	// };
 	const user = useSelector(state => state.session.user);
 
 	return (
@@ -18,10 +15,6 @@ function Navigation({ isLoaded }) {
         <i className="fas fa-home"></i>
       </NavLink>
       <SearchAll />
-      {/* <form className="nav-search" onSubmit={handleSearch}>
-
-				<input type="text" placeholder="Search..." className="nav-searchBar" />
-			</form> */}
       <div className="username_logo">
         <span className="username">{user.username}</span>
         <div className="nav-logo">
