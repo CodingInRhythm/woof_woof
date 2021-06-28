@@ -72,10 +72,9 @@ const MainInterface = () => {
 						socket.emit('join', {room:hashingRoom(userId, parseInt(data.sender_id))})
 						await dispatch(getDMUsers())
 						await dispatch(getDirectMessages(data.sender_id))
-	
+
 				})()
 				} else if (parseInt(data.sender_id) === userId){
-					// console.log("right before dispatch")
 					socket.emit('join', {room:hashingRoom(userId, parseInt(data.recipient_id))})
 					dispatch(getDirectMessages(data.recipient_id))
 				}
