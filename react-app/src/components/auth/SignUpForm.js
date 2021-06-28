@@ -4,6 +4,7 @@ import { Redirect, NavLink, useHistory } from 'react-router-dom';
 import { signUp } from '../../store/session';
 
 const SignUpForm = () => {
+	const [errors, setErrors] = useState([]);
 	const [username, setUsername] = useState('');
 	const [firstName, setFirstName] = useState('');
 	const [lastName, setLastName] = useState('');
@@ -17,9 +18,18 @@ const SignUpForm = () => {
 
 	const onSignUp = async e => {
 		e.preventDefault();
-		if (password === repeatPassword) {
-			await dispatch(signUp(username, firstName, lastName, email, photo, password))
-		}
+    (async()=>{
+      if (password === repeatPassword) {
+        const data = await dispatch(signUp(username, firstName, lastName, email, photo, password))
+        if (data.errors) {
+          setErrors(data.errors);
+          return
+        }
+        history.push('/dms/all');
+      } else{
+        setErrors(['password: Passwords do not match'])
+      }
+    })()
 	};
 
 	const updateUsername = e => {
@@ -71,6 +81,16 @@ const SignUpForm = () => {
           <h1 className="login-form-header">Join Woof Woof!</h1>
 
           <form className="signupform" onSubmit={onSignUp}>
+            {errors.length>0 && (
+              <div className="errorsContainer">
+                <span>The following errors occurred:</span>
+                <ul className="errorsList">
+                  {errors.map((error, idx) => (
+                    <li key={idx}>{error}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
             <div>
               <input
                 name="username"
@@ -130,7 +150,7 @@ const SignUpForm = () => {
                 hidden
               />
 
-              <label for="actual-btn" className="photo-upload--btn">
+              <label htmlFor="actual-btn" className="photo-upload--btn">
                 <span id="actual-btn-text">Choose File</span>
               </label>
             </div>

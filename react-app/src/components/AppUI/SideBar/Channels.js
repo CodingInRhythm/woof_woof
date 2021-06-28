@@ -74,12 +74,12 @@ const Nav = ({ channel, editOn, setEditOn }) => {
 				></input>
 				<button className="channels__add--btn" onClick={handleEditChannel}>
 					<span className="channels__edit-btn">
-						<i class="fas fa-pen-square"></i>
+						<i className="fas fa-pen-square"></i>
 					</span>
 				</button>
 				<button className="channels__add--btn" onClick={() => setEditOn(null)}>
 					<span className="channels__edit-cancel">
-						<i class="fas fa-ban"></i>
+						<i className="fas fa-ban"></i>
 					</span>
 				</button>
 			</li>

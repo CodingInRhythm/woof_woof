@@ -5,6 +5,9 @@ import { logout } from "../../store/session";
 const LogoutButton = ({socket}) => {
   const dispatch = useDispatch();
   const onLogout = async (e) => {
+    if(localStorage.getItem('lastPage')){
+      localStorage.removeItem('lastPage')
+    }
     socket.disconnect()
     dispatch(logout());
   };

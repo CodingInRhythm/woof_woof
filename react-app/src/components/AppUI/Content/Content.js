@@ -75,6 +75,8 @@ const Content = ({ isAddDM, socket }) => {
 
 	const textInput = useRef(null);
 
+    localStorage.setItem('lastPage', location.pathname)
+
 	let slice;
 
 	if (location.pathname.includes("channel")) {
@@ -212,7 +214,6 @@ const Content = ({ isAddDM, socket }) => {
 		if (localStorage.getItem("refreshPage")){
 			let url = localStorage.getItem("refreshPage")
 			localStorage.removeItem("refreshPage")
-			localStorage.removeItem("lastPage")
 			history.push(url);
 		}
 		messageItem = Object.keys(messages).map((msg, idx) => {

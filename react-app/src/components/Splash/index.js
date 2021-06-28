@@ -122,7 +122,7 @@ function Splash(){
     <div className="splash_container" id="splash_container">
       <nav className="splash_nav">
         <div className="splash_nav-left">
-          <i class="fas fa-dog"></i>
+          <i className="fas fa-dog"></i>
           <h1 className="nav_title">Woof Woof</h1>
         </div>
         <div className="splash_nav-right">
@@ -143,7 +143,7 @@ function Splash(){
       </nav>
       <nav className="splash_scrolling_nav hidden" id="splash_scrolling_nav">
         <div className="splash_scrolling_nav-left" onClick={scrollToTop}>
-          <i class="fas fa-dog_green fa-dog"></i>
+          <i className="fas fa-dog_green fa-dog"></i>
           <h1 className="splash_scolling_nav_title">Woof Woof</h1>
         </div>
         <div className="splash_scrolling_nav-right">

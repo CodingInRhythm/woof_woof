@@ -55,6 +55,9 @@ const UserProfile = ({profileUser, setShowModal})=>{
     //Logout
     const onLogout = async e => {
       e.preventDefault();
+      if(localStorage.getItem('lastPage')){
+        localStorage.removeItem('lastPage')
+      }
       await dispatch(logout())
       history.push('/')
     }

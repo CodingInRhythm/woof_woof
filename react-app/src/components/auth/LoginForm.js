@@ -12,12 +12,16 @@ const LoginForm = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	const onLogin = async e => {
+	const onLogin = e => {
 		e.preventDefault();
-		const data = await dispatch(login(credential, password));
-		if (data.errors) {
-			setErrors(data.errors);
-		}
+    (async()=>{
+      const data = await dispatch(login(credential, password));
+      if (data.errors) {
+        setErrors(data.errors);
+        return
+      }
+      history.push('/dms/all');
+    })()
 	};
 
 	const updateCredential = e => {
@@ -32,9 +36,12 @@ const LoginForm = () => {
 		history.push('/');
 	};
 
-	const demoClick = async e => {
+	const demoClick = e => {
 		e.preventDefault();
-		await dispatch(login('demo@aa.io', 'password'));
+    (async()=>{
+      await dispatch(login('demo@aa.io', 'password'));
+      history.push('/dms/all');
+    })()
 	};
 
 	if (user) {
@@ -46,10 +53,10 @@ const LoginForm = () => {
       <div className="login-container">
         <div></div>
         <div className="loginWrap">
-          <i onClick={logoClick} id="fa-dog_green-large_login" class="fas fa-dog"></i>
+          <i onClick={logoClick} id="fa-dog_green-large_login" className="fas fa-dog"></i>
           <h1 className="login-form-header">Sign in to Woof Woof</h1>
           <form onSubmit={onLogin}>
-            {errors.length ? (
+            {errors.length>0 && (
               <div className="errorsContainer">
                 <span>The following errors occurred:</span>
                 <ul className="errorsList">
@@ -58,8 +65,6 @@ const LoginForm = () => {
                   ))}
                 </ul>
               </div>
-            ) : (
-              <div></div>
             )}
             <input
               id="credential"

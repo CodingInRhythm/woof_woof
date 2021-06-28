@@ -53,7 +53,7 @@ export const login = (credential, password) => async (dispatch)  => {
   }
 
   dispatch(setUser(data))
-  return {};
+  return data.id;
 }
 
 export const logout = () => async (dispatch) => {
