@@ -9,6 +9,15 @@ import { ContextMenuWrapper, useContextMenuTrigger } from 'react-context-menu-wr
 import MyContextMenu from './ContextMenu';
 import { editChannel } from '../../../store/channels';
 
+const hashingRoom = (val1, recipientId) => {
+	if (!recipientId) {
+		return `Channel: ${val1}`
+	}
+	else {
+		return `DM${val1 < recipientId ? val1 : recipientId}${val1 > recipientId ? val1 : recipientId}`;
+	}
+}
+
 const Nav = ({ channel, editOn, setEditOn }) => {
 	const [isClicked, setIsClicked] = useState(false);
 	const [isLoaded, setIsLoaded] = useState(false);
@@ -101,7 +110,7 @@ const Nav = ({ channel, editOn, setEditOn }) => {
 	}
 };
 
-const Channels = () => {
+const Channels = ({socket}) => {
 	const channels = useSelector(state => state.channels);
 
 	let arr = [];
@@ -126,9 +135,12 @@ const Channels = () => {
 			is_channel: true,
 		};
 		if (newChannelName !== '') {
-			dispatch(addNewChannel(payload));
-			setHidden(!isHidden);
-			setChannelName('');
+			(async()=>{
+				const newChannel = await dispatch(addNewChannel(payload));
+				socket.emit('join', {room:hashingRoom(newChannel.id)})
+				setHidden(!isHidden);
+				setChannelName('');
+			})()
 		}
 	};
 

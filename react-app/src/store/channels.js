@@ -56,7 +56,7 @@ export const addNewChannel = channel_obj => async dispatch => {
 	if (response.ok) {
 		const channel = await response.json();
 		dispatch(addChannel(channel.channel));
-		return channel;
+		return channel.channel;
 	} else {
 		throw response;
 	}
