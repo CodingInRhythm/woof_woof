@@ -125,7 +125,7 @@
 	display: none;
 }
 
-.dm__li:hover .x {
+.remove-dm:hover .x {
 	display:block;
 
 }
