@@ -23,7 +23,7 @@ const DMPerson = ({ dmusers, recipient }) => {
   if (directMessageObj[recipient.id] !== undefined) {
     directMessageChannel = directMessageObj[recipient.id];
   }
-
+  console.log(recipient, directMessageChannel)
   const handleClick = () => {
     if (!isClicked) {
       dispatch(getDirectMessages(recipient.id));
@@ -54,6 +54,12 @@ const DMPerson = ({ dmusers, recipient }) => {
     if (location.pathname !== `/dm/${recipient.id}` && isLoaded) {
       setNewMessage(true);
       setNumberMessages(numberMessages + 1);
+    }
+    if (window.localStorage.getItem('newMsg') === recipient.id.toString()) {
+      console.log('Testing localstorage retrieval')
+      setNewMessage(true)
+      setNumberMessages(numberMessages + 1)
+      window.localStorage.removeItem('newMsg')
     }
     setIsLoaded(true);
   }, [directMessageChannel]);
