@@ -67,7 +67,6 @@ button:hover{
 }
 
 #modal-content {
-  transform: translateY(-20%);
   position: absolute;
   background-color: var(--profileBackground);
   border-radius: 10px;

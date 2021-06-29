@@ -9,7 +9,7 @@ import {useUserSearch} from '../../../context/UserSearch'
 const SideBar = ({ setRoom }) => {
 	const history = useHistory()
 	const user = useSelector(state=>state.session.user)
-	const {searchParam, setSearchParam, matchingUsers, setMatchingUsers} = useUserSearch()
+	const {setSearchParam, setMatchingUsers} = useUserSearch()
 	const resetSearch = () => {
 		setSearchParam("")
 		setMatchingUsers("")
