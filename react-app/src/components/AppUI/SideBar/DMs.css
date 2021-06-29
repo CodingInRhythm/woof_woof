@@ -118,20 +118,19 @@
 	margin-left: auto;
 	z-index: 100;
 	text-align: center;
-	
+
 }
 
 .x {
 	display: none;
 }
 
-.remove-dm:hover .x {
+.dm__li:hover .x {
 	display:block;
-	
+
 }
 
 .dm__li {
 	display: flex;
 	flex-direction: row;
 }
-
