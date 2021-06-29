@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect, NavLink, useHistory } from 'react-router-dom';
-import { signUp } from '../../store/session';
+import { login, signUp } from '../../store/session';
 
 const SignUpForm = () => {
 	const [errors, setErrors] = useState([]);
@@ -58,6 +58,14 @@ const SignUpForm = () => {
 
 	const updateRepeatPassword = e => {
 		setRepeatPassword(e.target.value);
+	};
+
+	const demoClick = e => {
+		e.preventDefault();
+    (async()=>{
+      await dispatch(login('demo@aa.io', 'password'));
+      history.push('/dms/all');
+    })()
 	};
 
 	const logoClick = () => {
@@ -179,6 +187,9 @@ const SignUpForm = () => {
             </div>
             <button type="submit" id="submitButton" className="login-btn">
               Sign Up
+            </button>
+			<button id="demoButton" className="demo-btn" onClick={demoClick}>
+              Demo Login
             </button>
           </form>
         </div>
