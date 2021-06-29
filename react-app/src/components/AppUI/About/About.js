@@ -16,7 +16,7 @@ const About = ()=>{
     return(
         <div className='about__div'>
             <h2 className='about__header'>Developers</h2>
-            <a className='about__repo' href="https://github.com/CodingInRhythm/woof_woof" target="_blank" rel="noopener noreferrer"><h2>(Repo)</h2></a>
+            <h2 className='about__repo'><a href="https://github.com/CodingInRhythm/woof_woof" target="_blank" rel="noopener noreferrer">(WoofWoof Repo)</a></h2>
             <div className="about_main-3-creator" id="about-nurs">
                 <img src={slack_nurs} alt="nurs-profile"></img>
                 <h3>Nurs Asanov</h3>
