@@ -134,3 +134,7 @@
 	display: flex;
 	flex-direction: row;
 }
+
+.dm__li:hover .x{
+	display: block;
+}

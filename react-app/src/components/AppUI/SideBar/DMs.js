@@ -55,6 +55,11 @@ const DMPerson = ({ dmusers, recipient }) => {
       setNewMessage(true);
       setNumberMessages(numberMessages + 1);
     }
+    if (window.localStorage.getItem('newMsg') === recipient.id.toString()) {
+      setNewMessage(true)
+      setNumberMessages(numberMessages + 1)
+      window.localStorage.removeItem('newMsg')
+    }
     setIsLoaded(true);
   }, [directMessageChannel]);
 
