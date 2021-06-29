@@ -259,8 +259,9 @@ function Splash(){
               </div>
               <div className="splash_main-3-creator" id="creator-brent">
                 <img src={github_brent} alt="brent-profile"></img>
-                <h3>Brent Arimoto</h3>
-                <a href="https://github.com/brentarimoto">GitHub</a>
+                <a href='https://brentarimoto.github.io/' target="_blank" rel="noreferrer"><h3>Brent Arimoto</h3></a>
+                <a href="https://www.linkedin.com/in/brent-arimoto/" target="_blank" rel="noreferrer">LinkedIn</a>
+                <a href="https://github.com/brentarimoto" target="_blank" rel="noreferrer">GitHub</a>
               </div>
               <div className="splash_main-3-creator" id="creator-zane">
                 <img src={linkedin_zane} alt="zane-profile"></img>
