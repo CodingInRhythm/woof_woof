@@ -2,16 +2,24 @@ import React from 'react';
 import './ContextMenu.css';
 import { useContextMenuEvent } from 'react-context-menu-wrapper';
 import { useDispatch } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
 import { deleteChannel } from '../../../store/channels';
 
 const MyContextMenu = ({ setEditOn }) => {
 	const dispatch = useDispatch();
+	const history= useHistory()
+	const {id} = useParams()
 	const menuEvent = useContextMenuEvent();
 
 	if (!menuEvent || !menuEvent.data) return null;
 
 	const handleDeleteChannel = () => {
-		dispatch(deleteChannel(menuEvent.data.id));
+		(async()=>{
+			await dispatch(deleteChannel(menuEvent.data.id));
+			if(parseInt(id)===menuEvent.data.id){
+				history.push('/dms/all')
+			}
+		})()
 	};
 
 	const toggleEditChannel = () => {

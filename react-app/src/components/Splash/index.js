@@ -249,8 +249,9 @@ function Splash(){
               <h2>Created By</h2>
               <div className="splash_main-3-creator" id="creator-nurs">
                 <img src={slack_nurs} alt="nurs-profile"></img>
-                <h3>Nurs Asanov</h3>
-                <a href="https://github.com/nasanov">GitHub</a>
+                <a href='https://nasanov.github.io/' target="_blank" rel="noopener noreferrer"><h3>Nurs Asanov</h3></a>
+                <a href="https://www.linkedin.com/in/nursultan-asanov/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://github.com/nasanov" target="_blank" rel="noopener noreferrer">GitHub</a>
               </div>
               <div className="splash_main-3-creator" id="creator-alex">
                 <img src={github_alex} alt="alex-profile"></img>
@@ -261,17 +262,20 @@ function Splash(){
                 >
                   <h3>Alex Clough</h3>
                 </a>
-                <a href="https://github.com/CodingInRhythm">GitHub</a>
+                <a href="https://www.linkedin.com/in/alex-clough-710546200/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://github.com/CodingInRhythm" target="_blank" rel="noopener noreferrer">GitHub</a>
               </div>
               <div className="splash_main-3-creator" id="creator-brent">
                 <img src={github_brent} alt="brent-profile"></img>
-                <h3>Brent Arimoto</h3>
-                <a href="https://github.com/brentarimoto">GitHub</a>
+                <a href='https://brentarimoto.github.io/' target="_blank" rel="noopener noreferrer"><h3>Brent Arimoto</h3></a>
+                <a href="https://www.linkedin.com/in/brent-arimoto/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://github.com/brentarimoto" target="_blank" rel="noopener noreferrer">GitHub</a>
               </div>
               <div className="splash_main-3-creator" id="creator-zane">
                 <img src={linkedin_zane} alt="zane-profile"></img>
-                <h3>Zane Preudhomme</h3>
-                <a href="https://github.com/zpreudhomme">GitHub</a>
+                <a href='https://zpreudhomme.github.io/' target="_blank" rel="noopener noreferrer"><h3>Zane Preudhomme</h3></a>
+                <a href="https://www.linkedin.com/in/zane-preudhomme-4473a8128/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://github.com/zpreudhomme" target="_blank" rel="noopener noreferrer">GitHub</a>
               </div>
             </div>
           </Animator>

@@ -154,11 +154,14 @@ const Content = ({ isAddDM, socket }) => {
 	}
 
 	const handleJoin =(e) => {
-		const channel_obj = {
-			user_id: user.id,
-			channel_id: id
-		}
-		dispatch(joinChannel(channel_obj))
+		(async()=>{
+			const channel_obj = {
+				user_id: user.id,
+				channel_id: id
+			}
+			await dispatch(joinChannel(channel_obj))
+			socket.emit('join', {room:hashingRoom(id)})
+		})()
 	}
 
 	/******************** USE EFFECTS ********************/

@@ -6,10 +6,10 @@ import DMs from './DMs';
 import Channels from './Channels';
 import {useUserSearch} from '../../../context/UserSearch'
 
-const SideBar = ({ setRoom }) => {
+const SideBar = ({ setRoom, socket }) => {
 	const history = useHistory()
 	const user = useSelector(state=>state.session.user)
-	const {searchParam, setSearchParam, matchingUsers, setMatchingUsers} = useUserSearch()
+	const {setSearchParam, setMatchingUsers} = useUserSearch()
 	const resetSearch = () => {
 		setSearchParam("")
 		setMatchingUsers("")
@@ -34,7 +34,7 @@ const SideBar = ({ setRoom }) => {
 					<span className="threads__icon"></span> All DMs
 				</div>
 			</div>
-			<Channels />
+			<Channels socket={socket}/>
 			<DMs />
 		</div>
 	);

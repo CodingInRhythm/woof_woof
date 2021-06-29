@@ -35,7 +35,7 @@ const DMPerson = ({ dmusers, recipient }) => {
   };
   const removeDM = (e) => {
 	  e.preventDefault()
-   
+
     window.localStorage.setItem(`${recipient.id}`, `${recipient.id}`);
 
 	return history.push("/dms/all")
@@ -64,7 +64,11 @@ const DMPerson = ({ dmusers, recipient }) => {
   }, [directMessageChannel]);
 
   return (
-    <li className="dm__li" key={recipient.id}>
+    <li className={
+		`dm__li` +
+		" " +
+		getNavLinkClass(`/dm/${recipient.id}`)
+	  } key={recipient.id}>
       <button
         id={`dm_${recipient.id}`}
         onClick={handleClick}

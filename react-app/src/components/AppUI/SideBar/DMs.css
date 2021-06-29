@@ -118,7 +118,7 @@
 	margin-left: auto;
 	z-index: 100;
 	text-align: center;
-	
+
 }
 
 .x {
@@ -127,7 +127,7 @@
 
 .remove-dm:hover .x {
 	display:block;
-	
+
 }
 
 .dm__li {
@@ -138,4 +138,3 @@
 .dm__li:hover .x{
 	display: block;
 }
-

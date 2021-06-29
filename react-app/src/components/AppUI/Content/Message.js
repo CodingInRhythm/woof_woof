@@ -11,7 +11,7 @@ import UserProfileModal from '../UserProfile/UserProfileModal'
 /*************************** HELPER COMPONENT ***************************/
 const EditDelete = ({editOn, setEditOn, deleteOn, setDeleteOn, msg, date, modules, formats}) =>{
     const dispatch = useDispatch()
-    const [currentMessage, setCurrentMessage] = useState(msg.message)
+    const [currentMessage] = useState(msg.message)
 
     const textInput = useRef(null)
 

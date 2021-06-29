@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import './Navigation.css';
 import { useSelector } from 'react-redux';
 import SearchAll from '../Search/SearchAll'
+import AboutModal from '../About/AboutModal';
 
 import UserProfileModal from '../UserProfile/UserProfileModal'
 
@@ -11,9 +12,12 @@ function Navigation({ isLoaded }) {
 
 	return (
     <nav className="main-nav">
-      <NavLink to="/" className='main-nav-home'>
-        <i className="fas fa-home"></i>
-      </NavLink>
+      <div className='main-nav-home__div'>
+        <NavLink to="/" className='main-nav-home'>
+          <i className="fas fa-home"></i>
+        </NavLink>
+        <AboutModal />
+      </div>
       <SearchAll />
       <div className="username_logo">
         <span className="username">{user.username}</span>

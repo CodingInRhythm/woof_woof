@@ -114,7 +114,7 @@ const MainInterface = () => {
 		<>
 			<Navigation socket={socket}/>
 			<div className="main-container">
-				<SideBar />
+				<SideBar socket={socket}/>
 				<Content isAddDM={isAddDM} socket={socket}/>
 			</div>
 		</>

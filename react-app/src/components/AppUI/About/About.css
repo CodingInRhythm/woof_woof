@@ -1,0 +1,105 @@
+.about__div{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 25px 20px 1fr 1fr;
+    grid-template-areas:
+    "header header"
+    "repo repo"
+    "nurs alex"
+    "brent zane";
+	padding: 20px 5px;
+}
+
+.about__header{
+    grid-area: header;
+    color: var(--primaryColorDark);
+    padding-bottom: 10px;
+    font-size: 25px;
+    font-weight: bolder;
+    text-decoration: underline;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about__repo{
+    grid-area: repo;
+    color: var(--primaryColorDark);
+    font-size: 25px;
+    font-weight: bolder;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#about-nurs{
+    grid-area: nurs;
+}
+
+#about-alex{
+    grid-area: alex;
+
+}
+
+#about-brent{
+    grid-area: brent;
+}
+
+#about-zane{
+    grid-area: zane;
+}
+
+.about_main-3-creator{
+    color: var(--primaryColor);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+
+.about_main-3-creator h3{
+    color: var(--primaryColor);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -1px;
+    font-size: 25px;
+    margin: 15px 0px;
+}
+
+.about_main-3-creator img{
+    width: 125px;
+    border-radius: 50%;
+    margin-top: 15px;
+}
+
+.about_main-3-creator a{
+    color: var(--secondaryColor);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.12;
+    letter-spacing: -0.5px;
+}
+
+.about_main-3-creator a:hover{
+    color: #ecb22e
+}
+
+.about_main-3-creator a h3:hover{
+    color: #ecb22e
+}
+
+
+.about_main-3-links{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.about_main-3-links i{
+    font-size: 150%;
+}
