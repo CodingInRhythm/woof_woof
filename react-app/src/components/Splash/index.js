@@ -254,7 +254,13 @@ function Splash(){
               </div>
               <div className="splash_main-3-creator" id="creator-alex">
                 <img src={github_alex} alt="alex-profile"></img>
-                <h3>Alex Clough</h3>
+                <a
+                  href="https://codinginrhythm.github.io/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <h3>Alex Clough</h3>
+                </a>
                 <a href="https://github.com/CodingInRhythm">GitHub</a>
               </div>
               <div className="splash_main-3-creator" id="creator-brent">
