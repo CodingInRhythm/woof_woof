@@ -61,6 +61,7 @@ const MainInterface = () => {
 				// when we recieve a dm, add it into our directMessages object in redux
 				if (dm.recipient_id === userId){
 					window.localStorage.removeItem(dm.sender_id.toString())
+					window.localStorage.setItem('newMsg', dm.sender_id)
 					dispatch(addDirectMessage(dm.sender_id, dm))
 				} else{
 					dispatch(addDirectMessage(dm.recipient_id, dm))
