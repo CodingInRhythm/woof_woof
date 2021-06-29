@@ -43,7 +43,7 @@ const About = ()=>{
             </div>
             <div className="about_main-3-creator" id="about-zane">
                 <img src={linkedin_zane} alt="zane-profile"></img>
-                <h3>Zane Preudhomme</h3>
+                <a href='https://zpreudhomme.github.io/' target="_blank" rel="noopener noreferrer"><h3>Zane Preudhomme</h3></a>
                 <div className="about_main-3-links">
                     <a href="https://www.linkedin.com/in/zane-preudhomme-4473a8128/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
                     <a href="https://github.com/zpreudhomme"><i className="fab fa-github"></i></a>

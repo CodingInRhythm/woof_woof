@@ -267,8 +267,8 @@ function Splash(){
               </div>
               <div className="splash_main-3-creator" id="creator-zane">
                 <img src={linkedin_zane} alt="zane-profile"></img>
-                <h3>Zane Preudhomme</h3>
-                <a href="https://www.linkedin.com/in/brent-arimoto/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href='https://zpreudhomme.github.io/' target="_blank" rel="noopener noreferrer"><h3>Zane Preudhomme</h3></a>
+                <a href="https://www.linkedin.com/in/zane-preudhomme-4473a8128/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                 <a href="https://github.com/zpreudhomme" target="_blank" rel="noopener noreferrer">GitHub</a>
               </div>
             </div>
