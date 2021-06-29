@@ -19,7 +19,7 @@ const About = ()=>{
             <h2 className='about__repo'><a href="https://github.com/CodingInRhythm/woof_woof" target="_blank" rel="noopener noreferrer">(WoofWoof Repo)</a></h2>
             <div className="about_main-3-creator" id="about-nurs">
                 <img src={slack_nurs} alt="nurs-profile"></img>
-                <h3>Nurs Asanov</h3>
+				<a href='https://nasanov.github.io/' target="_blank" rel="noopener noreferrer"><h3>Nurs Asanov</h3></a>
                 <div className="about_main-3-links">
                     <a href="https://www.linkedin.com/in/nursultan-asanov/" target="_blank" rel="noopener noreferrer"><i className="fab fa-linkedin"></i></a>
                     <a href="https://github.com/nasanov"><i className="fab fa-github"></i></a>
