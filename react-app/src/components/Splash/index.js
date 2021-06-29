@@ -250,12 +250,14 @@ function Splash(){
               <div className="splash_main-3-creator" id="creator-nurs">
                 <img src={slack_nurs} alt="nurs-profile"></img>
                 <h3>Nurs Asanov</h3>
-                <a href="https://github.com/nasanov">GitHub</a>
+                <a href="https://www.linkedin.com/in/brent-arimoto/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://github.com/nasanov" target="_blank" rel="noopener noreferrer">GitHub</a>
               </div>
               <div className="splash_main-3-creator" id="creator-alex">
                 <img src={github_alex} alt="alex-profile"></img>
                 <h3>Alex Clough</h3>
-                <a href="https://github.com/CodingInRhythm">GitHub</a>
+                <a href="https://www.linkedin.com/in/brent-arimoto/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://github.com/CodingInRhythm" target="_blank" rel="noopener noreferrer">GitHub</a>
               </div>
               <div className="splash_main-3-creator" id="creator-brent">
                 <img src={github_brent} alt="brent-profile"></img>
@@ -266,7 +268,8 @@ function Splash(){
               <div className="splash_main-3-creator" id="creator-zane">
                 <img src={linkedin_zane} alt="zane-profile"></img>
                 <h3>Zane Preudhomme</h3>
-                <a href="https://github.com/zpreudhomme">GitHub</a>
+                <a href="https://www.linkedin.com/in/brent-arimoto/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://github.com/zpreudhomme" target="_blank" rel="noopener noreferrer">GitHub</a>
               </div>
             </div>
           </Animator>
