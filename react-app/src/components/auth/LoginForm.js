@@ -55,6 +55,12 @@ const LoginForm = () => {
         <div className="loginWrap">
           <i onClick={logoClick} id="fa-dog_green-large_login" className="fas fa-dog"></i>
           <h1 className="login-form-header">Sign in to Woof Woof</h1>
+		  <div className="signup-link">
+			<p className="switchLinkName">New to Woof Woof?</p>
+			<NavLink to="/sign-up" className="switchLink">
+				Create an account
+			</NavLink>
+          </div>
           <form onSubmit={onLogin}>
             {errors.length>0 && (
               <div className="errorsContainer">
@@ -91,12 +97,7 @@ const LoginForm = () => {
             </button>
           </form>
         </div>
-        <div className="signup-link">
-          <p className="switchLinkName">New to Woof Woof?</p>
-          <NavLink to="/sign-up" className="switchLink">
-            Create an account
-          </NavLink>
-        </div>
+
       </div>
     </>
   );

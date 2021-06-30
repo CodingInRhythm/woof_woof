@@ -4,7 +4,6 @@
 	font-size: 2.6em;
 	margin-top: 10px;
 	color: #1b1b1b;
-	margin-bottom: 10px;
 	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
@@ -72,13 +71,11 @@
 .switchLinkName {
 	font-size: 14px;
 	text-decoration: none;
-	margin-right: 25px;
 	margin-bottom: 0px;
 }
 .switchLink {
 	font-size: 14px;
 	color: #186dee;
-	margin-right: 25px;
 	text-decoration: none;
 	font-weight: bold;
 }
@@ -114,8 +111,7 @@
 	margin-bottom: 20px;
 }
 
-
-#fa-dog_green-large_login{ 
+#fa-dog_green-large_login {
 	color: var(--primaryColor);
 	height: 50%;
 	font-size: 3.5em;
@@ -123,13 +119,14 @@
 	margin-bottom: 20px;
 }
 
-.slack_logo:hover{
+.slack_logo:hover {
 	cursor: pointer;
 }
 
 .signup-link {
-	margin-top: 90px;
-	text-align: end;
+	/* margin-top: 90px; */
+	text-align: center;
+	margin-bottom: 20px;
 }
 
 .photo-upload--form {
@@ -182,7 +179,7 @@
 }
 
 #actual-btn-text {
-	font-size: .75rem;
+	font-size: 0.75rem;
 }
 
 .signupform {

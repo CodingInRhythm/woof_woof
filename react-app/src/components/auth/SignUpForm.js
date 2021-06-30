@@ -87,7 +87,12 @@ const SignUpForm = () => {
             className="fas fa-dog"
           ></i>
           <h1 className="login-form-header">Join Woof Woof!</h1>
-
+		  <div className="signup-link">
+			<p className="switchLinkName">Already using Woof Woof?</p>
+			<NavLink to="/login" className="switchLink">
+				Sign in here
+			</NavLink>
+          </div>
           <form className="signupform" onSubmit={onSignUp}>
             {errors.length>0 && (
               <div className="errorsContainer">
@@ -193,12 +198,7 @@ const SignUpForm = () => {
             </button>
           </form>
         </div>
-        <div className="signup-link">
-          <p className="switchLinkName">Already using Woof Woof?</p>
-          <NavLink to="/login" className="switchLink">
-            Sign in here
-          </NavLink>
-        </div>
+
       </div>
     </>
   );
