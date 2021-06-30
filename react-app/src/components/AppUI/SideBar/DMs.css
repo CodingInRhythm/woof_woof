@@ -38,6 +38,15 @@
 	opacity: 0.6;
 }
 
+.dm__heading-add{
+	font-size: 100%;
+	display: none;
+}
+
+.dm__heading:hover .dm__heading-add{
+	display: block;
+}
+
 .dm__button {
 	padding: 4px 0 4px 18px;
 	display: flex;

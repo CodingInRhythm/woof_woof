@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./DMs.css";
-import { useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
   ContextMenuWrapper,
@@ -135,6 +135,7 @@ const DMs = () => {
         <span>
           Direct messages <span className="dm__number">({arr.length})</span>
         </span>
+        <Link to='/dms/all'><i className="dm__heading-add fas fa-plus"></i></Link>
       </h2>
 
       <ul className="dm__list">
