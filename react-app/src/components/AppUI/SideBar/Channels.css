@@ -54,7 +54,7 @@
 
 .channels__button:hover,
 .threads__items:hover {
-	background:  var(--sideBarHover);
+	background: var(--sideBarHover);
 	cursor: pointer;
 }
 
@@ -131,4 +131,10 @@
 .channels__edit-btn:hover,
 .channels__edit-cancel:hover {
 	opacity: 1;
+}
+
+.channels__button:hover {
+	background-color: #038edf;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
 }

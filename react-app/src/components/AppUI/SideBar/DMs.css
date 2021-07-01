@@ -70,6 +70,8 @@
 .dm__button--active:hover {
 	background: #038edf;
 	color: #ffffff;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
 }
 
 .dm__add--plussign {
@@ -109,16 +111,15 @@
 }
 .remove-dm {
 	line-height: 1.7;
-	border-radius: 50%;
+	/* border-radius: 50%; */
 	color: pink;
-	height: 25px;
+	/* height: 25px; */
 	width: 25px;
 	font-size: 14px;
 	font-weight: 600;
 	margin-left: auto;
 	z-index: 100;
 	text-align: center;
-
 }
 
 .x {
@@ -126,8 +127,7 @@
 }
 
 .remove-dm:hover .x {
-	display:block;
-
+	display: block;
 }
 
 .dm__li {
@@ -135,6 +135,19 @@
 	flex-direction: row;
 }
 
-.dm__li:hover .x{
+.dm__li:hover .x {
 	display: block;
+}
+
+.dm__li:hover .dm__button {
+	background-color: #038edf;
+	border-radius: 0px;
+}
+.dm__li:hover .remove-dm {
+	background-color: #038edf;
+	padding: 4px 0 4px 0px;
+	align-items: center;
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	line-height: 1.5;
 }
