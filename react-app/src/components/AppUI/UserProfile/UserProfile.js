@@ -32,25 +32,27 @@ const UserProfile = ({profileUser, setShowModal})=>{
 
     const isUser = profileUser.id === user.id
 
-    const handleSubmit= async (e)=>{
+    const handleSubmit= (e)=>{
         e.preventDefault();
-        const userInfo = {
-            id:user.id,
-            firstname,
-            lastname,
-            username,
-            email,
-            profile_image:photo,
-        }
+        (async()=>{
+            const userInfo = {
+                id:user.id,
+                firstname,
+                lastname,
+                username,
+                email,
+                profile_image:photo,
+            }
 
-        let editedUser = await dispatch(editUser(userInfo))
+            let editedUser = await dispatch(editUser(userInfo))
 
-        if (editedUser.username) {
-            setShowModal(false)
-        } else {
-            setErrors(editedUser.errors)
+            if (editedUser.username) {
+                setShowModal(false)
+            } else {
+                setErrors(editedUser.errors)
+            }
+        })()
         }
-    }
 
     //Logout
     const onLogout = async e => {
