@@ -282,6 +282,14 @@ function Splash(){
         </ScrollPage>
       </ScrollContainer>
       <br />
+      <div className="splash_main-5 splash_page-footer">
+        <div className="splash_page-footer-copyright">
+          Copyright <i className="far fa-copyright"></i> 2021 WoofWoof.inc
+        </div>
+        <div className="splash_page-footer-logo">
+          <i className="fas fa-dog"></i>
+        </div>
+      </div>
     </div>
   );
 }

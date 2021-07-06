@@ -68,7 +68,7 @@
 .signin_btn:hover{
     border: 2px solid white;
 }
-
+6
 .tryout_btn{
     background-color: white;
     color: var(--primaryColor)
@@ -417,4 +417,24 @@
 
 .fa-dog_green {
     color: var(--primaryColor);
+}
+
+
+/*** Footer ***/
+.splash_page-footer{
+    width: 100%;
+    height: 50px;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.splash_page-footer-copyright{
+    color: white;
+}
+
+.splash_page-footer-logo{
+    color: white;
 }
