@@ -9,7 +9,7 @@ import "./Splash.css"
 import { logout } from '../../store/session'
 
 //Image Imports
-import github_alex from "../../images/creator_photos/github_alex.png"
+import alex_headshot from "../../images/creator_photos/alex_headshot.jpg"
 import github_brent from "../../images/creator_photos/github_brent.jpg"
 import slack_nurs from "../../images/creator_photos/slack_nurs.jpg"
 import linkedin_zane from "../../images/creator_photos/linkedin_zane.jpg"
@@ -254,7 +254,7 @@ function Splash(){
                 <a href="https://github.com/nasanov" target="_blank" rel="noopener noreferrer">GitHub</a>
               </div>
               <div className="splash_main-3-creator" id="creator-alex">
-                <img src={github_alex} alt="alex-profile"></img>
+                <img className="alex-shot" src={alex_headshot} alt="alex-profile"></img>
                 <a
                   href="https://codinginrhythm.github.io/"
                   target="_blank"
