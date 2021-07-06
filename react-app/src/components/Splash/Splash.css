@@ -68,7 +68,8 @@
 .signin_btn:hover{
     border: 2px solid white;
 }
-6
+
+
 .tryout_btn{
     background-color: white;
     color: var(--primaryColor)
