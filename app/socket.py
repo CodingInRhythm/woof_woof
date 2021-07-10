@@ -13,7 +13,7 @@ Payload.max_decode_packets = 500
 
 if os.environ.get("FLASK_ENV") == "production":
     origins = [
-        "http://woofwoof-app.herokuapp.com",
+        "https://woofwoof-app.herokuapp.com",
         "https://woofwoof-app.herokuapp.com"
     ]
 else:
